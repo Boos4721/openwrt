@@ -302,7 +302,8 @@
 	pinctrl-0 = <&rgmii2_pins>;
 	pinctrl-names = "default";
 
-	mtd-mac-address = <&defaultmac 0x8>;
+	nvmem-cells = <&macaddr_defaultmac_8>;
+	nvmem-cell-names = "mac-address";
 	mac-address-increment = <1>;
 
 	fixed-link {
@@ -318,19 +319,9 @@
 	interrupts = <GIC_SPI 226 IRQ_TYPE_LEVEL_HIGH>;
 	phy-mode = "sgmii";
 	qcom,id = <2>;
-	qcom,pcs-chanid = <1>;
-	qcom,phy-mdio-addr = <0>; /* none */
-	qcom,poll-required = <0>; /* no polling */
-	qcom,rgmii-delay = <0>;
-	qcom,phy_mii_type = <1>;
-	qcom,emulation = <0>;
-	qcom,forced-speed = <1000>;
-	qcom,forced-duplex = <1>;
-	qcom,socver = <0>;
-	qcom,irq = <258>;
-	mdiobus = <&mdio0>;
-	
-	mtd-mac-address = <&defaultmac 0x8>;
+
+	nvmem-cells = <&macaddr_defaultmac_8>;
+	nvmem-cell-names = "mac-address";
 
 	fixed-link {
 		speed = <1000>;
@@ -340,4 +331,14 @@
 
 &adm_dma {
 	status = "okay";
+};
+
+&defaultmac {
+	compatible = "nvmem-cells";
+	#address-cells = <1>;
+	#size-cells = <1>;
+
+	macaddr_defaultmac_8: macaddr@8 {
+		reg = <0x8 0x6>;
+	};
 };
