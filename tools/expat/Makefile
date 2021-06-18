@@ -9,14 +9,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=expat
 PKG_CPE_ID:=cpe:/a:libexpat:expat
-PKG_VERSION:=2.4.1
+PKG_VERSION:=2.4.6
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_HASH:=2f9b6a580b94577b150a7d5617ad4643a4301a6616ff459307df3e225bcfbf40
+PKG_HASH:=ce317706b07cae150f90cddd4253f5b4fba929607488af5ac47bf2bc08e31f09
 PKG_SOURCE_URL:=https://github.com/libexpat/libexpat/releases/download/R_$(subst .,_,$(PKG_VERSION))
 
 include $(INCLUDE_DIR)/host-build.mk
-
 include $(INCLUDE_DIR)/cmake.mk
 
 CMAKE_HOST_OPTIONS += \
