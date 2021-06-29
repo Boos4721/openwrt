@@ -53,36 +53,3 @@ rm -rf ./tmp && rm -rf .config
 make menuconfig
 make -j$(($(nproc) + 1)) V=s
 ```
-
-Build result will be produced to `bin/targets` directory.
-
-Special tips:
-------
-1. This source code doesn't contain any backdoors or close source applications that can monitor/capture your HTTPS traffic, SSL is the final castle of cyber security. Safety is what a firmware should achieve.
-
-2. If you have any technical problem, you may join the QQ discussion group: 297253733, link: click [here](https://jq.qq.com/?_wv=1027&k=5yCRuXL)
-
-3. Want to learn OpenWrt development but don't know how? Can't motivate yourself for self-learning? Not enough fundamental knowledge? Learn OpenWrt development with Mr. Zuo through his Beginner OpenWrt Training Course. Click [here](http://forgotfun.org/2018/04/openwrt-training-2018.html) to register.
-
-## Router Recommendation
-Not Sponsored: If you are finding a low power consumption, small and performance promising x86/x64 router, I personally recommend the 
-EZPROv1 Alumium Edition (N3710 4000M): [Details](https://item.taobao.com/item.htm?spm=a230r.1.14.20.144c763fRkK0VZ&id=561126544764)
-
-![xm1](doc/xm5.jpg)
-![xm2](doc/xm6.jpg)
-
-## Donation
-
-If this project does help you, please consider donating to support the development of this project.
-
-### Alipay
-
-![alipay](doc/alipay_donate.jpg)
-
-### WeChat
-
-![wechat](doc/wechat_donate.jpg)
-
-## Note: Addition Lean's private package source code in `./package/lean` directory. Use it under GPL v3.
-
-## GPLv3 is compatible with more licenses than GPLv2: it allows you to make combinations with code that has specific kinds of additional requirements that are not in GPLv3 itself. Section 7 has more information about this, including the list of additional requirements that are permitted.
