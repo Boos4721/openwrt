@@ -25,7 +25,7 @@
 
 4. ```bash
    ./scripts/feeds update -a
-   ./scripts/feeds install -a
+   ./scripts/feeds install -a -f
    make menuconfig
    ```
 
