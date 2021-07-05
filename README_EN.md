@@ -9,7 +9,7 @@ Note:
 
 2. Users within China should prepare proxy before building.
 
-3. Web admin panel default IP is 192.168.1.1 and default password is "password".
+3. Web admin panel default IP is 10.10.10.1 and default password is "boos".
 
 Let's start!
 ---
