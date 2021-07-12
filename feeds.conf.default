@@ -1,4 +1,4 @@
-src-git packages https://github.com/R619AC-OpenWrt/packages
+src-git packages https://github.com/openwrt/packages
 src-git luci https://github.com/openwrt/luci
 src-git routing https://git.openwrt.org/feed/routing.git
 src-git telephony https://git.openwrt.org/feed/telephony.git
