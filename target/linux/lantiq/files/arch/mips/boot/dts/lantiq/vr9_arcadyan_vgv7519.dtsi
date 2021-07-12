@@ -127,76 +127,8 @@
 };
 
 &eth0 {
-	pinctrl-0 = <&mdio_pins>, <&gphy0_led1_pins>, <&gphy1_led0_pins>;
-	pinctrl-names = "default";
-
-	interface@0 {
-		compatible = "lantiq,xrx200-pdi";
-		#address-cells = <1>;
-		#size-cells = <0>;
-		reg = <0>;
-		mtd-mac-address = <&boardconfig 0x16>;
-		mtd-mac-address-increment = <1>;
-		lantiq,switch;
-
-		ethernet@0 {
-			compatible = "lantiq,xrx200-pdi-port";
-			reg = <0>;
-			phy-mode = "rgmii";
-			phy-handle = <&phy0>;
-		};
-		ethernet@1 {
-			compatible = "lantiq,xrx200-pdi-port";
-			reg = <1>;
-			phy-mode = "rgmii";
-			phy-handle = <&phy1>;
-		};
-		ethernet@2 {
-			compatible = "lantiq,xrx200-pdi-port";
-			reg = <2>;
-			phy-mode = "gmii";
-			phy-handle = <&phy11>;
-		};
-		ethernet@4 {
-			compatible = "lantiq,xrx200-pdi-port";
-			reg = <4>;
-			phy-mode = "gmii";
-			phy-handle = <&phy13>;
-		};
-		ethernet@5 {
-			compatible = "lantiq,xrx200-pdi-port";
-			reg = <5>;
-			phy-mode = "rgmii";
-			phy-handle = <&phy5>;
-		};
-	};
-
-	mdio {
-		#address-cells = <1>;
-		#size-cells = <0>;
-		compatible = "lantiq,xrx200-mdio";
-
-		phy0: ethernet-phy@0 {
-			reg = <0x0>;
-			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
-		};
-		phy1: ethernet-phy@1 {
-			reg = <0x1>;
-			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
-		};
-		phy5: ethernet-phy@5 {
-			reg = <0x5>;
-			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
-		};
-		phy11: ethernet-phy@11 {
-			reg = <0x11>;
-			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
-		};
-		phy13: ethernet-phy@13 {
-			reg = <0x13>;
-			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
-		};
-	};
+	mtd-mac-address = <&boardconfig 0x16>;
+	mac-address-increment = <1>;
 };
 
 &gphy0 {
@@ -251,7 +183,7 @@
 		ralink,mtd-eeprom = <&boardconfig 0x410>;
 		ralink,mtd-eeprom-swap;
 		mtd-mac-address = <&boardconfig 0x16>;
-		mtd-mac-address-increment = <1>;
+		mac-address-increment = <1>;
 	};
 };
 
