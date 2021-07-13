@@ -14,7 +14,7 @@ PKG_BUILD_DEPENDS:= meson/host ninja/host
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(TOPDIR)/feeds/packages/devel/meson/meson.mk
-include $(TOPDIR)/feeds/packages/devel/ninja/ninja.mk
+include $(TOPDIR)/feeds/Boos/ninja/ninja.mk
 
 TARGET_CFLAGS += -D_GNU_SOURCE -Wno-unused-result -Wno-format-nonliteral
 
