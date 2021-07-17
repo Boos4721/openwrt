@@ -1,13 +1,15 @@
 欢迎来到Lean的Openwrt源码仓库！
 =
 
+[![Build Status](https://cloud.drone.io/api/badges/Boos4721/lede/status.svg)](https://cloud.drone.io/Boos4721/lede)
+
 [English](./README_EN.md)
 
 如何编译自己需要的 OpenWrt 固件
 -
 注意：
 -
-1. **不**要用 **root** 用户进行编译！！！
+1. **不要**用 **root** 用户进行编译！！！
 2. 国内用户编译前最好准备好梯子
 3. 默认登陆IP 10.10.10.1 密码 boos
 
