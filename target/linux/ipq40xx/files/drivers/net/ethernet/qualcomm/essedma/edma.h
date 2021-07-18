@@ -37,7 +37,6 @@
 #include <linux/sysctl.h>
 #include <linux/phy.h>
 #include <linux/of_net.h>
-#include <linux/version.h>
 #include <net/checksum.h>
 #include <net/ip6_checksum.h>
 #include <asm-generic/bug.h>
