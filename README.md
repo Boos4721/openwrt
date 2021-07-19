@@ -57,3 +57,18 @@ make menuconfig
 make -j$(($(nproc) + 1)) V=s
 ```
 
+编译完成后输出路径：bin/targets
+
+如果你使用WSL或WSL2进行编译：
+------
+由于wsl的PATH路径中包含带有空格的Windows路径，有可能会导致编译失败，请在将make -j1 V=s或make -j$(($(nproc) + 1)) V=s改为
+
+首次编译：
+```bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin make -j1 V=s 
+```
+二次编译：
+```bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin make -j$(($(nproc) + 1)) V=s
+```
+

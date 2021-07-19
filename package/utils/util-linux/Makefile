@@ -9,14 +9,14 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=util-linux
 PKG_VERSION:=2.37
-PKG_RELEASE:=3
+PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@KERNEL/linux/utils/$(PKG_NAME)/v2.37
 PKG_HASH:=bd07b7e98839e0359842110525a3032fdb8eaf3a90bedde3dd1652d32d15cce5
 PKG_CPE_ID:=cpe:/a:kernel:util-linux
 
-PKG_LICENSE:=GPL-2.0
+PKG_LICENSE:=GPL-2.0-only
 PKG_LICENSE_FILES:=	COPYING					\
 			libblkid/COPYING			\
 			libmount/COPYING			\
