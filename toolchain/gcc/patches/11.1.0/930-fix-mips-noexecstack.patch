@@ -48,7 +48,7 @@ sellcey@mips.com
 
 --- a/gcc/config/mips/mips.c
 +++ b/gcc/config/mips/mips.c
-@@ -22881,6 +22881,9 @@ mips_asm_file_end (void)
+@@ -22890,6 +22890,9 @@ mips_asm_file_end (void)
  #define TARGET_ASM_FILE_END mips_asm_file_end
  
  
