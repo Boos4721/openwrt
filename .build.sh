@@ -27,11 +27,11 @@ wget -O .config https://gitlab.com/$id//openwrt/-/raw/master/.config && wget -O 
 }
 
 MAIN() {
+Version_File="package/lean/default-settings/files/zzz-default-settings"
 Old_Version="$(egrep -o "R[0-9]+\.[0-9]+\.[0-9]+" ${Version_File})"
 sed -i "s?By?By $id ?g" package/base-files/files/etc/banner
 sed -i "s?Openwrt?Openwrt ${Openwrt_Version}?g" package/base-files/files/etc/banner
 sed -i '/profile/d' package/base-files/files/lib/upgrade/keep.d/base-files-essential
-sed -i "s?iptables?#iptables?g" ${Version_File}
 sed -i "s?${Old_Version}?${Old_Version} Compiled by $id ?g" ${Version_File}
 }
 
