@@ -15,7 +15,6 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 SETUP() {
 apt-get update 
 apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync    
-timedatectl set-timezone "Asia/Shanghai"
 git config --global user.email 3.1415926535boos@gmail.com
 git config --global user.name $id
 }
@@ -28,8 +27,6 @@ wget -O .config https://gitlab.com/$id//openwrt/-/raw/master/.config && wget -O 
 }
 
 MAIN() {
-Openwrt_Version_="R18.06-"
-Version_File="package/lean/default-settings/files/zzz-default-settings"
 Old_Version="$(egrep -o "R[0-9]+\.[0-9]+\.[0-9]+" ${Version_File})"
 sed -i "s?By?By $id ?g" package/base-files/files/etc/banner
 sed -i "s?Openwrt?Openwrt ${Openwrt_Version}?g" package/base-files/files/etc/banner
@@ -60,7 +57,6 @@ cd ~/UPLOAD
 git init
 git remote add origin https://$id:$ss@github.com/$id/updater.git
 git checkout -b OpenWrt
-rm -rf cowtransfer.log transfer
 git add .
 git commit -sm "$(date +"%m%d-%H%S")"
 git push -uf origin OpenWrt    
