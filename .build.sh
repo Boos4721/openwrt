@@ -39,7 +39,7 @@ sed -i "s?${Old_Version}?${Old_Version} Compiled by $id ?g" ${Version_File}
 BUILD() {
 make defconfig
 BUILD_START=$(date +"%s")
-echo " ${Openwrt_Version} Starting first build..."
+echo " ${Old_Version} Starting first build..."
 make download -j$(nproc)
 make -j$(nproc) || make -j$(nproc) V=s
 BUILD_END=$(date +"%s")
