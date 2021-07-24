@@ -216,3 +216,4 @@ index e9b3689331ec..d42637ecbf1e 100644
  	.conf_tx                        = ath11k_mac_op_conf_tx,
 -- 
 2.25.1
+
