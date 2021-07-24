@@ -83,6 +83,17 @@ define Build/ubnt-erx-factory-image
 	fi
 endef
 
+define Build/yuncore-ax820-metadata
+	echo \
+		'{ \
+			"device_code": [".*"], \
+			"hwver": [".*"], \
+			"batch": [".*"], \
+			"serial": [".*"], \
+			"supported_devices":["mt7621-rfb-ax-nor"] \
+		}' | fwtool -I - $@
+endef
+
 define Build/zytrx-header
 	$(eval board=$(word 1,$(1)))
 	$(eval version=$(word 2,$(1)))
