@@ -1,6 +1,4 @@
-Welcome to Lean's git source of OpenWrt and packages
-=
-[![Build Status](https://cloud.drone.io/api/badges/Boos4721/lede/status.svg)](https://cloud.drone.io/Boos4721/lede)
+[![Build Status](https://cloud.drone.io/api/badges/Boos4721/openwrt/status.svg)](https://cloud.drone.io/Boos4721/openwrt)
 
 How to build your Openwrt firmware.
 -

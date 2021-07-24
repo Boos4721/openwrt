@@ -1,7 +1,4 @@
-欢迎来到Lean的Openwrt源码仓库！
-=
-
-[![Build Status](https://cloud.drone.io/api/badges/Boos4721/lede/status.svg)](https://cloud.drone.io/Boos4721/lede)
+[![Build Status](https://cloud.drone.io/api/badges/Boos4721/openwrt/status.svg)](https://cloud.drone.io/Boos4721/openwrt)
 
 [English](./README_EN.md)
 
@@ -10,6 +7,7 @@
 注意：
 -
 1. **不要**用 **root** 用户进行编译！！！
+> export FORCE_UNSAFE_CONFIGURE=1 && export FORCE=1
 2. 国内用户编译前最好准备好梯子
 3. 默认登陆IP 10.10.10.1 密码 boos
 
