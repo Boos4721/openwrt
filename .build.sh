@@ -21,7 +21,7 @@ git config --global user.name $id
 
 CLONE() {
 git clone https://github.com/R619AC-OpenWrt/OpenWrt-Packages package/Boos --depth=1 
-wget -O .config https://gitlab.com/$id//openwrt/-/raw/master/.config && wget -O package/base-files/files/etc/profile https://gitlab.com/$id/openwrt/-/raw/master/profile && wget -O package/lean/autocore/files/arm/sbin/cpuinfo https://gitlab.com/$id/openwrt/-/raw/master/cpuinfo_arm && wget -O package/base-files/files/etc/banner https://gitlab.com/$id/openwrt/-/raw/master/banner
+wget -O .config https://gitlab.com/$id//openwrt/-/raw/master/.config && wget -O package/base-files/files/etc/profile https://gitlab.com/$id/openwrt/-/raw/master/profile && wget -O package/base-files/files/etc/banner https://gitlab.com/$id/openwrt/-/raw/master/banner
 ./scripts/feeds update -a -f
 ./scripts/feeds install -a -f
 }
@@ -48,7 +48,7 @@ BUILD_END=$(date +"%s")
 UPLOAD() {
 mkdir -p ~/UPLOAD && cd ~/src/bin/targets/*/* && mv *.bin *.ubi sha256sums ~/UPLOAD/      
 curl -fsSL git.io/file-transfer | sh
-./transfer cow --block 2621440 -s -p 64 --no-progress ~/UPLOAD 2>&1 | tee cowtransfer.log
+./transfer wet -s -p 16 --no-progress ~/UPLOAD 2>&1 | tee cowtransfer.log
 echo "cat cowtransfer.log | grep https"
 }
 
