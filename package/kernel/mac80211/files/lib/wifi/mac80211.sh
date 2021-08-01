@@ -64,7 +64,6 @@ __get_band_defaults() {
 BEGIN {
         bands = ""
 }
-
 ($1 == "Band" || $1 == "") && band {
         if (channel) {
 		mode="NOHT"
@@ -78,7 +77,6 @@ BEGIN {
         }
         band=""
 }
-
 $1 == "Band" {
         band = $2
         channel = ""
@@ -86,23 +84,18 @@ $1 == "Band" {
 	ht = ""
 	he = ""
 }
-
 $0 ~ "Capabilities:" {
 	ht=1
 }
-
 $0 ~ "VHT Capabilities" {
 	vht=1
 }
-
 $0 ~ "HE Iftypes" {
 	he=1
 }
-
 $1 == "*" && $3 == "MHz" && $0 !~ /disabled/ && band && !channel {
         channel = $4
 }
-
 END {
         print bands
 }'
@@ -181,9 +174,11 @@ detect_mac80211() {
 			set wireless.default_radio${devidx}.device=radio${devidx}
 			set wireless.default_radio${devidx}.network=lan
 			set wireless.default_radio${devidx}.mode=ap
-            		set wireless.default_radio0.ssid=OpenWrt_2.4G
-            		set wireless.default_radio1.ssid=OpenWrt_5G
-			set wireless.default_radio${devidx}.encryption=none
+            		set wireless.default_radio0.ssid=Xiaomi_AloT_5G
+            		set wireless.default_radio1.ssid=Xiaomi_5G
+			set wireless.default_radio2.ssid=Xiaomi_2.4G
+			set wireless.default_radio${devidx}.encryption=psk2+aes
+                        set wireless.default_radio${devidx}.key=1234567890
 EOF
 		uci -q commit wireless
 
