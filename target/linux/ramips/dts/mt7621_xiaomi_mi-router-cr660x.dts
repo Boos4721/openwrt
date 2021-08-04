@@ -7,7 +7,7 @@
 
 / {
 	compatible = "xiaomi,mi-router-cr660x", "mediatek,mt7621-soc";
-	model = "Xiaomi Mi Router CR660x";
+	model = "Xiaomi Mi Router CR660X";
 
 	aliases {
 		led-boot = &led_sys_yellow;
