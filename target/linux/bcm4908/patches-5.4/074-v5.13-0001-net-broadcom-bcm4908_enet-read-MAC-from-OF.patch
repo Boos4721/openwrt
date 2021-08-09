@@ -25,15 +25,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  #include <linux/platform_device.h>
  #include <linux/slab.h>
  #include <linux/string.h>
-@@ -620,6 +621,7 @@ static int bcm4908_enet_probe(struct pla
- 	struct device *dev = &pdev->dev;
- 	struct net_device *netdev;
- 	struct bcm4908_enet *enet;
-+	const u8 *mac;
- 	int err;
- 
- 	netdev = devm_alloc_etherdev(dev, sizeof(*enet));
-@@ -647,7 +649,11 @@ static int bcm4908_enet_probe(struct pla
+@@ -647,7 +648,9 @@ static int bcm4908_enet_probe(struct pla
  		return err;
  
  	SET_NETDEV_DEV(netdev, &pdev->dev);
