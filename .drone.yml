@@ -16,5 +16,7 @@ steps:
         from_secret: id
       ss:
         from_secret: ss
+      token:
+        from_secret: token
     commands:  
       - bash .build.sh
