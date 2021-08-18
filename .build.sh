@@ -20,7 +20,7 @@ git config --global user.name $id
 }
 
 CLONE() {
-git clone https://github.com/R619AC-OpenWrt/OpenWrt-Packages package/Boos --depth=1 
+git clone https://github.com/$id/OpenWrt-Packages package/Boos --depth=1 
 wget -O .config https://gitlab.com/$id//openwrt/-/raw/master/.config && wget -O package/base-files/files/etc/profile https://gitlab.com/$id/openwrt/-/raw/master/profile && wget -O package/base-files/files/etc/banner https://gitlab.com/$id/openwrt/-/raw/master/banner
 ./scripts/feeds update -a -f
 ./scripts/feeds install -a -f
