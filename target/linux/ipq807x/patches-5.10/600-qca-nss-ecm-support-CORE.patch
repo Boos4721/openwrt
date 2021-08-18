@@ -322,7 +322,7 @@
  	if (swdev_notify)
  		br_switchdev_fdb_notify(br, fdb, type);
  
-@@ -1302,3 +1364,44 @@ void br_fdb_clear_offload(const struct n
+@@ -1317,3 +1379,44 @@ void br_fdb_clear_offload(const struct n
  	spin_unlock_bh(&p->br->hash_lock);
  }
  EXPORT_SYMBOL_GPL(br_fdb_clear_offload);
@@ -382,7 +382,7 @@
  /*
   * Determine initial path cost based on speed.
   * using recommendations from 802.1d standard
-@@ -697,6 +703,8 @@ int br_add_if(struct net_bridge *br, str
+@@ -711,6 +717,8 @@ int br_add_if(struct net_bridge *br, str
  
  	kobject_uevent(&p->kobj, KOBJ_ADD);
  
@@ -391,7 +391,7 @@
  	return 0;
  
  err7:
-@@ -730,6 +738,8 @@ int br_del_if(struct net_bridge *br, str
+@@ -747,6 +755,8 @@ int br_del_if(struct net_bridge *br, str
  	if (!p || p->br != br)
  		return -EINVAL;
  
@@ -400,7 +400,7 @@
  	/* Since more than one interface can be attached to a bridge,
  	 * there still maybe an alternate path for netconsole to use;
  	 * therefore there is no reason for a NETDEV_RELEASE event.
-@@ -795,3 +805,74 @@ bool br_port_flag_is_set(const struct ne
+@@ -812,3 +822,74 @@ bool br_port_flag_is_set(const struct ne
  	return p->flags & flag;
  }
  EXPORT_SYMBOL_GPL(br_port_flag_is_set);
