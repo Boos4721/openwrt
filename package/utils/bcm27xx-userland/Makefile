@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=bcm27xx-userland
-PKG_VERSION:=4a0a19b88b43e48c6b51b526b9378289fb712a4c
+PKG_VERSION:=97bc8180ad682b004ea224d1db7b8e108eda4397
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/raspberrypi/userland/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=0f42d48095d1f680cbe8781c2e974b76bdd0507aaef64cce8b8b472ca3a09588
+PKG_HASH:=d67def03931215f41b741aed5a3a1bc2bd62fa33f5cc14692e9a4d65f2e0ea27
 
 PKG_FLAGS:=nonshared
 
