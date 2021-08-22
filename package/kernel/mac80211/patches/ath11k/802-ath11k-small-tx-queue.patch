@@ -15,7 +15,7 @@
  		    ab->qmi.target.fw_version,
  		    ab->qmi.target.fw_build_timestamp,
  		    ab->qmi.target.fw_build_id);
-+
++	
 +	ath11k_info(ab, "joba-1 patch V2: ATH11K_QUEUE_LEN=%d", ATH11K_QUEUE_LEN);
  
  	r = ath11k_core_check_dt(ab);
