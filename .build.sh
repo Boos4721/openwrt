@@ -46,7 +46,7 @@ BUILD_END=$(date +"%s")
 }
 
 UPLOAD() {
-mkdir -p ~/UPLOAD && cd ~/src/bin/targets/*/* && mv *.bin *.ubi sha256sums ~/UPLOAD/      
+mkdir -p ~/UPLOAD && cd ~/src/bin/targets/*/* && mv *.itb *.bin *.ubi sha256sums ~/UPLOAD/      
 curl -fsSL git.io/file-transfer | sh
 ./transfer wet -s -p 16 --no-progress ~/UPLOAD 2>&1 | tee cowtransfer.log
 echo "cat cowtransfer.log | grep https"
