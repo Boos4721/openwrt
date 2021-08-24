@@ -35,8 +35,7 @@ case "$DISTRIB_TARGET" in
 		else
 			CPU_MAX_FREQ="1382400"
 		fi
-		uci_write_config 0 schedutil 1017600 $CPU_MAX_FREQ 10 50
-		echo "$CPU_POLICYS" | grep -q "1" && uci_write_config 1 ondemand 1017600 $CPU_MAX_FREQ 10 50
+		uci_write_config 0 schedutil 1017600 $CPU_MAX_FREQ
 		;;
 	"rockchip/armv8")
 		if echo "$CPU_POLICYS" | grep -q "4"; then
