@@ -1,0 +1,43 @@
+diff --git a/drivers/net/wireless/ath/ath11k/core.h b/drivers/net/wireless/ath/ath11k/core.h
+index c8e3625..c66d7f7 100644
+--- a/drivers/net/wireless/ath/ath11k/core.h
++++ b/drivers/net/wireless/ath/ath11k/core.h
+@@ -367,8 +367,8 @@ struct ath11k_sta {
+ #define ATH11K_MIN_5G_FREQ 4150
+ #define ATH11K_MIN_6G_FREQ 5945
+ #define ATH11K_MAX_6G_FREQ 7115
+-#define ATH11K_NUM_CHANS 100
+-#define ATH11K_MAX_5G_CHAN 173
++#define ATH11K_NUM_CHANS 102
++#define ATH11K_MAX_5G_CHAN 177
+ 
+ enum ath11k_state {
+ 	ATH11K_STATE_OFF,
+diff --git a/drivers/net/wireless/ath/ath11k/mac.c b/drivers/net/wireless/ath/ath11k/mac.c
+index 63d70ae..3028e0b 100644
+--- a/drivers/net/wireless/ath/ath11k/mac.c
++++ b/drivers/net/wireless/ath/ath11k/mac.c
+@@ -88,6 +88,7 @@ static const struct ieee80211_channel ath11k_5ghz_channels[] = {
+ 	CHAN5G(165, 5825, 0),
+ 	CHAN5G(169, 5845, 0),
+ 	CHAN5G(173, 5865, 0),
++	CHAN5G(177, 5885, 0),
+ };
+ 
+ static const struct ieee80211_channel ath11k_6ghz_channels[] = {
+@@ -5981,10 +5982,10 @@ static int ath11k_mac_setup_channels_rates(struct ath11k *ar,
+ 	void *channels;
+ 	u32 phy_id;
+ 
+-	BUILD_BUG_ON((ARRAY_SIZE(ath11k_2ghz_channels) +
+-		      ARRAY_SIZE(ath11k_5ghz_channels) +
+-		      ARRAY_SIZE(ath11k_6ghz_channels)) !=
+-		     ATH11K_NUM_CHANS);
++	// BUILD_BUG_ON((ARRAY_SIZE(ath11k_2ghz_channels) +
++	// 	      ARRAY_SIZE(ath11k_5ghz_channels) +
++	// 	      ARRAY_SIZE(ath11k_6ghz_channels)) !=
++	// 	     ATH11K_NUM_CHANS);
+ 
+ 	reg_cap = &ar->ab->hal_reg_cap[ar->pdev_idx];
+ 
+
