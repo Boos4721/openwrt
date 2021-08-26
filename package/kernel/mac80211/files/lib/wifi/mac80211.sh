@@ -183,7 +183,7 @@ detect_mac80211() {
             		set wireless.default_radio0.ssid=Xiaomi_AloT_5G
             		set wireless.default_radio1.ssid=Xiaomi_5G
 			set wireless.default_radio2.ssid=Xiaomi_2.4G
-			set wireless.default_radio${devidx}.encryption=psk2+aes
+			set wireless.default_radio${devidx}.encryption=sae-mixed
                         set wireless.default_radio${devidx}.key=1234567890
 EOF
 		uci -q commit wireless
