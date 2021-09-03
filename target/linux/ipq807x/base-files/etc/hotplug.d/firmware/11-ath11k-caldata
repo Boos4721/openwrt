@@ -12,11 +12,9 @@ case "$FIRMWARE" in
 	netgear,sxr80|\
 	redmi,ax6|\
 	xiaomi,ax3600|\
-	xiaomi,ax9000)
-		caldata_extract "0:art" 0x1000 0x20000
-		;;
+	xiaomi,ax9000|\
 	zte,mf269)
-		caldata_extract "0:ART" 0x1000 0x20000
+		caldata_extract "0:art" 0x1000 0x20000
 		;;
 	esac
 	;;
