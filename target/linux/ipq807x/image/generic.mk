@@ -32,7 +32,7 @@ define Device/netgear_sxr80
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@hk01
 	SOC := ipq8074
-	DEVICE_PACKAGES := ipq-wifi-netgear_sxr80 uboot-envtools
+	DEVICE_PACKAGES := ipq-wifi-netgear_sxr80
 endef
 TARGET_DEVICES += netgear_sxr80
 
@@ -40,7 +40,7 @@ define Device/redmi_ax6
 	$(call Device/xiaomi_ax3600)
 	DEVICE_VENDOR := Redmi
 	DEVICE_MODEL := AX6
-	DEVICE_PACKAGES := ipq-wifi-redmi_ax6 uboot-envtools
+	DEVICE_PACKAGES := ipq-wifi-redmi_ax6
 endef
 TARGET_DEVICES += redmi_ax6
 
@@ -53,8 +53,7 @@ define Device/xiaomi_ax3600
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@ac04
 	SOC := ipq8071
-	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax3600 kmod-ath10k-ct ath10k-firmware-qca9887-ct \
-	uboot-envtools
+	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax3600 kmod-ath10k-ct ath10k-firmware-qca9887-ct
 endef
 TARGET_DEVICES += xiaomi_ax3600
 
@@ -67,20 +66,19 @@ define Device/xiaomi_ax9000
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@hk14
 	SOC := ipq8072
-	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax9000 kmod-ath10k-ct ath10k-firmware-qca9887-ct \
-	uboot-envtools
+	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax9000 kmod-ath10k-ct ath10k-firmware-qca9887-ct
 endef
 TARGET_DEVICES += xiaomi_ax9000
 
 define Device/zte_mf269
-        $(call Device/FitImage)
-        $(call Device/UbiFit)
-        DEVICE_VENDOR := ZTE
-        DEVICE_MODEL := MF269
-        BLOCKSIZE := 128k
-        PAGESIZE := 2048
-        DEVICE_DTS_CONFIG := config@ac04
-        SOC := ipq8071
-        DEVICE_PACKAGES := ipq-wifi-zte_mf269 uboot-envtools
+	$(call Device/FitImage)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := ZTE
+	DEVICE_MODEL := MF269
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	DEVICE_DTS_CONFIG := config@ac04
+	SOC := ipq8071
+	DEVICE_PACKAGES := ipq-wifi-zte_mf269
 endef
 TARGET_DEVICES += zte_mf269
