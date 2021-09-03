@@ -668,7 +668,7 @@
  		   const struct in6_addr *daddr)
 --- a/net/ipv6/route.c
 +++ b/net/ipv6/route.c
-@@ -3737,6 +3737,9 @@ out_free:
+@@ -3745,6 +3745,9 @@ out_free:
  	return ERR_PTR(err);
  }
  
@@ -678,7 +678,7 @@
  int ip6_route_add(struct fib6_config *cfg, gfp_t gfp_flags,
  		  struct netlink_ext_ack *extack)
  {
-@@ -3748,6 +3751,10 @@ int ip6_route_add(struct fib6_config *cf
+@@ -3756,6 +3759,10 @@ int ip6_route_add(struct fib6_config *cf
  		return PTR_ERR(rt);
  
  	err = __ip6_ins_rt(rt, &cfg->fc_nlinfo, extack);
@@ -689,7 +689,7 @@
  	fib6_info_release(rt);
  
  	return err;
-@@ -3769,6 +3776,9 @@ static int __ip6_del_rt(struct fib6_info
+@@ -3777,6 +3784,9 @@ static int __ip6_del_rt(struct fib6_info
  	err = fib6_del(rt, info);
  	spin_unlock_bh(&table->tb6_lock);
  
@@ -699,7 +699,7 @@
  out:
  	fib6_info_release(rt);
  	return err;
-@@ -6120,6 +6130,20 @@ static int ip6_route_dev_notify(struct n
+@@ -6128,6 +6138,20 @@ static int ip6_route_dev_notify(struct n
  	return NOTIFY_OK;
  }
  
