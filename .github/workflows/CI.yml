@@ -55,19 +55,20 @@ jobs:
           mkdir -p ./artifact/firmware
           mkdir -p ./artifact/package
           rm -rf $(find ./bin/targets/ -type d -name "packages")
+          rm -rf $(find ./bin/targets/ -type f -name "*.buildinfo")
           cp -rf $(find ./bin/targets/ -type f) ./artifact/firmware/
           cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
 
       - name: Upload package
         uses: actions/upload-artifact@v2
         with:
-          name: OpenWrt_package
+          name: aarch64_OpenWrt_Package
           path: ./artifact/package/
 
       - name: Upload firmware
         uses: actions/upload-artifact@v2
         with:
-          name: OpenWrt_firmware
+          name: AX3600_OpenWrt_Firmware
           path: ./bin/targets/
           
       - name: Apply Build Commit
@@ -77,8 +78,8 @@ jobs:
           git init
           git remote add origin https://${{ secrets.TOKEN }}@github.com/Boos4721/updater.git
           git checkout -b OpenWrt
-          git add *.ubi *.bin
-          git commit -sm "[bot] Buildging: $(TZ='Asia/Shanghai' date +%m%d)" || echo 'Nothing to do.'
+          git add *.ubi *.bin sha256sums
+          git commit -sm "[bot] Building: $(TZ='Asia/Shanghai' date +%m%d-%H%S)" || echo 'Nothing to do.'
           
       - name: Push To Github
         run: |
