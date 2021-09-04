@@ -1,5 +1,4 @@
-
-[English](./README_EN.md)
+[![OpenWrt-CI](https://github.com/Boos4721/openwrt/actions/workflows/CI.yml/badge.svg)](https://github.com/Boos4721/openwrt/actions/workflows/CI.yml)
 
 如何编译自己需要的 OpenWrt 固件
 -
