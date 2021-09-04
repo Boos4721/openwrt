@@ -17,8 +17,10 @@ git config --global user.name Boos4721
 }
 
 CLONE() {
-git clone https://github.com/Boos4721/OpenWrt-Packages package/Boos --depth=1
-wget -O .config https://gitlab.com/Boos4721//openwrt/-/raw/master/.config && wget -O package/base-files/files/etc/profile https://gitlab.com/Boos4721/openwrt/-/raw/master/profile && wget -O package/base-files/files/etc/banner https://gitlab.com/Boos4721/openwrt/-/raw/master/banner
+wget -O .config https://gitlab.com/Boos4721//openwrt/-/raw/master/.config
+wget -O package/base-files/files/etc/profile https://gitlab.com/Boos4721/openwrt/-/raw/master/profile
+wget -O package/base-files/files/etc/banner https://gitlab.com/Boos4721/openwrt/-/raw/master/banner
+wget -O package/kernel/mac80211/files/lib/wifi/mac80211.sh https://gitlab.com/Boos4721/openwrt/-/raw/master/mac80211.sh
 ./scripts/feeds update -a -f
 ./scripts/feeds install -a -f
 }
