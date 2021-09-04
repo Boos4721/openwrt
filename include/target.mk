@@ -46,10 +46,12 @@ DEFAULT_PACKAGES.router:=\
 	iptables \
 	ppp \
 	ppp-mod-pppoe \
+	UA2F \
 	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw \
 	default-settings luci luci-app-ddns luci-app-upnp luci-app-autoreboot \
 	luci-app-filetransfer luci-app-unblockmusic luci-app-arpbind \
 	luci-app-vlmcsd luci-app-ramfree \
+	luci-app-advanced luci-app-argon-config luci-theme-argon luci-app-ttyd \
 	luci-app-turboacc ddns-scripts_aliyun ddns-scripts_dnspod
 
 ifneq ($(DUMP),)
