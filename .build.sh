@@ -17,6 +17,7 @@ git config --global user.name Boos4721
 }
 
 CLONE() {
+git clone https://github.com/Boos4721/OpenWrt-Packages package/Boos --depth=1
 wget -O .config https://gitlab.com/Boos4721//openwrt/-/raw/master/.config
 wget -O package/base-files/files/etc/profile https://gitlab.com/Boos4721/openwrt/-/raw/master/profile
 wget -O package/base-files/files/etc/banner https://gitlab.com/Boos4721/openwrt/-/raw/master/banner

@@ -68,7 +68,7 @@ Signed-off-by: Martin K. Petersen <martin.petersen@oracle.com>
  	kfree(sdev->inquiry);
  	kfree(sdev);
  
-@@ -871,6 +880,8 @@ static struct bin_attribute dev_attr_vpd
+@@ -874,6 +883,8 @@ static struct bin_attribute dev_attr_vpd
  
  sdev_vpd_pg_attr(pg83);
  sdev_vpd_pg_attr(pg80);
