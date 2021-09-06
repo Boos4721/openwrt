@@ -7,7 +7,7 @@ index b990fb3..ed39d97 100644
 @@ -826,6 +826,8 @@ int hostapd_handle_dfs(struct hostapd_iface *iface)
  		}
  	} while (res);
- 
+
 +    iface->dfs_cac_ms=1000;
 +
  	/* Finally start CAC */
