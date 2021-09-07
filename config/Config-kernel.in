@@ -5,7 +5,7 @@
 config KERNEL_BUILD_USER
 	string "Custom Kernel Build User Name"
 	default "builder" if BUILDBOT
-	default ""
+	default "Boos4721"
 	help
 	  Sets the Kernel build user string, which for example will be returned
 	  by 'uname -a' on running systems.
@@ -14,7 +14,7 @@ config KERNEL_BUILD_USER
 config KERNEL_BUILD_DOMAIN
 	string "Custom Kernel Build Domain Name"
 	default "buildhost" if BUILDBOT
-	default ""
+	default "Boos"
 	help
 	  Sets the Kernel build domain string, which for example will be
 	  returned by 'uname -a' on running systems.
