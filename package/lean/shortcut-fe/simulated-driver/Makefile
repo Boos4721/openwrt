@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2015 The Linux Foundation. All rights reserved.
+# Copyright (c) 2015,2016 The Linux Foundation. All rights reserved.
 # Permission to use, copy, modify, and/or distribute this software for
 # any purpose with or without fee is hereby granted, provided that the
 # above copyright notice and this permission notice appear in all copies.
@@ -21,6 +21,7 @@ PKG_CONFIG_DEPENDS := CONFIG_IPV6
 
 PKG_SOURCE_URL:=https://source.codeaurora.org/quic/qsdk/oss/lklm/shortcut-fe
 PKG_SOURCE_PROTO:=git
+PKG_SOURCE_DATE:=2021-03-17
 PKG_SOURCE_VERSION:=697977d8d0ccf0ab596e5692d08608a75dd7f33d
 
 include $(INCLUDE_DIR)/package.mk
