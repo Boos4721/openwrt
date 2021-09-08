@@ -79,9 +79,9 @@ jobs:
           git remote add origin https://${{ secrets.TOKEN }}@github.com/Boos4721/updater.git
           git checkout -b OpenWrt
           git add *.ubi *.bin sha256sums
-          git commit -sm "[bot] Building: $(TZ='Asia/Shanghai' date +%m%d-%H%S)" || echo 'Nothing to do.'
+          git commit -sm "[bot] Autobuild: $(TZ='Asia/Shanghai' date +%m%d-%H%S)"
           
       - name: Push To Github
         run: |
           cd ./artifact/firmware/
-          git push -uf --quiet "https://${{ secrets.TOKEN }}@github.com/Boos4721/updater.git" HEAD:OpenWrt || echo 'Nothing to do.'
+          git push -uf --quiet "https://${{ secrets.TOKEN }}@github.com/Boos4721/updater.git" HEAD:OpenWrt
