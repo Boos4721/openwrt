@@ -8,9 +8,6 @@ Subject: [PATCH] feat:rockchip add support EmbedFire DoorNet1 for kernel-5.10
  1 file changed, 425 insertions(+)
  create mode 100644 target/linux/rockchip/patches-5.10/203-rockchip-rk3328-Add-support-for-EmbedFire-DoorNet1.patch
 
-diff --git a/target/linux/rockchip/patches-5.10/203-rockchip-rk3328-Add-support-for-EmbedFire-DoorNet1.patch b/target/linux/rockchip/patches-5.10/203-rockchip-rk3328-Add-support-for-EmbedFire-DoorNet1.patch
-new file mode 100644
-index 000000000..63c3c82f0
 --- /dev/null
 +++ b/target/linux/rockchip/patches-5.10/203-rockchip-rk3328-Add-support-for-EmbedFire-DoorNet1.patch
 @@ -0,0 +1,425 @@
@@ -439,6 +436,3 @@ index 000000000..63c3c82f0
 + dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-evb.dtb
 + dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-nanopi-r2s.dtb
 + dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-orangepi-r1-plus.dtb
--- 
-2.17.1
-
