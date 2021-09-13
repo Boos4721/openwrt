@@ -34,26 +34,6 @@
 
 你可以自由使用，但源码编译二次发布请注明我的 GitHub 仓库链接。谢谢合作！
 =
-
-二次编译：
-```bash
-cd openwrt
-git pull
-./scripts/feeds update -a && ./scripts/feeds install -a
-make defconfig
-make -j8 download
-make -j$(($(nproc) + 1)) V=s
-```
-
-如果需要重新配置：
-```bash
-rm -rf ./tmp && rm -rf .config
-make menuconfig
-make -j$(($(nproc) + 1)) V=s
-```
-
-编译完成后输出路径：bin/targets
-
 如果你使用WSL或WSL2进行编译：
 ------
 由于wsl的PATH路径中包含带有空格的Windows路径，有可能会导致编译失败，请在将make -j1 V=s或make -j$(($(nproc) + 1)) V=s改为
