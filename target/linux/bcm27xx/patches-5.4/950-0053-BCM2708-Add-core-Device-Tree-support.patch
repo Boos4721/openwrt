@@ -670,6 +670,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  create mode 120000 arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi
  create mode 120000 arch/arm64/boot/dts/overlays
 
+diff --git a/.gitignore b/.gitignore
+index 70580bdd352c..a0cf56d7d0d2 100644
 --- a/.gitignore
 +++ b/.gitignore
 @@ -17,6 +17,7 @@
@@ -680,6 +682,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  *.dtb.S
  *.dwo
  *.elf
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index b21b3a64641a..e6832866849d 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
 @@ -1,4 +1,18 @@
@@ -723,6 +727,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +ifeq ($(CONFIG_ARCH_BCM2835),y)
 +	DTC_FLAGS ?= -@
 +endif
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-b-plus.dts b/arch/arm/boot/dts/bcm2708-rpi-b-plus.dts
+new file mode 100644
+index 000000000000..b800699a03fb
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708-rpi-b-plus.dts
 @@ -0,0 +1,125 @@
@@ -851,6 +858,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pwr_led_trigger = <&pwr_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-b.dts b/arch/arm/boot/dts/bcm2708-rpi-b.dts
+new file mode 100644
+index 000000000000..ef47775692ce
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708-rpi-b.dts
 @@ -0,0 +1,115 @@
@@ -969,6 +979,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		act_led_trigger = <&act_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-cm.dts b/arch/arm/boot/dts/bcm2708-rpi-cm.dts
+new file mode 100644
+index 000000000000..64809aee5c0c
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708-rpi-cm.dts
 @@ -0,0 +1,98 @@
@@ -1070,6 +1083,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +&hdmi {
 +	hpd-gpios = <&gpio 46 GPIO_ACTIVE_HIGH>;
 +};
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-cm.dtsi b/arch/arm/boot/dts/bcm2708-rpi-cm.dtsi
+new file mode 100644
+index 000000000000..dce160f420fd
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708-rpi-cm.dtsi
 @@ -0,0 +1,18 @@
@@ -1091,6 +1107,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		act_led_trigger = <&act_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-zero-w.dts b/arch/arm/boot/dts/bcm2708-rpi-zero-w.dts
+new file mode 100644
+index 000000000000..92f780a3e557
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708-rpi-zero-w.dts
 @@ -0,0 +1,163 @@
@@ -1257,6 +1276,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		act_led_trigger = <&act_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-zero.dts b/arch/arm/boot/dts/bcm2708-rpi-zero.dts
+new file mode 100644
+index 000000000000..2909ddeafc83
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708-rpi-zero.dts
 @@ -0,0 +1,118 @@
@@ -1378,6 +1400,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		act_led_trigger = <&act_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2708-rpi.dtsi b/arch/arm/boot/dts/bcm2708-rpi.dtsi
+new file mode 100644
+index 000000000000..ce9795dad99f
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708-rpi.dtsi
 @@ -0,0 +1,154 @@
@@ -1535,6 +1560,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +&vec {
 +	status = "disabled";
 +};
+diff --git a/arch/arm/boot/dts/bcm2708.dtsi b/arch/arm/boot/dts/bcm2708.dtsi
+new file mode 100644
+index 000000000000..16a637363b5d
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2708.dtsi
 @@ -0,0 +1,10 @@
@@ -1548,6 +1576,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		arm_freq;
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2709-rpi-2-b.dts b/arch/arm/boot/dts/bcm2709-rpi-2-b.dts
+new file mode 100644
+index 000000000000..4d2262f8d376
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2709-rpi-2-b.dts
 @@ -0,0 +1,125 @@
@@ -1676,6 +1707,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pwr_led_trigger = <&pwr_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2709-rpi.dtsi b/arch/arm/boot/dts/bcm2709-rpi.dtsi
+new file mode 100644
+index 000000000000..babfa41cd9f7
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2709-rpi.dtsi
 @@ -0,0 +1,5 @@
@@ -1684,6 +1718,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +&vchiq {
 +	compatible = "brcm,bcm2836-vchiq", "brcm,bcm2835-vchiq";
 +};
+diff --git a/arch/arm/boot/dts/bcm2709.dtsi b/arch/arm/boot/dts/bcm2709.dtsi
+new file mode 100644
+index 000000000000..8bc67c0aaff1
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2709.dtsi
 @@ -0,0 +1,18 @@
@@ -1705,6 +1742,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			   <&v7_cpu3>, "clock-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm270x.dtsi b/arch/arm/boot/dts/bcm270x.dtsi
+new file mode 100644
+index 000000000000..9eb6becfbe41
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm270x.dtsi
 @@ -0,0 +1,165 @@
@@ -1873,6 +1913,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +&vc4 {
 +	status = "disabled";
 +};
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-2-b.dts b/arch/arm/boot/dts/bcm2710-rpi-2-b.dts
+new file mode 100644
+index 000000000000..65a6f4d06866
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2710-rpi-2-b.dts
 @@ -0,0 +1,125 @@
@@ -2001,6 +2044,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pwr_led_trigger = <&pwr_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts b/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
+new file mode 100644
+index 000000000000..55420ac94dcf
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 @@ -0,0 +1,183 @@
@@ -2187,6 +2233,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pwr_led_trigger = <&pwr_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-3-b.dts b/arch/arm/boot/dts/bcm2710-rpi-3-b.dts
+new file mode 100644
+index 000000000000..261827cdb957
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2710-rpi-3-b.dts
 @@ -0,0 +1,194 @@
@@ -2384,6 +2433,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pwr_led_trigger = <&pwr_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-cm3.dts b/arch/arm/boot/dts/bcm2710-rpi-cm3.dts
+new file mode 100644
+index 000000000000..addebe448e32
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2710-rpi-cm3.dts
 @@ -0,0 +1,135 @@
@@ -2522,6 +2574,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		act_led_trigger = <&act_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2710.dtsi b/arch/arm/boot/dts/bcm2710.dtsi
+new file mode 100644
+index 000000000000..5c45ded273fe
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2710.dtsi
 @@ -0,0 +1,25 @@
@@ -2550,6 +2605,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		       <&cpu3>, "clock-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-4-b.dts b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+new file mode 100644
+index 000000000000..ccdc274665c0
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
 @@ -0,0 +1,338 @@
@@ -2891,6 +2949,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pwr_led_trigger = <&pwr_led>,"linux,default-trigger";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2711-rpi.dtsi b/arch/arm/boot/dts/bcm2711-rpi.dtsi
+new file mode 100644
+index 000000000000..d8ffaab8e86a
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2711-rpi.dtsi
 @@ -0,0 +1,7 @@
@@ -2901,6 +2962,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +     /* Undo the overwriting by bcm270x.dtsi */
 +     power-domains = <&pm BCM2835_POWER_DOMAIN_GRAFX_V3D>;
 +};
+diff --git a/arch/arm/boot/dts/bcm2711.dtsi b/arch/arm/boot/dts/bcm2711.dtsi
+new file mode 100644
+index 000000000000..f134aba2badb
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2711.dtsi
 @@ -0,0 +1,44 @@
@@ -2948,6 +3012,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	interrupts = <GIC_SPI 113 IRQ_TYPE_LEVEL_HIGH>,
 +		     <GIC_SPI 114 IRQ_TYPE_LEVEL_HIGH>;
 +};
+diff --git a/arch/arm/boot/dts/bcm2835-common.dtsi b/arch/arm/boot/dts/bcm2835-common.dtsi
+new file mode 100644
+index 000000000000..eceb170fd5b7
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2835-common.dtsi
 @@ -0,0 +1,54 @@
@@ -3005,6 +3072,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		brcm,function = <BCM2835_FSEL_ALT5>;
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts b/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
+index 6c8ce39833bf..0cc6355a8c06 100644
 --- a/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
 +++ b/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
 @@ -3,6 +3,7 @@
@@ -3015,6 +3084,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,model-a-plus", "brcm,bcm2835";
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-a.dts b/arch/arm/boot/dts/bcm2835-rpi-a.dts
+index 17fdd48346ff..21593978e851 100644
 --- a/arch/arm/boot/dts/bcm2835-rpi-a.dts
 +++ b/arch/arm/boot/dts/bcm2835-rpi-a.dts
 @@ -3,6 +3,7 @@
@@ -3025,6 +3096,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,model-a", "brcm,bcm2835";
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts b/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
+index b0355c229cdc..7c63ba90b827 100644
 --- a/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
 +++ b/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
 @@ -4,6 +4,7 @@
@@ -3035,6 +3108,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,model-b-plus", "brcm,bcm2835";
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts b/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
+index 33b3b5c02521..83e54a5fa3b4 100644
 --- a/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
 +++ b/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
 @@ -4,6 +4,7 @@
@@ -3045,6 +3120,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,model-b-rev2", "brcm,bcm2835";
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b.dts b/arch/arm/boot/dts/bcm2835-rpi-b.dts
+index 2b69957e0113..c9d04b1f14fd 100644
 --- a/arch/arm/boot/dts/bcm2835-rpi-b.dts
 +++ b/arch/arm/boot/dts/bcm2835-rpi-b.dts
 @@ -4,6 +4,7 @@
@@ -3055,6 +3132,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,model-b", "brcm,bcm2835";
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-zero.dts b/arch/arm/boot/dts/bcm2835-rpi-zero.dts
+index 6dd93c6f4966..42ce8b606354 100644
 --- a/arch/arm/boot/dts/bcm2835-rpi-zero.dts
 +++ b/arch/arm/boot/dts/bcm2835-rpi-zero.dts
 @@ -7,6 +7,7 @@
@@ -3065,6 +3144,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,model-zero", "brcm,bcm2835";
+diff --git a/arch/arm/boot/dts/bcm2835-rpi.dtsi b/arch/arm/boot/dts/bcm2835-rpi.dtsi
+index 6c6a7f620d8b..c77971e27175 100644
 --- a/arch/arm/boot/dts/bcm2835-rpi.dtsi
 +++ b/arch/arm/boot/dts/bcm2835-rpi.dtsi
 @@ -29,6 +29,22 @@
@@ -3118,6 +3199,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +&csi1 {
 +	power-domains = <&power RPI_POWER_DOMAIN_UNICAM1>;
 +};
+diff --git a/arch/arm/boot/dts/bcm2835.dtsi b/arch/arm/boot/dts/bcm2835.dtsi
+index a5c3824c8056..53bf4579cc22 100644
 --- a/arch/arm/boot/dts/bcm2835.dtsi
 +++ b/arch/arm/boot/dts/bcm2835.dtsi
 @@ -1,5 +1,6 @@
@@ -3127,6 +3210,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "brcm,bcm2835";
+diff --git a/arch/arm/boot/dts/bcm2836-rpi-2-b.dts b/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
+index 0455a680394a..6b0a6d5d5ca4 100644
 --- a/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
 +++ b/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
 @@ -4,6 +4,7 @@
@@ -3137,6 +3222,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,2-model-b", "brcm,bcm2836";
+diff --git a/arch/arm/boot/dts/bcm2836.dtsi b/arch/arm/boot/dts/bcm2836.dtsi
+index c933e8413884..82d6c4662ae4 100644
 --- a/arch/arm/boot/dts/bcm2836.dtsi
 +++ b/arch/arm/boot/dts/bcm2836.dtsi
 @@ -1,5 +1,6 @@
@@ -3146,6 +3233,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "brcm,bcm2836";
+diff --git a/arch/arm/boot/dts/bcm2837-rpi-3-b.dts b/arch/arm/boot/dts/bcm2837-rpi-3-b.dts
+index 054ecaa355c9..3d03e7d0fbf0 100644
 --- a/arch/arm/boot/dts/bcm2837-rpi-3-b.dts
 +++ b/arch/arm/boot/dts/bcm2837-rpi-3-b.dts
 @@ -4,6 +4,7 @@
@@ -3156,6 +3245,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "raspberrypi,3-model-b", "brcm,bcm2837";
+diff --git a/arch/arm/boot/dts/bcm2837.dtsi b/arch/arm/boot/dts/bcm2837.dtsi
+index beb6c502dadc..9e95fee78e19 100644
 --- a/arch/arm/boot/dts/bcm2837.dtsi
 +++ b/arch/arm/boot/dts/bcm2837.dtsi
 @@ -1,4 +1,5 @@
@@ -3164,6 +3255,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  
  / {
  	compatible = "brcm,bcm2837";
+diff --git a/arch/arm/boot/dts/bcm2838-rpi-4-b.dts b/arch/arm/boot/dts/bcm2838-rpi-4-b.dts
+new file mode 100644
+index 000000000000..7170a97bd3e4
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2838-rpi-4-b.dts
 @@ -0,0 +1,118 @@
@@ -3285,6 +3379,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	pinctrl-0 = <&uart1_gpio14>;
 +	status = "okay";
 +};
+diff --git a/arch/arm/boot/dts/bcm2838-rpi.dtsi b/arch/arm/boot/dts/bcm2838-rpi.dtsi
+new file mode 100644
+index 000000000000..140cfa312d1a
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2838-rpi.dtsi
 @@ -0,0 +1,25 @@
@@ -3313,6 +3410,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	/* The VPU firmware DMA channel 11 for VCHIQ */
 +	brcm,dma-channel-mask = <0x7000>;
 +};
+diff --git a/arch/arm/boot/dts/bcm2838.dtsi b/arch/arm/boot/dts/bcm2838.dtsi
+new file mode 100644
+index 000000000000..a8614cc3ad6a
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2838.dtsi
 @@ -0,0 +1,746 @@
@@ -4062,6 +4162,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +&txp {
 +	interrupts = <GIC_SPI 75 IRQ_TYPE_LEVEL_HIGH>;
 +};
+diff --git a/arch/arm/boot/dts/bcm283x-rpi-csi0-2lane.dtsi b/arch/arm/boot/dts/bcm283x-rpi-csi0-2lane.dtsi
+new file mode 100644
+index 000000000000..952a28eaf616
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm283x-rpi-csi0-2lane.dtsi
 @@ -0,0 +1,8 @@
@@ -4073,6 +4176,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm283x-rpi-csi1-2lane.dtsi b/arch/arm/boot/dts/bcm283x-rpi-csi1-2lane.dtsi
+new file mode 100644
+index 000000000000..451fb4bb4ab8
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm283x-rpi-csi1-2lane.dtsi
 @@ -0,0 +1,8 @@
@@ -4084,6 +4190,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm283x-rpi-csi1-4lane.dtsi b/arch/arm/boot/dts/bcm283x-rpi-csi1-4lane.dtsi
+new file mode 100644
+index 000000000000..9279d4b0bfae
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm283x-rpi-csi1-4lane.dtsi
 @@ -0,0 +1,8 @@
@@ -4095,6 +4204,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm283x-rpi-lan7515.dtsi b/arch/arm/boot/dts/bcm283x-rpi-lan7515.dtsi
+index 70bece63f9a7..7c6c054459b7 100644
 --- a/arch/arm/boot/dts/bcm283x-rpi-lan7515.dtsi
 +++ b/arch/arm/boot/dts/bcm283x-rpi-lan7515.dtsi
 @@ -29,6 +29,9 @@
@@ -4123,6 +4234,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		eth_max_speed = <&eth_phy>,"max-speed:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/bcm283x.dtsi b/arch/arm/boot/dts/bcm283x.dtsi
+index 90125ce19a1b..d7c955443138 100644
 --- a/arch/arm/boot/dts/bcm283x.dtsi
 +++ b/arch/arm/boot/dts/bcm283x.dtsi
 @@ -56,18 +56,7 @@
@@ -4203,8 +4316,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  			dma-names = "rx-tx";
  			status = "disabled";
  		};
-@@ -491,14 +464,6 @@
- 			status = "disabled";
+@@ -490,14 +463,6 @@
+ 
  		};
  
 -		thermal: thermal@7e212000 {
@@ -4218,7 +4331,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  		aux: aux@7e215000 {
  			compatible = "brcm,bcm2835-aux";
  			#clock-cells = <1>;
-@@ -578,6 +543,32 @@
+@@ -577,6 +542,32 @@
  			status = "disabled";
  		};
  
@@ -4251,7 +4364,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  		i2c1: i2c@7e804000 {
  			compatible = "brcm,bcm2835-i2c";
  			reg = <0x7e804000 0x1000>;
-@@ -638,13 +629,6 @@
+@@ -637,13 +628,6 @@
  			phy-names = "usb2-phy";
  		};
  
@@ -4265,6 +4378,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  		vc4: gpu {
  			compatible = "brcm,bcm2835-vc4";
  		};
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+new file mode 100644
+index 000000000000..e9cd9722bb94
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/Makefile
 @@ -0,0 +1,194 @@
@@ -4462,6 +4578,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +
 +always		:= $(dtbo-y)
 +clean-files	:= *.dtbo
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+new file mode 100644
+index 000000000000..8ce8cf05a2c8
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/README
 @@ -0,0 +1,2591 @@
@@ -7056,6 +7175,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +Raspberry Pi. There is a more complete explanation here:
 +
 +http://www.raspberrypi.org/documentation/configuration/device-tree.md
+diff --git a/arch/arm/boot/dts/overlays/act-led-overlay.dts b/arch/arm/boot/dts/overlays/act-led-overlay.dts
+new file mode 100644
+index 000000000000..2f4bbb407f89
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/act-led-overlay.dts
 @@ -0,0 +1,27 @@
@@ -7086,6 +7208,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		activelow = <&frag0>,"gpios:8";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/adau1977-adc-overlay.dts b/arch/arm/boot/dts/overlays/adau1977-adc-overlay.dts
+new file mode 100644
+index 000000000000..298488e19156
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/adau1977-adc-overlay.dts
 @@ -0,0 +1,40 @@
@@ -7129,6 +7254,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/adau7002-simple-overlay.dts b/arch/arm/boot/dts/overlays/adau7002-simple-overlay.dts
+new file mode 100644
+index 000000000000..5fed769d2526
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/adau7002-simple-overlay.dts
 @@ -0,0 +1,52 @@
@@ -7184,6 +7312,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +        card-name = <&sound_overlay>,"simple-audio-card,name";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/ads1015-overlay.dts b/arch/arm/boot/dts/overlays/ads1015-overlay.dts
+new file mode 100644
+index 000000000000..26d68fccc6a8
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ads1015-overlay.dts
 @@ -0,0 +1,98 @@
@@ -7285,6 +7416,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +   };
 +
 +};
+diff --git a/arch/arm/boot/dts/overlays/ads1115-overlay.dts b/arch/arm/boot/dts/overlays/ads1115-overlay.dts
+new file mode 100644
+index 000000000000..b380d925f0a5
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ads1115-overlay.dts
 @@ -0,0 +1,103 @@
@@ -7391,6 +7525,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		chd_datarate =    <&channel_d>,"ti,datarate:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/ads7846-overlay.dts b/arch/arm/boot/dts/overlays/ads7846-overlay.dts
+new file mode 100644
+index 000000000000..1c5c9b6bb6ff
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ads7846-overlay.dts
 @@ -0,0 +1,89 @@
@@ -7483,6 +7620,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		xohms =  <&ads7846>,"ti,x-plate-ohms;0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/adv7282m-overlay.dts b/arch/arm/boot/dts/overlays/adv7282m-overlay.dts
+new file mode 100644
+index 000000000000..197c8f41a265
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/adv7282m-overlay.dts
 @@ -0,0 +1,81 @@
@@ -7567,6 +7707,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		addr =			<&adv728x>,"reg:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/adv728x-m-overlay.dts b/arch/arm/boot/dts/overlays/adv728x-m-overlay.dts
+new file mode 100644
+index 000000000000..ea392e886984
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/adv728x-m-overlay.dts
 @@ -0,0 +1,37 @@
@@ -7607,6 +7750,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		adv7281ma = <0>, "+103";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/akkordion-iqdacplus-overlay.dts b/arch/arm/boot/dts/overlays/akkordion-iqdacplus-overlay.dts
+new file mode 100644
+index 000000000000..82f9b3734fb1
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/akkordion-iqdacplus-overlay.dts
 @@ -0,0 +1,49 @@
@@ -7659,6 +7805,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		24db_digital_gain = <&frag2>,"iqaudio,24db_digital_gain?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/allo-boss-dac-pcm512x-audio-overlay.dts b/arch/arm/boot/dts/overlays/allo-boss-dac-pcm512x-audio-overlay.dts
+new file mode 100644
+index 000000000000..dd69916fcb3c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/allo-boss-dac-pcm512x-audio-overlay.dts
 @@ -0,0 +1,59 @@
@@ -7721,6 +7870,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		slave = <&boss_dac>,"allo,slave?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/allo-digione-overlay.dts b/arch/arm/boot/dts/overlays/allo-digione-overlay.dts
+new file mode 100644
+index 000000000000..ea018ace34d4
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/allo-digione-overlay.dts
 @@ -0,0 +1,44 @@
@@ -7768,6 +7920,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/allo-katana-dac-audio-overlay.dts b/arch/arm/boot/dts/overlays/allo-katana-dac-audio-overlay.dts
+new file mode 100644
+index 000000000000..b25fd681f09f
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/allo-katana-dac-audio-overlay.dts
 @@ -0,0 +1,57 @@
@@ -7828,6 +7983,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +};
 +
+diff --git a/arch/arm/boot/dts/overlays/allo-piano-dac-pcm512x-audio-overlay.dts b/arch/arm/boot/dts/overlays/allo-piano-dac-pcm512x-audio-overlay.dts
+new file mode 100644
+index 000000000000..bfc66da6295a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/allo-piano-dac-pcm512x-audio-overlay.dts
 @@ -0,0 +1,54 @@
@@ -7885,6 +8043,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			<&piano_dac>,"allo,24db_digital_gain?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts b/arch/arm/boot/dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts
+new file mode 100644
+index 000000000000..374c553db062
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts
 @@ -0,0 +1,55 @@
@@ -7943,6 +8104,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			<&piano_dac>,"allo,glb_mclk?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/applepi-dac-overlay.dts b/arch/arm/boot/dts/overlays/applepi-dac-overlay.dts
+new file mode 100644
+index 000000000000..4769296ec9d6
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/applepi-dac-overlay.dts
 @@ -0,0 +1,57 @@
@@ -8003,6 +8167,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +   compile with:
 +   dtc -@ -H epapr -O dtb -o ApplePi-DAC.dtbo -W no-unit_address_vs_reg ApplePi-DAC.dts
 +*/
+diff --git a/arch/arm/boot/dts/overlays/at86rf233-overlay.dts b/arch/arm/boot/dts/overlays/at86rf233-overlay.dts
+new file mode 100644
+index 000000000000..5a3f4571ee78
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/at86rf233-overlay.dts
 @@ -0,0 +1,57 @@
@@ -8063,6 +8230,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		trim      = <&lowpan0>, "xtal-trim.0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/audioinjector-addons-overlay.dts b/arch/arm/boot/dts/overlays/audioinjector-addons-overlay.dts
+new file mode 100644
+index 000000000000..57a66eac8e9b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/audioinjector-addons-overlay.dts
 @@ -0,0 +1,60 @@
@@ -8126,6 +8296,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		non-stop-clocks = <&snd>, "non-stop-clocks?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/audioinjector-ultra-overlay.dts b/arch/arm/boot/dts/overlays/audioinjector-ultra-overlay.dts
+new file mode 100644
+index 000000000000..fb4a4678a17a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/audioinjector-ultra-overlay.dts
 @@ -0,0 +1,71 @@
@@ -8200,6 +8373,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/audioinjector-wm8731-audio-overlay.dts b/arch/arm/boot/dts/overlays/audioinjector-wm8731-audio-overlay.dts
+new file mode 100644
+index 000000000000..68f4427d86c3
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/audioinjector-wm8731-audio-overlay.dts
 @@ -0,0 +1,39 @@
@@ -8242,6 +8418,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/audiosense-pi-overlay.dts b/arch/arm/boot/dts/overlays/audiosense-pi-overlay.dts
+new file mode 100644
+index 000000000000..4b96a3a8a14a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/audiosense-pi-overlay.dts
 @@ -0,0 +1,82 @@
@@ -8327,6 +8506,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/audremap-overlay.dts b/arch/arm/boot/dts/overlays/audremap-overlay.dts
+new file mode 100644
+index 000000000000..d624bb3a3fea
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/audremap-overlay.dts
 @@ -0,0 +1,35 @@
@@ -8365,6 +8547,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pins_18_19 = <0>,"-1+2";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/balena-fin-overlay.dts b/arch/arm/boot/dts/overlays/balena-fin-overlay.dts
+new file mode 100644
+index 000000000000..249c8202b2ed
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/balena-fin-overlay.dts
 @@ -0,0 +1,122 @@
@@ -8490,6 +8675,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/bmp085_i2c-sensor-overlay.dts b/arch/arm/boot/dts/overlays/bmp085_i2c-sensor-overlay.dts
+new file mode 100644
+index 000000000000..26dbbdd03ce5
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/bmp085_i2c-sensor-overlay.dts
 @@ -0,0 +1,23 @@
@@ -8516,6 +8704,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +                };
 +        };
 +};
+diff --git a/arch/arm/boot/dts/overlays/dht11-overlay.dts b/arch/arm/boot/dts/overlays/dht11-overlay.dts
+new file mode 100644
+index 000000000000..8de67527e317
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/dht11-overlay.dts
 @@ -0,0 +1,39 @@
@@ -8558,6 +8749,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			<&dht11>,"gpios:4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/dionaudio-loco-overlay.dts b/arch/arm/boot/dts/overlays/dionaudio-loco-overlay.dts
+new file mode 100644
+index 000000000000..d863e5c167cc
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/dionaudio-loco-overlay.dts
 @@ -0,0 +1,39 @@
@@ -8600,6 +8794,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/dionaudio-loco-v2-overlay.dts b/arch/arm/boot/dts/overlays/dionaudio-loco-v2-overlay.dts
+new file mode 100644
+index 000000000000..dfb8922a654b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/dionaudio-loco-v2-overlay.dts
 @@ -0,0 +1,49 @@
@@ -8652,6 +8849,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		24db_digital_gain = <&frag0>,"dionaudio,24db_digital_gain?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/disable-bt-overlay.dts b/arch/arm/boot/dts/overlays/disable-bt-overlay.dts
+new file mode 100644
+index 000000000000..2f1b655a133c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/disable-bt-overlay.dts
 @@ -0,0 +1,55 @@
@@ -8710,6 +8910,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/disable-wifi-overlay.dts b/arch/arm/boot/dts/overlays/disable-wifi-overlay.dts
+new file mode 100644
+index 000000000000..75e046463900
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/disable-wifi-overlay.dts
 @@ -0,0 +1,20 @@
@@ -8733,6 +8936,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/dpi18-overlay.dts b/arch/arm/boot/dts/overlays/dpi18-overlay.dts
+new file mode 100644
+index 000000000000..4abe5be744db
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/dpi18-overlay.dts
 @@ -0,0 +1,39 @@
@@ -8775,6 +8981,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/dpi24-overlay.dts b/arch/arm/boot/dts/overlays/dpi24-overlay.dts
+new file mode 100644
+index 000000000000..44335cc81277
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/dpi24-overlay.dts
 @@ -0,0 +1,39 @@
@@ -8817,6 +9026,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/draws-overlay.dts b/arch/arm/boot/dts/overlays/draws-overlay.dts
+new file mode 100644
+index 000000000000..32b665c3934b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/draws-overlay.dts
 @@ -0,0 +1,200 @@
@@ -9020,6 +9232,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +        alsaname = <&snd>, "simple-audio-card,name";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/dwc-otg-overlay.dts b/arch/arm/boot/dts/overlays/dwc-otg-overlay.dts
+new file mode 100644
+index 000000000000..78c5e9f85048
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/dwc-otg-overlay.dts
 @@ -0,0 +1,14 @@
@@ -9037,6 +9252,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/dwc2-overlay.dts b/arch/arm/boot/dts/overlays/dwc2-overlay.dts
+new file mode 100644
+index 000000000000..732adbe3faaf
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/dwc2-overlay.dts
 @@ -0,0 +1,26 @@
@@ -9066,6 +9284,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		g-rx-fifo-size = <&dwc2_usb>,"g-rx-fifo-size:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/enc28j60-overlay.dts b/arch/arm/boot/dts/overlays/enc28j60-overlay.dts
+new file mode 100644
+index 000000000000..7af5c2e607ea
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/enc28j60-overlay.dts
 @@ -0,0 +1,53 @@
@@ -9122,6 +9343,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		speed   = <&eth1>, "spi-max-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/enc28j60-spi2-overlay.dts b/arch/arm/boot/dts/overlays/enc28j60-spi2-overlay.dts
+new file mode 100644
+index 000000000000..17cb5b8fa485
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/enc28j60-spi2-overlay.dts
 @@ -0,0 +1,47 @@
@@ -9172,6 +9396,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		speed   = <&eth1>, "spi-max-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/exc3000-overlay.dts b/arch/arm/boot/dts/overlays/exc3000-overlay.dts
+new file mode 100644
+index 000000000000..6f087fb20661
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/exc3000-overlay.dts
 @@ -0,0 +1,48 @@
@@ -9223,6 +9450,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		swapxy = <&exc3000>,"touchscreen-swapped-x-y?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/fe-pi-audio-overlay.dts b/arch/arm/boot/dts/overlays/fe-pi-audio-overlay.dts
+new file mode 100644
+index 000000000000..1c3ec3e21a18
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/fe-pi-audio-overlay.dts
 @@ -0,0 +1,70 @@
@@ -9296,6 +9526,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/goodix-overlay.dts b/arch/arm/boot/dts/overlays/goodix-overlay.dts
+new file mode 100644
+index 000000000000..8571527de49a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/goodix-overlay.dts
 @@ -0,0 +1,46 @@
@@ -9345,6 +9578,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			<&gt9271>,"reset-gpios:4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/googlevoicehat-soundcard-overlay.dts b/arch/arm/boot/dts/overlays/googlevoicehat-soundcard-overlay.dts
+new file mode 100644
+index 000000000000..e443be1f9a0e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/googlevoicehat-soundcard-overlay.dts
 @@ -0,0 +1,49 @@
@@ -9397,6 +9633,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-fan-overlay.dts b/arch/arm/boot/dts/overlays/gpio-fan-overlay.dts
+new file mode 100644
+index 000000000000..0b14981b4824
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-fan-overlay.dts
 @@ -0,0 +1,79 @@
@@ -9479,6 +9718,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		temp = <&cpu_hot>,"temperature:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-ir-overlay.dts b/arch/arm/boot/dts/overlays/gpio-ir-overlay.dts
+new file mode 100644
+index 000000000000..58f588498d68
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-ir-overlay.dts
 @@ -0,0 +1,48 @@
@@ -9530,6 +9772,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +                rc-map-name = <&gpio_ir>,"linux,rc-map-name";           // default rc map
 +        };
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-ir-tx-overlay.dts b/arch/arm/boot/dts/overlays/gpio-ir-tx-overlay.dts
+new file mode 100644
+index 000000000000..3625431b7560
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-ir-tx-overlay.dts
 @@ -0,0 +1,36 @@
@@ -9569,6 +9814,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		invert = <&gpio_ir_tx>, "gpios:8";		// 1 = active low
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-key-overlay.dts b/arch/arm/boot/dts/overlays/gpio-key-overlay.dts
+new file mode 100644
+index 000000000000..2e7253d1d0ab
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-key-overlay.dts
 @@ -0,0 +1,48 @@
@@ -9620,6 +9868,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-no-bank0-irq-overlay.dts b/arch/arm/boot/dts/overlays/gpio-no-bank0-irq-overlay.dts
+new file mode 100755
+index 000000000000..96cbe80820b7
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-no-bank0-irq-overlay.dts
 @@ -0,0 +1,14 @@
@@ -9637,6 +9888,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-no-irq-overlay.dts b/arch/arm/boot/dts/overlays/gpio-no-irq-overlay.dts
+new file mode 100644
+index 000000000000..55f9bff3a8f6
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-no-irq-overlay.dts
 @@ -0,0 +1,14 @@
@@ -9654,6 +9908,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-poweroff-overlay.dts b/arch/arm/boot/dts/overlays/gpio-poweroff-overlay.dts
+new file mode 100644
+index 000000000000..bb8cd3bf264d
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-poweroff-overlay.dts
 @@ -0,0 +1,36 @@
@@ -9693,6 +9950,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		export =        <&power_ctrl>,"export?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/gpio-shutdown-overlay.dts b/arch/arm/boot/dts/overlays/gpio-shutdown-overlay.dts
+new file mode 100644
+index 000000000000..db07ba67781d
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/gpio-shutdown-overlay.dts
 @@ -0,0 +1,82 @@
@@ -9778,6 +10038,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +
 +};
+diff --git a/arch/arm/boot/dts/overlays/hd44780-lcd-overlay.dts b/arch/arm/boot/dts/overlays/hd44780-lcd-overlay.dts
+new file mode 100644
+index 000000000000..ee726669ff51
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hd44780-lcd-overlay.dts
 @@ -0,0 +1,46 @@
@@ -9827,6 +10090,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +    };
 +
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-amp-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-amp-overlay.dts
+new file mode 100644
+index 000000000000..142518ab348b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-amp-overlay.dts
 @@ -0,0 +1,39 @@
@@ -9869,6 +10135,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-dac-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-dac-overlay.dts
+new file mode 100644
+index 000000000000..ea8a6c8f36c0
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-dac-overlay.dts
 @@ -0,0 +1,34 @@
@@ -9906,6 +10175,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-dacplus-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-dacplus-overlay.dts
+new file mode 100644
+index 000000000000..5cd14aac3e45
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-dacplus-overlay.dts
 @@ -0,0 +1,59 @@
@@ -9968,6 +10240,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		slave = <&hifiberry_dacplus>,"hifiberry-dacplus,slave?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-dacplusadc-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-dacplusadc-overlay.dts
+new file mode 100644
+index 000000000000..09adcea8fd37
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-dacplusadc-overlay.dts
 @@ -0,0 +1,71 @@
@@ -10042,6 +10317,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		slave = <&hifiberry_dacplusadc>,"hifiberry-dacplusadc,slave?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-dacplusadcpro-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-dacplusadcpro-overlay.dts
+new file mode 100644
+index 000000000000..00e5d450a88b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-dacplusadcpro-overlay.dts
 @@ -0,0 +1,64 @@
@@ -10109,6 +10387,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		slave = <&hifiberry_dacplusadcpro>,"hifiberry-dacplusadcpro,slave?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-dacplusdsp-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-dacplusdsp-overlay.dts
+new file mode 100644
+index 000000000000..63432e8b983f
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-dacplusdsp-overlay.dts
 @@ -0,0 +1,34 @@
@@ -10146,6 +10427,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-digi-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-digi-overlay.dts
+new file mode 100644
+index 000000000000..a2309a50e8d8
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-digi-overlay.dts
 @@ -0,0 +1,41 @@
@@ -10190,6 +10474,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hifiberry-digi-pro-overlay.dts b/arch/arm/boot/dts/overlays/hifiberry-digi-pro-overlay.dts
+new file mode 100644
+index 000000000000..83de602e76ba
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hifiberry-digi-pro-overlay.dts
 @@ -0,0 +1,43 @@
@@ -10236,6 +10523,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hy28a-overlay.dts b/arch/arm/boot/dts/overlays/hy28a-overlay.dts
+new file mode 100644
+index 000000000000..aa6463e6e749
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hy28a-overlay.dts
 @@ -0,0 +1,93 @@
@@ -10332,6 +10622,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +				<&hy28a_pins>, "brcm,pins:8";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hy28b-2017-overlay.dts b/arch/arm/boot/dts/overlays/hy28b-2017-overlay.dts
+new file mode 100644
+index 000000000000..42b68b684bd0
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hy28b-2017-overlay.dts
 @@ -0,0 +1,152 @@
@@ -10487,6 +10780,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +				<&hy28b_pins>, "brcm,pins:8";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/hy28b-overlay.dts b/arch/arm/boot/dts/overlays/hy28b-overlay.dts
+new file mode 100644
+index 000000000000..2e5e20f327a3
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/hy28b-overlay.dts
 @@ -0,0 +1,148 @@
@@ -10638,6 +10934,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +				<&hy28b_pins>, "brcm,pins:8";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i-sabre-q2m-overlay.dts b/arch/arm/boot/dts/overlays/i-sabre-q2m-overlay.dts
+new file mode 100644
+index 000000000000..0c4cff354674
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i-sabre-q2m-overlay.dts
 @@ -0,0 +1,39 @@
@@ -10680,6 +10979,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c-bcm2708-overlay.dts b/arch/arm/boot/dts/overlays/i2c-bcm2708-overlay.dts
+new file mode 100644
+index 000000000000..8204b6b3aef8
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c-bcm2708-overlay.dts
 @@ -0,0 +1,13 @@
@@ -10696,6 +10998,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts b/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
+new file mode 100644
+index 000000000000..39e7bc5fa9d8
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
 @@ -0,0 +1,45 @@
@@ -10744,6 +11049,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		bus = <&i2c_gpio>, "reg:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c-mux-overlay.dts b/arch/arm/boot/dts/overlays/i2c-mux-overlay.dts
+new file mode 100644
+index 000000000000..112aed91ecb2
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c-mux-overlay.dts
 @@ -0,0 +1,139 @@
@@ -10886,6 +11194,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			<&pca9548>,"reg:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c-pwm-pca9685a-overlay.dts b/arch/arm/boot/dts/overlays/i2c-pwm-pca9685a-overlay.dts
+new file mode 100644
+index 000000000000..108165df165e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c-pwm-pca9685a-overlay.dts
 @@ -0,0 +1,26 @@
@@ -10915,6 +11226,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		addr = <&pca>,"reg:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c-rtc-gpio-overlay.dts b/arch/arm/boot/dts/overlays/i2c-rtc-gpio-overlay.dts
+new file mode 100644
+index 000000000000..44df77459520
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c-rtc-gpio-overlay.dts
 @@ -0,0 +1,244 @@
@@ -11162,6 +11476,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		i2c_gpio_delay_us = <&i2c_gpio>,"i2c-gpio,delay-us:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c-rtc-overlay.dts b/arch/arm/boot/dts/overlays/i2c-rtc-overlay.dts
+new file mode 100644
+index 000000000000..af5ca042de75
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c-rtc-overlay.dts
 @@ -0,0 +1,225 @@
@@ -11390,6 +11707,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +				<&m41t62>,"wakeup-source?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c-sensor-overlay.dts b/arch/arm/boot/dts/overlays/i2c-sensor-overlay.dts
+new file mode 100644
+index 000000000000..777e4a68190a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c-sensor-overlay.dts
 @@ -0,0 +1,239 @@
@@ -11632,6 +11952,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		max17040 = <0>,"+13";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c0-bcm2708-overlay.dts b/arch/arm/boot/dts/overlays/i2c0-bcm2708-overlay.dts
+new file mode 100644
+index 000000000000..02f7dca9b71e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c0-bcm2708-overlay.dts
 @@ -0,0 +1,14 @@
@@ -11649,6 +11972,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			   <&pins4>,"brcm,pins:4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c0-overlay.dts b/arch/arm/boot/dts/overlays/i2c0-overlay.dts
+new file mode 100644
+index 000000000000..6b1f9ec6c878
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c0-overlay.dts
 @@ -0,0 +1,61 @@
@@ -11713,6 +12039,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		combine = <0>, "!5";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts b/arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts
+new file mode 100644
+index 000000000000..09d8b16a6256
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts
 @@ -0,0 +1,9 @@
@@ -11725,6 +12054,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pin_func = <&pins1>,"brcm,function:0", <&pins2>,"brcm,function:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c1-overlay.dts b/arch/arm/boot/dts/overlays/i2c1-overlay.dts
+new file mode 100644
+index 000000000000..addaed73e665
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c1-overlay.dts
 @@ -0,0 +1,44 @@
@@ -11772,6 +12104,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		combine = <0>, "!3";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c3-overlay.dts b/arch/arm/boot/dts/overlays/i2c3-overlay.dts
+new file mode 100644
+index 000000000000..e24a1df21f99
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c3-overlay.dts
 @@ -0,0 +1,36 @@
@@ -11811,6 +12146,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		baudrate = <&frag0>, "clock-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c4-overlay.dts b/arch/arm/boot/dts/overlays/i2c4-overlay.dts
+new file mode 100644
+index 000000000000..14c7f4d1da4c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c4-overlay.dts
 @@ -0,0 +1,36 @@
@@ -11850,6 +12188,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		baudrate = <&frag0>, "clock-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c5-overlay.dts b/arch/arm/boot/dts/overlays/i2c5-overlay.dts
+new file mode 100644
+index 000000000000..7953621112de
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c5-overlay.dts
 @@ -0,0 +1,36 @@
@@ -11889,6 +12230,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		baudrate = <&frag0>, "clock-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2c6-overlay.dts b/arch/arm/boot/dts/overlays/i2c6-overlay.dts
+new file mode 100644
+index 000000000000..555305a7ee1f
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2c6-overlay.dts
 @@ -0,0 +1,36 @@
@@ -11928,6 +12272,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		baudrate = <&frag0>, "clock-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/i2s-gpio28-31-overlay.dts b/arch/arm/boot/dts/overlays/i2s-gpio28-31-overlay.dts
+new file mode 100644
+index 000000000000..cf43094c6ff4
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/i2s-gpio28-31-overlay.dts
 @@ -0,0 +1,18 @@
@@ -11949,6 +12296,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/ilitek251x-overlay.dts b/arch/arm/boot/dts/overlays/ilitek251x-overlay.dts
+new file mode 100644
+index 000000000000..551aba591d26
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ilitek251x-overlay.dts
 @@ -0,0 +1,45 @@
@@ -11997,6 +12347,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		sizey = <&ili251x>,"touchscreen-size-y:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/imx219-overlay.dts b/arch/arm/boot/dts/overlays/imx219-overlay.dts
+new file mode 100644
+index 000000000000..2a1500d07b68
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/imx219-overlay.dts
 @@ -0,0 +1,129 @@
@@ -12129,6 +12482,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		i2c_pins_28_29 = <0>,"+2-3-4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/iqaudio-codec-overlay.dts b/arch/arm/boot/dts/overlays/iqaudio-codec-overlay.dts
+new file mode 100644
+index 000000000000..ff3ef3942c6c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/iqaudio-codec-overlay.dts
 @@ -0,0 +1,42 @@
@@ -12174,6 +12530,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	__overrides__ {
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/iqaudio-dac-overlay.dts b/arch/arm/boot/dts/overlays/iqaudio-dac-overlay.dts
+new file mode 100644
+index 000000000000..24073cadd0ef
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/iqaudio-dac-overlay.dts
 @@ -0,0 +1,46 @@
@@ -12223,6 +12582,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		24db_digital_gain = <&frag2>,"iqaudio,24db_digital_gain?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/iqaudio-dacplus-overlay.dts b/arch/arm/boot/dts/overlays/iqaudio-dacplus-overlay.dts
+new file mode 100644
+index 000000000000..7c70b25e58d7
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/iqaudio-dacplus-overlay.dts
 @@ -0,0 +1,49 @@
@@ -12275,6 +12637,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		unmute_amp = <&iqaudio_dac>,"iqaudio-dac,unmute-amp?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/iqaudio-digi-wm8804-audio-overlay.dts b/arch/arm/boot/dts/overlays/iqaudio-digi-wm8804-audio-overlay.dts
+new file mode 100644
+index 000000000000..ee54095c869b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/iqaudio-digi-wm8804-audio-overlay.dts
 @@ -0,0 +1,47 @@
@@ -12325,6 +12690,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		dai_stream_name = <&wm8804_digi>,"wm8804-digi,dai-stream-name";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/irs1125-overlay.dts b/arch/arm/boot/dts/overlays/irs1125-overlay.dts
+new file mode 100644
+index 000000000000..b9006715a539
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/irs1125-overlay.dts
 @@ -0,0 +1,97 @@
@@ -12425,6 +12793,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		i2c_pins_28_29 = <0>,"+2-3-4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/jedec-spi-nor-overlay.dts b/arch/arm/boot/dts/overlays/jedec-spi-nor-overlay.dts
+new file mode 100644
+index 000000000000..585c7dbcdf7f
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/jedec-spi-nor-overlay.dts
 @@ -0,0 +1,309 @@
@@ -12737,6 +13108,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +};
 +
+diff --git a/arch/arm/boot/dts/overlays/justboom-dac-overlay.dts b/arch/arm/boot/dts/overlays/justboom-dac-overlay.dts
+new file mode 100644
+index 000000000000..d00515dca419
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/justboom-dac-overlay.dts
 @@ -0,0 +1,46 @@
@@ -12786,6 +13160,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		24db_digital_gain = <&frag2>,"justboom,24db_digital_gain?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/justboom-digi-overlay.dts b/arch/arm/boot/dts/overlays/justboom-digi-overlay.dts
+new file mode 100644
+index 000000000000..e73336029c54
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/justboom-digi-overlay.dts
 @@ -0,0 +1,41 @@
@@ -12830,6 +13207,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/ltc294x-overlay.dts b/arch/arm/boot/dts/overlays/ltc294x-overlay.dts
+new file mode 100644
+index 000000000000..6d971f3649ca
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ltc294x-overlay.dts
 @@ -0,0 +1,86 @@
@@ -12919,6 +13299,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +				 <&ltc2944>, "lltc,prescaler-exponent:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/max98357a-overlay.dts b/arch/arm/boot/dts/overlays/max98357a-overlay.dts
+new file mode 100644
+index 000000000000..9e2afb05b7cb
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/max98357a-overlay.dts
 @@ -0,0 +1,84 @@
@@ -13006,6 +13389,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		sdmode-pin = <&max98357a_dac>,"sdmode-gpios:4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/mbed-dac-overlay.dts b/arch/arm/boot/dts/overlays/mbed-dac-overlay.dts
+new file mode 100644
+index 000000000000..840dd9b31db4
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mbed-dac-overlay.dts
 @@ -0,0 +1,64 @@
@@ -13073,6 +13459,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/mcp23017-overlay.dts b/arch/arm/boot/dts/overlays/mcp23017-overlay.dts
+new file mode 100644
+index 000000000000..16af971c3bdb
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mcp23017-overlay.dts
 @@ -0,0 +1,71 @@
@@ -13147,6 +13536,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +};
 +
+diff --git a/arch/arm/boot/dts/overlays/mcp23s17-overlay.dts b/arch/arm/boot/dts/overlays/mcp23s17-overlay.dts
+new file mode 100644
+index 000000000000..484d64b225fb
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mcp23s17-overlay.dts
 @@ -0,0 +1,732 @@
@@ -13882,6 +14274,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +};
 +
+diff --git a/arch/arm/boot/dts/overlays/mcp2515-can0-overlay.dts b/arch/arm/boot/dts/overlays/mcp2515-can0-overlay.dts
+new file mode 100755
+index 000000000000..0dae8053a9a9
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mcp2515-can0-overlay.dts
 @@ -0,0 +1,73 @@
@@ -13958,6 +14353,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +        interrupt = <&can0_pins>,"brcm,pins:0",<&can0>,"interrupts:0";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/mcp2515-can1-overlay.dts b/arch/arm/boot/dts/overlays/mcp2515-can1-overlay.dts
+new file mode 100644
+index 000000000000..c70dc3d05ebf
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mcp2515-can1-overlay.dts
 @@ -0,0 +1,73 @@
@@ -14034,6 +14432,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +        interrupt = <&can1_pins>,"brcm,pins:0",<&can1>,"interrupts:0";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/mcp3008-overlay.dts b/arch/arm/boot/dts/overlays/mcp3008-overlay.dts
+new file mode 100755
+index 000000000000..0b7d9f75546e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mcp3008-overlay.dts
 @@ -0,0 +1,205 @@
@@ -14242,6 +14643,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		spi2-2-speed = <&mcp3008_22>, "spi-max-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/mcp3202-overlay.dts b/arch/arm/boot/dts/overlays/mcp3202-overlay.dts
+new file mode 100755
+index 000000000000..8e4e9f60f285
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mcp3202-overlay.dts
 @@ -0,0 +1,205 @@
@@ -14450,6 +14854,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		spi2-2-speed = <&mcp3202_22>, "spi-max-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/mcp342x-overlay.dts b/arch/arm/boot/dts/overlays/mcp342x-overlay.dts
+new file mode 100644
+index 000000000000..7bbb528f804f
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mcp342x-overlay.dts
 @@ -0,0 +1,93 @@
@@ -14546,6 +14953,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +};
 +
+diff --git a/arch/arm/boot/dts/overlays/media-center-overlay.dts b/arch/arm/boot/dts/overlays/media-center-overlay.dts
+new file mode 100644
+index 000000000000..0fcdcfa18eb3
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/media-center-overlay.dts
 @@ -0,0 +1,134 @@
@@ -14683,6 +15093,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		invert =        <&lirc_rpi>,"rpi,invert:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/midi-uart0-overlay.dts b/arch/arm/boot/dts/overlays/midi-uart0-overlay.dts
+new file mode 100644
+index 000000000000..565af7cf79d7
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/midi-uart0-overlay.dts
 @@ -0,0 +1,36 @@
@@ -14722,6 +15135,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/midi-uart1-overlay.dts b/arch/arm/boot/dts/overlays/midi-uart1-overlay.dts
+new file mode 100644
+index 000000000000..e0bc410acbff
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/midi-uart1-overlay.dts
 @@ -0,0 +1,43 @@
@@ -14768,6 +15184,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/miniuart-bt-overlay.dts b/arch/arm/boot/dts/overlays/miniuart-bt-overlay.dts
+new file mode 100644
+index 000000000000..30d3d8549da0
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/miniuart-bt-overlay.dts
 @@ -0,0 +1,74 @@
@@ -14845,6 +15264,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/mmc-overlay.dts b/arch/arm/boot/dts/overlays/mmc-overlay.dts
+new file mode 100644
+index 000000000000..c1a2f691aa1e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mmc-overlay.dts
 @@ -0,0 +1,46 @@
@@ -14894,6 +15316,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		overclock_50     = <&frag0>,"brcm,overclock-50:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/mpu6050-overlay.dts b/arch/arm/boot/dts/overlays/mpu6050-overlay.dts
+new file mode 100644
+index 000000000000..3109d90562ae
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mpu6050-overlay.dts
 @@ -0,0 +1,28 @@
@@ -14925,6 +15350,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +                interrupt = <&mpu6050>,"interrupts:0";
 +        };
 +};
+diff --git a/arch/arm/boot/dts/overlays/mz61581-overlay.dts b/arch/arm/boot/dts/overlays/mz61581-overlay.dts
+new file mode 100644
+index 000000000000..32686968c0d6
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/mz61581-overlay.dts
 @@ -0,0 +1,117 @@
@@ -15045,6 +15473,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		xohms =   <&mz61581_ts>,"ti,x-plate-ohms;0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/ov5647-overlay.dts b/arch/arm/boot/dts/overlays/ov5647-overlay.dts
+new file mode 100644
+index 000000000000..5266d4b8758d
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ov5647-overlay.dts
 @@ -0,0 +1,99 @@
@@ -15147,6 +15578,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		i2c_pins_28_29 = <0>,"+2-3-4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/papirus-overlay.dts b/arch/arm/boot/dts/overlays/papirus-overlay.dts
+new file mode 100644
+index 000000000000..7b6bcfd49c86
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/papirus-overlay.dts
 @@ -0,0 +1,89 @@
@@ -15239,22 +15673,37 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		speed = <&repaper>, "spi-max-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/pi3-act-led-overlay.dts b/arch/arm/boot/dts/overlays/pi3-act-led-overlay.dts
+new file mode 100644
+index 000000000000..aedfc90e8a31
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pi3-act-led-overlay.dts
 @@ -0,0 +1 @@
 +#include "act-led-overlay.dts"
+diff --git a/arch/arm/boot/dts/overlays/pi3-disable-bt-overlay.dts b/arch/arm/boot/dts/overlays/pi3-disable-bt-overlay.dts
+new file mode 100644
+index 000000000000..e09a49295236
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pi3-disable-bt-overlay.dts
 @@ -0,0 +1 @@
 +#include "disable-bt-overlay.dts"
+diff --git a/arch/arm/boot/dts/overlays/pi3-disable-wifi-overlay.dts b/arch/arm/boot/dts/overlays/pi3-disable-wifi-overlay.dts
+new file mode 100644
+index 000000000000..b61b69c14f37
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pi3-disable-wifi-overlay.dts
 @@ -0,0 +1 @@
 +#include "disable-wifi-overlay.dts"
+diff --git a/arch/arm/boot/dts/overlays/pi3-miniuart-bt-overlay.dts b/arch/arm/boot/dts/overlays/pi3-miniuart-bt-overlay.dts
+new file mode 100644
+index 000000000000..94c14267716e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pi3-miniuart-bt-overlay.dts
 @@ -0,0 +1 @@
 +#include "miniuart-bt-overlay.dts"
+diff --git a/arch/arm/boot/dts/overlays/pibell-overlay.dts b/arch/arm/boot/dts/overlays/pibell-overlay.dts
+new file mode 100644
+index 000000000000..9333a9b09772
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pibell-overlay.dts
 @@ -0,0 +1,81 @@
@@ -15339,6 +15788,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +        alsaname = <&snd>, "simple-audio-card,name";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/piglow-overlay.dts b/arch/arm/boot/dts/overlays/piglow-overlay.dts
+new file mode 100644
+index 000000000000..075bceef158c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/piglow-overlay.dts
 @@ -0,0 +1,97 @@
@@ -15439,6 +15891,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/piscreen-overlay.dts b/arch/arm/boot/dts/overlays/piscreen-overlay.dts
+new file mode 100644
+index 000000000000..ae1af76d3923
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/piscreen-overlay.dts
 @@ -0,0 +1,102 @@
@@ -15544,6 +15999,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		xohms =		<&piscreen_ts>,"ti,x-plate-ohms;0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/piscreen2r-overlay.dts b/arch/arm/boot/dts/overlays/piscreen2r-overlay.dts
+new file mode 100644
+index 000000000000..93b85be3f7c1
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/piscreen2r-overlay.dts
 @@ -0,0 +1,106 @@
@@ -15653,6 +16111,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +};
 +
+diff --git a/arch/arm/boot/dts/overlays/pisound-overlay.dts b/arch/arm/boot/dts/overlays/pisound-overlay.dts
+new file mode 100644
+index 000000000000..49efb2b768fb
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pisound-overlay.dts
 @@ -0,0 +1,120 @@
@@ -15776,6 +16237,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/pitft22-overlay.dts b/arch/arm/boot/dts/overlays/pitft22-overlay.dts
+new file mode 100644
+index 000000000000..589ad13795b1
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pitft22-overlay.dts
 @@ -0,0 +1,69 @@
@@ -15848,6 +16312,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +                debug =   <&pitft>,"debug:0";
 +        };
 +};
+diff --git a/arch/arm/boot/dts/overlays/pitft28-capacitive-overlay.dts b/arch/arm/boot/dts/overlays/pitft28-capacitive-overlay.dts
+new file mode 100644
+index 000000000000..33901ee1db7a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pitft28-capacitive-overlay.dts
 @@ -0,0 +1,91 @@
@@ -15942,6 +16409,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +                touch-swapxy = <&ft6236>,"touchscreen-swapped-x-y?";
 +        };
 +};
+diff --git a/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts b/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
+new file mode 100644
+index 000000000000..4a4a3f44c29d
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
 @@ -0,0 +1,119 @@
@@ -16064,6 +16534,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		debug =   <&pitft>,"debug:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts b/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
+new file mode 100644
+index 000000000000..a69b6c2c7608
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
 @@ -0,0 +1,119 @@
@@ -16186,6 +16659,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		debug =   <&pitft>,"debug:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/pps-gpio-overlay.dts b/arch/arm/boot/dts/overlays/pps-gpio-overlay.dts
+new file mode 100644
+index 000000000000..524a1c1d3670
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pps-gpio-overlay.dts
 @@ -0,0 +1,38 @@
@@ -16227,6 +16703,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		capture_clear = <&pps>,"capture-clear?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/pwm-2chan-overlay.dts b/arch/arm/boot/dts/overlays/pwm-2chan-overlay.dts
+new file mode 100644
+index 000000000000..abdeddd0f2c8
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pwm-2chan-overlay.dts
 @@ -0,0 +1,47 @@
@@ -16277,6 +16756,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		clock = <&frag1>,"assigned-clock-rates:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/pwm-ir-tx-overlay.dts b/arch/arm/boot/dts/overlays/pwm-ir-tx-overlay.dts
+new file mode 100644
+index 000000000000..119caf746b3b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pwm-ir-tx-overlay.dts
 @@ -0,0 +1,40 @@
@@ -16320,6 +16802,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		func = <&pwm0_pins>,"brcm,function:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/pwm-overlay.dts b/arch/arm/boot/dts/overlays/pwm-overlay.dts
+new file mode 100644
+index 000000000000..27809e8dc746
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pwm-overlay.dts
 @@ -0,0 +1,43 @@
@@ -16366,6 +16851,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		clock = <&frag1>,"assigned-clock-rates:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/qca7000-overlay.dts b/arch/arm/boot/dts/overlays/qca7000-overlay.dts
+new file mode 100644
+index 000000000000..9a451202a2eb
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/qca7000-overlay.dts
 @@ -0,0 +1,55 @@
@@ -16424,6 +16912,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		speed   = <&eth1>, "spi-max-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rotary-encoder-overlay.dts b/arch/arm/boot/dts/overlays/rotary-encoder-overlay.dts
+new file mode 100644
+index 000000000000..ea1d952734e9
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rotary-encoder-overlay.dts
 @@ -0,0 +1,59 @@
@@ -16486,6 +16977,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		                    <&rotary_pins>,"brcm,pins:4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-backlight-overlay.dts b/arch/arm/boot/dts/overlays/rpi-backlight-overlay.dts
+new file mode 100644
+index 000000000000..cac5e44c6ec5
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-backlight-overlay.dts
 @@ -0,0 +1,21 @@
@@ -16510,6 +17004,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-cirrus-wm5102-overlay.dts b/arch/arm/boot/dts/overlays/rpi-cirrus-wm5102-overlay.dts
+new file mode 100644
+index 000000000000..e2c25a0535e6
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-cirrus-wm5102-overlay.dts
 @@ -0,0 +1,152 @@
@@ -16665,6 +17162,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-dac-overlay.dts b/arch/arm/boot/dts/overlays/rpi-dac-overlay.dts
+new file mode 100644
+index 000000000000..07a915342702
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-dac-overlay.dts
 @@ -0,0 +1,34 @@
@@ -16702,6 +17202,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-display-overlay.dts b/arch/arm/boot/dts/overlays/rpi-display-overlay.dts
+new file mode 100644
+index 000000000000..a5eed07d6a4b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-display-overlay.dts
 @@ -0,0 +1,91 @@
@@ -16796,6 +17299,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		            <&rpi_display_pins>,"brcm,pins:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-ft5406-overlay.dts b/arch/arm/boot/dts/overlays/rpi-ft5406-overlay.dts
+new file mode 100644
+index 000000000000..4dcb490f04b6
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-ft5406-overlay.dts
 @@ -0,0 +1,25 @@
@@ -16824,6 +17330,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		touchscreen-swapped-x-y = <&ts>,"touchscreen-swapped-x-y:?";
 +        };
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts b/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts
+new file mode 100644
+index 000000000000..21f8fe6f1229
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts
 @@ -0,0 +1,70 @@
@@ -16897,6 +17406,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		poe_fan_temp1_hyst =	<&trip1>,"hysteresis:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-proto-overlay.dts b/arch/arm/boot/dts/overlays/rpi-proto-overlay.dts
+new file mode 100644
+index 000000000000..9cda044a0f62
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-proto-overlay.dts
 @@ -0,0 +1,39 @@
@@ -16939,6 +17451,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-sense-overlay.dts b/arch/arm/boot/dts/overlays/rpi-sense-overlay.dts
+new file mode 100644
+index 000000000000..89d8d2ea6b2e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-sense-overlay.dts
 @@ -0,0 +1,47 @@
@@ -16989,6 +17504,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/rpi-tv-overlay.dts b/arch/arm/boot/dts/overlays/rpi-tv-overlay.dts
+new file mode 100644
+index 000000000000..3c97a545d820
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-tv-overlay.dts
 @@ -0,0 +1,34 @@
@@ -17026,6 +17544,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +
 +};
+diff --git a/arch/arm/boot/dts/overlays/rra-digidac1-wm8741-audio-overlay.dts b/arch/arm/boot/dts/overlays/rra-digidac1-wm8741-audio-overlay.dts
+new file mode 100644
+index 000000000000..87e9a326eff1
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rra-digidac1-wm8741-audio-overlay.dts
 @@ -0,0 +1,49 @@
@@ -17078,6 +17599,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/sc16is750-i2c-overlay.dts b/arch/arm/boot/dts/overlays/sc16is750-i2c-overlay.dts
+new file mode 100644
+index 000000000000..5fbff2e6c02d
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sc16is750-i2c-overlay.dts
 @@ -0,0 +1,38 @@
@@ -17119,6 +17643,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +
 +};
+diff --git a/arch/arm/boot/dts/overlays/sc16is752-i2c-overlay.dts b/arch/arm/boot/dts/overlays/sc16is752-i2c-overlay.dts
+new file mode 100644
+index 000000000000..57ae35c38442
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sc16is752-i2c-overlay.dts
 @@ -0,0 +1,40 @@
@@ -17162,6 +17689,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		xtal = <&sc16is752_clk>,"clock-frequency:0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/sc16is752-spi1-overlay.dts b/arch/arm/boot/dts/overlays/sc16is752-spi1-overlay.dts
+new file mode 100644
+index 000000000000..4e33b14afc78
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sc16is752-spi1-overlay.dts
 @@ -0,0 +1,61 @@
@@ -17226,6 +17756,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +      int_pin = <&sc16is752>,"interrupts:0";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/sdhost-overlay.dts b/arch/arm/boot/dts/overlays/sdhost-overlay.dts
+new file mode 100644
+index 000000000000..0b72b4eeac88
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sdhost-overlay.dts
 @@ -0,0 +1,38 @@
@@ -17267,6 +17800,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		debug            = <&frag0>,"brcm,debug?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/sdio-overlay.dts b/arch/arm/boot/dts/overlays/sdio-overlay.dts
+new file mode 100644
+index 000000000000..873e49056379
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sdio-overlay.dts
 @@ -0,0 +1,77 @@
@@ -17347,6 +17883,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		gpios_34_39 = <0>,"=5";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/sdtweak-overlay.dts b/arch/arm/boot/dts/overlays/sdtweak-overlay.dts
+new file mode 100644
+index 000000000000..38157d2f9bf3
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sdtweak-overlay.dts
 @@ -0,0 +1,25 @@
@@ -17375,6 +17914,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		poll_once        = <&frag0>,"non-removable?";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/smi-dev-overlay.dts b/arch/arm/boot/dts/overlays/smi-dev-overlay.dts
+new file mode 100644
+index 000000000000..b610d8283608
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/smi-dev-overlay.dts
 @@ -0,0 +1,18 @@
@@ -17396,6 +17938,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/smi-nand-overlay.dts b/arch/arm/boot/dts/overlays/smi-nand-overlay.dts
+new file mode 100644
+index 000000000000..ae1e50329d66
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/smi-nand-overlay.dts
 @@ -0,0 +1,66 @@
@@ -17465,6 +18010,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/smi-overlay.dts b/arch/arm/boot/dts/overlays/smi-overlay.dts
+new file mode 100644
+index 000000000000..70104c11627c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/smi-overlay.dts
 @@ -0,0 +1,37 @@
@@ -17505,6 +18053,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi-gpio35-39-overlay.dts b/arch/arm/boot/dts/overlays/spi-gpio35-39-overlay.dts
+new file mode 100644
+index 000000000000..a132b8637c31
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi-gpio35-39-overlay.dts
 @@ -0,0 +1,31 @@
@@ -17539,6 +18090,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi-gpio40-45-overlay.dts b/arch/arm/boot/dts/overlays/spi-gpio40-45-overlay.dts
+new file mode 100644
+index 000000000000..9ebcaf1b5ea0
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi-gpio40-45-overlay.dts
 @@ -0,0 +1,36 @@
@@ -17578,6 +18132,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi-rtc-overlay.dts b/arch/arm/boot/dts/overlays/spi-rtc-overlay.dts
+new file mode 100644
+index 000000000000..9664afc9845c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi-rtc-overlay.dts
 @@ -0,0 +1,33 @@
@@ -17614,6 +18171,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pcf2123 = <0>, "=0=1";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi0-cs-overlay.dts b/arch/arm/boot/dts/overlays/spi0-cs-overlay.dts
+new file mode 100644
+index 000000000000..ff41439a483a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi0-cs-overlay.dts
 @@ -0,0 +1,29 @@
@@ -17646,6 +18206,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			   <&frag1>,"cs-gpios:16";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi0-hw-cs-overlay.dts b/arch/arm/boot/dts/overlays/spi0-hw-cs-overlay.dts
+new file mode 100644
+index 000000000000..168a0dc80ad1
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi0-hw-cs-overlay.dts
 @@ -0,0 +1,26 @@
@@ -17675,6 +18238,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi1-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi1-1cs-overlay.dts
+new file mode 100644
+index 000000000000..ea2794bc5fd5
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi1-1cs-overlay.dts
 @@ -0,0 +1,57 @@
@@ -17735,6 +18301,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs0_spidev = <&spidev1_0>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi1-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi1-2cs-overlay.dts
+new file mode 100644
+index 000000000000..dab34ee79ae2
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi1-2cs-overlay.dts
 @@ -0,0 +1,69 @@
@@ -17807,6 +18376,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs1_spidev = <&spidev1_1>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi1-3cs-overlay.dts b/arch/arm/boot/dts/overlays/spi1-3cs-overlay.dts
+new file mode 100644
+index 000000000000..bc7e7d04324b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi1-3cs-overlay.dts
 @@ -0,0 +1,81 @@
@@ -17891,6 +18463,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs2_spidev = <&spidev1_2>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi2-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi2-1cs-overlay.dts
+new file mode 100644
+index 000000000000..2a29750462af
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi2-1cs-overlay.dts
 @@ -0,0 +1,57 @@
@@ -17951,6 +18526,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs0_spidev = <&spidev2_0>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi2-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi2-2cs-overlay.dts
+new file mode 100644
+index 000000000000..642678fc9ddd
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi2-2cs-overlay.dts
 @@ -0,0 +1,69 @@
@@ -18023,6 +18601,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs1_spidev = <&spidev2_1>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi2-3cs-overlay.dts b/arch/arm/boot/dts/overlays/spi2-3cs-overlay.dts
+new file mode 100644
+index 000000000000..28d40c6c3c37
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi2-3cs-overlay.dts
 @@ -0,0 +1,81 @@
@@ -18107,6 +18688,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs2_spidev = <&spidev2_2>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts
+new file mode 100644
+index 000000000000..335af8637051
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts
 @@ -0,0 +1,44 @@
@@ -18154,6 +18738,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs0_spidev = <&spidev3_0>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts
+new file mode 100644
+index 000000000000..ce65da27f767
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts
 @@ -0,0 +1,56 @@
@@ -18213,6 +18800,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs1_spidev = <&spidev3_1>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts
+new file mode 100644
+index 000000000000..85d70b40352b
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts
 @@ -0,0 +1,44 @@
@@ -18260,6 +18850,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs0_spidev = <&spidev4_0>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts
+new file mode 100644
+index 000000000000..8bc2215a6a7e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts
 @@ -0,0 +1,56 @@
@@ -18319,6 +18912,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs1_spidev = <&spidev4_1>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts
+new file mode 100644
+index 000000000000..c0f8cb8510ee
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts
 @@ -0,0 +1,44 @@
@@ -18366,6 +18962,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs0_spidev = <&spidev5_0>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts
+new file mode 100644
+index 000000000000..7758b9c00b4e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts
 @@ -0,0 +1,56 @@
@@ -18425,6 +19024,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs1_spidev = <&spidev5_1>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts
+new file mode 100644
+index 000000000000..8c8a953eca01
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts
 @@ -0,0 +1,44 @@
@@ -18472,6 +19074,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs0_spidev = <&spidev6_0>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts
+new file mode 100644
+index 000000000000..2ff897f21aed
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts
 @@ -0,0 +1,56 @@
@@ -18531,6 +19136,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cs1_spidev = <&spidev6_1>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/ssd1306-overlay.dts b/arch/arm/boot/dts/overlays/ssd1306-overlay.dts
+new file mode 100644
+index 000000000000..84cf10e489d3
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ssd1306-overlay.dts
 @@ -0,0 +1,36 @@
@@ -18570,6 +19178,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	inverted = <&ssd1306>,"solomon,com-invdir?";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/superaudioboard-overlay.dts b/arch/arm/boot/dts/overlays/superaudioboard-overlay.dts
+new file mode 100755
+index 000000000000..bad61535981e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/superaudioboard-overlay.dts
 @@ -0,0 +1,73 @@
@@ -18646,6 +19257,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		gpiopin = <&cs4271>,"reset-gpio:4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/sx150x-overlay.dts b/arch/arm/boot/dts/overlays/sx150x-overlay.dts
+new file mode 100644
+index 000000000000..1d1069345da2
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sx150x-overlay.dts
 @@ -0,0 +1,1706 @@
@@ -20355,6 +20969,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +};
 +
+diff --git a/arch/arm/boot/dts/overlays/tc358743-audio-overlay.dts b/arch/arm/boot/dts/overlays/tc358743-audio-overlay.dts
+new file mode 100644
+index 000000000000..047695bb0c71
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/tc358743-audio-overlay.dts
 @@ -0,0 +1,52 @@
@@ -20410,6 +21027,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		card-name = <&sound_overlay>,"simple-audio-card,name";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/tc358743-overlay.dts b/arch/arm/boot/dts/overlays/tc358743-overlay.dts
+new file mode 100644
+index 000000000000..2a1a3a80de49
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/tc358743-overlay.dts
 @@ -0,0 +1,116 @@
@@ -20529,6 +21149,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		link-frequency = <&tc358743>,"link-frequencies#0";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/tinylcd35-overlay.dts b/arch/arm/boot/dts/overlays/tinylcd35-overlay.dts
+new file mode 100644
+index 000000000000..254ac2e0a214
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/tinylcd35-overlay.dts
 @@ -0,0 +1,222 @@
@@ -20754,6 +21377,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		keypad =     <&keypad>,"status";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/tpm-slb9670-overlay.dts b/arch/arm/boot/dts/overlays/tpm-slb9670-overlay.dts
+new file mode 100644
+index 000000000000..e69188503ca3
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/tpm-slb9670-overlay.dts
 @@ -0,0 +1,44 @@
@@ -20801,6 +21427,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/uart0-overlay.dts b/arch/arm/boot/dts/overlays/uart0-overlay.dts
+new file mode 100755
+index 000000000000..57ba7745d023
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/uart0-overlay.dts
 @@ -0,0 +1,33 @@
@@ -20837,6 +21466,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			   <&uart0_pins>,"brcm,function:12";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/uart1-overlay.dts b/arch/arm/boot/dts/overlays/uart1-overlay.dts
+new file mode 100644
+index 000000000000..986d725a2652
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/uart1-overlay.dts
 @@ -0,0 +1,38 @@
@@ -20878,6 +21510,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		rxd1_pin = <&uart1_pins>,"brcm,pins:4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/uart2-overlay.dts b/arch/arm/boot/dts/overlays/uart2-overlay.dts
+new file mode 100644
+index 000000000000..9face240aca1
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/uart2-overlay.dts
 @@ -0,0 +1,27 @@
@@ -20908,6 +21543,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		ctsrts = <0>,"=1";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/uart3-overlay.dts b/arch/arm/boot/dts/overlays/uart3-overlay.dts
+new file mode 100644
+index 000000000000..ae9f9fe5ea1d
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/uart3-overlay.dts
 @@ -0,0 +1,27 @@
@@ -20938,6 +21576,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		ctsrts = <0>,"=1";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/uart4-overlay.dts b/arch/arm/boot/dts/overlays/uart4-overlay.dts
+new file mode 100644
+index 000000000000..ac004ffbadbf
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/uart4-overlay.dts
 @@ -0,0 +1,27 @@
@@ -20968,6 +21609,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		ctsrts = <0>,"=1";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/uart5-overlay.dts b/arch/arm/boot/dts/overlays/uart5-overlay.dts
+new file mode 100644
+index 000000000000..04eaf376effe
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/uart5-overlay.dts
 @@ -0,0 +1,27 @@
@@ -20998,6 +21642,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		ctsrts = <0>,"=1";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/udrc-overlay.dts b/arch/arm/boot/dts/overlays/udrc-overlay.dts
+new file mode 100644
+index 000000000000..ae7c37996894
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/udrc-overlay.dts
 @@ -0,0 +1,128 @@
@@ -21129,6 +21776,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +        alsaname = <&snd>, "simple-audio-card,name";
 +    };
 +};
+diff --git a/arch/arm/boot/dts/overlays/upstream-overlay.dts b/arch/arm/boot/dts/overlays/upstream-overlay.dts
+new file mode 100644
+index 000000000000..6112640837fc
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/upstream-overlay.dts
 @@ -0,0 +1,131 @@
@@ -21263,6 +21913,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/vc4-fkms-v3d-overlay.dts b/arch/arm/boot/dts/overlays/vc4-fkms-v3d-overlay.dts
+new file mode 100644
+index 000000000000..d9af97c8414f
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vc4-fkms-v3d-overlay.dts
 @@ -0,0 +1,81 @@
@@ -21347,6 +22000,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		cma-64  = <0>,"-0-1-2-3+4";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/vc4-kms-kippah-7inch-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-kippah-7inch-overlay.dts
+new file mode 100644
+index 000000000000..b03394844abd
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vc4-kms-kippah-7inch-overlay.dts
 @@ -0,0 +1,43 @@
@@ -21393,6 +22049,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts
+new file mode 100644
+index 000000000000..c5f687e8bcb9
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts
 @@ -0,0 +1,152 @@
@@ -21548,6 +22207,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		audio   = <0>,"!17";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/vga666-overlay.dts b/arch/arm/boot/dts/overlays/vga666-overlay.dts
+new file mode 100644
+index 000000000000..a4968d180a5d
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vga666-overlay.dts
 @@ -0,0 +1,30 @@
@@ -21581,6 +22243,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/w1-gpio-overlay.dts b/arch/arm/boot/dts/overlays/w1-gpio-overlay.dts
+new file mode 100644
+index 000000000000..f44e325bc1f2
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/w1-gpio-overlay.dts
 @@ -0,0 +1,40 @@
@@ -21624,6 +22289,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pullup;		// Silently ignore unneeded parameter
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/w1-gpio-pullup-overlay.dts b/arch/arm/boot/dts/overlays/w1-gpio-pullup-overlay.dts
+new file mode 100644
+index 000000000000..953c6a1aeab9
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/w1-gpio-pullup-overlay.dts
 @@ -0,0 +1,42 @@
@@ -21669,6 +22337,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		pullup;		// Silently ignore unneeded parameter
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/w5500-overlay.dts b/arch/arm/boot/dts/overlays/w5500-overlay.dts
+new file mode 100644
+index 000000000000..4d3e66296753
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/w5500-overlay.dts
 @@ -0,0 +1,63 @@
@@ -21735,6 +22406,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +			  <0>, "!0=1";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/wittypi-overlay.dts b/arch/arm/boot/dts/overlays/wittypi-overlay.dts
+new file mode 100644
+index 000000000000..71ce806186de
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/wittypi-overlay.dts
 @@ -0,0 +1,44 @@
@@ -21782,6 +22456,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +	};
 +
 +};
+diff --git a/arch/arm64/boot/dts/Makefile b/arch/arm64/boot/dts/Makefile
+index f19b762c008d..fb5542a7a124 100644
 --- a/arch/arm64/boot/dts/Makefile
 +++ b/arch/arm64/boot/dts/Makefile
 @@ -28,3 +28,5 @@ subdir-y += synaptics
@@ -21790,9 +22466,11 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  subdir-y += zte
 +
 +subdir-y += overlays
+diff --git a/arch/arm64/boot/dts/broadcom/Makefile b/arch/arm64/boot/dts/broadcom/Makefile
+index d1d31ccad758..1004a9fb8bf4 100644
 --- a/arch/arm64/boot/dts/broadcom/Makefile
 +++ b/arch/arm64/boot/dts/broadcom/Makefile
-@@ -3,6 +3,17 @@ dtb-$(CONFIG_ARCH_BCM2835) += bcm2837-rp
+@@ -3,6 +3,17 @@ dtb-$(CONFIG_ARCH_BCM2835) += bcm2837-rpi-3-a-plus.dtb \
  			      bcm2837-rpi-3-b.dtb \
  			      bcm2837-rpi-3-b-plus.dtb \
  			      bcm2837-rpi-cm3-io3.dtb
@@ -21810,45 +22488,68 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +ifeq ($(CONFIG_ARCH_BCM2835),y)
 +	DTC_FLAGS ?= -@
 +endif
+diff --git a/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b-plus.dts b/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b-plus.dts
+new file mode 100644
+index 000000000000..d9242ff77079
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b-plus.dts
 @@ -0,0 +1,3 @@
 +#define RPI364
 +
 +#include "../../../../arm/boot/dts/bcm2710-rpi-3-b-plus.dts"
+diff --git a/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b.dts b/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b.dts
+new file mode 100644
+index 000000000000..deb33441da95
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b.dts
 @@ -0,0 +1,3 @@
 +#define RPI364
 +
 +#include "../../../../arm/boot/dts/bcm2710-rpi-3-b.dts"
+diff --git a/arch/arm64/boot/dts/broadcom/bcm2710-rpi-cm3.dts b/arch/arm64/boot/dts/broadcom/bcm2710-rpi-cm3.dts
+new file mode 100644
+index 000000000000..1c2560017c02
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm2710-rpi-cm3.dts
 @@ -0,0 +1,3 @@
 +#define RPI364
 +
 +#include "../../../../arm/boot/dts/bcm2710-rpi-cm3.dts"
+diff --git a/arch/arm64/boot/dts/broadcom/bcm2711-rpi-4-b.dts b/arch/arm64/boot/dts/broadcom/bcm2711-rpi-4-b.dts
+new file mode 100644
+index 000000000000..1fd86f81f542
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm2711-rpi-4-b.dts
 @@ -0,0 +1,3 @@
 +#define RPI364
 +
 +#include "../../../../arm/boot/dts/bcm2711-rpi-4-b.dts"
+diff --git a/arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi b/arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi
+new file mode 120000
+index 000000000000..e5c400284467
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi
 @@ -0,0 +1 @@
 +../../../../arm/boot/dts/bcm283x-rpi-csi1-2lane.dtsi
 \ No newline at end of file
+diff --git a/arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi b/arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi
+new file mode 120000
+index 000000000000..fc4c05bbe7fd
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi
 @@ -0,0 +1 @@
 +../../../../arm/boot/dts/bcm283x-rpi-lan7515.dtsi
 \ No newline at end of file
+diff --git a/arch/arm64/boot/dts/overlays b/arch/arm64/boot/dts/overlays
+new file mode 120000
+index 000000000000..ded08646b6f6
 --- /dev/null
 +++ b/arch/arm64/boot/dts/overlays
 @@ -0,0 +1 @@
 +../../../arm/boot/dts/overlays
 \ No newline at end of file
+diff --git a/scripts/Makefile.dtbinst b/scripts/Makefile.dtbinst
+index 7301ab5e2e06..da2af04a6d7d 100644
 --- a/scripts/Makefile.dtbinst
 +++ b/scripts/Makefile.dtbinst
 @@ -20,6 +20,7 @@ include scripts/Kbuild.include
@@ -21859,7 +22560,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  dtbinst-dirs	:= $(subdir-y) $(subdir-m)
  
  # Helper targets for Installing DTBs into the boot directory
-@@ -31,10 +32,13 @@ install-dir = $(patsubst $(dtbinst_root)
+@@ -31,10 +32,13 @@ install-dir = $(patsubst $(dtbinst_root)%,$(INSTALL_DTBS_PATH)%,$(obj))
  $(dtbinst-files): %.dtb: $(obj)/%.dtb
  	$(call cmd,dtb_install,$(install-dir))
  
@@ -21875,9 +22576,11 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +__dtbs_install: $(dtbinst-files) $(dtboinst-files) $(dtbinst-dirs)
  
  .PHONY: $(PHONY)
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 179d55af5852..2cfce19f9f73 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -240,6 +240,7 @@ DTC ?= $(objtree)/scripts/dtc/dtc
+@@ -254,6 +254,7 @@ DTC ?= $(objtree)/scripts/dtc/dtc
  ifeq ($(findstring 1,$(KBUILD_EXTRA_WARN)),)
  DTC_FLAGS += -Wno-unit_address_vs_reg \
  	-Wno-unit_address_format \
@@ -21885,9 +22588,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  	-Wno-avoid_unnecessary_addr_size \
  	-Wno-alias_paths \
  	-Wno-graph_child_address \
-@@ -299,6 +300,18 @@ endef
+@@ -313,6 +314,18 @@ endef
  $(obj)/%.dt.yaml: $(src)/%.dts $(DTC) $(DT_TMP_SCHEMA) FORCE
- 	$(call if_changed_rule,dtc,yaml)
+ 	$(call if_changed_rule,dtc_dt_yaml)
  
 +quiet_cmd_dtco = DTCO    $@
 +cmd_dtco = mkdir -p $(dir ${dtc-tmp}) ; \
@@ -21904,3 +22607,6 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
  
  # Bzip2
+-- 
+2.20.1
+

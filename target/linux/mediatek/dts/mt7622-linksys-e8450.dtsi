@@ -110,6 +110,10 @@
 	};
 };
 
+&bch {
+	status = "okay";
+};
+
 &btif {
 	status = "okay";
 };
@@ -338,11 +342,18 @@
 	};
 };
 
-&snand {
-	mediatek,quad-spi;
+&snfi {
 	pinctrl-names = "default";
 	pinctrl-0 = <&serial_nand_pins>;
 	status = "okay";
+
+	snand: spi_nand@0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "spi-nand";
+		spi-max-frequency = <104000000>;
+		reg = <0>;
+	};
 };
 
 &spi0 {
