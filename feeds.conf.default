@@ -1,5 +1,5 @@
 src-git packages https://github.com/Boos4721/packages.git
 src-git luci https://github.com/Boos4721/luci.git
-src-git routing https://github.com/Boos4721/routing.git
+src-git routing https://github.com/openwrt/routing.git
 src-git telephony https://git.openwrt.org/feed/telephony.git
 src-git Boos https://github.com/Boos4721/OpenWrt-Packages.git
