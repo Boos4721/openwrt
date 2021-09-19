@@ -224,18 +224,10 @@
 	};
 };
 
-&qmp_pcie_phy0 {
-	status = "okay";
-};
-
 &pcie0 {
 	status = "okay";
 
 	perst-gpio = <&tlmm 58 GPIO_ACTIVE_LOW>;
-};
-
-&qmp_pcie_phy1 {
-	status = "disabled";
 };
 
 &pcie1 {
