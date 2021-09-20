@@ -40,6 +40,10 @@
 	};
 };
 
+&pcie_phy0 {
+	status = "okay";
+};
+
 &pcie0 {
 	status = "okay";
 

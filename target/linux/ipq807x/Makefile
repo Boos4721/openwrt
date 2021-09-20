@@ -17,6 +17,6 @@ DEFAULT_PACKAGES += \
 	kmod-tun \
 	ath11k-firmware-ipq8074 kmod-ath11k-ahb \
 	wpad-openssl kmod-qca-nss-dp kmod-qca-nss-drv-64 kmod-qca-nss-drv-pppoe-64 kmod-qca-nss-ecm-64 nss-firmware-ipq8074 \
-	autocore-arm htop luci-app-cpufreq luci-app-unblockmusic uboot-envtools \
+	autocore-arm htop luci-app-cpufreq luci-app-eqos uboot-envtools \
 
 $(eval $(call BuildTarget))
