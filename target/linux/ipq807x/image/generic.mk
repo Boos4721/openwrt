@@ -32,7 +32,7 @@ define Device/netgear_sxr80
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@hk01
 	SOC := ipq8074
-	DEVICE_PACKAGES := ipq-wifi-netgear_sxr80
+	DEVICE_PACKAGES := ipq-wifi-netgear_sxr80 kmod-usb3 kmod-usb-dwc3 kmod-usb-dwc3-qcom
 endef
 TARGET_DEVICES += netgear_sxr80
 
@@ -66,7 +66,7 @@ define Device/xiaomi_ax9000
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@hk14
 	SOC := ipq8072
-	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax9000 kmod-ath10k-ct ath10k-firmware-qca9887-ct
+	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax9000 kmod-ath10k-ct ath10k-firmware-qca9887-ct kmod-usb3 kmod-usb-dwc3 kmod-usb-dwc3-qcom
 endef
 TARGET_DEVICES += xiaomi_ax9000
 
@@ -79,6 +79,6 @@ define Device/zte_mf269
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@ac04
 	SOC := ipq8071
-	DEVICE_PACKAGES := ipq-wifi-zte_mf269
+	DEVICE_PACKAGES := ipq-wifi-zte_mf269 kmod-usb3 kmod-usb-dwc3 kmod-usb-dwc3-qcom
 endef
 TARGET_DEVICES += zte_mf269
