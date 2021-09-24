@@ -9,6 +9,7 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
+PKG_VERSION:=1.12
 PKG_NAME:=cryptodev-linux
 PKG_RELEASE:=$(AUTORELEASE)
 
