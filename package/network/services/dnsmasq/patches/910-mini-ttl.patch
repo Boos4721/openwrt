@@ -1,4 +1,4 @@
-	--- a/src/dnsmasq.h
+--- a/src/dnsmasq.h
 +++ b/src/dnsmasq.h
 @@ -1116,7 +1116,7 @@ extern struct daemon {
    int max_logs;  /* queue limit */
