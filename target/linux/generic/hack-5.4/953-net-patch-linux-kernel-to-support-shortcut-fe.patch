@@ -1,6 +1,6 @@
 --- a/include/linux/if_bridge.h
 +++ b/include/linux/if_bridge.h
-@@ -52,6 +52,9 @@ struct br_ip_list {
+@@ -53,6 +53,9 @@ struct br_ip_list {
  
  extern void brioctl_set(int (*ioctl_hook)(struct net *, unsigned int, void __user *));
  

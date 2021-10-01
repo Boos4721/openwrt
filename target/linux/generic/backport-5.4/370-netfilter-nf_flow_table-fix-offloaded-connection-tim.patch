@@ -111,4 +111,4 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
 +	if (nf_flow_has_expired(flow) || teardown)
  		flow_offload_del(flow_table, flow);
  }
-
+ 
