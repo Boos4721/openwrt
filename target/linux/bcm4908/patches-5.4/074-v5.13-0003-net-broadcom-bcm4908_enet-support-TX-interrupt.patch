@@ -22,7 +22,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
 
 --- a/drivers/net/ethernet/broadcom/bcm4908_enet.c
 +++ b/drivers/net/ethernet/broadcom/bcm4908_enet.c
-@@ -54,6 +54,7 @@ struct bcm4908_enet_dma_ring {
+@@ -53,6 +53,7 @@ struct bcm4908_enet_dma_ring {
  	int length;
  	u16 cfg_block;
  	u16 st_ram_block;
@@ -30,7 +30,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  
  	union {
  		void *cpu_addr;
-@@ -67,8 +68,8 @@ struct bcm4908_enet_dma_ring {
+@@ -66,8 +67,8 @@ struct bcm4908_enet_dma_ring {
  struct bcm4908_enet {
  	struct device *dev;
  	struct net_device *netdev;
@@ -40,7 +40,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  
  	struct bcm4908_enet_dma_ring tx_ring;
  	struct bcm4908_enet_dma_ring rx_ring;
-@@ -123,24 +124,31 @@ static void enet_umac_set(struct bcm4908
+@@ -122,24 +123,31 @@ static void enet_umac_set(struct bcm4908
   * Helpers
   */
  
@@ -80,7 +80,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  }
  
  /***
-@@ -414,11 +422,14 @@ static void bcm4908_enet_gmac_init(struc
+@@ -413,11 +421,14 @@ static void bcm4908_enet_gmac_init(struc
  static irqreturn_t bcm4908_enet_irq_handler(int irq, void *dev_id)
  {
  	struct bcm4908_enet *enet = dev_id;
@@ -98,7 +98,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  
  	return IRQ_HANDLED;
  }
-@@ -426,6 +437,8 @@ static irqreturn_t bcm4908_enet_irq_hand
+@@ -425,6 +436,8 @@ static irqreturn_t bcm4908_enet_irq_hand
  static int bcm4908_enet_open(struct net_device *netdev)
  {
  	struct bcm4908_enet *enet = netdev_priv(netdev);
@@ -107,7 +107,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  	struct device *dev = enet->dev;
  	int err;
  
-@@ -435,6 +448,17 @@ static int bcm4908_enet_open(struct net_
+@@ -434,6 +447,17 @@ static int bcm4908_enet_open(struct net_
  		return err;
  	}
  
@@ -125,7 +125,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  	bcm4908_enet_gmac_init(enet);
  	bcm4908_enet_dma_reset(enet);
  	bcm4908_enet_dma_init(enet);
-@@ -443,14 +467,19 @@ static int bcm4908_enet_open(struct net_
+@@ -442,14 +466,19 @@ static int bcm4908_enet_open(struct net_
  
  	enet_set(enet, ENET_DMA_CONTROLLER_CFG, ENET_DMA_CTRL_CFG_MASTER_EN);
  	enet_maskset(enet, ENET_DMA_CONTROLLER_CFG, ENET_DMA_CTRL_CFG_FLOWC_CH1_EN, 0);
@@ -150,7 +150,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  
  	return 0;
  }
-@@ -458,16 +487,20 @@ static int bcm4908_enet_open(struct net_
+@@ -457,16 +486,20 @@ static int bcm4908_enet_open(struct net_
  static int bcm4908_enet_stop(struct net_device *netdev)
  {
  	struct bcm4908_enet *enet = netdev_priv(netdev);
@@ -172,7 +172,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  	free_irq(enet->netdev->irq, enet);
  
  	return 0;
-@@ -484,25 +517,19 @@ static int bcm4908_enet_start_xmit(struc
+@@ -483,25 +516,19 @@ static int bcm4908_enet_start_xmit(struc
  	u32 tmp;
  
  	/* Free transmitted skbs */
@@ -204,7 +204,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  
  	/* Hardware removes OWN bit after sending data */
  	buf_desc = &ring->buf_desc[ring->write_idx];
-@@ -539,9 +566,10 @@ static int bcm4908_enet_start_xmit(struc
+@@ -538,9 +565,10 @@ static int bcm4908_enet_start_xmit(struc
  	return NETDEV_TX_OK;
  }
  
@@ -217,7 +217,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  	struct device *dev = enet->dev;
  	int handled = 0;
  
-@@ -590,7 +618,7 @@ static int bcm4908_enet_poll(struct napi
+@@ -589,7 +617,7 @@ static int bcm4908_enet_poll(struct napi
  
  	if (handled < weight) {
  		napi_complete_done(napi, handled);
@@ -226,7 +226,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  	}
  
  	/* Hardware could disable ring if it run out of descriptors */
-@@ -599,6 +627,42 @@ static int bcm4908_enet_poll(struct napi
+@@ -598,6 +626,42 @@ static int bcm4908_enet_poll(struct napi
  	return handled;
  }
  
@@ -269,7 +269,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  static int bcm4908_enet_change_mtu(struct net_device *netdev, int new_mtu)
  {
  	struct bcm4908_enet *enet = netdev_priv(netdev);
-@@ -641,6 +705,8 @@ static int bcm4908_enet_probe(struct pla
+@@ -640,6 +704,8 @@ static int bcm4908_enet_probe(struct pla
  	if (netdev->irq < 0)
  		return netdev->irq;
  
@@ -278,7 +278,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  	dma_set_coherent_mask(dev, DMA_BIT_MASK(32));
  
  	err = bcm4908_enet_dma_alloc(enet);
-@@ -655,7 +721,8 @@ static int bcm4908_enet_probe(struct pla
+@@ -652,7 +718,8 @@ static int bcm4908_enet_probe(struct pla
  	netdev->min_mtu = ETH_ZLEN;
  	netdev->mtu = ETH_DATA_LEN;
  	netdev->max_mtu = ENET_MTU_MAX;
@@ -288,7 +288,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  
  	err = register_netdev(netdev);
  	if (err) {
-@@ -673,7 +740,8 @@ static int bcm4908_enet_remove(struct pl
+@@ -670,7 +737,8 @@ static int bcm4908_enet_remove(struct pl
  	struct bcm4908_enet *enet = platform_get_drvdata(pdev);
  
  	unregister_netdev(enet->netdev);
