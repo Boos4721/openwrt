@@ -40,7 +40,7 @@
 	};
 };
 
-&pcie_phy0 {
+&qmp_pcie_phy0 {
 	status = "okay";
 };
 

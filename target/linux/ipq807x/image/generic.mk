@@ -53,7 +53,7 @@ define Device/xiaomi_ax3600
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@ac04
 	SOC := ipq8071
-	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax3600
+	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax3600 kmod-ath10k-ct ath10k-firmware-qca9887-ct
 endef
 TARGET_DEVICES += xiaomi_ax3600
 
