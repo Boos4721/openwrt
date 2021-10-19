@@ -50,6 +50,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           wget https://gist.githubusercontent.com/Boos4721/5944821c5899fc159fe87ed3a7f7e888/raw/b4ceece0d74f0a0556f1c2605452efaa46022cac/.build.sh 
+          chmod 0755 .build.sh
           bash .build.sh
             
       - name: Prepare artifact
