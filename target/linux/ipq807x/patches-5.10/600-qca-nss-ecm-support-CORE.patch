@@ -477,7 +477,7 @@
 +/* QCA NSS ECM support - End */
 --- a/net/bridge/br_private.h
 +++ b/net/bridge/br_private.h
-@@ -1593,4 +1593,9 @@ void br_do_proxy_suppress_arp(struct sk_
+@@ -1591,4 +1591,9 @@ void br_do_proxy_suppress_arp(struct sk_
  void br_do_suppress_nd(struct sk_buff *skb, struct net_bridge *br,
  		       u16 vid, struct net_bridge_port *p, struct nd_msg *msg);
  struct nd_msg *br_is_nd_neigh_msg(struct sk_buff *skb, struct nd_msg *m);
