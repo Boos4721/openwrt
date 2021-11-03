@@ -15,9 +15,9 @@ Signed-off-by: Pavel Kubelun <be.dissent@gmail.com>
 
 --- a/arch/arm/boot/dts/qcom-ipq4019.dtsi
 +++ b/arch/arm/boot/dts/qcom-ipq4019.dtsi
-@@ -141,9 +141,9 @@
+@@ -140,9 +140,9 @@
  	};
-
+ 
  	clocks {
 -		sleep_clk: sleep_clk {
 +		sleep_clk: gcc_sleep_clk_src {
@@ -26,5 +26,4 @@ Signed-off-by: Pavel Kubelun <be.dissent@gmail.com>
 +			clock-frequency = <32000>;
  			#clock-cells = <0>;
  		};
-
-
+ 
