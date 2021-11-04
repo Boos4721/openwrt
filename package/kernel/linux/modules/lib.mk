@@ -272,3 +272,13 @@ define KernelPackage/asn1-decoder
 endef
 
 $(eval $(call KernelPackage,asn1-decoder))
+
+define KernelPackage/oid-registry
+  SUBMENU:=$(LIB_MENU)
+  TITLE:=OID Registry
+  KCONFIG:= CONFIG_OID_REGISTRY
+  HIDDEN:=1
+  FILES:=$(LINUX_DIR)/lib/oid_registry.ko
+endef
+
+$(eval $(call KernelPackage,oid-registry))
