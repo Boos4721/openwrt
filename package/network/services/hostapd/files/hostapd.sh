@@ -236,7 +236,7 @@ EOF
 }
 
 hostapd_common_add_bss_config() {
-	config_add_string 'bssid:macaddr' 'ssid:string' 'ssid2:string'
+	config_add_string 'bssid:macaddr' 'ssid:string'
 	config_add_boolean wds wmm uapsd hidden utf8_ssid
 
 	config_add_int maxassoc max_inactivity
@@ -523,7 +523,7 @@ hostapd_set_bss_options() {
 		maxassoc max_inactivity disassoc_low_ack isolate auth_cache \
 		wps_pushbutton wps_label ext_registrar wps_pbc_in_m1 wps_ap_setup_locked \
 		wps_independent wps_device_type wps_device_name wps_manufacturer wps_pin \
-		macfilter ssid ssid2 utf8_ssid wmm uapsd hidden short_preamble rsn_preauth \
+		macfilter ssid utf8_ssid wmm uapsd hidden short_preamble rsn_preauth \
 		iapp_interface eapol_version dynamic_vlan ieee80211w nasid \
 		acct_server acct_secret acct_port acct_interval \
 		bss_load_update_period chan_util_avg_period sae_require_mfp sae_pwe \
@@ -752,9 +752,8 @@ hostapd_set_bss_options() {
 		}
 	}
 
-	[ "x${ssid}" = 'x' ] || append bss_conf "ssid=${ssid}" "$N"
-	[ "x${ssid2}" = 'x' ] || append bss_conf "ssid2=${ssid2}" "$N"	
-	[ -n "$network_bridge" ] && append bss_conf "bridge=$network_bridge" "$N"
+	append bss_conf "ssid=$ssid" "$N"
+	[ -n "$network_bridge" ] && append bss_conf "bridge=$network_bridge${N}wds_bridge=" "$N"
 	[ -n "$network_ifname" ] && append bss_conf "snoop_iface=$network_ifname" "$N"
 	[ -n "$iapp_interface" ] && {
 		local ifname
@@ -974,7 +973,6 @@ hostapd_set_bss_options() {
 		[ -n "$iw_network_auth_type" ] && \
 			append bss_conf "network_auth_type=$iw_network_auth_type" "$N"
 		[ -n "$iw_gas_address3" ] && append bss_conf "gas_address3=$iw_gas_address3" "$N"
-		[ -n "$iw_qos_map_set" ] && append bss_conf "qos_map_set=$iw_qos_map_set" "$N"
 
 		json_for_each_item append_iw_roaming_consortium iw_roaming_consortium
 		json_for_each_item append_iw_anqp_elem iw_anqp_elem
@@ -993,6 +991,12 @@ hostapd_set_bss_options() {
 			append bss_conf "anqp_3gpp_cell_net=$iw_anqp_3gpp_cell_net_conf" "$N"
 	fi
 
+	set_default iw_qos_map_set 0,0,2,16,1,1,255,255,18,22,24,38,40,40,44,46,48,56
+	case "$iw_qos_map_set" in
+		*,*);;
+		*) iw_qos_map_set="";;
+	esac
+	[ -n "$iw_qos_map_set" ] && append bss_conf "qos_map_set=$iw_qos_map_set" "$N"
 
 	local hs20 disable_dgaf osen anqp_domain_id hs20_deauth_req_timeout \
 		osu_ssid hs20_wan_metrics hs20_operating_class hs20_t_c_filename hs20_t_c_timestamp \
