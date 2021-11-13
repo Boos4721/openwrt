@@ -1,0 +1,29 @@
+From edc5f646eed256a5c6cb13b9f367709909d2d548 Mon Sep 17 00:00:00 2001
+From: Robert Marko <robimarko@gmail.com>
+Date: Tue, 8 Jun 2021 22:12:02 +0200
+Subject: [PATCH 1/2] nss-crypto: fix SHA1 header include
+
+SHA1 header has been merged to the generic SHA one,
+and with that the cryptohash.h was dropped.
+
+So, fix include in kernels 5.8 and newer.
+
+Signed-off-by: Robert Marko <robimarko@gmail.com>
+---
+ v2.0/src/nss_crypto_hlos.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+--- a/v2.0/src/nss_crypto_hlos.h
++++ b/v2.0/src/nss_crypto_hlos.h
+@@ -55,7 +55,11 @@
+ #include <linux/interrupt.h>
+ #include <linux/delay.h>
+ #include <linux/vmalloc.h>
++#if LINUX_VERSION_CODE > KERNEL_VERSION(5, 8, 0)
++#include <crypto/sha.h>
++#else
+ #include <linux/cryptohash.h>
++#endif
+ #include <crypto/sha.h>
+ #include <crypto/aes.h>
+ #include <crypto/des.h>
