@@ -40,6 +40,21 @@ define KernelPackage/qca-nss-drv-bridge-mgr/Description
 Kernel modules for NSS bridge manager
 endef
 
+define KernelPackage/qca-nss-drv-qdisc
+  SECTION:=kernel
+  CATEGORY:=Kernel modules
+  SUBMENU:=Network Support
+  TITLE:=Qdisc for configuring shapers in NSS
+  DEPENDS:=+kmod-qca-nss-drv @!LINUX_3_18
+  FILES:=$(PKG_BUILD_DIR)/nss_qdisc/qca-nss-qdisc.ko
+  KCONFIG:=CONFIG_NET_CLS_ACT=y
+  AUTOLOAD:=$(call AutoLoad,58,qca-nss-qdisc)
+endef
+
+define KernelPackage/qca-nss-drv-qdisc/Description
+Linux qdisc that aids in configuring shapers in the NSS
+endef
+
 define KernelPackage/qca-nss-drv-vlan-mgr
   SECTION:=kernel
   CATEGORY:=Kernel modules
@@ -100,3 +115,4 @@ endef
 $(eval $(call KernelPackage,qca-nss-drv-pppoe))
 $(eval $(call KernelPackage,qca-nss-drv-bridge-mgr))
 $(eval $(call KernelPackage,qca-nss-drv-vlan-mgr))
+$(eval $(call KernelPackage,qca-nss-drv-qdisc))
