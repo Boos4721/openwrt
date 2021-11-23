@@ -164,16 +164,9 @@ detect_mac80211() {
 			set wireless.radio${devidx}=wifi-device
 			set wireless.radio${devidx}.type=mac80211
 			${dev_id}
-			set wireless.radio0.channel=149
-            		set wireless.radio1.channel=44
-                	set wireless.radio2.channel=11
-                    	set wireless.radio0.band=5g
-            		set wireless.radio1.band=5g
-	    		set wireless.radio2.band=2g
-			set wireless.radio2.noscan=1
-            		set wireless.radio0.htmode=HE80
-            		set wireless.radio1.htmode=HE160
-            		set wireless.radio2.htmode=HE40
+			set wireless.radio${devidx}.channel=${channel}
+			set wireless.radio${devidx}.band=${mode_band}
+			set wireless.radio${devidx}.htmode=$htmode
 			set wireless.radio${devidx}.disabled=0
 			set wireless.radio${devidx}.country=US
 			
@@ -181,9 +174,8 @@ detect_mac80211() {
 			set wireless.default_radio${devidx}.device=radio${devidx}
 			set wireless.default_radio${devidx}.network=lan
 			set wireless.default_radio${devidx}.mode=ap
-            		set wireless.default_radio0.ssid=Xiaomi_AloT_5G
-            		set wireless.default_radio1.ssid=Xiaomi_5G
-			set wireless.default_radio2.ssid=Xiaomi_2.4G
+            		set wireless.default_radio0.ssid=OpenWrt_2.4G
+            		set wireless.default_radio1.ssid=OpenWrt_5G	
 			set wireless.default_radio${devidx}.encryption=sae-mixed
                         set wireless.default_radio${devidx}.key=1234567890
 EOF
