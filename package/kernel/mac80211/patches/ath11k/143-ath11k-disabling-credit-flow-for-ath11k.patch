@@ -71,7 +71,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  	},
  
  	/* CE4: host->target HTT */
-@@ -436,19 +442,33 @@ err_unlock:
+@@ -489,19 +495,33 @@ err_unlock:
  	return skb;
  }
  
@@ -107,7 +107,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  }
  
  static void ath11k_ce_srng_msi_ring_params_setup(struct ath11k_base *ab, u32 ce_id,
-@@ -582,7 +602,7 @@ static int ath11k_ce_alloc_pipe(struct a
+@@ -636,7 +656,7 @@ static int ath11k_ce_alloc_pipe(struct a
  	pipe->attr_flags = attr->flags;
  
  	if (attr->src_nentries) {
@@ -116,7 +116,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  		nentries = roundup_pow_of_two(attr->src_nentries);
  		desc_sz = ath11k_hal_ce_get_desc_size(HAL_CE_DESC_SRC);
  		ring = ath11k_ce_alloc_ring(ab, nentries, desc_sz);
-@@ -613,9 +633,10 @@ static int ath11k_ce_alloc_pipe(struct a
+@@ -667,9 +687,10 @@ static int ath11k_ce_alloc_pipe(struct a
  void ath11k_ce_per_engine_service(struct ath11k_base *ab, u16 ce_id)
  {
  	struct ath11k_ce_pipe *pipe = &ab->ce.ce_pipe[ce_id];
@@ -129,7 +129,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  
  	if (pipe->recv_cb)
  		ath11k_ce_recv_process_cb(pipe);
-@@ -624,9 +645,10 @@ void ath11k_ce_per_engine_service(struct
+@@ -678,9 +699,10 @@ void ath11k_ce_per_engine_service(struct
  void ath11k_ce_poll_send_completed(struct ath11k_base *ab, u8 pipe_id)
  {
  	struct ath11k_ce_pipe *pipe = &ab->ce.ce_pipe[pipe_id];
@@ -163,7 +163,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  	struct tasklet_struct intr_tq;
 --- a/drivers/net/wireless/ath/ath11k/core.c
 +++ b/drivers/net/wireless/ath/ath11k/core.c
-@@ -41,6 +41,7 @@ static const struct ath11k_hw_params ath
+@@ -42,6 +42,7 @@ static const struct ath11k_hw_params ath
  		.max_radios = 3,
  		.bdf_addr = 0x4B0C0000,
  		.hw_ops = &ipq8074_ops,
@@ -171,7 +171,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  		.ring_mask = &ath11k_hw_ring_mask_ipq8074,
  		.internal_sleep_clock = false,
  		.regs = &ipq8074_regs,
-@@ -78,6 +79,7 @@ static const struct ath11k_hw_params ath
+@@ -83,6 +84,7 @@ static const struct ath11k_hw_params ath
  		.max_radios = 2,
  		.bdf_addr = 0x4ABC0000,
  		.hw_ops = &ipq6018_ops,
@@ -181,7 +181,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  		.regs = &ipq8074_regs,
 --- a/drivers/net/wireless/ath/ath11k/htc.c
 +++ b/drivers/net/wireless/ath/ath11k/htc.c
-@@ -86,8 +86,7 @@ int ath11k_htc_send(struct ath11k_htc *h
+@@ -88,8 +88,7 @@ int ath11k_htc_send(struct ath11k_htc *h
  	}
  
  	skb_push(skb, sizeof(struct ath11k_htc_hdr));
@@ -191,7 +191,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  		credits = DIV_ROUND_UP(skb->len, htc->target_credit_size);
  		spin_lock_bh(&htc->tx_lock);
  		if (ep->tx_credits < credits) {
-@@ -112,7 +111,11 @@ int ath11k_htc_send(struct ath11k_htc *h
+@@ -114,7 +113,11 @@ int ath11k_htc_send(struct ath11k_htc *h
  	ret = dma_mapping_error(dev, skb_cb->paddr);
  	if (ret) {
  		ret = -EIO;
@@ -204,7 +204,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  	}
  
  	ret = ath11k_ce_send(htc->ab, skb, ep->ul_pipe_id, ep->eid);
-@@ -124,14 +127,13 @@ int ath11k_htc_send(struct ath11k_htc *h
+@@ -126,14 +129,13 @@ int ath11k_htc_send(struct ath11k_htc *h
  err_unmap:
  	dma_unmap_single(dev, skb_cb->paddr, skb->len, DMA_TO_DEVICE);
  err_credits:
@@ -220,7 +220,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  		if (ep->ep_ops.ep_tx_credits)
  			ep->ep_ops.ep_tx_credits(htc->ab);
  	}
-@@ -200,24 +202,25 @@ static int ath11k_htc_process_trailer(st
+@@ -202,24 +204,25 @@ static int ath11k_htc_process_trailer(st
  			status = -EINVAL;
  			break;
  		}
@@ -262,8 +262,8 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  		}
  
  		if (status)
-@@ -231,6 +234,29 @@ static int ath11k_htc_process_trailer(st
- 	return status;
+@@ -245,6 +248,29 @@ static void ath11k_htc_suspend_complete(
+ 	complete(&ab->htc_suspend);
  }
  
 +void ath11k_htc_tx_completion_handler(struct ath11k_base *ab,
@@ -292,7 +292,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  void ath11k_htc_rx_completion_handler(struct ath11k_base *ab,
  				      struct sk_buff *skb)
  {
-@@ -584,6 +610,11 @@ int ath11k_htc_connect_service(struct at
+@@ -607,6 +633,11 @@ int ath11k_htc_connect_service(struct at
  		disable_credit_flow_ctrl = true;
  	}
  
@@ -304,7 +304,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  	req_msg->flags_len = FIELD_PREP(HTC_SVC_MSG_CONNECTIONFLAGS, flags);
  	req_msg->msg_svc_id |= FIELD_PREP(HTC_SVC_MSG_SERVICE_ID,
  					  conn_req->service_id);
-@@ -708,6 +739,8 @@ int ath11k_htc_start(struct ath11k_htc *
+@@ -731,6 +762,8 @@ int ath11k_htc_start(struct ath11k_htc *
  	msg = (struct ath11k_htc_setup_complete_extended *)skb->data;
  	msg->msg_id = FIELD_PREP(HTC_MSG_MESSAGEID,
  				 ATH11K_HTC_MSG_SETUP_COMPLETE_EX_ID);
@@ -315,7 +315,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  
 --- a/drivers/net/wireless/ath/ath11k/htc.h
 +++ b/drivers/net/wireless/ath/ath11k/htc.h
-@@ -114,6 +114,8 @@ struct ath11k_htc_conn_svc_resp {
+@@ -116,6 +116,8 @@ struct ath11k_htc_conn_svc_resp {
  	u32 svc_meta_pad;
  } __packed;
  
@@ -324,7 +324,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  struct ath11k_htc_setup_complete_extended {
  	u32 msg_id;
  	u32 flags;
-@@ -309,5 +311,7 @@ int ath11k_htc_send(struct ath11k_htc *h
+@@ -305,5 +307,7 @@ int ath11k_htc_send(struct ath11k_htc *h
  struct sk_buff *ath11k_htc_alloc_skb(struct ath11k_base *ar, int size);
  void ath11k_htc_rx_completion_handler(struct ath11k_base *ar,
  				      struct sk_buff *skb);
@@ -334,7 +334,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  #endif
 --- a/drivers/net/wireless/ath/ath11k/hw.h
 +++ b/drivers/net/wireless/ath/ath11k/hw.h
-@@ -156,6 +156,7 @@ struct ath11k_hw_params {
+@@ -154,6 +154,7 @@ struct ath11k_hw_params {
  	bool htt_peer_map_v2;
  	bool tcl_0_only;
  	u8 spectral_fft_sz;
@@ -344,7 +344,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  	bool supports_monitor;
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -261,20 +261,35 @@ int ath11k_wmi_cmd_send(struct ath11k_pd
+@@ -267,20 +267,35 @@ int ath11k_wmi_cmd_send(struct ath11k_pd
  {
  	struct ath11k_wmi_base *wmi_sc = wmi->wmi_ab;
  	int ret = -EOPNOTSUPP;
@@ -386,7 +386,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  
  	return ret;
  }
-@@ -5328,6 +5343,32 @@ static void ath11k_wmi_op_ep_tx_credits(
+@@ -5754,6 +5769,32 @@ static void ath11k_wmi_op_ep_tx_credits(
  static void ath11k_wmi_htc_tx_complete(struct ath11k_base *ab,
  				       struct sk_buff *skb)
  {
@@ -419,7 +419,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  	dev_kfree_skb(skb);
  }
  
-@@ -6545,6 +6586,7 @@ static int ath11k_connect_pdev_htc_servi
+@@ -7120,6 +7161,7 @@ static int ath11k_connect_pdev_htc_servi
  	ab->wmi_ab.wmi_endpoint_id[pdev_idx] = conn_resp.eid;
  	ab->wmi_ab.wmi[pdev_idx].eid = conn_resp.eid;
  	ab->wmi_ab.max_msg_len[pdev_idx] = conn_resp.max_msg_len;
@@ -429,7 +429,7 @@ Signed-off-by: Maharaja Kennadyrajan <mkenna@codeaurora.org>
  }
 --- a/drivers/net/wireless/ath/ath11k/wmi.h
 +++ b/drivers/net/wireless/ath/ath11k/wmi.h
-@@ -2446,6 +2446,7 @@ struct ath11k_pdev_wmi {
+@@ -2471,6 +2471,7 @@ struct ath11k_pdev_wmi {
  	enum ath11k_htc_ep_id eid;
  	const struct wmi_peer_flags_map *peer_flags;
  	u32 rx_decap_mode;

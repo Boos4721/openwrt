@@ -1,6 +1,6 @@
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -6278,6 +6278,8 @@ static int __ath11k_mac_register(struct
+@@ -6590,6 +6590,8 @@ static int __ath11k_mac_register(struct
  
  	ar->hw->wiphy->max_ap_assoc_sta = ar->max_num_stations;
  
@@ -11,7 +11,7 @@
  	ar->hw->offchannel_tx_hw_queue = ATH11K_HW_MAX_QUEUES - 1;
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -3143,7 +3143,8 @@ ath11k_wmi_copy_resource_config(struct w
+@@ -3511,7 +3511,8 @@ ath11k_wmi_copy_resource_config(struct w
  	wmi_cfg->bpf_instruction_size = tg_cfg->bpf_instruction_size;
  	wmi_cfg->max_bssid_rx_filters = tg_cfg->max_bssid_rx_filters;
  	wmi_cfg->use_pdev_id = tg_cfg->use_pdev_id;
@@ -21,7 +21,7 @@
  	wmi_cfg->peer_map_unmap_v2_support = tg_cfg->peer_map_unmap_v2_support;
  	wmi_cfg->sched_params = tg_cfg->sched_params;
  	wmi_cfg->twt_ap_pdev_count = tg_cfg->twt_ap_pdev_count;
-@@ -4344,32 +4345,35 @@ static int ath11k_pull_mgmt_rx_params_tl
+@@ -4770,32 +4771,35 @@ static int ath11k_pull_mgmt_rx_params_tl
  	return 0;
  }
  
@@ -63,7 +63,7 @@
  
  	ieee80211_tx_status_irqsafe(ar->hw, msdu);
  
-@@ -4405,6 +4409,7 @@ static int ath11k_pull_mgmt_tx_compl_par
+@@ -4831,6 +4835,7 @@ static int ath11k_pull_mgmt_tx_compl_par
  	param->pdev_id = ev->pdev_id;
  	param->desc_id = ev->desc_id;
  	param->status = ev->status;
@@ -71,7 +71,7 @@
  
  	kfree(tb);
  	return 0;
-@@ -5798,8 +5803,7 @@ static void ath11k_mgmt_tx_compl_event(s
+@@ -6250,8 +6255,7 @@ static void ath11k_mgmt_tx_compl_event(s
  		goto exit;
  	}
  
@@ -83,7 +83,7 @@
  		   "mgmt tx compl ev pdev_id %d, desc_id %d, status %d",
 --- a/drivers/net/wireless/ath/ath11k/wmi.h
 +++ b/drivers/net/wireless/ath/ath11k/wmi.h
-@@ -2220,6 +2220,7 @@ struct wmi_init_cmd {
+@@ -2245,6 +2245,7 @@ struct wmi_init_cmd {
  } __packed;
  
  #define WMI_RSRC_CFG_FLAG1_BSS_CHANNEL_INFO_64 BIT(5)
@@ -91,7 +91,7 @@
  
  struct wmi_resource_config {
  	u32 tlv_header;
-@@ -4337,6 +4338,8 @@ struct wmi_mgmt_tx_compl_event {
+@@ -4376,6 +4377,8 @@ struct wmi_mgmt_tx_compl_event {
  	u32 desc_id;
  	u32 status;
  	u32 pdev_id;

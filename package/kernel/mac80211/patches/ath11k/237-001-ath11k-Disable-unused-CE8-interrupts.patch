@@ -20,7 +20,7 @@ Signed-off-by: P Praneesh <ppranees@codeaurora.org>
 
 --- a/drivers/net/wireless/ath/ath11k/ce.c
 +++ b/drivers/net/wireless/ath/ath11k/ce.c
-@@ -80,7 +80,7 @@ const struct ce_attr ath11k_host_ce_conf
+@@ -185,7 +185,7 @@ const struct ce_attr ath11k_host_ce_conf
  
  	/* CE8: target autonomous hif_memcpy */
  	{

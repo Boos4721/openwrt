@@ -1,8 +1,6 @@
-diff --git a/drivers/net/wireless/ath/ath11k/core.h b/drivers/net/wireless/ath/ath11k/core.h
-index c8e3625..c66d7f7 100644
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -367,8 +367,8 @@ struct ath11k_sta {
+@@ -383,8 +383,8 @@ struct ath11k_sta {
  #define ATH11K_MIN_5G_FREQ 4150
  #define ATH11K_MIN_6G_FREQ 5945
  #define ATH11K_MAX_6G_FREQ 7115
@@ -13,11 +11,9 @@ index c8e3625..c66d7f7 100644
  
  enum ath11k_state {
  	ATH11K_STATE_OFF,
-diff --git a/drivers/net/wireless/ath/ath11k/mac.c b/drivers/net/wireless/ath/ath11k/mac.c
-index 63d70ae..3028e0b 100644
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -88,6 +88,7 @@ static const struct ieee80211_channel ath11k_5ghz_channels[] = {
+@@ -88,6 +88,7 @@ static const struct ieee80211_channel at
  	CHAN5G(165, 5825, 0),
  	CHAN5G(169, 5845, 0),
  	CHAN5G(173, 5865, 0),
@@ -25,7 +21,7 @@ index 63d70ae..3028e0b 100644
  };
  
  static const struct ieee80211_channel ath11k_6ghz_channels[] = {
-@@ -5981,10 +5982,10 @@ static int ath11k_mac_setup_channels_rates(struct ath11k *ar,
+@@ -6292,10 +6293,10 @@ static int ath11k_mac_setup_channels_rat
  	void *channels;
  	u32 phy_id;
  
@@ -40,4 +36,3 @@ index 63d70ae..3028e0b 100644
  
  	reg_cap = &ar->ab->hal_reg_cap[ar->pdev_idx];
  
-

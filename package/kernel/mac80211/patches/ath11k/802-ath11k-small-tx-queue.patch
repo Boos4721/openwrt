@@ -11,7 +11,7 @@
  
 --- a/drivers/net/wireless/ath/ath11k/qmi.c
 +++ b/drivers/net/wireless/ath/ath11k/qmi.c
-@@ -1885,6 +1885,8 @@ static int ath11k_qmi_request_target_cap
+@@ -1913,6 +1913,8 @@ static int ath11k_qmi_request_target_cap
  		    ab->qmi.target.fw_version,
  		    ab->qmi.target.fw_build_timestamp,
  		    ab->qmi.target.fw_build_id);
