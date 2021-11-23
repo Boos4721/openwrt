@@ -12,7 +12,7 @@ Signed-off-by: Karthikeyan Periyasamy <periyasa@codeaurora.org>
 
 --- a/drivers/net/wireless/ath/ath11k/ce.c
 +++ b/drivers/net/wireless/ath/ath11k/ce.c
-@@ -613,6 +613,7 @@ ath11k_ce_alloc_ring(struct ath11k_base
+@@ -593,6 +593,7 @@ ath11k_ce_alloc_ring(struct ath11k_base
  {
  	struct ath11k_ce_ring *ce_ring;
  	dma_addr_t base_addr;
@@ -20,7 +20,7 @@ Signed-off-by: Karthikeyan Periyasamy <periyasa@codeaurora.org>
  
  	ce_ring = kzalloc(struct_size(ce_ring, skb, nentries), GFP_KERNEL);
  	if (ce_ring == NULL)
-@@ -635,12 +636,13 @@ ath11k_ce_alloc_ring(struct ath11k_base
+@@ -615,12 +616,13 @@ ath11k_ce_alloc_ring(struct ath11k_base
  
  	ce_ring->base_addr_ce_space_unaligned = base_addr;
  
@@ -39,7 +39,7 @@ Signed-off-by: Karthikeyan Periyasamy <periyasa@codeaurora.org>
  
  	return ce_ring;
  }
-@@ -989,8 +991,8 @@ void ath11k_ce_free_pipes(struct ath11k_
+@@ -967,8 +969,8 @@ void ath11k_ce_free_pipes(struct ath11k_
  			dma_free_coherent(ab->dev,
  					  pipe->src_ring->nentries * desc_sz +
  					  CE_DESC_RING_ALIGN,
@@ -50,7 +50,7 @@ Signed-off-by: Karthikeyan Periyasamy <periyasa@codeaurora.org>
  			kfree(pipe->src_ring);
  			pipe->src_ring = NULL;
  		}
-@@ -1000,8 +1002,8 @@ void ath11k_ce_free_pipes(struct ath11k_
+@@ -978,8 +980,8 @@ void ath11k_ce_free_pipes(struct ath11k_
  			dma_free_coherent(ab->dev,
  					  pipe->dest_ring->nentries * desc_sz +
  					  CE_DESC_RING_ALIGN,
@@ -61,7 +61,7 @@ Signed-off-by: Karthikeyan Periyasamy <periyasa@codeaurora.org>
  			kfree(pipe->dest_ring);
  			pipe->dest_ring = NULL;
  		}
-@@ -1012,8 +1014,8 @@ void ath11k_ce_free_pipes(struct ath11k_
+@@ -990,8 +992,8 @@ void ath11k_ce_free_pipes(struct ath11k_
  			dma_free_coherent(ab->dev,
  					  pipe->status_ring->nentries * desc_sz +
  					  CE_DESC_RING_ALIGN,
@@ -74,7 +74,7 @@ Signed-off-by: Karthikeyan Periyasamy <periyasa@codeaurora.org>
  		}
 --- a/drivers/net/wireless/ath/ath11k/ce.h
 +++ b/drivers/net/wireless/ath/ath11k/ce.h
-@@ -129,7 +129,7 @@ struct ath11k_ce_ring {
+@@ -128,7 +128,7 @@ struct ath11k_ce_ring {
  	/* Host address space */
  	void *base_addr_owner_space_unaligned;
  	/* CE address space */
@@ -83,7 +83,7 @@ Signed-off-by: Karthikeyan Periyasamy <periyasa@codeaurora.org>
  
  	/* Actual start of descriptors.
  	 * Aligned to descriptor-size boundary.
-@@ -139,7 +139,7 @@ struct ath11k_ce_ring {
+@@ -138,7 +138,7 @@ struct ath11k_ce_ring {
  	void *base_addr_owner_space;
  
  	/* CE address space */

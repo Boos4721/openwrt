@@ -28,7 +28,7 @@ Signed-off-by: Sriram R <srirrama@codeaurora.org>
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -4175,23 +4175,36 @@ static int __ath11k_set_antenna(struct a
+@@ -4504,23 +4504,36 @@ static int __ath11k_set_antenna(struct a
  	return 0;
  }
  
@@ -71,7 +71,7 @@ Signed-off-by: Sriram R <srirrama@codeaurora.org>
  
  	return 0;
  }
-@@ -4200,17 +4213,10 @@ static int ath11k_mac_vif_txmgmt_idr_rem
+@@ -4529,17 +4542,10 @@ static int ath11k_mac_vif_txmgmt_idr_rem
  {
  	struct ieee80211_vif *vif = ctx;
  	struct ath11k_skb_cb *skb_cb = ATH11K_SKB_CB((struct sk_buff *)skb);
@@ -91,7 +91,7 @@ Signed-off-by: Sriram R <srirrama@codeaurora.org>
  
  	return 0;
  }
-@@ -4250,6 +4256,8 @@ static int ath11k_mac_mgmt_tx_wmi(struct
+@@ -4579,6 +4585,8 @@ static int ath11k_mac_mgmt_tx_wmi(struct
  	}
  
  	ATH11K_SKB_CB(skb)->paddr = paddr;

@@ -2,7 +2,7 @@
    
 --- a/net/mac80211/Kconfig
 +++ b/net/mac80211/Kconfig
-@@ -19,6 +19,13 @@
+@@ -19,6 +19,13 @@ comment "CFG80211 needs to be enabled fo
  
  if MAC80211 != n
  
@@ -18,7 +18,7 @@
  
 --- a/local-symbols
 +++ b/local-symbols
-@@ -39,6 +39,7 @@
+@@ -39,6 +39,7 @@ LIB80211_CRYPT_CCMP=
  LIB80211_CRYPT_TKIP=
  LIB80211_DEBUG=
  MAC80211=
@@ -39,7 +39,7 @@
  struct ieee80211_local;
  
  /* Maximum number of broadcast/multicast frames to buffer when some of the
-@@ -1002,6 +1006,14 @@
+@@ -1002,6 +1006,14 @@ struct ieee80211_sub_if_data {
  	} debugfs;
  #endif
  
@@ -77,7 +77,7 @@
  /**
   * DOC: Interface list locking
   *
-@@ -697,6 +704,96 @@
+@@ -697,6 +704,96 @@ static void ieee80211_uninit(struct net_
  	ieee80211_teardown_sdata(IEEE80211_DEV_TO_SUB_IF(dev));
  }
  
@@ -174,7 +174,7 @@
  #if LINUX_VERSION_IS_GEQ(5,2,0)
  static u16 ieee80211_netdev_select_queue(struct net_device *dev,
  					 struct sk_buff *skb,
-@@ -749,7 +846,12 @@
+@@ -749,7 +846,12 @@ static const struct net_device_ops ieee8
  
  	.ndo_open		= ieee80211_open,
  	.ndo_stop		= ieee80211_stop,
@@ -200,7 +200,7 @@
  /*
   * monitor mode reception
   *
-@@ -2608,6 +2612,21 @@
+@@ -2608,6 +2612,21 @@ static void ieee80211_deliver_skb_to_loc
  			ether_addr_copy(ehdr->h_dest, sdata->vif.addr);
  
  		/* deliver to local stack */
@@ -222,7 +222,7 @@
  		if (rx->list)
  #if LINUX_VERSION_IS_GEQ(4,19,0)
  			list_add_tail(&skb->list, rx->list);
-@@ -2616,6 +2635,7 @@
+@@ -2616,6 +2635,7 @@ static void ieee80211_deliver_skb_to_loc
  #endif
  		else
  			netif_receive_skb(skb);
@@ -230,7 +230,7 @@
  	}
  }
  
-@@ -4522,6 +4542,21 @@
+@@ -4522,6 +4542,21 @@ static void ieee80211_rx_8023(struct iee
  	/* deliver to local stack */
  	skb->protocol = eth_type_trans(skb, fast_rx->dev);
  	memset(skb->cb, 0, sizeof(skb->cb));
@@ -252,7 +252,7 @@
  	if (rx->list)
  #if LINUX_VERSION_IS_GEQ(4,19,0)
  		list_add_tail(&skb->list, rx->list);
-@@ -4565,7 +4565,7 @@
+@@ -4530,7 +4565,7 @@ static void ieee80211_rx_8023(struct iee
  #endif
  	else
  		netif_receive_skb(skb);
