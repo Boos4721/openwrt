@@ -85,7 +85,7 @@ v13:
  create mode 100644 drivers/net/wireless/ath/ath10k/leds.h
 --- a/drivers/net/wireless/ath/ath10k/Kconfig
 +++ b/drivers/net/wireless/ath/ath10k/Kconfig
-@@ -70,6 +70,16 @@ config ATH10K_DEBUGFS
+@@ -71,6 +71,16 @@ config ATH10K_DEBUGFS
  
  	  If unsure, say Y to make it easier to debug problems.
  
@@ -114,7 +114,7 @@ v13:
  ath10k_core-$(CONFIG_DEV_COREDUMP) += coredump.o
 --- a/local-symbols
 +++ b/local-symbols
-@@ -145,6 +145,7 @@ ATH10K_DEBUG=
+@@ -137,6 +137,7 @@ ATH10K_DEBUG=
  ATH10K_DEBUGFS=
  ATH10K_SPECTRAL=
  ATH10K_THERMAL=
@@ -124,7 +124,7 @@ v13:
  WCN36XX=
 --- a/drivers/net/wireless/ath/ath10k/core.c
 +++ b/drivers/net/wireless/ath/ath10k/core.c
-@@ -25,6 +25,7 @@
+@@ -28,6 +28,7 @@
  #include "testmode.h"
  #include "wmi-ops.h"
  #include "coredump.h"
@@ -132,7 +132,7 @@ v13:
  
  unsigned int ath10k_debug_mask;
  EXPORT_SYMBOL(ath10k_debug_mask);
-@@ -61,6 +62,7 @@ static const struct ath10k_hw_params ath
+@@ -64,6 +65,7 @@ static const struct ath10k_hw_params ath
  		.dev_id = QCA988X_2_0_DEVICE_ID,
  		.bus = ATH10K_BUS_PCI,
  		.name = "qca988x hw2.0",
@@ -140,7 +140,7 @@ v13:
  		.patch_load_addr = QCA988X_HW_2_0_PATCH_LOAD_ADDR,
  		.uart_pin = 7,
  		.cc_wraparound_type = ATH10K_HW_CC_WRAP_SHIFTED_ALL,
-@@ -130,6 +132,7 @@ static const struct ath10k_hw_params ath
+@@ -135,6 +137,7 @@ static const struct ath10k_hw_params ath
  		.dev_id = QCA9887_1_0_DEVICE_ID,
  		.bus = ATH10K_BUS_PCI,
  		.name = "qca9887 hw1.0",
@@ -148,7 +148,7 @@ v13:
  		.patch_load_addr = QCA9887_HW_1_0_PATCH_LOAD_ADDR,
  		.uart_pin = 7,
  		.cc_wraparound_type = ATH10K_HW_CC_WRAP_SHIFTED_ALL,
-@@ -335,6 +338,7 @@ static const struct ath10k_hw_params ath
+@@ -346,6 +349,7 @@ static const struct ath10k_hw_params ath
  		.dev_id = QCA99X0_2_0_DEVICE_ID,
  		.bus = ATH10K_BUS_PCI,
  		.name = "qca99x0 hw2.0",
@@ -156,7 +156,7 @@ v13:
  		.patch_load_addr = QCA99X0_HW_2_0_PATCH_LOAD_ADDR,
  		.uart_pin = 7,
  		.otp_exe_param = 0x00000700,
-@@ -375,6 +379,7 @@ static const struct ath10k_hw_params ath
+@@ -387,6 +391,7 @@ static const struct ath10k_hw_params ath
  		.dev_id = QCA9984_1_0_DEVICE_ID,
  		.bus = ATH10K_BUS_PCI,
  		.name = "qca9984/qca9994 hw1.0",
@@ -164,7 +164,7 @@ v13:
  		.patch_load_addr = QCA9984_HW_1_0_PATCH_LOAD_ADDR,
  		.uart_pin = 7,
  		.cc_wraparound_type = ATH10K_HW_CC_WRAP_SHIFTED_EACH,
-@@ -422,6 +427,7 @@ static const struct ath10k_hw_params ath
+@@ -435,6 +440,7 @@ static const struct ath10k_hw_params ath
  		.dev_id = QCA9888_2_0_DEVICE_ID,
  		.bus = ATH10K_BUS_PCI,
  		.name = "qca9888 hw2.0",
@@ -172,7 +172,7 @@ v13:
  		.patch_load_addr = QCA9888_HW_2_0_PATCH_LOAD_ADDR,
  		.uart_pin = 7,
  		.cc_wraparound_type = ATH10K_HW_CC_WRAP_SHIFTED_EACH,
-@@ -2904,6 +2910,10 @@ int ath10k_core_start(struct ath10k *ar,
+@@ -3063,6 +3069,10 @@ int ath10k_core_start(struct ath10k *ar,
  		goto err_hif_stop;
  	}
  
@@ -183,7 +183,7 @@ v13:
  	return 0;
  
  err_hif_stop:
-@@ -3162,9 +3172,18 @@ static void ath10k_core_register_work(st
+@@ -3331,9 +3341,18 @@ static void ath10k_core_register_work(st
  		goto err_spectral_destroy;
  	}
  
@@ -202,7 +202,7 @@ v13:
  err_spectral_destroy:
  	ath10k_spectral_destroy(ar);
  err_debug_destroy:
-@@ -3210,6 +3229,8 @@ void ath10k_core_unregister(struct ath10
+@@ -3379,6 +3398,8 @@ void ath10k_core_unregister(struct ath10
  	if (!test_bit(ATH10K_FLAG_CORE_REGISTERED, &ar->dev_flags))
  		return;
  
@@ -221,7 +221,7 @@ v13:
  
  #include "htt.h"
  #include "htc.h"
-@@ -1237,6 +1238,13 @@ struct ath10k {
+@@ -1250,6 +1251,13 @@ struct ath10k {
  	} testmode;
  
  	struct {

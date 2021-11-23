@@ -1,6 +1,6 @@
 --- a/net/mac80211/tx.c
 +++ b/net/mac80211/tx.c
-@@ -1580,7 +1580,16 @@ static bool ieee80211_tx_frags(struct ie
+@@ -1691,7 +1691,16 @@ static bool ieee80211_tx_frags(struct ie
  					return true;
  				}
  			} else {

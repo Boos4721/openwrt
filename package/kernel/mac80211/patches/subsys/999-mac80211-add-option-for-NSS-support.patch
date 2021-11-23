@@ -1,6 +1,8 @@
---- a/net/mac80211/Kconfig	2019-01-03 21:03:17.839001000 +0800
-+++ b/net/mac80211/Kconfig	2019-01-03 21:04:43.931001000 +0800
-@@ -16,6 +16,13 @@
+
+   
+--- a/net/mac80211/Kconfig
++++ b/net/mac80211/Kconfig
+@@ -19,6 +19,13 @@ comment "CFG80211 needs to be enabled fo
  
  if MAC80211 != n
  
@@ -14,9 +16,9 @@
  config MAC80211_HAS_RC
  	bool
  
---- a/local-symbols	2019-01-03 21:24:00.087001000 +0800
-+++ b/local-symbols	2019-01-03 21:24:56.535001000 +0800
-@@ -47,6 +47,7 @@ LIB80211_CRYPT_CCMP=
+--- a/local-symbols
++++ b/local-symbols
+@@ -39,6 +39,7 @@ LIB80211_CRYPT_CCMP=
  LIB80211_CRYPT_TKIP=
  LIB80211_DEBUG=
  MAC80211=
@@ -24,9 +26,9 @@
  MAC80211_HAS_RC=
  MAC80211_RC_MINSTREL=
  MAC80211_RC_DEFAULT_MINSTREL=
---- a/net/mac80211/ieee80211_i.h	2019-01-03 21:04:57.527001000 +0800
-+++ b/net/mac80211/ieee80211_i.h	2019-01-03 21:05:44.827001000 +0800
-@@ -35,6 +35,10 @@
+--- a/net/mac80211/ieee80211_i.h
++++ b/net/mac80211/ieee80211_i.h
+@@ -36,6 +36,10 @@
  
  extern const struct cfg80211_ops mac80211_config_ops;
  
@@ -37,9 +39,9 @@
  struct ieee80211_local;
  
  /* Maximum number of broadcast/multicast frames to buffer when some of the
-@@ -988,6 +992,14 @@ struct ieee80211_sub_if_data {
- 
- 	bool hw_80211_encap;
+@@ -1002,6 +1006,14 @@ struct ieee80211_sub_if_data {
+ 	} debugfs;
+ #endif
  
 +#ifdef CPTCFG_MAC80211_NSS_SUPPORT
 +	struct nss_virt_if_handle *nssctx;
@@ -52,17 +54,17 @@
  	/* must be last, dynamically sized area in this! */
  	struct ieee80211_vif vif;
  };
---- a/net/mac80211/iface.c	2019-01-03 21:06:00.007001000 +0800
-+++ b/net/mac80211/iface.c	2019-01-03 21:08:49.535001000 +0800
+--- a/net/mac80211/iface.c
++++ b/net/mac80211/iface.c
 @@ -15,6 +15,7 @@
  #include <linux/if_arp.h>
  #include <linux/netdevice.h>
  #include <linux/rtnetlink.h>
 +#include <linux/module.h>
+ #include <linux/kcov.h>
  #include <net/mac80211.h>
  #include <net/ieee80211_radiotap.h>
- #include "ieee80211_i.h"
-@@ -26,6 +27,12 @@
+@@ -27,6 +28,12 @@
  #include "wme.h"
  #include "rate.h"
  
@@ -75,7 +77,7 @@
  /**
   * DOC: Interface list locking
   *
-@@ -695,6 +702,96 @@
+@@ -697,6 +704,96 @@ static void ieee80211_uninit(struct net_
  	ieee80211_teardown_sdata(IEEE80211_DEV_TO_SUB_IF(dev));
  }
  
@@ -172,8 +174,8 @@
  #if LINUX_VERSION_IS_GEQ(5,2,0)
  static u16 ieee80211_netdev_select_queue(struct net_device *dev,
  					 struct sk_buff *skb,
-@@ -742,7 +839,12 @@
- static const struct net_device_ops ieee80211_dataif_ops = {
+@@ -749,7 +846,12 @@ static const struct net_device_ops ieee8
+ 
  	.ndo_open		= ieee80211_open,
  	.ndo_stop		= ieee80211_stop,
 +#ifdef CPTCFG_MAC80211_NSS_SUPPORT
@@ -185,20 +187,20 @@
  	.ndo_start_xmit		= ieee80211_subif_start_xmit,
  	.ndo_set_rx_mode	= ieee80211_set_multicast_list,
  	.ndo_set_mac_address 	= ieee80211_change_mac,
---- a/net/mac80211/rx.c	2019-01-03 21:09:29.503001000 +0800
-+++ b/net/mac80211/rx.c	2019-01-03 21:17:42.463001000 +0800
-@@ -32,6 +32,10 @@
+--- a/net/mac80211/rx.c
++++ b/net/mac80211/rx.c
+@@ -33,6 +33,10 @@
  #include "wme.h"
  #include "rate.h"
  
-+#ifdef CPTCFG_MAC80211_NSS_SUPPORT
-+extern bool is_nss_enable;
-+#endif
+++#ifdef CPTCFG_MAC80211_NSS_SUPPORT
+++extern bool is_nss_enable;
+++#endif
 +
- static inline void ieee80211_rx_stats(struct net_device *dev, u32 len)
- {
- 	struct pcpu_sw_netstats *tstats = this_cpu_ptr(netdev_tstats(dev));
-@@ -2604,6 +2608,21 @@
+ /*
+  * monitor mode reception
+  *
+@@ -2608,6 +2612,21 @@ static void ieee80211_deliver_skb_to_loc
  			ether_addr_copy(ehdr->h_dest, sdata->vif.addr);
  
  		/* deliver to local stack */
@@ -220,7 +222,7 @@
  		if (rx->list)
  #if LINUX_VERSION_IS_GEQ(4,19,0)
  			list_add_tail(&skb->list, rx->list);
-@@ -2612,6 +2631,7 @@
+@@ -2616,6 +2635,7 @@ static void ieee80211_deliver_skb_to_loc
  #endif
  		else
  			netif_receive_skb(skb);
@@ -228,7 +230,7 @@
  	}
  }
  
-@@ -4461,6 +4481,21 @@
+@@ -4522,6 +4542,21 @@ static void ieee80211_rx_8023(struct iee
  	/* deliver to local stack */
  	skb->protocol = eth_type_trans(skb, fast_rx->dev);
  	memset(skb->cb, 0, sizeof(skb->cb));
@@ -250,12 +252,3 @@
  	if (rx->list)
  #if LINUX_VERSION_IS_GEQ(4,19,0)
  		list_add_tail(&skb->list, rx->list);
-@@ -4469,7 +4504,7 @@
- #endif
- 	else
- 		netif_receive_skb(skb);
--
-+#endif
- }
- 
- static bool ieee80211_invoke_fast_rx(struct ieee80211_rx_data *rx,
