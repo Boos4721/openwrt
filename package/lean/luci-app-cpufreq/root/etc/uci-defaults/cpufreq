@@ -30,12 +30,7 @@ case "$DISTRIB_TARGET" in
 		;;
 	"ipq807x/generic")	
 		CPU_FREQS="$(cat '/sys/devices/system/cpu/cpufreq/policy0/scaling_available_frequencies')"
-		if echo "$CPU_FREQS" | grep -q "1651200"; then
-			CPU_MAX_FREQ="1651200"
-		else
-			CPU_MAX_FREQ="1382400"
-		fi
-		uci_write_config 0 schedutil 1017600 $CPU_MAX_FREQ
+		uci_write_config 0 schedutil 1017600 1382400
 		;;
 	"rockchip/armv8")
 		if echo "$CPU_POLICYS" | grep -q "4"; then
