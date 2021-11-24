@@ -26,9 +26,9 @@
 +}
 +
  /**
-  * Search the device tree for the best MAC address to use.  'mac-address' is
-  * checked first, because that is supposed to contain to "most recent" MAC
-@@ -161,6 +182,7 @@ found:
+  * of_get_mac_address()
+  * @np:		Caller's Device Node
+@@ -165,6 +186,7 @@ found:
  	if (!of_property_read_u32(np, "mac-address-increment", &mac_inc))
  		addr[inc_idx] += mac_inc;
  
