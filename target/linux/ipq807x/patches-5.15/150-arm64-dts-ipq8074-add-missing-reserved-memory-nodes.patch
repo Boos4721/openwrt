@@ -13,7 +13,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -96,15 +96,47 @@
+@@ -102,15 +102,47 @@
  			reg = <0x0 0x40000000 0x0 0x01000000>;
  		};
  

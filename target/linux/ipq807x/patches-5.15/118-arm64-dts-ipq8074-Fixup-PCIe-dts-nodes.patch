@@ -13,8 +13,8 @@ Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
 
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -227,34 +227,66 @@
- 			resets = <&gcc GCC_QUSB2_0_PHY_BCR>;
+@@ -234,34 +234,66 @@
+ 			status = "disabled";
  		};
  
 -		pcie_phy0: phy@86000 {
@@ -95,7 +95,7 @@ Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
  		};
  
  		mdio: mdio@90000 {
-@@ -687,9 +719,9 @@
+@@ -739,9 +771,9 @@
  			phy-names = "pciephy";
  
  			ranges = <0x81000000 0 0x10200000 0x10200000
@@ -108,7 +108,7 @@ Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
  
  			interrupts = <GIC_SPI 85 IRQ_TYPE_LEVEL_HIGH>;
  			interrupt-names = "msi";
-@@ -732,12 +764,13 @@
+@@ -784,12 +816,13 @@
  		};
  
  		pcie0: pci@20000000 {
@@ -128,7 +128,7 @@ Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
  			device_type = "pci";
  			linux,pci-domain = <0>;
  			bus-range = <0x00 0xff>;
-@@ -749,9 +782,9 @@
+@@ -801,9 +834,9 @@
  			phy-names = "pciephy";
  
  			ranges = <0x81000000 0 0x20200000 0x20200000
@@ -141,7 +141,7 @@ Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
  
  			interrupts = <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
  			interrupt-names = "msi";
-@@ -770,27 +803,33 @@
+@@ -822,27 +855,33 @@
  				 <&gcc GCC_PCIE0_AXI_M_CLK>,
  				 <&gcc GCC_PCIE0_AXI_S_CLK>,
  				 <&gcc GCC_PCIE0_AHB_CLK>,

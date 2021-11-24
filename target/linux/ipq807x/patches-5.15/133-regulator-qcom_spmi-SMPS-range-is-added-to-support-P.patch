@@ -12,7 +12,7 @@ Change-Id: I5571801debec25527fd763d95aff27cc42f53bde
 
 --- a/drivers/regulator/qcom_spmi-regulator.c
 +++ b/drivers/regulator/qcom_spmi-regulator.c
-@@ -480,6 +480,7 @@ static struct spmi_voltage_range ln_ldo_
+@@ -481,6 +481,7 @@ static struct spmi_voltage_range ln_ldo_
  };
  
  static struct spmi_voltage_range smps_ranges[] = {

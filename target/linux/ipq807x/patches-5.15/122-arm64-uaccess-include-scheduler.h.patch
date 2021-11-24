@@ -16,12 +16,12 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/arch/arm64/include/asm/uaccess.h
 +++ b/arch/arm64/include/asm/uaccess.h
-@@ -24,6 +24,8 @@
+@@ -25,6 +25,8 @@
  #include <asm/memory.h>
  #include <asm/extable.h>
  
 +#include <linux/sched.h>
 +
- #define get_fs()	(current_thread_info()->addr_limit)
+ #define HAVE_GET_KERNEL_NOFAULT
  
- static inline void set_fs(mm_segment_t fs)
+ /*

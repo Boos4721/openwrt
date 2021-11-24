@@ -13,8 +13,8 @@ Signed-off-by: Sricharan R <sricharan@codeaurora.org>
 
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -76,6 +76,12 @@
- 		method = "smc";
+@@ -82,6 +82,12 @@
+ 		};
  	};
  
 +	firmware {

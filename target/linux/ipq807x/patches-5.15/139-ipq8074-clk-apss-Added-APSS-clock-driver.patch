@@ -21,7 +21,7 @@ Change-Id: I17ecad1f1731c88d8d91485d5d5f8a38b76f7104
 
 --- a/drivers/clk/qcom/Kconfig
 +++ b/drivers/clk/qcom/Kconfig
-@@ -155,6 +155,13 @@ config IPQ_GCC_8074
+@@ -172,6 +172,13 @@ config IPQ_GCC_8074
  	  i2c, USB, SD/eMMC, etc. Select this for the root clock
  	  of ipq8074.
  
@@ -37,14 +37,14 @@ Change-Id: I17ecad1f1731c88d8d91485d5d5f8a38b76f7104
  	help
 --- a/drivers/clk/qcom/Makefile
 +++ b/drivers/clk/qcom/Makefile
-@@ -25,6 +25,7 @@ obj-$(CONFIG_IPQ_GCC_4019) += gcc-ipq401
+@@ -26,6 +26,7 @@ obj-$(CONFIG_IPQ_GCC_4019) += gcc-ipq401
  obj-$(CONFIG_IPQ_GCC_6018) += gcc-ipq6018.o
  obj-$(CONFIG_IPQ_GCC_806X) += gcc-ipq806x.o
  obj-$(CONFIG_IPQ_GCC_8074) += gcc-ipq8074.o
 +obj-$(CONFIG_IPQ_APSS_8074) += apss-ipq8074.o
  obj-$(CONFIG_IPQ_LCC_806X) += lcc-ipq806x.o
+ obj-$(CONFIG_MDM_GCC_9607) += gcc-mdm9607.o
  obj-$(CONFIG_MDM_GCC_9615) += gcc-mdm9615.o
- obj-$(CONFIG_MDM_LCC_9615) += lcc-mdm9615.o
 --- /dev/null
 +++ b/drivers/clk/qcom/apss-ipq8074.c
 @@ -0,0 +1,210 @@
@@ -260,9 +260,9 @@ Change-Id: I17ecad1f1731c88d8d91485d5d5f8a38b76f7104
 +MODULE_ALIAS("platform:apss-ipq807x");
 --- a/drivers/clk/qcom/clk-alpha-pll.c
 +++ b/drivers/clk/qcom/clk-alpha-pll.c
-@@ -116,6 +116,18 @@ const u8 clk_alpha_pll_regs[][PLL_OFF_MA
- 		[PLL_OFF_OPMODE] = 0x38,
- 		[PLL_OFF_ALPHA_VAL] = 0x40,
+@@ -139,6 +139,18 @@ const u8 clk_alpha_pll_regs[][PLL_OFF_MA
+ 		[PLL_OFF_OPMODE] = 0x28,
+ 		[PLL_OFF_STATUS] = 0x38,
  	},
 +	[CLK_ALPHA_PLL_TYPE_APSS] = {
 +		[PLL_OFF_L_VAL] = 0x08,
@@ -286,18 +286,9 @@ Change-Id: I17ecad1f1731c88d8d91485d5d5f8a38b76f7104
  	CLK_ALPHA_PLL_TYPE_TRION,
  	CLK_ALPHA_PLL_TYPE_LUCID = CLK_ALPHA_PLL_TYPE_TRION,
 +	CLK_ALPHA_PLL_TYPE_APSS,
+ 	CLK_ALPHA_PLL_TYPE_AGERA,
+ 	CLK_ALPHA_PLL_TYPE_ZONDA,
  	CLK_ALPHA_PLL_TYPE_MAX,
- };
- 
-@@ -69,6 +70,8 @@ struct clk_alpha_pll {
- #define SUPPORTS_OFFLINE_REQ	BIT(0)
- #define SUPPORTS_FSM_MODE	BIT(2)
- #define SUPPORTS_DYNAMIC_UPDATE	BIT(3)
-+
-+
- 	u8 flags;
- 
- 	struct clk_regmap clkr;
 --- /dev/null
 +++ b/include/dt-bindings/clock/qca,apss-ipq8074.h
 @@ -0,0 +1,25 @@

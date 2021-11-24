@@ -14,7 +14,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -91,6 +91,11 @@
+@@ -97,6 +97,11 @@
  		#size-cells = <2>;
  		ranges;
  

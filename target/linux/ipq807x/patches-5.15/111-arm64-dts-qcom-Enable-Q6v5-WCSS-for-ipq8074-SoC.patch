@@ -16,8 +16,8 @@ Signed-off-by: Nikhil Prakash V <nprakash@codeaurora.org>
 
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -76,12 +76,66 @@
- 		method = "smc";
+@@ -82,12 +82,66 @@
+ 		};
  	};
  
 +	reserved-memory {
@@ -83,7 +83,7 @@ Signed-off-by: Nikhil Prakash V <nprakash@codeaurora.org>
  	soc: soc {
  		#address-cells = <0x1>;
  		#size-cells = <0x1>;
-@@ -727,5 +781,72 @@
+@@ -779,5 +833,72 @@
  				      "axi_m_sticky";
  			status = "disabled";
  		};

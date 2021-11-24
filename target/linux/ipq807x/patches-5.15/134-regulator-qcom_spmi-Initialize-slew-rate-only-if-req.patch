@@ -19,7 +19,7 @@ Change-Id: Ida3cf3d754e1207e34a164d6d86c6e1aa109ef1e
 
 --- a/drivers/regulator/qcom_spmi-regulator.c
 +++ b/drivers/regulator/qcom_spmi-regulator.c
-@@ -1610,6 +1610,13 @@ static int spmi_regulator_init_slew_rate
+@@ -1617,6 +1617,13 @@ static int spmi_regulator_init_slew_rate
  	int step, delay, slew_rate, step_delay;
  	const struct spmi_voltage_range *range;
  

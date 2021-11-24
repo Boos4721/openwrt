@@ -12,15 +12,25 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/drivers/soc/qcom/socinfo.c
 +++ b/drivers/soc/qcom/socinfo.c
-@@ -224,8 +224,20 @@ static const struct soc_id soc_id[] = {
- 	{ 312, "APQ8096SG" },
- 	{ 318, "SDM630" },
+@@ -281,18 +281,30 @@ static const struct soc_id soc_id[] = {
+ 	{ 319, "APQ8098" },
  	{ 321, "SDM845" },
+ 	{ 322, "MDM9206" },
 +	{ 323, "IPQ8074" },
+ 	{ 324, "SDA660" },
+ 	{ 325, "SDM658" },
+ 	{ 326, "SDA658" },
+ 	{ 327, "SDA630" },
+ 	{ 338, "SDM450" },
  	{ 341, "SDA845" },
 +	{ 342, "IPQ8072" },
 +	{ 343, "IPQ8076" },
 +	{ 344, "IPQ8078" },
+ 	{ 345, "SDM636" },
+ 	{ 346, "SDA636" },
+ 	{ 349, "SDM632" },
+ 	{ 350, "SDA632" },
+ 	{ 351, "SDA450" },
  	{ 356, "SM8250" },
 +	{ 375, "IPQ8070" },
 +	{ 376, "IPQ8071" },
@@ -30,6 +40,6 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 +	{ 392, "IPQ8078A" },
 +	{ 395, "IPQ8070A" },
 +	{ 396, "IPQ8071A" },
+ 	{ 394, "SM6125" },
  	{ 402, "IPQ6018" },
- 	{ 425, "SC7180" },
- };
+ 	{ 403, "IPQ6028" },

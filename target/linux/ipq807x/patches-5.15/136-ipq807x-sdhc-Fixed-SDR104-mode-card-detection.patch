@@ -10,24 +10,10 @@ Signed-off-by: Saravanan Jaganathan <sjaganat@codeaurora.org>
 Signed-off-by: Praveenkumar I <ipkumar@codeaurora.org>
 
 Change-Id: Ie5edb7b3d972e06f3eb2525e10597b49e9bae14d
----
- arch/arm64/boot/dts/qcom/ipq8074.dtsi   | 1 -
- drivers/regulator/qcom_spmi-regulator.c | 3 +++
- 2 files changed, 3 insertions(+), 1 deletion(-)
 
---- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-+++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -430,7 +430,6 @@
- 
- 			status = "disabled";
- 		};
--
- 		blsp_dma: dma@7884000 {
- 			compatible = "qcom,bam-v1.7.0";
- 			reg = <0x07884000 0x2b000>;
 --- a/drivers/regulator/qcom_spmi-regulator.c
 +++ b/drivers/regulator/qcom_spmi-regulator.c
-@@ -164,6 +164,7 @@ enum spmi_regulator_subtype {
+@@ -165,6 +165,7 @@ enum spmi_regulator_subtype {
  	SPMI_REGULATOR_SUBTYPE_ULT_HF_CTL4	= 0x10,
  	SPMI_REGULATOR_SUBTYPE_HFS430		= 0x0a,
  	SPMI_REGULATOR_SUBTYPE_VMPWM_CTL	= 0x0a,
@@ -35,7 +21,7 @@ Change-Id: Ie5edb7b3d972e06f3eb2525e10597b49e9bae14d
  };
  
  enum spmi_common_regulator_registers {
-@@ -492,6 +493,7 @@ static struct spmi_voltage_range smps_ra
+@@ -493,6 +494,7 @@ static struct spmi_voltage_range smps_ra
  
  static struct spmi_voltage_range smps_vmpwm_ranges[] = {
  	SPMI_VOLTAGE_RANGE(0,  664000,  664000, 1104000, 1104000, 8000),
@@ -43,7 +29,7 @@ Change-Id: Ie5edb7b3d972e06f3eb2525e10597b49e9bae14d
  };
  
  static struct spmi_voltage_range ftsmps_ranges[] = {
-@@ -1535,6 +1537,7 @@ static const struct regulator_ops spmi_h
+@@ -1540,6 +1542,7 @@ static const struct regulator_ops spmi_h
  
  static const struct spmi_regulator_mapping supported_regulators[] = {
  	/*           type subtype dig_min dig_max ltype ops setpoints hpm_min */

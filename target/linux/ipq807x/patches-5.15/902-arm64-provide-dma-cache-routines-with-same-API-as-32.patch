@@ -38,7 +38,7 @@ Signed-off-by: Kathiravan T <kathirav@codeaurora.org>
 
 --- a/arch/arm64/include/asm/cacheflush.h
 +++ b/arch/arm64/include/asm/cacheflush.h
-@@ -102,6 +102,15 @@ static inline void flush_icache_range(un
+@@ -110,6 +110,15 @@ static inline void flush_icache_range(un
  extern void __dma_map_area(const void *, size_t, int);
  extern void __dma_unmap_area(const void *, size_t, int);
  extern void __dma_flush_area(const void *, size_t);
