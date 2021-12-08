@@ -65,7 +65,7 @@ endef
 define Package/ath11k-firmware-qcn9074/install
 	$(INSTALL_DIR) $(1)/lib/firmware/ath11k/QCN9074/hw1.0
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/ath11k-firmware/QCN9074/hw1.0/testing/2.6.0.1.r6/WLAN.HK.2.6.0.1.r6-00010-QCAHKSWPL_SILICONZ-1//* \
+		$(PKG_BUILD_DIR)/ath11k-firmware/QCN9074/hw1.0/testing/2.6.0.1.r6/WLAN.HK.2.6.0.1.r6-00010-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/ath11k/QCN9074/hw1.0/
 endef
 
