@@ -200,7 +200,7 @@
  /*
   * monitor mode reception
   *
-@@ -2608,6 +2612,21 @@ static void ieee80211_deliver_skb_to_loc
+@@ -2609,6 +2613,21 @@ static void ieee80211_deliver_skb_to_loc
  			ether_addr_copy(ehdr->h_dest, sdata->vif.addr);
  
  		/* deliver to local stack */
@@ -222,7 +222,7 @@
  		if (rx->list)
  #if LINUX_VERSION_IS_GEQ(4,19,0)
  			list_add_tail(&skb->list, rx->list);
-@@ -2616,6 +2635,7 @@ static void ieee80211_deliver_skb_to_loc
+@@ -2617,6 +2636,7 @@ static void ieee80211_deliver_skb_to_loc
  #endif
  		else
  			netif_receive_skb(skb);
@@ -230,7 +230,7 @@
  	}
  }
  
-@@ -4522,6 +4542,21 @@ static void ieee80211_rx_8023(struct iee
+@@ -4524,6 +4544,21 @@ static void ieee80211_rx_8023(struct iee
  	/* deliver to local stack */
  	skb->protocol = eth_type_trans(skb, fast_rx->dev);
  	memset(skb->cb, 0, sizeof(skb->cb));
@@ -252,7 +252,7 @@
  	if (rx->list)
  #if LINUX_VERSION_IS_GEQ(4,19,0)
  		list_add_tail(&skb->list, rx->list);
-@@ -4530,7 +4565,7 @@ static void ieee80211_rx_8023(struct iee
+@@ -4532,7 +4567,7 @@ static void ieee80211_rx_8023(struct iee
  #endif
  	else
  		netif_receive_skb(skb);
