@@ -1,6 +1,6 @@
 --- a/ath10k-5.10/htt_rx.c
 +++ b/ath10k-5.10/htt_rx.c
-@@ -3026,7 +3026,7 @@
+@@ -3026,7 +3026,7 @@ static void ath10k_htt_rx_tx_compl_ind(s
  
  			/* workaround for possibly firmware bug */
  			if (unlikely(tx_done.tx_rate_code == ATH10K_CT_TX_BEACON_INVALID_RATE_CODE)) {
@@ -9,7 +9,7 @@
  				tx_done.tx_rate_code = 0;
  			}
  
-@@ -3120,7 +3120,7 @@
+@@ -3120,7 +3120,7 @@ static void ath10k_htt_rx_tx_compl_ind(s
  
  			/* workaround for possibly firmware bug */
  			if (unlikely(tx_done.tx_rate_code == ATH10K_CT_TX_BEACON_INVALID_RATE_CODE)) {
@@ -18,7 +18,7 @@
  				tx_done.tx_rate_code = 0;
  			}
  
-@@ -3970,11 +3970,11 @@
+@@ -3970,11 +3970,11 @@ ath10k_update_per_peer_tx_stats(struct a
  	if (txrate.flags == WMI_RATE_PREAMBLE_VHT && txrate.mcs > 9) {
  		static bool done_once = 0;
  		if (!done_once) {
@@ -34,7 +34,7 @@
  	}
 --- a/ath10k-5.10/wmi.c
 +++ b/ath10k-5.10/wmi.c
-@@ -6329,7 +6329,7 @@
+@@ -6329,7 +6329,7 @@ static void ath10k_wmi_event_beacon_tx(s
  
  	/* workaround for possibly firmware bug */
  	if (unlikely(ev->tx_rate_code == ATH10K_CT_TX_BEACON_INVALID_RATE_CODE)) {
