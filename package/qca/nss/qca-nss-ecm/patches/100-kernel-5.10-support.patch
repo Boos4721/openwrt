@@ -94,7 +94,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  }
 --- a/ecm_classifier_emesh.c
 +++ b/ecm_classifier_emesh.c
-@@ -977,19 +977,11 @@ int ecm_classifier_emesh_init(struct den
+@@ -974,19 +974,11 @@ int ecm_classifier_emesh_init(struct den
  		return -1;
  	}
  
