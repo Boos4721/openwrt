@@ -108,7 +108,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-1-jouni@codeaurora.org
  #define DP_RXDMA_BUF_COOKIE_BUF_ID	GENMASK(17, 0)
 --- a/drivers/net/wireless/ath/ath11k/dp_rx.c
 +++ b/drivers/net/wireless/ath/ath11k/dp_rx.c
-@@ -3030,6 +3030,8 @@ int ath11k_dp_rx_process_mon_status(stru
+@@ -3033,6 +3033,8 @@ int ath11k_dp_rx_process_mon_status(stru
  	struct ath11k_peer *peer;
  	struct ath11k_sta *arsta;
  	int num_buffs_reaped = 0;
@@ -117,7 +117,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-1-jouni@codeaurora.org
  
  	__skb_queue_head_init(&skb_list);
  
-@@ -3042,8 +3044,16 @@ int ath11k_dp_rx_process_mon_status(stru
+@@ -3045,8 +3047,16 @@ int ath11k_dp_rx_process_mon_status(stru
  		memset(&ppdu_info, 0, sizeof(ppdu_info));
  		ppdu_info.peer_id = HAL_INVALID_PEERID;
  
@@ -136,7 +136,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-1-jouni@codeaurora.org
  
  		hal_status = ath11k_hal_rx_parse_mon_status(ab, &ppdu_info, skb);
  
-@@ -3071,7 +3081,7 @@ int ath11k_dp_rx_process_mon_status(stru
+@@ -3074,7 +3084,7 @@ int ath11k_dp_rx_process_mon_status(stru
  		ath11k_dp_rx_update_peer_stats(arsta, &ppdu_info);
  
  		if (ath11k_debugfs_is_pktlog_peer_valid(ar, peer->addr))

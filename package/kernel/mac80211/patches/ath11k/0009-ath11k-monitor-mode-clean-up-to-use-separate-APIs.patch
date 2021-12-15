@@ -37,7 +37,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-4-jouni@codeaurora.org
  	ATH11K_FLAG_MONITOR_VDEV_CREATED,
 --- a/drivers/net/wireless/ath/ath11k/dp_rx.c
 +++ b/drivers/net/wireless/ath/ath11k/dp_rx.c
-@@ -5029,7 +5029,7 @@ int ath11k_dp_rx_process_mon_rings(struc
+@@ -5032,7 +5032,7 @@ int ath11k_dp_rx_process_mon_rings(struc
  	struct ath11k *ar = ath11k_ab_to_ar(ab, mac_id);
  	int ret = 0;
  

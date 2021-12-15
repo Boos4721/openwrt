@@ -50,9 +50,9 @@ Link: https://lore.kernel.org/r/20210721212029.142388-3-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -5848,6 +5848,17 @@ static int ath11k_reg_chan_list_event(st
- 
- 	pdev_idx = reg_info->phy_id;
+@@ -5859,6 +5859,17 @@ static int ath11k_reg_chan_list_event(st
+ 	}
+ 	spin_unlock(&ab->base_lock);
  
 +	/* Avoid default reg rule updates sent during FW recovery if
 +	 * it is already available

@@ -20,7 +20,7 @@ Link: https://lore.kernel.org/r/20210720214922.118078-1-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -3495,7 +3495,7 @@ ath11k_wmi_copy_resource_config(struct w
+@@ -3496,7 +3496,7 @@ ath11k_wmi_copy_resource_config(struct w
  	wmi_cfg->bpf_instruction_size = tg_cfg->bpf_instruction_size;
  	wmi_cfg->max_bssid_rx_filters = tg_cfg->max_bssid_rx_filters;
  	wmi_cfg->use_pdev_id = tg_cfg->use_pdev_id;
@@ -31,7 +31,7 @@ Link: https://lore.kernel.org/r/20210720214922.118078-1-jouni@codeaurora.org
  	wmi_cfg->twt_ap_pdev_count = tg_cfg->twt_ap_pdev_count;
 --- a/drivers/net/wireless/ath/ath11k/wmi.h
 +++ b/drivers/net/wireless/ath/ath11k/wmi.h
-@@ -5014,7 +5014,7 @@ struct target_resource_config {
+@@ -5015,7 +5015,7 @@ struct target_resource_config {
  	u32 vo_minfree;
  	u32 rx_batchmode;
  	u32 tt_support;
