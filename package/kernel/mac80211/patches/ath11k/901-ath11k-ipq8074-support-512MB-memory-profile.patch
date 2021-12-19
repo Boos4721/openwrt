@@ -214,7 +214,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  		.fix_l1ss = true,
 --- a/local-symbols
 +++ b/local-symbols
-@@ -148,6 +148,8 @@ ATH11K_DEBUG=
+@@ -149,6 +149,8 @@ ATH11K_DEBUG=
  ATH11K_DEBUGFS=
  ATH11K_TRACING=
  ATH11K_SPECTRAL=
