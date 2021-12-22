@@ -13,10 +13,10 @@ Signed-off-by: Simon Casey <simon501098c@gmail.com>
 
 --- a/include/linux/if_bridge.h
 +++ b/include/linux/if_bridge.h
-@@ -196,4 +196,8 @@ typedef struct net_bridge_port *br_get_d
+@@ -197,4 +197,8 @@ typedef struct net_bridge_port *br_get_d
  extern br_get_dst_hook_t __rcu *br_get_dst_hook;
  /* QCA NSS ECM support - End */
-
+ 
 +/* QCA NSS bridge-mgr support - Start */
 +extern struct net_device *br_fdb_bridge_dev_get_and_hold(struct net_bridge *br);
 +/* QCA NSS bridge-mgr support - End */
@@ -27,7 +27,7 @@ Signed-off-by: Simon Casey <simon501098c@gmail.com>
 @@ -66,6 +66,15 @@ void br_fdb_update_unregister_notify(str
  EXPORT_SYMBOL_GPL(br_fdb_update_unregister_notify);
  /* QCA NSS ECM support - End */
-
+ 
 +/* QCA NSS bridge-mgr support - Start */
 +struct net_device *br_fdb_bridge_dev_get_and_hold(struct net_bridge *br)
 +{
@@ -46,7 +46,7 @@ Signed-off-by: Simon Casey <simon501098c@gmail.com>
  	unsigned long now = jiffies;
 -	u8 mac_addr[6]; /* QCA NSS ECM support */
 +	struct br_fdb_event fdb_event; /* QCA NSS bridge-mgr support */
-
+ 
  	/* this part is tricky, in order to avoid blocking learning and
  	 * consequently forwarding, we rely on rcu to delete objects with
 @@ -399,12 +408,13 @@ void br_fdb_cleanup(struct work_struct *
@@ -70,7 +70,7 @@ Signed-off-by: Simon Casey <simon501098c@gmail.com>
  {
  	struct net_bridge_fdb_entry *fdb;
 +	struct br_fdb_event fdb_event; /* QCA NSS bridge-mgr support */
-
+ 
  	/* some users want to always flood. */
  	if (hold_time(br) == 0)
 @@ -640,6 +651,12 @@ void br_fdb_update(struct net_bridge *br
@@ -94,5 +94,4 @@ Signed-off-by: Simon Casey <simon501098c@gmail.com>
 +					0, (void *)&fdb_event);
  				/* QCA NSS ECM support - End */
  			}
-
-
+ 
