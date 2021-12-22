@@ -50,7 +50,7 @@ DEFAULT_PACKAGES.router:=\
 	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw kmod-tun \
 	default-settings luci luci-app-ddns luci-app-upnp luci-app-autoreboot \
 	luci-app-filetransfer luci-app-easymesh luci-app-arpbind \
-	luci-app-vlmcsd luci-app-ramfree \
+	luci-app-vlmcsd luci-app-ramfree luci-app-unblockneteasemusic \
 	luci-app-advanced luci-app-argon-config luci-theme-argon luci-app-ttyd \
 	luci-app-turboacc ddns-scripts_aliyun ddns-scripts_dnspod
 
