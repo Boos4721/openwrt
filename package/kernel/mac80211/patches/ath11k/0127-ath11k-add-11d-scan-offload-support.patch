@@ -545,7 +545,7 @@ Link: https://lore.kernel.org/r/20211201071745.17746-4-quic_wgong@quicinc.com
  static void ath11k_wmi_htc_tx_complete(struct ath11k_base *ab,
  				       struct sk_buff *skb)
  {
-@@ -7333,6 +7439,9 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7344,6 +7450,9 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_WOW_WAKEUP_HOST_EVENTID:
  		ath11k_wmi_event_wow_wakeup_host(ab, skb);
  		break;
