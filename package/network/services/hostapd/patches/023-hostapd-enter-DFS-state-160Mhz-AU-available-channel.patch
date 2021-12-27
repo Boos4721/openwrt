@@ -1,13 +1,11 @@
 WARNNING: Disclaimer: DFS specification is not supported in China And Other DFS Restricted Countries
 
-diff --git a/src/ap/dfs.c b/src/ap/dfs.c
-index b990fb3..ed39d97 100644
 --- a/src/ap/dfs.c
 +++ b/src/ap/dfs.c
-@@ -826,6 +826,8 @@ int hostapd_handle_dfs(struct hostapd_iface *iface)
+@@ -844,6 +844,8 @@ int hostapd_handle_dfs(struct hostapd_if
  		}
  	} while (res);
-
+ 
 +    iface->dfs_cac_ms=1000;
 +
  	/* Finally start CAC */
