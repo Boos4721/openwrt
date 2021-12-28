@@ -23,7 +23,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  
  / {
  	model = "Qualcomm Technologies, Inc. IPQ8074";
-@@ -142,6 +143,15 @@
+@@ -82,6 +83,15 @@
  		};
  	};
  
@@ -39,7 +39,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	soc: soc {
  		#address-cells = <0x1>;
  		#size-cells = <0x1>;
-@@ -446,6 +456,42 @@
+@@ -310,6 +320,42 @@
  			interrupt-controller;
  			#interrupt-cells = <4>;
  			cell-index = <0>;

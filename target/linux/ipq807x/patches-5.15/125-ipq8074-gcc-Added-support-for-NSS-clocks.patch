@@ -14,9 +14,9 @@ Signed-off-by: Rajkumar Ayyasamy <arajkuma@codeaurora.org>
 
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -1101,5 +1101,17 @@
- 			resets = <&gcc GCC_EDMA_HW_RESET>;
- 			reset-names = "edma_rst";
+@@ -741,5 +741,17 @@
+ 				      "axi_m_sticky";
+ 			status = "disabled";
  		};
 +
 +		bias_pll_cc_clk {
