@@ -1,4 +1,4 @@
-From 98130cb1cb992593b050baa9c4d8484d6fd6e8f6 Mon Sep 17 00:00:00 2001
+From 25769e17eb1299beae7b2db7c5465e9c78275ca1 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Fri, 20 Nov 2020 13:52:43 +0100
 Subject: [PATCH] thermal: qcom: tsens: Add IPQ8074 support
