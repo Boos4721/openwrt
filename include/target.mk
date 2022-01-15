@@ -52,7 +52,7 @@ DEFAULT_PACKAGES.router:=\
 	luci-app-filetransfer luci-app-easymesh luci-app-arpbind \
 	luci-app-vlmcsd luci-app-ramfree luci-app-unblockneteasemusic \
 	luci-app-advanced luci-app-argon-config luci-theme-argon luci-app-ttyd \
-	luci-app-turboacc ddns-scripts_aliyun ddns-scripts_dnspod
+	luci-app-turboacc ddns-scripts_aliyun ddns-scripts_dnspod ddns-scripts_cloudflare.com-v4
 
 ifneq ($(DUMP),)
   all: dumpinfo
