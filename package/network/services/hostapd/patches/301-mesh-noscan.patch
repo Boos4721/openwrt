@@ -20,7 +20,7 @@
  	INT(enable_edmg);
 --- a/wpa_supplicant/mesh.c
 +++ b/wpa_supplicant/mesh.c
-@@ -505,6 +505,8 @@ static int wpa_supplicant_mesh_init(stru
+@@ -506,6 +506,8 @@ static int wpa_supplicant_mesh_init(stru
  			   frequency);
  		goto out_free;
  	}
@@ -29,20 +29,9 @@
  
  	if (ssid->mesh_basic_rates == NULL) {
  		/*
---- a/wpa_supplicant/config_ssid.h
-+++ b/wpa_supplicant/config_ssid.h
-@@ -974,6 +974,8 @@ struct wpa_ssid {
- 	 */
- 	int no_auto_peer;
- 
-+	int noscan;
-+
- 	/**
- 	 * mesh_rssi_threshold - Set mesh parameter mesh_rssi_threshold (dBm)
- 	 *
 --- a/wpa_supplicant/wpa_supplicant.c
 +++ b/wpa_supplicant/wpa_supplicant.c
-@@ -2434,7 +2434,7 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2436,7 +2436,7 @@ void ibss_mesh_setup_freq(struct wpa_sup
  	int ieee80211_mode = wpas_mode_to_ieee80211_mode(ssid->mode);
  	enum hostapd_hw_mode hw_mode;
  	struct hostapd_hw_modes *mode = NULL;
@@ -51,7 +40,7 @@
  			   184, 192 };
  	int bw80[] = { 5180, 5260, 5500, 5580, 5660, 5745, 5955,
  		       6035, 6115, 6195, 6275, 6355, 6435, 6515,
-@@ -2442,7 +2442,7 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2444,7 +2444,7 @@ void ibss_mesh_setup_freq(struct wpa_sup
  	int bw160[] = { 5955, 6115, 6275, 6435, 6595, 6755, 6915 };
  	struct hostapd_channel_data *pri_chan = NULL, *sec_chan = NULL;
  	u8 channel;
@@ -60,7 +49,7 @@
  	unsigned int j, k;
  	struct hostapd_freq_params vht_freq;
  	int chwidth, seg0, seg1;
-@@ -2533,7 +2533,7 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2535,7 +2535,7 @@ void ibss_mesh_setup_freq(struct wpa_sup
  #endif /* CONFIG_HE_OVERRIDES */
  
  	/* Setup higher BW only for 5 GHz */
@@ -69,3 +58,15 @@
  		return;
  
  	for (chan_idx = 0; chan_idx < mode->num_channels; chan_idx++) {
+--- a/wpa_supplicant/config_ssid.h
++++ b/wpa_supplicant/config_ssid.h
+@@ -979,6 +979,8 @@ struct wpa_ssid {
+ 	 */
+ 	int no_auto_peer;
+ 
++	int noscan;
++
+ 	/**
+ 	 * mesh_rssi_threshold - Set mesh parameter mesh_rssi_threshold (dBm)
+ 	 *
+

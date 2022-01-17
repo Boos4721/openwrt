@@ -9,28 +9,28 @@
  {
  	int i;
  
-@@ -2417,8 +2417,9 @@ static bool ibss_mesh_is_80mhz_avail(int
- 		struct hostapd_channel_data *chan;
+@@ -2418,7 +2418,10 @@ static bool ibss_mesh_is_80mhz_avail(int
  
  		chan = hw_get_channel_chan(mode, i, NULL);
--		if (!chan ||
+ 		if (!chan ||
 -		    chan->flag & (HOSTAPD_CHAN_DISABLED | HOSTAPD_CHAN_NO_IR))
-+		if (!chan || chan->flag & HOSTAPD_CHAN_DISABLED)
++		    chan->flag & HOSTAPD_CHAN_DISABLED)
 +			return false;
-+		if ((chan->flag & (HOSTAPD_CHAN_RADAR | HOSTAPD_CHAN_NO_IR)) && !dfs_enabled)
++		
++		if (!dfs_enabled && chan->flag & (HOSTAPD_CHAN_RADAR | HOSTAPD_CHAN_NO_IR))
  			return false;
  	}
  
-@@ -2447,6 +2448,8 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2447,6 +2450,8 @@ void ibss_mesh_setup_freq(struct wpa_sup
  	int chwidth, seg0, seg1;
  	u32 vht_caps = 0;
  	bool is_24ghz, is_6ghz;
-+	int dfs_enabled = wpa_s->conf->country[0] &&
-+		(wpa_s->drv_flags & WPA_DRIVER_FLAGS_RADAR);
++	bool dfs_enabled = wpa_s->conf->country[0] &&
++			   (wpa_s->drv_flags & WPA_DRIVER_FLAGS_RADAR);
  
  	freq->freq = ssid->frequency;
  
-@@ -2543,8 +2546,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2543,8 +2548,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
  		return;
  
  	/* Check primary channel flags */
@@ -43,7 +43,7 @@
  
  	freq->channel = pri_chan->chan;
  
-@@ -2577,8 +2583,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2577,8 +2585,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
  		return;
  
  	/* Check secondary channel flags */
@@ -56,7 +56,7 @@
  
  	if (ht40 == -1) {
  		if (!(pri_chan->flag & HOSTAPD_CHAN_HT40MINUS))
-@@ -2667,7 +2676,7 @@ skip_to_6ghz:
+@@ -2667,7 +2678,7 @@ skip_to_6ghz:
  		return;
  
  	/* Back to HT configuration if channel not usable */
@@ -65,7 +65,7 @@
  		return;
  
  	chwidth = CHANWIDTH_80MHZ;
-@@ -2681,7 +2690,7 @@ skip_to_6ghz:
+@@ -2681,7 +2692,7 @@ skip_to_6ghz:
  		 * above; check the remaining four 20 MHz channels for the total
  		 * of 160 MHz bandwidth.
  		 */
@@ -74,7 +74,7 @@
  			return;
  
  		for (j = 0; j < ARRAY_SIZE(bw160); j++) {
-@@ -2711,10 +2720,12 @@ skip_to_6ghz:
+@@ -2711,10 +2722,12 @@ skip_to_6ghz:
  				if (!chan)
  					continue;
  
