@@ -463,7 +463,7 @@
  
 --- a/src/ap/dfs.c
 +++ b/src/ap/dfs.c
-@@ -1198,6 +1198,8 @@ int hostapd_dfs_radar_detected(struct ho
+@@ -1196,6 +1196,8 @@ int hostapd_dfs_radar_detected(struct ho
  		"freq=%d ht_enabled=%d chan_offset=%d chan_width=%d cf1=%d cf2=%d",
  		freq, ht_enabled, chan_offset, chan_width, cf1, cf2);
  
