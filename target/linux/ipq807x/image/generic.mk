@@ -23,19 +23,6 @@ define Device/UbiFit
 	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 
-define Device/netgear_sxr80
-	$(call Device/FitImage)
-	$(call Device/UbiFit)
-	DEVICE_VENDOR := Netgear
-	DEVICE_MODEL := SXR80
-	BLOCKSIZE := 128k
-	PAGESIZE := 2048
-	DEVICE_DTS_CONFIG := config@hk01
-	SOC := ipq8074
-	DEVICE_PACKAGES := ipq-wifi-netgear_sxr80 kmod-usb3 kmod-usb-dwc3 kmod-usb-dwc3-qcom
-endef
-TARGET_DEVICES += netgear_sxr80
-
 define Device/redmi_ax6
 	$(call Device/xiaomi_ax3600)
 	DEVICE_VENDOR := Redmi
@@ -69,7 +56,6 @@ define Device/xiaomi_ax3600-1G
         DEVICE_PACKAGES := ipq-wifi-xiaomi_ax3600 kmod-ath10k-ct ath10k-firmware-qca9887-ct
 endef
 TARGET_DEVICES += xiaomi_ax3600-1G
-
 
 define Device/xiaomi_ax9000
 	$(call Device/FitImage)
