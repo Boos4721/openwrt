@@ -8,6 +8,7 @@ board_config_update
 
 case $board in
 xiaomi,ax3600|\
+xiaomi,ax3600-1G|\
 redmi,ax6)
 	ucidef_set_led_netdev "wan" "WAN" "blue:network" "eth0"
 	;;
