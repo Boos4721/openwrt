@@ -73,10 +73,13 @@
 
 &wmac {
 	status = "okay";
+
+	mediatek,mtd-eeprom = <&factory 0x0>;
 };
 
 &ethernet {
-	mtd-mac-address = <&factory 0x28>;
+	nvmem-cells = <&macaddr_factory_28>;
+	nvmem-cell-names = "mac-address";
 };
 
 &spi0 {
@@ -103,17 +106,51 @@
 				reg = <0x30000 0x10000>;
 			};
 
-			factory: partition@40000 {
-				label = "factory";
+			partition@40000 {
+				label = "Bdata";
 				reg = <0x40000 0x10000>;
 				read-only;
 			};
 
-			partition@50000 {
-				compatible = "denx,uimage";
+			factory: partition@50000 {
+				label = "factory";
+				reg = <0x50000 0x10000>;
+				read-only;
+			};
+
+			partition@60000 {
+				label = "crash";
+				reg = <0x60000 0x10000>;
+				read-only;
+			};
+
+			partition@70000 {
+				label = "cfg_bak";
+				reg = <0x70000 0x10000>;
+				read-only;
+			};
+
+			partition@80000 {
+				label = "overlay";
+				reg = <0x80000 0xc0000>;
+				read-only;
+			};
+
+			partition@140000 {
 				label = "firmware";
-				reg = <0x50000 0xfb0000>;
+				compatible = "denx,uimage";
+				reg = <0x140000 0xec0000>;
 			};
 		};
+	};
+};
+
+&factory {
+	compatible = "nvmem-cells";
+	#address-cells = <1>;
+	#size-cells = <1>;
+
+	macaddr_factory_28: macaddr@28 {
+		reg = <0x28 0x6>;
 	};
 };
