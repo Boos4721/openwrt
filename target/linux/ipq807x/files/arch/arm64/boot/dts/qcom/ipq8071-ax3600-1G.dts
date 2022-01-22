@@ -61,11 +61,11 @@
 			compatible = "qcom,ath10k";
 			reg = <0x00010000 0 0 0 0>;
 
-			qcom,ath10k-calibration-variant = "Xiaomi-AX3600-1G";
+			qcom,ath10k-calibration-variant = "Xiaomi-AX3600";
 		};
 	};
 };
 
 &wifi {
-	qcom,ath11k-calibration-variant = "Xiaomi-AX3600-1G";
+	qcom,ath11k-calibration-variant = "Xiaomi-AX3600";
 };
