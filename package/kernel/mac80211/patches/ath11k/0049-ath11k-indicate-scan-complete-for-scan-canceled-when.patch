@@ -34,7 +34,7 @@ Link: https://lore.kernel.org/r/20210914164226.38843-2-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -6300,8 +6300,9 @@ exit:
+@@ -6289,8 +6289,9 @@ exit:
  	rcu_read_unlock();
  }
  
@@ -46,7 +46,7 @@ Link: https://lore.kernel.org/r/20210914164226.38843-2-jouni@codeaurora.org
  {
  	int i;
  	struct ath11k_pdev *pdev;
-@@ -6313,7 +6314,7 @@ static struct ath11k *ath11k_get_ar_on_s
+@@ -6302,7 +6303,7 @@ static struct ath11k *ath11k_get_ar_on_s
  			ar = pdev->ar;
  
  			spin_lock_bh(&ar->data_lock);
@@ -55,7 +55,7 @@ Link: https://lore.kernel.org/r/20210914164226.38843-2-jouni@codeaurora.org
  			    ar->scan.vdev_id == vdev_id) {
  				spin_unlock_bh(&ar->data_lock);
  				return ar;
-@@ -6343,10 +6344,15 @@ static void ath11k_scan_event(struct ath
+@@ -6332,10 +6333,15 @@ static void ath11k_scan_event(struct ath
  	 * aborting scan's vdev id matches this event info.
  	 */
  	if (scan_ev.event_type == WMI_SCAN_EVENT_COMPLETED &&

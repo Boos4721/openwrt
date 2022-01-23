@@ -479,7 +479,7 @@ Link: https://lore.kernel.org/r/1635156494-20059-1-git-send-email-quic_ppranees@
  }
  
  static bool ath11k_reg_is_world_alpha(char *alpha)
-@@ -7218,6 +7259,7 @@ static int ath11k_connect_pdev_htc_servi
+@@ -7207,6 +7248,7 @@ static int ath11k_connect_pdev_htc_servi
  	ab->wmi_ab.wmi_endpoint_id[pdev_idx] = conn_resp.eid;
  	ab->wmi_ab.wmi[pdev_idx].eid = conn_resp.eid;
  	ab->wmi_ab.max_msg_len[pdev_idx] = conn_resp.max_msg_len;

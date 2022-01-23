@@ -235,7 +235,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  ath11k_fill_band_to_mac_param(struct ath11k_base  *soc,
  			      struct wmi_host_pdev_band_to_mac *band_to_mac)
  {
-@@ -6168,6 +6230,7 @@ static void ath11k_vdev_start_resp_event
+@@ -6157,6 +6219,7 @@ static void ath11k_vdev_start_resp_event
  
  static void ath11k_bcn_tx_status_event(struct ath11k_base *ab, struct sk_buff *skb)
  {
@@ -243,7 +243,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  	u32 vdev_id, tx_status;
  
  	if (ath11k_pull_bcn_tx_status_ev(ab, skb->data, skb->len,
-@@ -6175,6 +6238,14 @@ static void ath11k_bcn_tx_status_event(s
+@@ -6164,6 +6227,14 @@ static void ath11k_bcn_tx_status_event(s
  		ath11k_warn(ab, "failed to extract bcn tx status");
  		return;
  	}
@@ -258,7 +258,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  }
  
  static void ath11k_vdev_stopped_event(struct ath11k_base *ab, struct sk_buff *skb)
-@@ -7202,6 +7273,9 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7191,6 +7262,9 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_OFFLOAD_PROB_RESP_TX_STATUS_EVENTID:
  		ath11k_probe_resp_tx_status_event(ab, skb);
  		break;

@@ -298,7 +298,7 @@ Link: https://lore.kernel.org/r/1636439755-30419-1-git-send-email-quic_vnaralas@
  	memset(skb_cb, 0, sizeof(*skb_cb));
  	ret = ath11k_htc_send(&ab->htc, wmi->eid, skb);
  
-@@ -7114,6 +7116,8 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7103,6 +7105,8 @@ static void ath11k_wmi_tlv_op_rx(struct
  	cmd_hdr = (struct wmi_cmd_hdr *)skb->data;
  	id = FIELD_GET(WMI_CMD_HDR_CMD_ID, (cmd_hdr->cmd_id));
  

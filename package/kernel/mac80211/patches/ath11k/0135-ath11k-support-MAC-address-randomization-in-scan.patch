@@ -72,7 +72,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
  
  	ptr += sizeof(*cmd);
  
-@@ -7721,3 +7723,31 @@ int ath11k_wmi_wow_enable(struct ath11k
+@@ -7710,3 +7712,31 @@ int ath11k_wmi_wow_enable(struct ath11k
  
  	return ath11k_wmi_cmd_send(ar->wmi, skb, WMI_WOW_ENABLE_CMDID);
  }

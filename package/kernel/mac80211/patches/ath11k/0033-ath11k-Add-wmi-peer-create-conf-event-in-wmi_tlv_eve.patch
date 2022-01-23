@@ -29,7 +29,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-9-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -7147,6 +7147,7 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7136,6 +7136,7 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_TWT_ENABLE_EVENTID:
  	case WMI_TWT_DISABLE_EVENTID:
  	case WMI_PDEV_DMA_RING_CFG_RSP_EVENTID:
