@@ -1195,7 +1195,7 @@ hostapd_rrm_nr_set(struct ubus_context *ctx, struct ubus_object *obj,
 			memcpy(&ssid, s, ssid.ssid_len);
 		}
 
-		hostapd_neighbor_set(hapd, bssid, &ssid, data, NULL, NULL, 0);
+		hostapd_neighbor_set(hapd, bssid, &ssid, data, NULL, NULL, 0, 0);
 		wpabuf_free(data);
 		continue;
 
@@ -1835,17 +1835,6 @@ void hostapd_ubus_notify_beacon_report(
 	blobmsg_add_macaddr(&b, "bssid", rep->bssid);
 	blobmsg_add_u16(&b, "antenna-id", rep->antenna_id);
 	blobmsg_add_u16(&b, "parent-tsf", rep->parent_tsf);
-
-	if (rep_mode == MEASUREMENT_REPORT_MODE_ACCEPT) {
-		blobmsg_add_u8(&b, "accepted", 1);
-	} else {
-		blobmsg_add_u8(&b, "accepted", 0);
-		void *reject = blobmsg_open_table(&b, "reject-reasons");
-		blobmsg_add_u8(&b, "reject-late", rep_mode & MEASUREMENT_REPORT_MODE_REJECT_LATE);
-		blobmsg_add_u8(&b, "reject-incapable", rep_mode & MEASUREMENT_REPORT_MODE_REJECT_INCAPABLE);
-		blobmsg_add_u8(&b, "reject-refused", rep_mode & MEASUREMENT_REPORT_MODE_REJECT_REFUSED);
-		blobmsg_close_table(&b, reject);
-	}
 
 	ubus_notify(ctx, &hapd->ubus.obj, "beacon-report", b.head, -1);
 }

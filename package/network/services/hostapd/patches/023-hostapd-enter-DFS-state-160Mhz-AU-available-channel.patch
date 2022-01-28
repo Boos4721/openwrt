@@ -2,7 +2,7 @@ WARNNING: Disclaimer: DFS specification is not supported in China And Other DFS 
 
 --- a/src/ap/dfs.c
 +++ b/src/ap/dfs.c
-@@ -844,6 +844,8 @@ int hostapd_handle_dfs(struct hostapd_if
+@@ -847,6 +847,8 @@ int hostapd_handle_dfs(struct hostapd_if
  		}
  	} while (res);
  
