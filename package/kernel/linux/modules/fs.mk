@@ -108,6 +108,7 @@ define KernelPackage/fs-cifs
     +kmod-crypto-aead \
     +kmod-crypto-ccm \
     +kmod-crypto-ecb \
+    +kmod-crypto-des \
     +(LINUX_5_15):kmod-asn1-decoder \
     +(LINUX_5_15):kmod-oid-registry \
     +(LINUX_5_15):kmod-dnsresolver
@@ -397,17 +398,18 @@ $(eval $(call KernelPackage,fs-nfs))
 define KernelPackage/fs-nfs-ssc
   SUBMENU:=$(FS_MENU)
   TITLE:=Common NFS filesystem SSC Helper module
-  KCONFIG:= CONFIG_NFS_V4_2@ge5.15
+  KCONFIG:= CONFIG_NFS_V4_2@ge5.10
   FILES:= $(LINUX_DIR)/fs/nfs_common/nfs_ssc.ko@ge5.10
   AUTOLOAD:=$(call AutoLoad,30,nfs_ssc)
 endef
 
 $(eval $(call KernelPackage,fs-nfs-ssc))
 
+
 define KernelPackage/fs-nfs-common
   SUBMENU:=$(FS_MENU)
   TITLE:=Common NFS filesystem modules
-  DEPENDS:=+LINUX_5_10:kmod-fs-nfs-ssc
+  DEPENDS:=+kmod-oid-registry
   KCONFIG:= \
 	CONFIG_LOCKD \
 	CONFIG_SUNRPC \
@@ -471,7 +473,7 @@ $(eval $(call KernelPackage,fs-nfs-v3))
 define KernelPackage/fs-nfs-v4
   SUBMENU:=$(FS_MENU)
   TITLE:=NFS4 filesystem client support
-  DEPENDS:=+kmod-fs-nfs +LINUX_5_15:kmod-fs-nfs-ssc
+  DEPENDS:=+kmod-fs-nfs +!LINUX_5_4:kmod-fs-nfs-ssc
   KCONFIG:= \
 	CONFIG_NFS_V4=y
   FILES:= \
@@ -524,18 +526,18 @@ endef
 
 $(eval $(call KernelPackage,fs-ntfs))
 
+
 define KernelPackage/fs-ntfs3
   SUBMENU:=$(FS_MENU)
   TITLE:=NTFS3 Read-Write file system support
-  DEPENDS:=@LINUX_5_15
+  DEPENDS:=@LINUX_5_15 +kmod-nls-base
   KCONFIG:= \
-  CONFIG_NTFS3_FS \
-  CONFIG_NTFS3_64BIT_CLUSTER=y \
-  CONFIG_NTFS3_LZX_XPRESS=y \
-  CONFIG_NTFS3_FS_POSIX_ACL=y
+	CONFIG_NTFS3_FS \
+	CONFIG_NTFS3_64BIT_CLUSTER=y \
+	CONFIG_NTFS3_LZX_XPRESS=y \
+	CONFIG_NTFS3_FS_POSIX_ACL=y
   FILES:=$(LINUX_DIR)/fs/ntfs3/ntfs3.ko
   AUTOLOAD:=$(call AutoLoad,30,ntfs3)
-  $(call AddDepends/nls)
 endef
 
 define KernelPackage/fs-ntfs3/description
@@ -611,6 +613,22 @@ define KernelPackage/fs-vfat/description
 endef
 
 $(eval $(call KernelPackage,fs-vfat))
+
+
+define KernelPackage/fs-virtiofs
+  SUBMENU:=$(FS_MENU)
+  TITLE:=Virtiofs filesystem support
+  DEPENDS:=+kmod-fuse
+  KCONFIG:=CONFIG_VIRTIO_FS
+  FILES:=$(LINUX_DIR)/fs/fuse/virtiofs.ko
+  AUTOLOAD:=$(call AutoLoad,30,virtiofs)
+endef
+
+define KernelPackage/fs-virtiofs/description
+  Kernel module for Virtiofs filesystem support
+endef
+
+$(eval $(call KernelPackage,fs-virtiofs))
 
 
 define KernelPackage/fs-xfs

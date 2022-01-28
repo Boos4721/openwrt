@@ -477,7 +477,7 @@ $(eval $(call KernelPackage,usb-dwc3))
 
 define KernelPackage/usb-dwc3-qcom
   TITLE:=DWC3 Qualcomm USB driver
-  DEPENDS:=@(TARGET_ipq40xx||TARGET_ipq806x) +kmod-usb-dwc3
+  DEPENDS:=@(TARGET_ipq40xx||TARGET_ipq806x||TARGET_ipq807x) +kmod-usb-dwc3
   KCONFIG:= CONFIG_USB_DWC3_QCOM
   FILES:= $(LINUX_DIR)/drivers/usb/dwc3/dwc3-qcom.ko
   AUTOLOAD:=$(call AutoLoad,53,dwc3-qcom,1)
@@ -1138,9 +1138,11 @@ $(eval $(call KernelPackage,usb-net-aqc111))
 
 define KernelPackage/usb-net-asix
   TITLE:=Kernel module for USB-to-Ethernet Asix convertors
-  DEPENDS:=+kmod-libphy
+  DEPENDS:=+kmod-libphy +LINUX_5_15:kmod-mdio-devres
   KCONFIG:=CONFIG_USB_NET_AX8817X
-  FILES:=$(LINUX_DIR)/drivers/$(USBNET_DIR)/asix.ko
+  FILES:= \
+	$(LINUX_DIR)/drivers/$(USBNET_DIR)/asix.ko \
+	$(LINUX_DIR)/net/core/selftests.ko@ge5.13
   AUTOLOAD:=$(call AutoProbe,asix)
   $(call AddDepends/usb-net)
 endef
@@ -1201,23 +1203,6 @@ endef
 $(eval $(call KernelPackage,usb-net-kaweth))
 
 
-define KernelPackage/usb-net-lan78xx
-  TITLE:=USB-To-Ethernet Microchip LAN78XX convertors
-  DEPENDS:=+kmod-fixed-phy +kmod-phy-microchip
-  KCONFIG:=CONFIG_USB_LAN78XX
-  FILES:=$(LINUX_DIR)/drivers/$(USBNET_DIR)/lan78xx.ko
-  AUTOLOAD:=$(call AutoProbe,lan78xx)
-  $(call AddDepends/usb-net)
-endef
-
-define KernelPackage/usb-net-lan78xx/description
- Kernel module for Microchip LAN78XX based USB 2 & USB 3
- 10/100/1000 Ethernet adapters.
-endef
-
-$(eval $(call KernelPackage,usb-net-lan78xx))
-
-
 define KernelPackage/usb-net-pegasus
   TITLE:=Kernel module for USB-to-Ethernet Pegasus convertors
   KCONFIG:=CONFIG_USB_PEGASUS
@@ -1248,9 +1233,25 @@ endef
 $(eval $(call KernelPackage,usb-net-mcs7830))
 
 
+define KernelPackage/usb-net-smsc75xx
+  TITLE:=SMSC LAN75XX based USB 2.0 Gigabit ethernet devices
+  DEPENDS:=+!LINUX_5_4:kmod-libphy
+  KCONFIG:=CONFIG_USB_NET_SMSC75XX
+  FILES:=$(LINUX_DIR)/drivers/$(USBNET_DIR)/smsc75xx.ko
+  AUTOLOAD:=$(call AutoProbe,smsc75xx)
+  $(call AddDepends/usb-net, +kmod-lib-crc16)
+endef
+
+define KernelPackage/usb-net-smsc75xx/description
+ Kernel module for SMSC LAN75XX based devices
+endef
+
+$(eval $(call KernelPackage,usb-net-smsc75xx))
+
+
 define KernelPackage/usb-net-smsc95xx
   TITLE:=SMSC LAN95XX based USB 2.0 10/100 ethernet devices
-  DEPENDS:=+LINUX_5_10:kmod-libphy
+  DEPENDS:=+!LINUX_5_4:kmod-libphy
   KCONFIG:=CONFIG_USB_NET_SMSC95XX
   FILES:=$(LINUX_DIR)/drivers/$(USBNET_DIR)/smsc95xx.ko
   AUTOLOAD:=$(call AutoProbe,smsc95xx)

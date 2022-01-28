@@ -48,6 +48,7 @@ define KernelPackage/bonding
   KCONFIG:=CONFIG_BONDING
   FILES:=$(LINUX_DIR)/drivers/net/bonding/bonding.ko
   AUTOLOAD:=$(call AutoLoad,40,bonding)
+  MODPARAMS.bonding:=max_bonds=0
 endef
 
 define KernelPackage/bonding/description
@@ -563,23 +564,6 @@ endef
 $(eval $(call KernelPackage,veth))
 
 
-define KernelPackage/vrf
-  SUBMENU:=$(NETWORK_SUPPORT_MENU)
-  TITLE:=Virtual Routing and Forwarding (Lite)
-  DEPENDS:=@KERNEL_NET_L3_MASTER_DEV
-  KCONFIG:=CONFIG_NET_VRF
-  FILES:=$(LINUX_DIR)/drivers/net/vrf.ko
-  AUTOLOAD:=$(call AutoLoad,30,vrf)
-endef
-
-define KernelPackage/vrf/description
- This option enables the support for mapping interfaces into VRF's. The
- support enables VRF devices.
-endef
-
-$(eval $(call KernelPackage,vrf))
-
-
 define KernelPackage/slhc
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   HIDDEN:=1
@@ -985,24 +969,6 @@ endef
 $(eval $(call KernelPackage,tcp-hybla))
 
 
-define KernelPackage/tcp-scalable
-  SUBMENU:=$(NETWORK_SUPPORT_MENU)
-  TITLE:=TCP-Scalable congestion control algorithm
-  KCONFIG:=CONFIG_TCP_CONG_SCALABLE
-  FILES:=$(LINUX_DIR)/net/ipv4/tcp_scalable.ko
-  AUTOLOAD:=$(call AutoProbe,tcp-scalable)
-endef
-
-define KernelPackage/tcp-scalable/description
-  Scalable TCP is a sender-side only change to TCP which uses a
-	MIMD congestion control algorithm which has some nice scaling
-	properties, though is known to have fairness issues.
-	See http://www.deneholme.net/tom/scalable/
-endef
-
-$(eval $(call KernelPackage,tcp-scalable))
-
-
 define KernelPackage/ax25
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=AX25 support
@@ -1294,6 +1260,7 @@ endef
 
 $(eval $(call KernelPackage,netlink-diag))
 
+
 define KernelPackage/inet-diag
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=INET diag support for ss utility
@@ -1317,6 +1284,7 @@ native Linux tools such as ss.
 endef
 
 $(eval $(call KernelPackage,inet-diag))
+
 
 define KernelPackage/wireguard
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -1344,3 +1312,67 @@ define KernelPackage/wireguard/description
 endef
 
 $(eval $(call KernelPackage,wireguard))
+
+
+define KernelPackage/qrtr
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Qualcomm IPC Router support
+  HIDDEN:=1
+  DEPENDS:=@LINUX_5_15
+  KCONFIG:=CONFIG_QRTR
+  FILES:= \
+  $(LINUX_DIR)/net/qrtr/qrtr.ko \
+  $(LINUX_DIR)/net/qrtr/ns.ko
+  AUTOLOAD:=$(call AutoProbe,qrtr)
+endef
+
+define KernelPackage/qrtr/description
+ Qualcomm IPC Router support
+endef
+
+$(eval $(call KernelPackage,qrtr))
+
+define KernelPackage/qrtr-tun
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=TUN device for Qualcomm IPC Router
+  DEPENDS:=+kmod-qrtr
+  KCONFIG:=CONFIG_QRTR_TUN
+  FILES:= $(LINUX_DIR)/net/qrtr/qrtr-tun.ko
+  AUTOLOAD:=$(call AutoProbe,qrtr-tun)
+endef
+
+define KernelPackage/qrtr-tun/description
+ TUN device for Qualcomm IPC Router
+endef
+
+$(eval $(call KernelPackage,qrtr-tun))
+
+define KernelPackage/qrtr-smd
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=SMD IPC Router channels
+  DEPENDS:=+kmod-qrtr @TARGET_ipq807x
+  KCONFIG:=CONFIG_QRTR_SMD
+  FILES:= $(LINUX_DIR)/net/qrtr/qrtr-smd.ko
+  AUTOLOAD:=$(call AutoProbe,qrtr-smd)
+endef
+
+define KernelPackage/qrtr-smd/description
+ SMD IPC Router channels
+endef
+
+$(eval $(call KernelPackage,qrtr-smd))
+
+define KernelPackage/qrtr-mhi
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=MHI IPC Router channels
+  DEPENDS:=+kmod-mhi +kmod-qrtr
+  KCONFIG:=CONFIG_QRTR_MHI
+  FILES:= $(LINUX_DIR)/net/qrtr/qrtr-mhi.ko
+  AUTOLOAD:=$(call AutoProbe,qrtr-mhi)
+endef
+
+define KernelPackage/qrtr-mhi/description
+ MHI IPC Router channels
+endef
+
+$(eval $(call KernelPackage,qrtr-mhi))
