@@ -108,7 +108,7 @@
  		     __be16 vlan_proto, u16 vlan_id)
 --- a/include/linux/netdevice.h
 +++ b/include/linux/netdevice.h
-@@ -2745,6 +2745,10 @@ enum netdev_cmd {
+@@ -2746,6 +2746,10 @@ enum netdev_cmd {
  	NETDEV_CVLAN_FILTER_DROP_INFO,
  	NETDEV_SVLAN_FILTER_PUSH_INFO,
  	NETDEV_SVLAN_FILTER_DROP_INFO,
@@ -608,7 +608,7 @@
  	struct fib_table *tb;
 --- a/include/net/addrconf.h
 +++ b/include/net/addrconf.h
-@@ -501,4 +501,9 @@ int if6_proc_init(void);
+@@ -503,4 +503,9 @@ int if6_proc_init(void);
  void if6_proc_exit(void);
  #endif
  
@@ -620,7 +620,7 @@
  #endif
 --- a/net/ipv6/addrconf.c
 +++ b/net/ipv6/addrconf.c
-@@ -7236,3 +7236,35 @@ void addrconf_cleanup(void)
+@@ -7249,3 +7249,35 @@ void addrconf_cleanup(void)
  
  	destroy_workqueue(addrconf_wq);
  }
