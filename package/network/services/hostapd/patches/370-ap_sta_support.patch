@@ -181,7 +181,7 @@
  #else /* CONFIG_MESH */
  		wpa_msg(wpa_s, MSG_ERROR,
  			"mesh mode support not included in the build");
-@@ -6648,6 +6702,16 @@ static int wpa_supplicant_init_iface(str
+@@ -6650,6 +6704,16 @@ static int wpa_supplicant_init_iface(str
  			   sizeof(wpa_s->bridge_ifname));
  	}
  
@@ -198,7 +198,7 @@
  	/* RSNA Supplicant Key Management - INITIALIZE */
  	eapol_sm_notify_portEnabled(wpa_s->eapol, false);
  	eapol_sm_notify_portValid(wpa_s->eapol, false);
-@@ -6985,6 +7049,11 @@ static void wpa_supplicant_deinit_iface(
+@@ -6987,6 +7051,11 @@ static void wpa_supplicant_deinit_iface(
  	if (terminate)
  		wpa_msg(wpa_s, MSG_INFO, WPA_EVENT_TERMINATING);
  
