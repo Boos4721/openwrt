@@ -497,9 +497,8 @@ endef
 
 define Build/zip
 	mkdir $@.tmp
-	mv $@ $@.tmp/$(1)
-
-	zip -j -X \
+	mv $@ $@.tmp/$(word 1,$(1))
+	TZ=UTC $(STAGING_DIR_HOST)/bin/zip -j -X \
 		$(if $(SOURCE_DATE_EPOCH),--mtime="$(SOURCE_DATE_EPOCH)") \
 		$@ $@.tmp/$(if $(1),$(1),$@)
 	rm -rf $@.tmp
