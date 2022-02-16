@@ -765,7 +765,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  	bcm2835-rpi-zero.dtb \
  	bcm2835-rpi-zero-w.dtb
  dtb-$(CONFIG_ARCH_BCM_5301X) += \
-@@ -1408,3 +1423,13 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
+@@ -1409,3 +1424,13 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
  	aspeed-bmc-opp-zaius.dtb \
  	aspeed-bmc-portwell-neptune.dtb \
  	aspeed-bmc-quanta-q71l.dtb

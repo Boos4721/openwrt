@@ -1,6 +1,6 @@
 --- a/include/linux/if_bridge.h
 +++ b/include/linux/if_bridge.h
-@@ -62,6 +62,9 @@ struct br_ip_list {
+@@ -63,6 +63,9 @@ struct br_ip_list {
  
  extern void brioctl_set(int (*ioctl_hook)(struct net *, unsigned int, void __user *));
  
@@ -49,8 +49,8 @@
  	int (*fcn)(unsigned int events, struct nf_ct_event *item);
 --- a/net/bridge/br_if.c
 +++ b/net/bridge/br_if.c
-@@ -779,6 +779,28 @@ void br_port_flags_change(struct net_bri
- 		br_recalculate_neigh_suppress_enabled(br);
+@@ -783,6 +783,28 @@ void br_port_flags_change(struct net_bri
+ 		br_offload_port_state(p);
  }
  
 +void br_dev_update_stats(struct net_device *dev,
