@@ -1264,7 +1264,7 @@
  };
 --- a/drivers/mtd/nand/raw/qcom_nandc.c
 +++ b/drivers/mtd/nand/raw/qcom_nandc.c
-@@ -3063,6 +3063,10 @@ static const struct of_device_id qcom_na
+@@ -3061,6 +3061,10 @@ static const struct of_device_id qcom_na
  		.data = &ipq4019_nandc_props,
  	},
  	{
