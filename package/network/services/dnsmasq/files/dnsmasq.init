@@ -929,8 +929,14 @@ dnsmasq_start()
 	append_bool "$cfg" noping "--no-ping"
 	append_bool "$cfg" rapidcommit "--dhcp-rapid-commit"
 	append_bool "$cfg" scriptarp "--script-arp"
+	
+	append_bool "$cfg" filter_aaaa "--filter-aaaa"
+	append_bool "$cfg" filter_https "--filter-https"
+	append_bool "$cfg" filter_unknown "--filter-unknown"
 
 	append_parm "$cfg" logfacility "--log-facility"
+	
+	append_parm "$cfg" mini_ttl "--min-ttl"
 
 	append_parm "$cfg" cachesize "--cache-size"
 	append_parm "$cfg" dnsforwardmax "--dns-forward-max"
@@ -1159,7 +1165,6 @@ dnsmasq_start()
 	procd_add_jail_mount $EXTRA_MOUNT $RFC6761FILE $TRUSTANCHORSFILE
 	procd_add_jail_mount $dnsmasqconffile $dnsmasqconfdir $resolvdir $user_dhcpscript
 	procd_add_jail_mount /etc/passwd /etc/group /etc/TZ /etc/hosts /etc/ethers
-	[ "$HOSTFILE_DIR" != "/tmp" ] && procd_add_jail_mount "$HOSTFILE_DIR"
 	procd_add_jail_mount_rw /var/run/dnsmasq/ $leasefile
 
 	procd_close_instance
