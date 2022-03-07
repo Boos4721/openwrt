@@ -8,9 +8,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ath11k-firmware
-PKG_SOURCE_DATE:=2021-12-16
-PKG_SOURCE_VERSION:=198f9c2bcdd5ae6b0940d977ac749019b15452ac
-PKG_MIRROR_HASH:=f00f22b536724fdb53f2cadaef39c0264633227a4d5775eb7cbb08167085557e
+PKG_SOURCE_DATE:=2022-03-04
+PKG_SOURCE_VERSION:=4abc7856e26618a9b7a70f24d7f61e844f160e17
+PKG_MIRROR_HASH:=7fa0f1d56e951a9351826710729312ca4d6a18866cb22d0cbaff49c628e75902
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
@@ -51,21 +51,21 @@ endef
 define Package/ath11k-firmware-ipq6018/install
 	$(INSTALL_DIR) $(1)/lib/firmware/IPQ6018
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ6018/hw1.0/2.5.0.1/WLAN.HK.2.5.0.1-01201-QCAHKSWPL_SILICONZ-1/* \
+		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ6018/hw1.0/2.5.0.1/WLAN.HK.2.5.0.1-01208-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/IPQ6018/
 endef
 
 define Package/ath11k-firmware-ipq8074/install
 	$(INSTALL_DIR) $(1)/lib/firmware/IPQ8074
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ8074/hw2.0/2.5.0.1/WLAN.HK.2.5.0.1-01201-QCAHKSWPL_SILICONZ-1/* \
-	$(1)/lib/firmware/IPQ8074/
+		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ8074/hw2.0/2.5.0.1/WLAN.HK.2.5.0.1-01208-QCAHKSWPL_SILICONZ-1/* \
+		$(1)/lib/firmware/IPQ8074/
 endef
 
 define Package/ath11k-firmware-qcn9074/install
 	$(INSTALL_DIR) $(1)/lib/firmware/ath11k/QCN9074/hw1.0
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/ath11k-firmware/QCN9074/hw1.0/testing/2.6.0.1.r6/WLAN.HK.2.6.0.1.r6-00010-QCAHKSWPL_SILICONZ-1/* \
+		$(PKG_BUILD_DIR)/ath11k-firmware/QCN9074/hw1.0/2.5.0.1/WLAN.HK.2.5.0.1-01208-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/ath11k/QCN9074/hw1.0/
 endef
 
