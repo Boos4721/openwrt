@@ -620,7 +620,7 @@
  #endif
 --- a/net/ipv6/addrconf.c
 +++ b/net/ipv6/addrconf.c
-@@ -7249,3 +7249,35 @@ void addrconf_cleanup(void)
+@@ -7253,3 +7253,35 @@ void addrconf_cleanup(void)
  
  	destroy_workqueue(addrconf_wq);
  }
