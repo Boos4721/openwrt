@@ -3,7 +3,7 @@
 注意：
 -
 1. **不要**用 **root** 用户进行编译！！！
-  `非必要 请输入 ```export FORCE_UNSAFE_CONFIGURE=1``` && export ```FORCE=1``` `
+  `非必要 请输入 `export FORCE_UNSAFE_CONFIGURE=1` && export `FORCE=1` `
 2. 国内用户编译前最好准备好梯子
 3. 默认登陆IP 10.10.10.1 密码 boos
 

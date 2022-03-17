@@ -3999,7 +3999,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +};
 --- a/arch/arm/boot/dts/bcm2711.dtsi
 +++ b/arch/arm/boot/dts/bcm2711.dtsi
-@@ -318,7 +318,8 @@
+@@ -319,7 +319,8 @@
  			      <0x7ef01f00 0x400>,
  			      <0x7ef00200 0x80>,
  			      <0x7ef04300 0x100>,
@@ -4009,7 +4009,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  			reg-names = "hdmi",
  				    "dvp",
  				    "phy",
-@@ -327,12 +328,18 @@
+@@ -328,12 +329,18 @@
  				    "metadata",
  				    "csc",
  				    "cec",
@@ -4029,7 +4029,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  			status = "disabled";
  		};
  
-@@ -354,7 +361,8 @@
+@@ -355,7 +362,8 @@
  			      <0x7ef06f00 0x400>,
  			      <0x7ef00280 0x80>,
  			      <0x7ef09300 0x100>,
@@ -4039,7 +4039,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  			reg-names = "hdmi",
  				    "dvp",
  				    "phy",
-@@ -363,12 +371,18 @@
+@@ -364,12 +372,18 @@
  				    "metadata",
  				    "csc",
  				    "cec",
@@ -4059,7 +4059,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  			status = "disabled";
  		};
  
-@@ -468,14 +482,14 @@
+@@ -469,14 +483,14 @@
  	scb {
  		compatible = "simple-bus";
  		#address-cells = <2>;
@@ -4078,7 +4078,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  			device_type = "pci";
  			#address-cells = <3>;
  			#interrupt-cells = <1>;
-@@ -509,7 +523,7 @@
+@@ -510,7 +524,7 @@
  
  		genet: ethernet@7d580000 {
  			compatible = "brcm,bcm2711-genet-v5";
@@ -4087,7 +4087,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  			#address-cells = <0x1>;
  			#size-cells = <0x1>;
  			interrupts = <GIC_SPI 157 IRQ_TYPE_LEVEL_HIGH>,
-@@ -1018,7 +1032,7 @@
+@@ -1019,7 +1033,7 @@
  	alloc-ranges = <0x0 0x00000000 0x40000000>;
  };
  
