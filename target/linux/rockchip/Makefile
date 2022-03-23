@@ -17,7 +17,7 @@ include $(INCLUDE_DIR)/target.mk
 
 DEFAULT_PACKAGES += uboot-envtools partx-utils e2fsprogs mkf2fs kmod-gpio-button-hotplug \
 		    automount autocore-arm autosamba fdisk cfdisk e2fsprogs ethtool haveged htop \
-		    wpad-openssl kmod-mt76x2u usbutils
+		    wpad-openssl kmod-mt76x2u kmod-rtl88x2bu usbutils
 
 KERNELNAME:=Image dtbs
 
