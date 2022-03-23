@@ -152,4 +152,3 @@ U_BOOT_DRVINFO(syscon_at_ff100000) = {
 	.plat_size	= sizeof(dtv_syscon_at_ff100000),
 	.parent_idx	= -1,
 };
-
