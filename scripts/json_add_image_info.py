@@ -11,8 +11,8 @@ if len(argv) != 2:
     exit(1)
 
 json_path = Path(argv[1])
-bin_dir = Path(getenv("BIN_DIR"))
-image_file = bin_dir / getenv("DEVICE_IMG_NAME")
+file_path = Path(getenv("FILE_DIR")) / getenv("FILE_NAME")
+
 
 if not image_file.is_file():
     print("Skip JSON creation for non existing image ", image_file)
@@ -37,7 +37,14 @@ def get_titles():
 
 
 device_id = getenv("DEVICE_ID")
-image_hash = hashlib.sha256(image_file.read_bytes()).hexdigest()
+hash_file = hashlib.sha256(file_path.read_bytes()).hexdigest()
+
+if file_path.with_suffix(file_path.suffix + ".sha256sum").exists():
+    hash_unsigned = (
+        file_path.with_suffix(file_path.suffix + ".sha256sum").read_text().strip()
+    )
+else:
+    hash_unsigned = hash_file
 
 image_info = {
     "metadata_version": 1,
@@ -50,10 +57,10 @@ image_info = {
             "image_prefix": getenv("DEVICE_IMG_PREFIX"),
             "images": [
                 {
-                    "type": getenv("IMAGE_TYPE"),
-                    "filesystem": getenv("IMAGE_FILESYSTEM"),
-                    "name": getenv("DEVICE_IMG_NAME"),
-                    "sha256": image_hash,
+                    "type": getenv("FILE_TYPE"),
+                    "name": getenv("FILE_NAME"),
+                    "sha256": hash_file,
+                    "sha256_unsigned": hash_unsigned,
                 }
             ],
             "device_packages": getenv("DEVICE_PACKAGES").split(),
