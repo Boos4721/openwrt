@@ -1,0 +1,29 @@
+From 5dc949b4991a7c1100069655cb6a1dae21ffd665 Mon Sep 17 00:00:00 2001
+From: Simon Casey <simon501098c@gmail.com>
+Date: Sat, 29 Jan 2022 11:32:19 +0100
+Subject: [PATCH] nss_coredump.c: New location for panic_notifier_list
+
+Kernel 5.14 moved panic_notifier_list & friends to its own header file
+---
+ nss_coredump.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/nss_coredump.c b/nss_coredump.c
+index ecad659..48924f4 100644
+--- a/nss_coredump.c
++++ b/nss_coredump.c
+@@ -23,7 +23,11 @@
+ #include "nss_hal.h"
+ #include "nss_log.h"
+ #include <linux/kernel.h>
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0))
+ #include <linux/notifier.h>	/* for panic_notifier_list */
++#else
++#include <linux/panic_notifier.h>	/* for panic_notifier_list */
++#endif
+ #include <linux/jiffies.h>	/* for time */
+ #include "nss_tx_rx_common.h"
+ 
+-- 
+2.25.1
+

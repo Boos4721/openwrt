@@ -6,7 +6,7 @@
 #include "ipq8071-ax3600.dtsi"
 
 / {
-	model = "Xiaomi AX3600";
+	model = "Xiaomi Mi AIoT Router AX3600";
 	compatible = "xiaomi,ax3600", "qcom,ipq8074";
 
 	leds {
