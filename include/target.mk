@@ -47,9 +47,9 @@ DEFAULT_PACKAGES.router:=\
 	ppp \
 	ppp-mod-pppoe \
 	UA2F \
-	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw kmod-tun \
+	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw kmod-tun kmod-inet-diag \
 	default-settings luci luci-app-ddns luci-app-upnp luci-app-autoreboot \
-	luci-app-filetransfer luci-app-easymesh luci-app-arpbind \
+	luci-app-filetransfer luci-app-eqos luci-app-arpbind \
 	luci-app-vlmcsd luci-app-ramfree luci-app-unblockneteasemusic \
 	luci-app-advanced luci-app-argon-config luci-theme-argon luci-app-ttyd \
 	luci-app-turboacc ddns-scripts_aliyun ddns-scripts_dnspod ddns-scripts_cloudflare.com-v4
