@@ -15,7 +15,7 @@ endef
 
 include $(INCLUDE_DIR)/target.mk
 
-DEFAULT_PACKAGES += uboot-envtools partx-utils resize2fs e2fsprogs mkf2fs kmod-gpio-button-hotplug \
+DEFAULT_PACKAGES += uboot-envtools partx-utils resize2fs e2fsprogs mkf2fs kmod-gpio-button-hotplug kmod-usb3 kmod-usb-dwc3 kmod-usb-dwc3-qcom \
 		    automount autocore-arm autosamba fdisk luci-app-cpufreq cfdisk e2fsprogs ethtool haveged htop \
 		    wpad-openssl kmod-mt76x2u usb-modeswitch usbutils
 
