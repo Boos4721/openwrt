@@ -24,6 +24,8 @@ PKG_INSTALL:=1
 PKG_USE_MIPS16:=1
 PKG_BUILD_DEPENDS:=!USE_GLIBC:argp-standalone
 
+HOST_BUILD_DEPENDS:=argp-standalone/host musl-fts/host
+
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 include $(INCLUDE_DIR)/host-build.mk
@@ -44,7 +46,7 @@ endef
 
 define Package/libdw
   $(call Package/elfutils/Default)
-  DEPENDS:=+libelf +libbz2
+  DEPENDS:=+libelf +libbz2 +USE_MUSL:musl-fts
   TITLE+= (libdw)
 endef
 
@@ -62,6 +64,8 @@ CONFIGURE_ARGS += --disable-nls
 endif
 
 HOST_CONFIGURE_ARGS += \
+	--disable-shared \
+	--disable-nls \
 	--disable-debuginfod \
 	--disable-libdebuginfod \
 	--without-lzma \
