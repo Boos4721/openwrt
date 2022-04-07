@@ -64,7 +64,7 @@ BPF_CFLAGS := \
 	-O2 -emit-llvm -Xclang -disable-llvm-passes
 
 ifeq ($(DUMP),)
-  CLANG_VER:=$(shell clang -dM -E - < /dev/null | grep __clang_major__ | cut -d' ' -f3)
+  CLANG_VER:=$(shell $(CLANG) -dM -E - < /dev/null | grep __clang_major__ | cut -d' ' -f3)
   CLANG_VER_VALID:=$(shell [ "$(CLANG_VER)" -ge "$(CLANG_MIN_VER)" ] && echo 1 )
   ifeq ($(CLANG_VER_VALID),)
     $(error ERROR: LLVM/clang version too old. Minimum required: $(CLANG_MIN_VER), found: $(CLANG_VER))
@@ -76,8 +76,7 @@ define CompileBPF
 		-c $(1) -o $(patsubst %.c,%.bc,$(1))
 	$(LLVM_OPT) -O2 -mtriple=$(BPF_TARGET) < $(patsubst %.c,%.bc,$(1)) > $(patsubst %.c,%.opt,$(1))
 	$(LLVM_DIS) < $(patsubst %.c,%.opt,$(1)) > $(patsubst %.c,%.S,$(1))
-	$(LLVM_LLC) -march=$(BPF_TARGET) -filetype=obj -o $(patsubst %.c,%.o,$(1)) < $(patsubst %.c,%.S,$(1))
+	$(LLVM_LLC) -march=$(BPF_TARGET) -mcpu=v3 -filetype=obj -o $(patsubst %.c,%.o,$(1)) < $(patsubst %.c,%.S,$(1))
 	$(CP) $(patsubst %.c,%.o,$(1)) $(patsubst %.c,%.debug.o,$(1))
 	$(LLVM_STRIP) --strip-debug $(patsubst %.c,%.o,$(1))
 endef
-
