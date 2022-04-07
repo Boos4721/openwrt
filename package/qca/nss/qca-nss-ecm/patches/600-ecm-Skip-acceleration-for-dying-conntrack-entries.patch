@@ -1,0 +1,109 @@
+From 5ff77eea54812b8feadeaf8825bde8edaffd9e29 Mon Sep 17 00:00:00 2001
+From: bitthief <bitthief@protonmail.ch>
+Date: Wed, 9 Mar 2022 05:17:05 +0200
+Subject: [PATCH] qca-nss-ecm: skip acceleration for dying conntrack entries
+
+Backport fix from QSDK 12.1r2.
+
+---
+ ecm_conntrack_notifier.c     | 8 ++++++++
+ frontends/nss/ecm_nss_ipv4.c | 7 +++++++
+ frontends/nss/ecm_nss_ipv6.c | 7 +++++++
+ frontends/sfe/ecm_sfe_ipv4.c | 7 +++++++
+ frontends/sfe/ecm_sfe_ipv6.c | 8 ++++++++
+ 5 files changed, 37 insertions(+)
+
+diff --git a/ecm_conntrack_notifier.c b/ecm_conntrack_notifier.c
+index 8e44a1a..2b2f3b6 100644
+--- a/ecm_conntrack_notifier.c
++++ b/ecm_conntrack_notifier.c
+@@ -354,6 +354,14 @@ static int ecm_conntrack_event(unsigned int events, struct nf_ct_event *item) {
+ 		return NOTIFY_DONE;
+ 	}
+
++	/*
++	 * Do not process the packet, if the conntrack is in dying state.
++	 */
++	if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++		DEBUG_TRACE("Connection is in dying state - ignoring\n");
++		return NOTIFY_DONE;
++	}
++
+ 	/*
+ 	 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 	 * and onwards.
+diff --git a/frontends/nss/ecm_nss_ipv4.c b/frontends/nss/ecm_nss_ipv4.c
+index 1f89d2f..904c3f0 100644
+--- a/frontends/nss/ecm_nss_ipv4.c
++++ b/frontends/nss/ecm_nss_ipv4.c
+@@ -1133,6 +1133,13 @@ static unsigned int ecm_nss_ipv4_ip_process(struct net_device *out_dev, struct n
+ 		reply_tuple.dst.u3.ip = orig_tuple.src.u3.ip;
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
++		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
+ 		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+diff --git a/frontends/nss/ecm_nss_ipv6.c b/frontends/nss/ecm_nss_ipv6.c
+index d852536..56ff0e5 100644
+--- a/frontends/nss/ecm_nss_ipv6.c
++++ b/frontends/nss/ecm_nss_ipv6.c
+@@ -1148,6 +1148,13 @@ static unsigned int ecm_nss_ipv6_ip_process(struct net_device *out_dev, struct n
+ 		ECM_IP_ADDR_TO_NIN6_ADDR(reply_tuple.dst.u3.in6, ip_hdr.src_addr);
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
++		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
+ 		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+diff --git a/frontends/sfe/ecm_sfe_ipv4.c b/frontends/sfe/ecm_sfe_ipv4.c
+index 9087406..f5f7dd3 100644
+--- a/frontends/sfe/ecm_sfe_ipv4.c
++++ b/frontends/sfe/ecm_sfe_ipv4.c
+@@ -764,6 +764,13 @@ static unsigned int ecm_sfe_ipv4_ip_process(struct net_device *out_dev, struct n
+ 		reply_tuple.dst.u3.ip = orig_tuple.src.u3.ip;
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
++		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
+ 		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+diff --git a/frontends/sfe/ecm_sfe_ipv6.c b/frontends/sfe/ecm_sfe_ipv6.c
+index c4cf38f..697eb9e 100644
+--- a/frontends/sfe/ecm_sfe_ipv6.c
++++ b/frontends/sfe/ecm_sfe_ipv6.c
+@@ -732,6 +732,14 @@ static unsigned int ecm_sfe_ipv6_ip_process(struct net_device *out_dev, struct n
+ 		ECM_IP_ADDR_TO_NIN6_ADDR(reply_tuple.dst.u3.in6, ip_hdr.src_addr);
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
++		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
++
+ 		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+--
+2.35.1

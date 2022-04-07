@@ -1,0 +1,28 @@
+From 044e70eb4fb527b896ade2bb16d3eb806990b435 Mon Sep 17 00:00:00 2001
+From: Simon Casey <simon501098c@gmail.com>
+Date: Sat, 29 Jan 2022 11:29:24 +0100
+Subject: [PATCH] core: add 5.15 kernel to version check
+
+NSS DRV has a kernel version check, so simply add
+5.15 as supported.
+---
+ nss_core.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/nss_core.c b/nss_core.c
+index 2ee714b..2d898b8 100644
+--- a/nss_core.c
++++ b/nss_core.c
+@@ -53,7 +53,8 @@
+ (((LINUX_VERSION_CODE >= KERNEL_VERSION(3, 18, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0)))) || \
+ (((LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(4, 5, 0)))) || \
+ (((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 0)))) || \
+-(((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 10, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(5, 11, 0))))))
++(((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 10, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(5, 11, 0)))) || \
++(((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(5, 16, 0))))))
+ #error "Check skb recycle code in this file to match Linux version"
+ #endif
+ 
+-- 
+2.25.1
+

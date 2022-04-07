@@ -1,0 +1,29 @@
+From 1db080824c97fec3645a256a9aed396360615921 Mon Sep 17 00:00:00 2001
+From: Simon Casey <simon501098c@gmail.com>
+Date: Sat, 29 Jan 2022 11:34:54 +0100
+Subject: [PATCH] nss_core.h: include <linux/ethtool.h> for struct ethtool_ops
+
+Kernel 5.11 removed <linux/ethtool.h> from <linux/netdevice.h> thus losing
+struct ethtool_ops if only <linux/netdevice.h> is included. Add <linux/ethtool.h>
+to nss_core.h to fix "error: storage size of 'nss_ethtool_ops' isn't known".
+---
+ nss_core.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/nss_core.h b/nss_core.h
+index d7f62fe..8ad39cf 100644
+--- a/nss_core.h
++++ b/nss_core.h
+@@ -30,6 +30,9 @@
+ #include <linux/interrupt.h>
+ #include <linux/skbuff.h>
+ #include <linux/netdevice.h>
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 11, 0))
++#include <linux/ethtool.h>	/* for struct ethtool_ops */
++#endif
+ #include <linux/debugfs.h>
+ #include <linux/workqueue.h>
+ #include <asm/cacheflush.h>
+-- 
+2.25.1
+

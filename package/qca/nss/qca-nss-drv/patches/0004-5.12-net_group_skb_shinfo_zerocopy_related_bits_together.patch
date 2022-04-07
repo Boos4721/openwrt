@@ -1,0 +1,29 @@
+From 9f160d7df76e3ca5341ecb05c4ef3ad96b1f15ba Mon Sep 17 00:00:00 2001
+From: Simon Casey <simon501098c@gmail.com>
+Date: Sat, 29 Jan 2022 11:26:51 +0100
+Subject: [PATCH] Implement changes in skbuff introduced in v5.12
+
+Ref https://github.com/torvalds/linux/commit/06b4feb
+---
+ nss_core.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/nss_core.c b/nss_core.c
+index 23dc155..2ee714b 100644
+--- a/nss_core.c
++++ b/nss_core.c
+@@ -2578,7 +2578,11 @@ static inline bool nss_core_skb_can_reuse(struct nss_ctx_instance *nss_ctx,
+ 	if (unlikely(irqs_disabled()))
+ 		return false;
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 12, 0))
+ 	if (unlikely(skb_shinfo(nbuf)->tx_flags & SKBTX_DEV_ZEROCOPY))
++#else
++	if (unlikely(skb_shinfo(nbuf)->flags & SKBFL_ZEROCOPY_ENABLE))
++#endif
+ 		return false;
+ 
+ 	if (unlikely(skb_is_nonlinear(nbuf)))
+-- 
+2.25.1
+
