@@ -13,11 +13,9 @@ Signed-off-by: Kathiravan T <quic_kathirav@quicinc.com>
  arch/arm64/boot/dts/qcom/ipq8074.dtsi | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq8074.dtsi b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-index 94de2bd6596f..452a81d288f4 100644
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -13,7 +13,7 @@ / {
+@@ -13,7 +13,7 @@
  	clocks {
  		sleep_clk: sleep_clk {
  			compatible = "fixed-clock";
@@ -26,6 +24,3 @@ index 94de2bd6596f..452a81d288f4 100644
  			#clock-cells = <0>;
  		};
  
--- 
-2.35.1
-

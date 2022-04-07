@@ -23,11 +23,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  drivers/clk/qcom/gcc-ipq8074.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/qcom/gcc-ipq8074.c b/drivers/clk/qcom/gcc-ipq8074.c
-index 1e493f19fa44..c24e33321f72 100644
 --- a/drivers/clk/qcom/gcc-ipq8074.c
 +++ b/drivers/clk/qcom/gcc-ipq8074.c
-@@ -1074,7 +1074,7 @@ static struct clk_rcg2 sdcc1_apps_clk_src = {
+@@ -1074,7 +1074,7 @@ static struct clk_rcg2 sdcc1_apps_clk_sr
  		.name = "sdcc1_apps_clk_src",
  		.parent_names = gcc_xo_gpll0_gpll2_gpll0_out_main_div2,
  		.num_parents = 4,
@@ -36,6 +34,3 @@ index 1e493f19fa44..c24e33321f72 100644
  	},
  };
  
--- 
-2.35.1
-

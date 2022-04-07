@@ -86,11 +86,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  drivers/clk/qcom/gcc-ipq8074.c | 19 +++++++++----------
  1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/clk/qcom/gcc-ipq8074.c b/drivers/clk/qcom/gcc-ipq8074.c
-index 108fe27bee10..b09d99343e09 100644
 --- a/drivers/clk/qcom/gcc-ipq8074.c
 +++ b/drivers/clk/qcom/gcc-ipq8074.c
-@@ -60,11 +60,6 @@ static const struct parent_map gcc_xo_gpll0_gpll0_out_main_div2_map[] = {
+@@ -60,11 +60,6 @@ static const struct parent_map gcc_xo_gp
  	{ P_GPLL0_DIV2, 4 },
  };
  
@@ -102,7 +100,7 @@ index 108fe27bee10..b09d99343e09 100644
  static const struct parent_map gcc_xo_gpll0_map[] = {
  	{ P_XO, 0 },
  	{ P_GPLL0, 1 },
-@@ -956,6 +951,11 @@ static struct clk_rcg2 blsp1_uart6_apps_clk_src = {
+@@ -956,6 +951,11 @@ static struct clk_rcg2 blsp1_uart6_apps_
  	},
  };
  
@@ -114,7 +112,7 @@ index 108fe27bee10..b09d99343e09 100644
  static const struct freq_tbl ftbl_pcie_axi_clk_src[] = {
  	F(19200000, P_XO, 1, 0, 0),
  	F(200000000, P_GPLL0, 4, 0, 0),
-@@ -969,7 +969,7 @@ static struct clk_rcg2 pcie0_axi_clk_src = {
+@@ -969,7 +969,7 @@ static struct clk_rcg2 pcie0_axi_clk_src
  	.parent_map = gcc_xo_gpll0_map,
  	.clkr.hw.init = &(struct clk_init_data){
  		.name = "pcie0_axi_clk_src",
@@ -123,7 +121,7 @@ index 108fe27bee10..b09d99343e09 100644
  		.num_parents = 2,
  		.ops = &clk_rcg2_ops,
  	},
-@@ -1016,7 +1016,7 @@ static struct clk_rcg2 pcie1_axi_clk_src = {
+@@ -1016,7 +1016,7 @@ static struct clk_rcg2 pcie1_axi_clk_src
  	.parent_map = gcc_xo_gpll0_map,
  	.clkr.hw.init = &(struct clk_init_data){
  		.name = "pcie1_axi_clk_src",
@@ -132,7 +130,7 @@ index 108fe27bee10..b09d99343e09 100644
  		.num_parents = 2,
  		.ops = &clk_rcg2_ops,
  	},
-@@ -1330,7 +1330,7 @@ static struct clk_rcg2 nss_ce_clk_src = {
+@@ -1330,7 +1330,7 @@ static struct clk_rcg2 nss_ce_clk_src =
  	.parent_map = gcc_xo_gpll0_map,
  	.clkr.hw.init = &(struct clk_init_data){
  		.name = "nss_ce_clk_src",
@@ -141,7 +139,7 @@ index 108fe27bee10..b09d99343e09 100644
  		.num_parents = 2,
  		.ops = &clk_rcg2_ops,
  	},
-@@ -4329,8 +4329,7 @@ static struct clk_rcg2 pcie0_rchng_clk_src = {
+@@ -4329,8 +4329,7 @@ static struct clk_rcg2 pcie0_rchng_clk_s
  	.parent_map = gcc_xo_gpll0_map,
  	.clkr.hw.init = &(struct clk_init_data){
  		.name = "pcie0_rchng_clk_src",
@@ -151,6 +149,3 @@ index 108fe27bee10..b09d99343e09 100644
  		.num_parents = 2,
  		.ops = &clk_rcg2_ops,
  	},
--- 
-2.35.1
-

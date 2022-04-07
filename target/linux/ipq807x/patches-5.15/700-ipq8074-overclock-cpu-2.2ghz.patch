@@ -1,6 +1,6 @@
 --- a/arch/arm64/boot/dts/qcom/ipq8074-ac-cpu.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074-ac-cpu.dtsi
-@@ -32,13 +32,34 @@
+@@ -26,13 +26,34 @@
  		opp-1017600000 {
  			opp-hz = /bits/ 64 <1017600000>;
  			opp-microvolt = <704000>;

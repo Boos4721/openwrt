@@ -23,11 +23,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  drivers/clk/qcom/gcc-ipq8074.c | 39 +++++++++++++++++++++++++++++++++-
  1 file changed, 38 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/clk/qcom/gcc-ipq8074.c b/drivers/clk/qcom/gcc-ipq8074.c
-index 759e676d4110..244d1d8468e4 100644
 --- a/drivers/clk/qcom/gcc-ipq8074.c
 +++ b/drivers/clk/qcom/gcc-ipq8074.c
-@@ -4371,6 +4371,33 @@ static struct clk_branch gcc_pcie0_axi_s_bridge_clk = {
+@@ -4371,6 +4371,33 @@ static struct clk_branch gcc_pcie0_axi_s
  	},
  };
  
@@ -61,7 +59,7 @@ index 759e676d4110..244d1d8468e4 100644
  static struct clk_hw *gcc_ipq8074_hws[] = {
  	&gpll0_out_main_div2.hw,
  	&gpll6_out_main_div2.hw,
-@@ -4787,7 +4814,17 @@ static const struct qcom_cc_desc gcc_ipq8074_desc = {
+@@ -4787,7 +4814,17 @@ static const struct qcom_cc_desc gcc_ipq
  
  static int gcc_ipq8074_probe(struct platform_device *pdev)
  {
@@ -80,6 +78,3 @@ index 759e676d4110..244d1d8468e4 100644
  }
  
  static struct platform_driver gcc_ipq8074_driver = {
--- 
-2.35.1
-

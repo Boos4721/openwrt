@@ -14,11 +14,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  drivers/pci/controller/dwc/pcie-qcom.c | 48 +++++++++++++++-----------
  1 file changed, 28 insertions(+), 20 deletions(-)
 
-diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-index 5556859eed18..4ddc4431c977 100644
 --- a/drivers/pci/controller/dwc/pcie-qcom.c
 +++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -1047,9 +1047,7 @@ static int qcom_pcie_init_2_3_3(struct qcom_pcie *pcie)
+@@ -1047,9 +1047,7 @@ static int qcom_pcie_init_2_3_3(struct q
  	struct qcom_pcie_resources_2_3_3 *res = &pcie->res.v2_3_3;
  	struct dw_pcie *pci = pcie->pci;
  	struct device *dev = pci->dev;
@@ -28,7 +26,7 @@ index 5556859eed18..4ddc4431c977 100644
  
  	for (i = 0; i < ARRAY_SIZE(res->rst); i++) {
  		ret = reset_control_assert(res->rst[i]);
-@@ -1106,6 +1104,33 @@ static int qcom_pcie_init_2_3_3(struct qcom_pcie *pcie)
+@@ -1106,6 +1104,33 @@ static int qcom_pcie_init_2_3_3(struct q
  		goto err_clk_aux;
  	}
  
@@ -62,7 +60,7 @@ index 5556859eed18..4ddc4431c977 100644
  	writel(SLV_ADDR_SPACE_SZ,
  		pcie->parf + PCIE20_v3_PARF_SLV_ADDR_SPACE_SIZE);
  
-@@ -1133,24 +1158,6 @@ static int qcom_pcie_init_2_3_3(struct qcom_pcie *pcie)
+@@ -1133,24 +1158,6 @@ static int qcom_pcie_init_2_3_3(struct q
  		PCI_EXP_DEVCTL2);
  
  	return 0;
@@ -87,7 +85,7 @@ index 5556859eed18..4ddc4431c977 100644
  }
  
  static int qcom_pcie_get_resources_2_7_0(struct qcom_pcie *pcie)
-@@ -1569,6 +1576,7 @@ static const struct qcom_pcie_ops ops_2_4_0 = {
+@@ -1569,6 +1576,7 @@ static const struct qcom_pcie_ops ops_2_
  static const struct qcom_pcie_ops ops_2_3_3 = {
  	.get_resources = qcom_pcie_get_resources_2_3_3,
  	.init = qcom_pcie_init_2_3_3,
@@ -95,6 +93,3 @@ index 5556859eed18..4ddc4431c977 100644
  	.deinit = qcom_pcie_deinit_2_3_3,
  	.ltssm_enable = qcom_pcie_2_3_2_ltssm_enable,
  };
--- 
-2.35.1
-
