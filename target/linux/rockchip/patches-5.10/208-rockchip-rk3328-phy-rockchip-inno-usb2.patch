@@ -27,7 +27,7 @@ Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 @@ -823,7 +823,7 @@
  		#address-cells = <1>;
  		#size-cells = <1>;
-
+ 
 -		u2phy: usb2-phy@100 {
 +		u2phy: usb2phy@100 {
  			compatible = "rockchip,rk3328-usb2phy";

@@ -1,18 +1,16 @@
-diff --git a/drivers/bus/mhi/core/pm.c b/drivers/bus/mhi/core/pm.c
-index fb99e3727155..547e6e769546 100644
 --- a/drivers/bus/mhi/core/pm.c
 +++ b/drivers/bus/mhi/core/pm.c
-@@ -881,7 +881,7 @@ int mhi_pm_suspend(struct mhi_controller *mhi_cntrl)
+@@ -767,7 +767,7 @@ int mhi_pm_suspend(struct mhi_controller
  }
  EXPORT_SYMBOL_GPL(mhi_pm_suspend);
-
+ 
 -int mhi_pm_resume(struct mhi_controller *mhi_cntrl)
 +static int __mhi_pm_resume(struct mhi_controller *mhi_cntrl, bool force)
  {
  	struct mhi_chan *itr, *tmp;
  	struct device *dev = &mhi_cntrl->mhi_dev->dev;
-@@ -783,6 +783,13 @@
-
+@@ -783,6 +783,13 @@ int mhi_pm_resume(struct mhi_controller
+ 
  	if (MHI_PM_IN_ERROR_STATE(mhi_cntrl->pm_state))
  		return -EIO;
 +		
@@ -22,11 +20,11 @@ index fb99e3727155..547e6e769546 100644
 +		if (!force)
 +			return -EINVAL;
 +	}
-
+ 
  	/* Notify clients about exiting LPM */
  	list_for_each_entry_safe(itr, tmp, &mhi_cntrl->lpm_chans, node) {
-@@ -940,8 +944,19 @@ int mhi_pm_resume(struct mhi_controller *mhi_cntrl)
-
+@@ -823,8 +830,19 @@ int mhi_pm_resume(struct mhi_controller
+ 
  	return 0;
  }
 +
@@ -35,7 +33,7 @@ index fb99e3727155..547e6e769546 100644
 +	return __mhi_pm_resume(mhi_cntrl, false);
 +}
  EXPORT_SYMBOL_GPL(mhi_pm_resume);
-
+ 
 +int mhi_pm_resume_force(struct mhi_controller *mhi_cntrl)
 +{
 +	return __mhi_pm_resume(mhi_cntrl, true);
@@ -45,11 +43,9 @@ index fb99e3727155..547e6e769546 100644
  int __mhi_device_get_sync(struct mhi_controller *mhi_cntrl)
  {
  	int ret;
-diff --git a/drivers/net/wireless/ath/ath11k/mhi.c b/drivers/net/wireless/ath/ath11k/mhi.c
-index 26c7ae242db6..49c0b1ad40a0 100644
 --- a/drivers/net/wireless/ath/ath11k/mhi.c
 +++ b/drivers/net/wireless/ath/ath11k/mhi.c
-@@ -415,6 +415,11 @@
+@@ -415,6 +415,11 @@ static int ath11k_mhi_set_state(struct a
  	case ATH11K_MHI_SUSPEND:
  		break;
  	case ATH11K_MHI_RESUME:
@@ -61,15 +57,12 @@ index 26c7ae242db6..49c0b1ad40a0 100644
  		break;
  	case ATH11K_MHI_TRIGGER_RDDM:
  		ret = mhi_force_rddm_mode(ab_pci->mhi_ctrl);
-diff --git a/include/linux/mhi.h b/include/linux/mhi.h
-index 723985879035..a5cc4cdf9cc8 100644
 --- a/include/linux/mhi.h
 +++ b/include/linux/mhi.h
-@@ -663,6 +663,19 @@ int mhi_pm_suspend(struct mhi_controller *mhi_cntrl);
-  */
- int mhi_pm_resume(struct mhi_controller *mhi_cntrl);
-
-+/**
+@@ -667,6 +667,19 @@ int mhi_force_rddm_mode(struct mhi_contr
+ enum mhi_state mhi_get_mhi_state(struct mhi_controller *mhi_cntrl);
+ 
+ /**
 + * mhi_pm_resume_force - Force resume MHI from suspended state
 + * @mhi_cntrl: MHI controller
 + *
@@ -82,6 +75,7 @@ index 723985879035..a5cc4cdf9cc8 100644
 + */
 +int mhi_pm_resume_force(struct mhi_controller *mhi_cntrl);
 +
- /**
-  * mhi_download_rddm_image - Download ramdump image from device for
-  *                           debugging purpose.
++/**
+  * mhi_device_get - Disable device low power mode
+  * @mhi_dev: Device associated with the channel
+  */
