@@ -1028,7 +1028,8 @@ define KernelPackage/of-mdio
   FILES:= \
 	$(LINUX_DIR)/drivers/net/phy/fixed_phy.ko \
 	$(LINUX_DIR)/drivers/of/of_mdio.ko@lt5.10 \
-	$(LINUX_DIR)/drivers/net/mdio/of_mdio.ko@ge5.10
+	$(LINUX_DIR)/drivers/net/mdio/of_mdio.ko@ge5.10 \
+	$(LINUX_DIR)/drivers/net/mdio/fwnode_mdio.ko@ge5.15
   AUTOLOAD:=$(call AutoLoad,41,of_mdio)
 endef
 
