@@ -33,7 +33,7 @@ Link: https://lore.kernel.org/r/20211118095700.8149-1-quic_wgong@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -713,6 +713,11 @@ struct ath11k_base {
+@@ -714,6 +714,11 @@ struct ath11k_base {
  	/* Protects data like peers */
  	spinlock_t base_lock;
  	struct ath11k_pdev pdevs[MAX_RADIOS];
@@ -79,7 +79,7 @@ Link: https://lore.kernel.org/r/20211118095700.8149-1-quic_wgong@quicinc.com
  	cmd->cfg_param0 = cfg_params->cfg0;
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -553,6 +553,67 @@ struct ath11k *ath11k_mac_get_ar_by_pdev
+@@ -554,6 +554,67 @@ struct ath11k *ath11k_mac_get_ar_by_pdev
  	return NULL;
  }
  

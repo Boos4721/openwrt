@@ -26,7 +26,7 @@ Link: https://lore.kernel.org/r/20211026041732.5323-1-bqiang@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/pci.c
 +++ b/drivers/net/wireless/ath/ath11k/pci.c
-@@ -843,6 +843,15 @@ static int ath11k_pci_ext_irq_config(str
+@@ -849,6 +849,15 @@ static int ath11k_pci_ext_irq_config(str
  	return 0;
  }
  
@@ -42,7 +42,7 @@ Link: https://lore.kernel.org/r/20211026041732.5323-1-bqiang@codeaurora.org
  static int ath11k_pci_config_irq(struct ath11k_base *ab)
  {
  	struct ath11k_pci *ab_pci = ath11k_pci_priv(ab);
-@@ -859,6 +868,12 @@ static int ath11k_pci_config_irq(struct
+@@ -865,6 +874,12 @@ static int ath11k_pci_config_irq(struct
  	if (ret)
  		return ret;
  
@@ -55,7 +55,7 @@ Link: https://lore.kernel.org/r/20211026041732.5323-1-bqiang@codeaurora.org
  	/* Configure CE irqs */
  	for (i = 0, msi_data_idx = 0; i < ab->hw_params.ce_count; i++) {
  		if (ath11k_ce_get_attr_flags(ab, i) & CE_ATTR_DIS_INTR)
-@@ -878,7 +893,7 @@ static int ath11k_pci_config_irq(struct
+@@ -884,7 +899,7 @@ static int ath11k_pci_config_irq(struct
  		if (ret) {
  			ath11k_err(ab, "failed to request irq %d: %d\n",
  				   irq_idx, ret);
@@ -64,7 +64,7 @@ Link: https://lore.kernel.org/r/20211026041732.5323-1-bqiang@codeaurora.org
  		}
  
  		ab->irq_num[irq_idx] = irq;
-@@ -889,9 +904,13 @@ static int ath11k_pci_config_irq(struct
+@@ -895,9 +910,13 @@ static int ath11k_pci_config_irq(struct
  
  	ret = ath11k_pci_ext_irq_config(ab);
  	if (ret)
@@ -79,7 +79,7 @@ Link: https://lore.kernel.org/r/20211026041732.5323-1-bqiang@codeaurora.org
  }
  
  static void ath11k_pci_init_qmi_ce_config(struct ath11k_base *ab)
-@@ -1488,6 +1507,8 @@ static void ath11k_pci_remove(struct pci
+@@ -1494,6 +1513,8 @@ static void ath11k_pci_remove(struct pci
  	struct ath11k_base *ab = pci_get_drvdata(pdev);
  	struct ath11k_pci *ab_pci = ath11k_pci_priv(ab);
  

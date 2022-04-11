@@ -33,7 +33,7 @@ Link: https://lore.kernel.org/r/20210322160253.4032422-5-arnd@kernel.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -1401,7 +1401,7 @@ ath11k_peer_assoc_h_ht_masked(const u8 h
+@@ -1406,7 +1406,7 @@ ath11k_peer_assoc_h_ht_masked(const u8 h
  }
  
  static bool

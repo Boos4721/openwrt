@@ -82,7 +82,7 @@ Link: https://lore.kernel.org/r/20210914163726.38604-3-jouni@codeaurora.org
  struct ath11k_hw_ops {
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7672,7 +7672,8 @@ static int __ath11k_mac_register(struct
+@@ -7682,7 +7682,8 @@ static int __ath11k_mac_register(struct
  	 * for each band for a dual band capable radio. It will be tricky to
  	 * handle it when the ht capability different for each band.
  	 */

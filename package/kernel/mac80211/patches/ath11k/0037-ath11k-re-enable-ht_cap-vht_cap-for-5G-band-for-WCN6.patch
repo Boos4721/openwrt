@@ -22,7 +22,7 @@ Link: https://lore.kernel.org/r/20210804181217.88751-2-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -4545,7 +4545,9 @@ static void ath11k_mac_setup_ht_vht_cap(
+@@ -4551,7 +4551,9 @@ static void ath11k_mac_setup_ht_vht_cap(
  						    rate_cap_rx_chainmask);
  	}
  

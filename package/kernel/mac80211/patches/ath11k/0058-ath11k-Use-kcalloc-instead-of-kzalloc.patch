@@ -16,7 +16,7 @@ Link: https://lore.kernel.org/r/20211006181204.GA913553@embeddedor
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -4065,8 +4065,8 @@ static int ath11k_wmi_tlv_mac_phy_caps_p
+@@ -4066,8 +4066,8 @@ static int ath11k_wmi_tlv_mac_phy_caps_p
  
  	len = min_t(u16, len, sizeof(struct wmi_mac_phy_capabilities));
  	if (!svc_rdy_ext->n_mac_phy_caps) {
@@ -27,7 +27,7 @@ Link: https://lore.kernel.org/r/20211006181204.GA913553@embeddedor
  		if (!svc_rdy_ext->mac_phy_caps)
  			return -ENOMEM;
  	}
-@@ -4466,8 +4466,8 @@ static struct cur_reg_rule
+@@ -4467,8 +4467,8 @@ static struct cur_reg_rule
  	struct cur_reg_rule *reg_rule_ptr;
  	u32 count;
  

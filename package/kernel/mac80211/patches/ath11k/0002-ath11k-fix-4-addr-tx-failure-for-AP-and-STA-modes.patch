@@ -35,7 +35,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -362,6 +362,7 @@ struct ath11k_sta {
+@@ -368,6 +368,7 @@ struct ath11k_sta {
  	enum hal_pn_type pn_type;
  
  	struct work_struct update_wk;
@@ -43,7 +43,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
  	struct rate_info txrate;
  	struct rate_info last_txrate;
  	u64 rx_duration;
-@@ -374,6 +375,8 @@ struct ath11k_sta {
+@@ -380,6 +381,8 @@ struct ath11k_sta {
  	/* protected by conf_mutex */
  	bool aggr_mode;
  #endif
@@ -54,7 +54,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
  #define ATH11K_MIN_5G_FREQ 4150
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -3155,6 +3155,31 @@ static void ath11k_sta_rc_update_wk(stru
+@@ -3161,6 +3161,31 @@ static void ath11k_sta_rc_update_wk(stru
  	mutex_unlock(&ar->conf_mutex);
  }
  
@@ -86,7 +86,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
  static int ath11k_mac_inc_num_stations(struct ath11k_vif *arvif,
  				       struct ieee80211_sta *sta)
  {
-@@ -3234,11 +3259,13 @@ static int ath11k_mac_station_add(struct
+@@ -3240,11 +3265,13 @@ static int ath11k_mac_station_add(struct
  	}
  
  	if (ieee80211_vif_is_mesh(vif)) {
@@ -101,7 +101,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
  				    sta->addr, ret);
  			goto free_tx_stats;
  		}
-@@ -3291,8 +3318,10 @@ static int ath11k_mac_op_sta_state(struc
+@@ -3297,8 +3324,10 @@ static int ath11k_mac_op_sta_state(struc
  
  	/* cancel must be done outside the mutex to avoid deadlock */
  	if ((old_state == IEEE80211_STA_NONE &&
@@ -113,7 +113,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
  
  	mutex_lock(&ar->conf_mutex);
  
-@@ -3301,6 +3330,7 @@ static int ath11k_mac_op_sta_state(struc
+@@ -3307,6 +3336,7 @@ static int ath11k_mac_op_sta_state(struc
  		memset(arsta, 0, sizeof(*arsta));
  		arsta->arvif = arvif;
  		INIT_WORK(&arsta->update_wk, ath11k_sta_rc_update_wk);
@@ -121,7 +121,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
  
  		ret = ath11k_mac_station_add(ar, vif, sta);
  		if (ret)
-@@ -3395,6 +3425,19 @@ out:
+@@ -3401,6 +3431,19 @@ out:
  	return ret;
  }
  
@@ -141,7 +141,7 @@ Link: https://lore.kernel.org/r/20210720213147.90042-1-jouni@codeaurora.org
  static void ath11k_mac_op_sta_rc_update(struct ieee80211_hw *hw,
  					struct ieee80211_vif *vif,
  					struct ieee80211_sta *sta,
-@@ -6180,6 +6223,7 @@ static const struct ieee80211_ops ath11k
+@@ -6190,6 +6233,7 @@ static const struct ieee80211_ops ath11k
  	.cancel_hw_scan                 = ath11k_mac_op_cancel_hw_scan,
  	.set_key                        = ath11k_mac_op_set_key,
  	.sta_state                      = ath11k_mac_op_sta_state,

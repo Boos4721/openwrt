@@ -38,7 +38,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -597,6 +597,8 @@ struct ath11k_pdev_cap {
+@@ -603,6 +603,8 @@ struct ath11k_pdev_cap {
  	u32 tx_chain_mask_shift;
  	u32 rx_chain_mask_shift;
  	struct ath11k_band_cap band[NUM_NL80211_BANDS];
@@ -49,7 +49,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  struct ath11k_pdev {
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -1581,6 +1581,34 @@ ath11k_peer_assoc_h_vht_limit(u16 tx_mcs
+@@ -1586,6 +1586,34 @@ ath11k_peer_assoc_h_vht_limit(u16 tx_mcs
  	return tx_mcs_set;
  }
  
@@ -84,7 +84,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  static void ath11k_peer_assoc_h_vht(struct ath11k *ar,
  				    struct ieee80211_vif *vif,
  				    struct ieee80211_sta *sta,
-@@ -1595,6 +1623,7 @@ static void ath11k_peer_assoc_h_vht(stru
+@@ -1600,6 +1628,7 @@ static void ath11k_peer_assoc_h_vht(stru
  	u8 max_nss, vht_mcs;
  	int i, vht_nss, nss_idx;
  	bool user_rate_valid = true;
@@ -92,7 +92,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  
  	if (WARN_ON(ath11k_mac_vif_chan(vif, &def)))
  		return;
-@@ -1687,10 +1716,29 @@ static void ath11k_peer_assoc_h_vht(stru
+@@ -1692,10 +1721,29 @@ static void ath11k_peer_assoc_h_vht(stru
  	/* TODO:  Check */
  	arg->tx_max_mcs_nss = 0xFF;
  
@@ -125,7 +125,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  }
  
  static int ath11k_mac_get_max_he_mcs_map(u16 mcs_map, int nss)
-@@ -1774,6 +1822,7 @@ static void ath11k_peer_assoc_h_he(struc
+@@ -1779,6 +1827,7 @@ static void ath11k_peer_assoc_h_he(struc
  	u16 he_tx_mcs = 0, v = 0;
  	int i, he_nss, nss_idx;
  	bool user_rate_valid = true;
@@ -133,7 +133,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  
  	if (WARN_ON(ath11k_mac_vif_chan(vif, &def)))
  		return;
-@@ -1937,9 +1986,30 @@ static void ath11k_peer_assoc_h_he(struc
+@@ -1942,9 +1991,30 @@ static void ath11k_peer_assoc_h_he(struc
  	}
  	arg->peer_nss = min(sta->rx_nss, max_nss);
  
@@ -166,7 +166,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  }
  
  static void ath11k_peer_assoc_h_smps(struct ieee80211_sta *sta,
-@@ -2227,11 +2297,11 @@ static void ath11k_peer_assoc_prepare(st
+@@ -2232,11 +2302,11 @@ static void ath11k_peer_assoc_prepare(st
  	ath11k_peer_assoc_h_basic(ar, vif, sta, arg);
  	ath11k_peer_assoc_h_crypto(ar, vif, sta, arg);
  	ath11k_peer_assoc_h_rates(ar, vif, sta, arg);
@@ -179,7 +179,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  	ath11k_peer_assoc_h_smps(sta, arg);
  
  	/* TODO: amsdu_disable req? */
-@@ -4427,11 +4497,6 @@ ath11k_create_vht_cap(struct ath11k *ar,
+@@ -4433,11 +4503,6 @@ ath11k_create_vht_cap(struct ath11k *ar,
  
  	ath11k_set_vht_txbf_cap(ar, &vht_cap.cap);
  
@@ -191,7 +191,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  	rxmcs_map = 0;
  	txmcs_map = 0;
  	for (i = 0; i < 8; i++) {
-@@ -7345,7 +7410,9 @@ static int ath11k_mac_setup_iface_combin
+@@ -7355,7 +7420,9 @@ static int ath11k_mac_setup_iface_combin
  	combinations[0].radar_detect_widths = BIT(NL80211_CHAN_WIDTH_20_NOHT) |
  						BIT(NL80211_CHAN_WIDTH_20) |
  						BIT(NL80211_CHAN_WIDTH_40) |
@@ -202,7 +202,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
  
  	ar->hw->wiphy->iface_combinations = combinations;
  	ar->hw->wiphy->n_iface_combinations = 1;
-@@ -7484,6 +7551,10 @@ static int __ath11k_mac_register(struct
+@@ -7494,6 +7561,10 @@ static int __ath11k_mac_register(struct
  	ieee80211_hw_set(ar->hw, SUPPORTS_TX_FRAG);
  	ieee80211_hw_set(ar->hw, REPORTS_LOW_ACK);
  	ieee80211_hw_set(ar->hw, SUPPORTS_TX_ENCAP_OFFLOAD);

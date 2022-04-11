@@ -190,7 +190,7 @@ Link: https://lore.kernel.org/r/1630560820-21905-12-git-send-email-ppranees@code
  			spin_unlock_bh(&tx_ring->tx_idr_lock);
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5283,7 +5283,7 @@ static void ath11k_mac_op_tx(struct ieee
+@@ -5293,7 +5293,7 @@ static void ath11k_mac_op_tx(struct ieee
  		arsta = (struct ath11k_sta *)control->sta->drv_priv;
  
  	ret = ath11k_dp_tx(ar, arvif, arsta, skb);

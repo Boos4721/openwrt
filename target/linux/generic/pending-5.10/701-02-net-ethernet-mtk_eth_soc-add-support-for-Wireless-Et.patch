@@ -56,7 +56,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  
  static int mtk_msg_level = -1;
  module_param_named(msg_level, mtk_msg_level, int, 0);
-@@ -3173,6 +3174,22 @@ static int mtk_probe(struct platform_dev
+@@ -3143,6 +3144,22 @@ static int mtk_probe(struct platform_dev
  		}
  	}
  
@@ -81,7 +81,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  			eth->irq[i] = eth->irq[0];
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -295,6 +295,9 @@
+@@ -294,6 +294,9 @@
  #define MTK_GDM1_TX_GPCNT	0x2438
  #define MTK_STAT_OFFSET		0x40
  

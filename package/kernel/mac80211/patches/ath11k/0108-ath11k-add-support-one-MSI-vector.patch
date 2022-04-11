@@ -117,7 +117,7 @@ Link: https://lore.kernel.org/r/20211026041714.5219-1-bqiang@codeaurora.org
  	tasklet_schedule(&ce_pipe->intr_tq);
  
  	return IRQ_HANDLED;
-@@ -729,11 +743,13 @@ static int ath11k_pci_ext_grp_napi_poll(
+@@ -735,11 +749,13 @@ static int ath11k_pci_ext_grp_napi_poll(
  						napi);
  	struct ath11k_base *ab = irq_grp->ab;
  	int work_done;
@@ -132,7 +132,7 @@ Link: https://lore.kernel.org/r/20211026041714.5219-1-bqiang@codeaurora.org
  	}
  
  	if (work_done > budget)
-@@ -746,6 +762,7 @@ static irqreturn_t ath11k_pci_ext_interr
+@@ -752,6 +768,7 @@ static irqreturn_t ath11k_pci_ext_interr
  {
  	struct ath11k_ext_irq_grp *irq_grp = arg;
  	struct ath11k_base *ab = irq_grp->ab;
@@ -140,7 +140,7 @@ Link: https://lore.kernel.org/r/20211026041714.5219-1-bqiang@codeaurora.org
  
  	if (!test_bit(ATH11K_FLAG_EXT_IRQ_ENABLED, &ab->dev_flags))
  		return IRQ_HANDLED;
-@@ -755,7 +772,8 @@ static irqreturn_t ath11k_pci_ext_interr
+@@ -761,7 +778,8 @@ static irqreturn_t ath11k_pci_ext_interr
  	/* last interrupt received for this group */
  	irq_grp->timestamp = jiffies;
  
@@ -150,7 +150,7 @@ Link: https://lore.kernel.org/r/20211026041714.5219-1-bqiang@codeaurora.org
  
  	napi_schedule(&irq_grp->napi);
  
-@@ -941,18 +959,25 @@ static int ath11k_pci_alloc_msi(struct a
+@@ -947,18 +965,25 @@ static int ath11k_pci_alloc_msi(struct a
  					    msi_config->total_vectors,
  					    msi_config->total_vectors,
  					    PCI_IRQ_MSI);
@@ -185,7 +185,7 @@ Link: https://lore.kernel.org/r/20211026041714.5219-1-bqiang@codeaurora.org
  	ath11k_pci_msi_disable(ab_pci);
  
  	msi_desc = irq_get_msi_desc(ab_pci->pdev->irq);
-@@ -973,6 +998,7 @@ static int ath11k_pci_alloc_msi(struct a
+@@ -979,6 +1004,7 @@ static int ath11k_pci_alloc_msi(struct a
  free_msi_vector:
  	pci_free_irq_vectors(ab_pci->pdev);
  

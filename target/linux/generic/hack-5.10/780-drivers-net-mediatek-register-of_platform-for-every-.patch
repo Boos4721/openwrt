@@ -16,7 +16,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
 
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -3005,6 +3005,8 @@ static int mtk_add_mac(struct mtk_eth *e
+@@ -3019,6 +3019,8 @@ static int mtk_add_mac(struct mtk_eth *e
  	eth->netdev[id]->dev.of_node = np;
  
  	eth->netdev[id]->max_mtu = MTK_MAX_RX_LENGTH - MTK_RX_ETH_HLEN;

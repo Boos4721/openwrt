@@ -123,7 +123,7 @@ Link: https://lore.kernel.org/r/20210823172159.GA25800@embeddedor
  
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -2302,7 +2302,7 @@ int ath11k_wmi_send_scan_chan_list_cmd(s
+@@ -2303,7 +2303,7 @@ int ath11k_wmi_send_scan_chan_list_cmd(s
  	u16 num_send_chans, num_sends = 0, max_chan_limit = 0;
  	u32 *reg1, *reg2;
  

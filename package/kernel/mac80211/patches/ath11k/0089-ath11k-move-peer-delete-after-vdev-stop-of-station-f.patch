@@ -48,7 +48,7 @@ Link: https://lore.kernel.org/r/20211027093825.12167-1-quic_wgong@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -4212,6 +4212,10 @@ static int ath11k_mac_op_sta_state(struc
+@@ -4218,6 +4218,10 @@ static int ath11k_mac_op_sta_state(struc
  		    new_state == IEEE80211_STA_NOTEXIST)) {
  		ath11k_dp_peer_cleanup(ar, arvif->vdev_id, sta->addr);
  
@@ -59,7 +59,7 @@ Link: https://lore.kernel.org/r/20211027093825.12167-1-quic_wgong@quicinc.com
  		ret = ath11k_peer_delete(ar, arvif->vdev_id, sta->addr);
  		if (ret)
  			ath11k_warn(ar->ab, "Failed to delete peer: %pM for VDEV: %d\n",
-@@ -4233,6 +4237,7 @@ static int ath11k_mac_op_sta_state(struc
+@@ -4239,6 +4243,7 @@ static int ath11k_mac_op_sta_state(struc
  		}
  		spin_unlock_bh(&ar->ab->base_lock);
  
@@ -67,7 +67,7 @@ Link: https://lore.kernel.org/r/20211027093825.12167-1-quic_wgong@quicinc.com
  		kfree(arsta->tx_stats);
  		arsta->tx_stats = NULL;
  
-@@ -6617,6 +6622,19 @@ ath11k_mac_op_unassign_vif_chanctx(struc
+@@ -6627,6 +6632,19 @@ ath11k_mac_op_unassign_vif_chanctx(struc
  	arvif->is_started = false;
  
  	if (ab->hw_params.vdev_start_delay &&

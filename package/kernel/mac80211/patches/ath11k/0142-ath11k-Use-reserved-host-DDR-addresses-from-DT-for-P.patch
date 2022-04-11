@@ -28,7 +28,7 @@ Link: https://lore.kernel.org/r/1638789319-2950-2-git-send-email-akolli@codeauro
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -202,6 +202,7 @@ enum ath11k_dev_flags {
+@@ -203,6 +203,7 @@ enum ath11k_dev_flags {
  	ATH11K_FLAG_HTC_SUSPEND_COMPLETE,
  	ATH11K_FLAG_CE_IRQ_ENABLED,
  	ATH11K_FLAG_EXT_IRQ_ENABLED,
@@ -103,7 +103,7 @@ Link: https://lore.kernel.org/r/1638789319-2950-2-git-send-email-akolli@codeauro
  
  #include "pci.h"
  #include "core.h"
-@@ -1347,7 +1348,7 @@ static int ath11k_pci_probe(struct pci_d
+@@ -1353,7 +1354,7 @@ static int ath11k_pci_probe(struct pci_d
  {
  	struct ath11k_base *ab;
  	struct ath11k_pci *ab_pci;
@@ -112,7 +112,7 @@ Link: https://lore.kernel.org/r/1638789319-2950-2-git-send-email-akolli@codeauro
  	int ret;
  
  	ab = ath11k_core_alloc(&pdev->dev, sizeof(*ab_pci), ATH11K_BUS_PCI,
-@@ -1367,6 +1368,14 @@ static int ath11k_pci_probe(struct pci_d
+@@ -1373,6 +1374,14 @@ static int ath11k_pci_probe(struct pci_d
  	pci_set_drvdata(pdev, ab);
  	spin_lock_init(&ab_pci->window_lock);
  

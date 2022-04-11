@@ -29,7 +29,7 @@ Link: https://lore.kernel.org/r/20211011084957.31024-1-wgong@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7426,21 +7426,20 @@ static void ath11k_mac_op_sta_statistics
+@@ -7436,21 +7436,20 @@ static void ath11k_mac_op_sta_statistics
  	sinfo->tx_duration = arsta->tx_duration;
  	sinfo->filled |= BIT_ULL(NL80211_STA_INFO_TX_DURATION);
  

@@ -21,7 +21,7 @@ Link: https://lore.kernel.org/r/20211118095453.8030-1-quic_wgong@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -1920,7 +1920,6 @@ static void ath11k_peer_assoc_h_he(struc
+@@ -1921,7 +1921,6 @@ static void ath11k_peer_assoc_h_he(struc
  	struct ath11k_vif *arvif = (void *)vif->drv_priv;
  	struct cfg80211_chan_def def;
  	const struct ieee80211_sta_he_cap *he_cap = &sta->he_cap;
@@ -29,7 +29,7 @@ Link: https://lore.kernel.org/r/20211118095453.8030-1-quic_wgong@quicinc.com
  	enum nl80211_band band;
  	u16 *he_mcs_mask;
  	u8 max_nss, he_mcs;
-@@ -1928,6 +1927,9 @@ static void ath11k_peer_assoc_h_he(struc
+@@ -1929,6 +1928,9 @@ static void ath11k_peer_assoc_h_he(struc
  	int i, he_nss, nss_idx;
  	bool user_rate_valid = true;
  	u32 rx_nss, tx_nss, nss_160;
@@ -39,7 +39,7 @@ Link: https://lore.kernel.org/r/20211118095453.8030-1-quic_wgong@quicinc.com
  
  	if (WARN_ON(ath11k_mac_vif_chan(vif, &def)))
  		return;
-@@ -1942,6 +1944,39 @@ static void ath11k_peer_assoc_h_he(struc
+@@ -1943,6 +1945,39 @@ static void ath11k_peer_assoc_h_he(struc
  		return;
  
  	arg->he_flag = true;

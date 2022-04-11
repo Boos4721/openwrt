@@ -27,7 +27,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-6-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7701,6 +7701,10 @@ int ath11k_mac_register(struct ath11k_ba
+@@ -7711,6 +7711,10 @@ int ath11k_mac_register(struct ath11k_ba
  	if (test_bit(ATH11K_FLAG_REGISTERED, &ab->dev_flags))
  		return 0;
  
@@ -38,7 +38,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-6-jouni@codeaurora.org
  	for (i = 0; i < ab->num_radios; i++) {
  		pdev = &ab->pdevs[i];
  		ar = pdev->ar;
-@@ -7711,18 +7715,14 @@ int ath11k_mac_register(struct ath11k_ba
+@@ -7721,18 +7725,14 @@ int ath11k_mac_register(struct ath11k_ba
  			ar->mac_addr[4] += i;
  		}
  

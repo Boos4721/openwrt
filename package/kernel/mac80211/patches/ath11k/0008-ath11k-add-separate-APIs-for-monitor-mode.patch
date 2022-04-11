@@ -23,7 +23,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-3-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -194,6 +194,9 @@ enum ath11k_dev_flags {
+@@ -200,6 +200,9 @@ enum ath11k_dev_flags {
  
  enum ath11k_monitor_flags {
  	ATH11K_FLAG_MONITOR_ENABLED,
@@ -33,7 +33,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-3-jouni@codeaurora.org
  };
  
  struct ath11k_vif {
-@@ -488,7 +491,6 @@ struct ath11k {
+@@ -494,7 +497,6 @@ struct ath11k {
  	u32 chan_tx_pwr;
  	u32 num_stations;
  	u32 max_num_stations;
@@ -41,7 +41,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-3-jouni@codeaurora.org
  	/* To synchronize concurrent synchronous mac80211 callback operations,
  	 * concurrent debugfs configuration and concurrent FW statistics events.
  	 */
-@@ -563,6 +565,7 @@ struct ath11k {
+@@ -569,6 +571,7 @@ struct ath11k {
  	struct ath11k_per_peer_tx_stats cached_stats;
  	u32 last_ppdu_id;
  	u32 cached_ppdu_id;
@@ -51,7 +51,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-3-jouni@codeaurora.org
  #endif
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -745,14 +745,370 @@ static inline int ath11k_mac_vdev_setup_
+@@ -746,14 +746,370 @@ static inline int ath11k_mac_vdev_setup_
  	return ar->last_wmi_vdev_start_status ? -EINVAL : 0;
  }
  
@@ -427,7 +427,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-3-jouni@codeaurora.org
  }
  
  static int ath11k_mac_setup_bcn_tmpl(struct ath11k_vif *arvif)
-@@ -6771,7 +7127,12 @@ int ath11k_mac_allocate(struct ath11k_ba
+@@ -6781,7 +7137,12 @@ int ath11k_mac_allocate(struct ath11k_ba
  
  		INIT_WORK(&ar->wmi_mgmt_tx_work, ath11k_mgmt_over_wmi_tx_work);
  		skb_queue_head_init(&ar->wmi_mgmt_tx_queue);

@@ -43,7 +43,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -2076,8 +2076,8 @@ static void ath11k_peer_assoc_h_smps(str
+@@ -2081,8 +2081,8 @@ static void ath11k_peer_assoc_h_smps(str
  		smps = ht_cap->cap & IEEE80211_HT_CAP_SM_PS;
  		smps >>= IEEE80211_HT_CAP_SM_PS_SHIFT;
  	} else {

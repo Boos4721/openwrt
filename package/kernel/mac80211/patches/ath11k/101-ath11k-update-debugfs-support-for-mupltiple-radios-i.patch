@@ -46,7 +46,7 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
 
 --- a/drivers/net/wireless/ath/ath11k/core.c
 +++ b/drivers/net/wireless/ath/ath11k/core.c
-@@ -1349,5 +1349,17 @@ err_sc_free:
+@@ -1461,5 +1461,17 @@ err_sc_free:
  }
  EXPORT_SYMBOL(ath11k_core_alloc);
  
@@ -66,7 +66,7 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
  MODULE_LICENSE("Dual BSD/GPL");
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -761,7 +761,6 @@ struct ath11k_base {
+@@ -777,7 +777,6 @@ struct ath11k_base {
  	enum ath11k_dfs_region dfs_region;
  #ifdef CPTCFG_ATH11K_DEBUGFS
  	struct dentry *debugfs_soc;
@@ -85,7 +85,7 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
  static const char *htt_bp_umac_ring[HTT_SW_UMAC_RING_IDX_MAX] = {
  	"REO2SW1_RING",
  	"REO2SW2_RING",
-@@ -836,10 +838,6 @@ int ath11k_debugfs_pdev_create(struct at
+@@ -942,10 +944,6 @@ int ath11k_debugfs_pdev_create(struct at
  	if (test_bit(ATH11K_FLAG_REGISTERED, &ab->dev_flags))
  		return 0;
  
@@ -96,7 +96,7 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
  	debugfs_create_file("simulate_fw_crash", 0600, ab->debugfs_soc, ab,
  			    &fops_simulate_fw_crash);
  
-@@ -851,24 +849,58 @@ int ath11k_debugfs_pdev_create(struct at
+@@ -957,24 +955,58 @@ int ath11k_debugfs_pdev_create(struct at
  
  void ath11k_debugfs_pdev_destroy(struct ath11k_base *ab)
  {
@@ -161,7 +161,7 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
  void ath11k_debugfs_fw_stats_init(struct ath11k *ar)
  {
  	struct dentry *fwstats_dir = debugfs_create_dir("fw_stats",
-@@ -1074,6 +1106,9 @@ int ath11k_debugfs_register(struct ath11
+@@ -1180,6 +1212,9 @@ int ath11k_debugfs_register(struct ath11
  	char pdev_name[5];
  	char buf[100] = {0};
  
@@ -171,16 +171,18 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
  	snprintf(pdev_name, sizeof(pdev_name), "%s%d", "mac", ar->pdev_idx);
  
  	ar->debug.debugfs_pdev = debugfs_create_dir(pdev_name, ab->debugfs_soc);
-@@ -1112,4 +1147,6 @@ int ath11k_debugfs_register(struct ath11
+@@ -1221,6 +1256,8 @@ int ath11k_debugfs_register(struct ath11
  
  void ath11k_debugfs_unregister(struct ath11k *ar)
  {
 +	debugfs_remove_recursive(ar->debug.debugfs_pdev);
 +	ar->debug.debugfs_pdev = NULL;
  }
+ 
+ static ssize_t ath11k_write_twt_add_dialog(struct file *file,
 --- a/drivers/net/wireless/ath/ath11k/debugfs.h
 +++ b/drivers/net/wireless/ath/ath11k/debugfs.h
-@@ -108,6 +108,8 @@ enum ath11k_dbg_aggr_mode {
+@@ -233,6 +233,8 @@ struct ath11k_fw_dbglog {
  };
  
  #ifdef CPTCFG_ATH11K_DEBUGFS
@@ -189,8 +191,8 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
  int ath11k_debugfs_soc_create(struct ath11k_base *ab);
  void ath11k_debugfs_soc_destroy(struct ath11k_base *ab);
  int ath11k_debugfs_pdev_create(struct ath11k_base *ab);
-@@ -150,6 +152,15 @@ static inline int ath11k_debugfs_rx_filt
- }
+@@ -280,6 +282,15 @@ int ath11k_debugfs_add_interface(struct
+ void ath11k_debugfs_remove_interface(struct ath11k_vif *arvif);
  
  #else
 +static inline int ath11k_debugfs_create(void)

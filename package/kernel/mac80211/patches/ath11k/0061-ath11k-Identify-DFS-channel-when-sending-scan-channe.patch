@@ -22,7 +22,7 @@ Link: https://lore.kernel.org/r/20211011054919.77071-1-bqiang@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -2371,6 +2371,8 @@ int ath11k_wmi_send_scan_chan_list_cmd(s
+@@ -2372,6 +2372,8 @@ int ath11k_wmi_send_scan_chan_list_cmd(s
  				chan_info->info |= WMI_CHAN_INFO_QUARTER_RATE;
  			if (tchan_info->psc_channel)
  				chan_info->info |= WMI_CHAN_INFO_PSC;

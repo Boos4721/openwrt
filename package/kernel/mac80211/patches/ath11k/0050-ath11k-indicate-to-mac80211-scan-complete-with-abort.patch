@@ -41,7 +41,7 @@ Link: https://lore.kernel.org/r/20210914164226.38843-3-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -2982,18 +2982,21 @@ void __ath11k_mac_scan_finish(struct ath
+@@ -2987,18 +2987,21 @@ void __ath11k_mac_scan_finish(struct ath
  		break;
  	case ATH11K_SCAN_RUNNING:
  	case ATH11K_SCAN_ABORTING:

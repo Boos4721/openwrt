@@ -19,7 +19,7 @@ Link: https://lore.kernel.org/r/20210722102054.43419-3-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7172,7 +7172,13 @@ static int ath11k_mac_op_get_survey(stru
+@@ -7182,7 +7182,13 @@ static int ath11k_mac_op_get_survey(stru
  
  	if (!sband)
  		sband = hw->wiphy->bands[NL80211_BAND_5GHZ];

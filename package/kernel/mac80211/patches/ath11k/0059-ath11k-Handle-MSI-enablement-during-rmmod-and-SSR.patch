@@ -40,7 +40,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/pci.c
 +++ b/drivers/net/wireless/ath/ath11k/pci.c
-@@ -855,7 +855,32 @@ static void ath11k_pci_ce_irqs_enable(st
+@@ -861,7 +861,32 @@ static void ath11k_pci_ce_irqs_enable(st
  	}
  }
  
@@ -74,7 +74,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
  {
  	struct ath11k_base *ab = ab_pci->ab;
  	const struct ath11k_msi_config *msi_config = ab_pci->msi_config;
-@@ -876,6 +901,7 @@ static int ath11k_pci_enable_msi(struct
+@@ -882,6 +907,7 @@ static int ath11k_pci_enable_msi(struct
  		else
  			return num_vectors;
  	}
@@ -82,7 +82,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
  
  	msi_desc = irq_get_msi_desc(ab_pci->pdev->irq);
  	if (!msi_desc) {
-@@ -898,7 +924,7 @@ free_msi_vector:
+@@ -904,7 +930,7 @@ free_msi_vector:
  	return ret;
  }
  
@@ -91,7 +91,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
  {
  	pci_free_irq_vectors(ab_pci->pdev);
  }
-@@ -1019,6 +1045,8 @@ static int ath11k_pci_power_up(struct at
+@@ -1025,6 +1051,8 @@ static int ath11k_pci_power_up(struct at
  	 */
  	ath11k_pci_aspm_disable(ab_pci);
  
@@ -100,7 +100,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
  	ret = ath11k_mhi_start(ab_pci);
  	if (ret) {
  		ath11k_err(ab, "failed to start mhi: %d\n", ret);
-@@ -1039,6 +1067,9 @@ static void ath11k_pci_power_down(struct
+@@ -1045,6 +1073,9 @@ static void ath11k_pci_power_down(struct
  	ath11k_pci_aspm_restore(ab_pci);
  
  	ath11k_pci_force_wake(ab_pci->ab);
@@ -110,7 +110,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
  	ath11k_mhi_stop(ab_pci);
  	clear_bit(ATH11K_PCI_FLAG_INIT_DONE, &ab_pci->flags);
  	ath11k_pci_sw_reset(ab_pci->ab, false);
-@@ -1263,7 +1294,7 @@ static int ath11k_pci_probe(struct pci_d
+@@ -1279,7 +1310,7 @@ static int ath11k_pci_probe(struct pci_d
  		goto err_pci_free_region;
  	}
  
@@ -119,7 +119,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
  	if (ret) {
  		ath11k_err(ab, "failed to enable msi: %d\n", ret);
  		goto err_pci_free_region;
-@@ -1317,7 +1348,7 @@ err_mhi_unregister:
+@@ -1333,7 +1364,7 @@ err_mhi_unregister:
  	ath11k_mhi_unregister(ab_pci);
  
  err_pci_disable_msi:
@@ -128,7 +128,7 @@ Link: https://lore.kernel.org/r/20210913180246.193388-5-jouni@codeaurora.org
  
  err_pci_free_region:
  	ath11k_pci_free_region(ab_pci);
-@@ -1348,7 +1379,7 @@ qmi_fail:
+@@ -1364,7 +1395,7 @@ qmi_fail:
  	ath11k_mhi_unregister(ab_pci);
  
  	ath11k_pci_free_irq(ab);

@@ -225,7 +225,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  	if (MTK_HAS_CAPS(eth->soc->caps, MTK_SOC_MT7628)) {
  		ret = device_reset(eth->dev);
  		if (ret) {
-@@ -3043,6 +3050,35 @@ free_netdev:
+@@ -3013,6 +3020,35 @@ free_netdev:
  	return err;
  }
  
@@ -261,7 +261,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  static int mtk_probe(struct platform_device *pdev)
  {
  	struct device_node *mac_np;
-@@ -3056,6 +3092,7 @@ static int mtk_probe(struct platform_dev
+@@ -3026,6 +3062,7 @@ static int mtk_probe(struct platform_dev
  	eth->soc = of_device_get_match_data(&pdev->dev);
  
  	eth->dev = &pdev->dev;
@@ -269,7 +269,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  	eth->base = devm_platform_ioremap_resource(pdev, 0);
  	if (IS_ERR(eth->base))
  		return PTR_ERR(eth->base);
-@@ -3104,6 +3141,16 @@ static int mtk_probe(struct platform_dev
+@@ -3074,6 +3111,16 @@ static int mtk_probe(struct platform_dev
  		}
  	}
  
@@ -288,7 +288,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  					  GFP_KERNEL);
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -456,6 +456,12 @@
+@@ -450,6 +450,12 @@
  #define RSTCTRL_FE		BIT(6)
  #define RSTCTRL_PPE		BIT(31)
  
@@ -301,7 +301,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  /* SGMII subsystem config registers */
  /* Register to auto-negotiation restart */
  #define SGMSYS_PCS_CONTROL_1	0x0
-@@ -873,6 +879,7 @@ struct mtk_sgmii {
+@@ -867,6 +873,7 @@ struct mtk_sgmii {
  /* struct mtk_eth -	This is the main datasructure for holding the state
   *			of the driver
   * @dev:		The device pointer
@@ -309,7 +309,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
   * @base:		The mapped register i/o base
   * @page_lock:		Make sure that register operations are atomic
   * @tx_irq__lock:	Make sure that IRQ register operations are atomic
-@@ -916,6 +923,7 @@ struct mtk_sgmii {
+@@ -910,6 +917,7 @@ struct mtk_sgmii {
  
  struct mtk_eth {
  	struct device			*dev;
@@ -317,7 +317,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  	void __iomem			*base;
  	spinlock_t			page_lock;
  	spinlock_t			tx_irq_lock;
-@@ -1014,6 +1022,7 @@ int mtk_gmac_rgmii_path_setup(struct mtk
+@@ -1008,6 +1016,7 @@ int mtk_gmac_rgmii_path_setup(struct mtk
  int mtk_eth_offload_init(struct mtk_eth *eth);
  int mtk_eth_setup_tc(struct net_device *dev, enum tc_setup_type type,
  		     void *type_data);

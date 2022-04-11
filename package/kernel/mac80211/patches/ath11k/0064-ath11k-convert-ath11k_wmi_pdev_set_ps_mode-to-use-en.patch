@@ -19,7 +19,7 @@ Link: https://lore.kernel.org/r/20211108123826.8463-1-kvalo@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5638,7 +5638,8 @@ static int ath11k_mac_op_add_interface(s
+@@ -5648,7 +5648,8 @@ static int ath11k_mac_op_add_interface(s
  			goto err_peer_del;
  		}
  

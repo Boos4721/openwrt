@@ -17,7 +17,7 @@ Link: https://lore.kernel.org/r/20210722102054.43419-1-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -387,9 +387,9 @@ struct ath11k_sta {
+@@ -393,9 +393,9 @@ struct ath11k_sta {
  };
  
  #define ATH11K_MIN_5G_FREQ 4150
@@ -31,7 +31,7 @@ Link: https://lore.kernel.org/r/20210722102054.43419-1-jouni@codeaurora.org
  enum ath11k_state {
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -150,6 +150,9 @@ static const struct ieee80211_channel at
+@@ -151,6 +151,9 @@ static const struct ieee80211_channel at
  	CHAN6G(225, 7075, 0),
  	CHAN6G(229, 7095, 0),
  	CHAN6G(233, 7115, 0),

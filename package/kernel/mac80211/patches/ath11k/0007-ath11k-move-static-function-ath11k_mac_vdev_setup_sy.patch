@@ -21,7 +21,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-2-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -731,6 +731,20 @@ static int ath11k_monitor_vdev_up(struct
+@@ -732,6 +732,20 @@ static int ath11k_monitor_vdev_up(struct
  	return 0;
  }
  
@@ -42,7 +42,7 @@ Link: https://lore.kernel.org/r/20210721162053.46290-2-jouni@codeaurora.org
  static int ath11k_mac_op_config(struct ieee80211_hw *hw, u32 changed)
  {
  	/* mac80211 requires this op to be present and that's why
-@@ -5165,20 +5179,6 @@ static void ath11k_mac_op_remove_chanctx
+@@ -5175,20 +5189,6 @@ static void ath11k_mac_op_remove_chanctx
  	mutex_unlock(&ar->conf_mutex);
  }
  

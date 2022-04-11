@@ -30,7 +30,7 @@ Link: https://lore.kernel.org/r/20211129101309.2931-1-quic_wgong@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -8119,6 +8119,9 @@ static int __ath11k_mac_register(struct
+@@ -8122,6 +8122,9 @@ static int __ath11k_mac_register(struct
  
  	ar->hw->wiphy->interface_modes = ab->hw_params.interface_modes;
  

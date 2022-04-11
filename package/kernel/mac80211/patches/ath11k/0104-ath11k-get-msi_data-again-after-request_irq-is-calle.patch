@@ -31,7 +31,7 @@ Link: https://lore.kernel.org/r/20211026041636.5008-1-bqiang@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/pci.c
 +++ b/drivers/net/wireless/ath/ath11k/pci.c
-@@ -933,6 +933,25 @@ static void ath11k_pci_free_msi(struct a
+@@ -939,6 +939,25 @@ static void ath11k_pci_free_msi(struct a
  	pci_free_irq_vectors(ab_pci->pdev);
  }
  
@@ -57,7 +57,7 @@ Link: https://lore.kernel.org/r/20211026041636.5008-1-bqiang@codeaurora.org
  static int ath11k_pci_claim(struct ath11k_pci *ab_pci, struct pci_dev *pdev)
  {
  	struct ath11k_base *ab = ab_pci->ab;
-@@ -1342,6 +1361,17 @@ static int ath11k_pci_probe(struct pci_d
+@@ -1348,6 +1367,17 @@ static int ath11k_pci_probe(struct pci_d
  		goto err_ce_free;
  	}
  

@@ -32,7 +32,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-8-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -500,7 +500,8 @@ struct ath11k_vif *ath11k_mac_get_arvif_
+@@ -501,7 +501,8 @@ struct ath11k_vif *ath11k_mac_get_arvif_
  
  	for (i = 0; i < ab->num_radios; i++) {
  		pdev = rcu_dereference(ab->pdevs_active[i]);

@@ -25,7 +25,7 @@ Link: https://lore.kernel.org/r/1635177786-20854-1-git-send-email-quic_ramess@qu
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -2495,6 +2495,7 @@ static void ath11k_bss_assoc(struct ieee
+@@ -2500,6 +2500,7 @@ static void ath11k_bss_assoc(struct ieee
  
  	rcu_read_unlock();
  
@@ -33,7 +33,7 @@ Link: https://lore.kernel.org/r/1635177786-20854-1-git-send-email-quic_ramess@qu
  	ret = ath11k_wmi_send_peer_assoc_cmd(ar, &peer_arg);
  	if (ret) {
  		ath11k_warn(ar->ab, "failed to run peer assoc for %pM vdev %i: %d\n",
-@@ -3772,6 +3773,7 @@ static int ath11k_station_assoc(struct a
+@@ -3778,6 +3779,7 @@ static int ath11k_station_assoc(struct a
  
  	ath11k_peer_assoc_prepare(ar, vif, sta, &peer_arg, reassoc);
  
@@ -41,7 +41,7 @@ Link: https://lore.kernel.org/r/1635177786-20854-1-git-send-email-quic_ramess@qu
  	ret = ath11k_wmi_send_peer_assoc_cmd(ar, &peer_arg);
  	if (ret) {
  		ath11k_warn(ar->ab, "failed to run peer assoc for STA %pM vdev %i: %d\n",
-@@ -3983,6 +3985,7 @@ static void ath11k_sta_rc_update_wk(stru
+@@ -3989,6 +3991,7 @@ static void ath11k_sta_rc_update_wk(stru
  			ath11k_peer_assoc_prepare(ar, arvif->vif, sta,
  						  &peer_arg, true);
  
@@ -51,7 +51,7 @@ Link: https://lore.kernel.org/r/1635177786-20854-1-git-send-email-quic_ramess@qu
  				ath11k_warn(ar->ab, "failed to run peer assoc for STA %pM vdev %i: %d\n",
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -1763,7 +1763,7 @@ ath11k_wmi_copy_peer_flags(struct wmi_pe
+@@ -1764,7 +1764,7 @@ ath11k_wmi_copy_peer_flags(struct wmi_pe
  		cmd->peer_flags |= WMI_PEER_AUTH;
  	if (param->need_ptk_4_way) {
  		cmd->peer_flags |= WMI_PEER_NEED_PTK_4_WAY;

@@ -59,8 +59,8 @@ Link: https://lore.kernel.org/r/20211026011605.58615-1-quic_bqiang@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/hw.c
 +++ b/drivers/net/wireless/ath/ath11k/hw.c
-@@ -1061,8 +1061,6 @@ const struct ath11k_hw_ring_mask ath11k_
- const struct ath11k_hw_ring_mask ath11k_hw_ring_mask_qca6390 = {
+@@ -1021,8 +1021,6 @@ const struct ath11k_hw_ops wcn6855_ops =
+ const struct ath11k_hw_ring_mask ath11k_hw_ring_mask_ipq8074 = {
  	.tx  = {
  		ATH11K_TX_RING_MASK_0,
 -		ATH11K_TX_RING_MASK_1,

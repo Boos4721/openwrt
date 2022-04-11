@@ -24,7 +24,7 @@ Link: https://lore.kernel.org/r/1635168282-8845-1-git-send-email-quic_ppranees@q
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5202,13 +5202,15 @@ static void ath11k_mgmt_over_wmi_tx_work
+@@ -5212,13 +5212,15 @@ static void ath11k_mgmt_over_wmi_tx_work
  		arvif = ath11k_vif_to_arvif(skb_cb->vif);
  		if (ar->allocated_vdev_map & (1LL << arvif->vdev_id) &&
  		    arvif->is_started) {

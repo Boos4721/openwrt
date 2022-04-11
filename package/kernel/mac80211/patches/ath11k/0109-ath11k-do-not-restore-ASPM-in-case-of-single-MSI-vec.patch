@@ -25,7 +25,7 @@ Link: https://lore.kernel.org/r/20211026041722.5271-1-bqiang@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/pci.c
 +++ b/drivers/net/wireless/ath/ath11k/pci.c
-@@ -1223,7 +1223,13 @@ static int ath11k_pci_start(struct ath11
+@@ -1229,7 +1229,13 @@ static int ath11k_pci_start(struct ath11
  
  	set_bit(ATH11K_PCI_FLAG_INIT_DONE, &ab_pci->flags);
  

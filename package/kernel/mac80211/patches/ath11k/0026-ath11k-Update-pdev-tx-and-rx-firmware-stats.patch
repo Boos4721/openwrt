@@ -28,7 +28,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -806,12 +806,15 @@ struct ath11k_fw_stats_pdev {
+@@ -819,12 +819,15 @@ struct ath11k_fw_stats_pdev {
  	s32 hw_reaped;
  	/* Num underruns */
  	s32 underrun;
@@ -44,7 +44,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  	/* data hw rate code */
  	u32 data_rc;
  	/* Scheduler self triggers */
-@@ -832,6 +835,30 @@ struct ath11k_fw_stats_pdev {
+@@ -845,6 +848,30 @@ struct ath11k_fw_stats_pdev {
  	u32 phy_underrun;
  	/* MPDU is more than txop limit */
  	u32 txop_ovf;
@@ -75,7 +75,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  
  	/* PDEV RX stats */
  	/* Cnts any change in ring routing mid-ppdu */
-@@ -857,6 +884,8 @@ struct ath11k_fw_stats_pdev {
+@@ -870,6 +897,8 @@ struct ath11k_fw_stats_pdev {
  	s32 phy_err_drop;
  	/* Number of mpdu errors - FCS, MIC, ENC etc. */
  	s32 mpdu_errs;
@@ -86,7 +86,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  struct ath11k_fw_stats_vdev {
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -5251,9 +5251,11 @@ ath11k_wmi_pull_pdev_stats_tx(const stru
+@@ -5252,9 +5252,11 @@ ath11k_wmi_pull_pdev_stats_tx(const stru
  	dst->hw_queued = src->hw_queued;
  	dst->hw_reaped = src->hw_reaped;
  	dst->underrun = src->underrun;
@@ -98,7 +98,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  	dst->data_rc = src->data_rc;
  	dst->self_triggers = src->self_triggers;
  	dst->sw_retry_failure = src->sw_retry_failure;
-@@ -5264,6 +5266,16 @@ ath11k_wmi_pull_pdev_stats_tx(const stru
+@@ -5265,6 +5267,16 @@ ath11k_wmi_pull_pdev_stats_tx(const stru
  	dst->stateless_tid_alloc_failure = src->stateless_tid_alloc_failure;
  	dst->phy_underrun = src->phy_underrun;
  	dst->txop_ovf = src->txop_ovf;
@@ -115,7 +115,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  }
  
  static void ath11k_wmi_pull_pdev_stats_rx(const struct wmi_pdev_stats_rx *src,
-@@ -5283,6 +5295,7 @@ static void ath11k_wmi_pull_pdev_stats_r
+@@ -5284,6 +5296,7 @@ static void ath11k_wmi_pull_pdev_stats_r
  	dst->phy_errs = src->phy_errs;
  	dst->phy_err_drop = src->phy_err_drop;
  	dst->mpdu_errs = src->mpdu_errs;
@@ -123,7 +123,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  }
  
  static void
-@@ -5520,11 +5533,15 @@ ath11k_wmi_fw_pdev_tx_stats_fill(const s
+@@ -5521,11 +5534,15 @@ ath11k_wmi_fw_pdev_tx_stats_fill(const s
  	len += scnprintf(buf + len, buf_len - len, "%30s %10d\n",
  			 "Num underruns", pdev->underrun);
  	len += scnprintf(buf + len, buf_len - len, "%30s %10d\n",
@@ -140,7 +140,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  	len += scnprintf(buf + len, buf_len - len, "%30s %10u\n",
  			 "HW rate", pdev->data_rc);
  	len += scnprintf(buf + len, buf_len - len, "%30s %10u\n",
-@@ -5548,6 +5565,26 @@ ath11k_wmi_fw_pdev_tx_stats_fill(const s
+@@ -5549,6 +5566,26 @@ ath11k_wmi_fw_pdev_tx_stats_fill(const s
  			 "PHY underrun", pdev->phy_underrun);
  	len += scnprintf(buf + len, buf_len - len, "%30s %10u\n",
  			 "MPDU is more than txop limit", pdev->txop_ovf);
@@ -167,7 +167,7 @@ Link: https://lore.kernel.org/r/20210721212029.142388-2-jouni@codeaurora.org
  	*length = len;
  }
  
-@@ -5592,6 +5629,8 @@ ath11k_wmi_fw_pdev_rx_stats_fill(const s
+@@ -5593,6 +5630,8 @@ ath11k_wmi_fw_pdev_rx_stats_fill(const s
  			 "PHY errors drops", pdev->phy_err_drop);
  	len += scnprintf(buf + len, buf_len - len, "%30s %10d\n",
  			 "MPDU errors (FCS, MIC, ENC)", pdev->mpdu_errs);

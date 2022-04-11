@@ -30,7 +30,7 @@ Link: https://lore.kernel.org/r/20210804181217.88751-3-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7312,7 +7312,7 @@ static int ath11k_mac_setup_channels_rat
+@@ -7322,7 +7322,7 @@ static int ath11k_mac_setup_channels_rat
  					   u32 supported_bands)
  {
  	struct ieee80211_supported_band *band;
@@ -39,7 +39,7 @@ Link: https://lore.kernel.org/r/20210804181217.88751-3-jouni@codeaurora.org
  	void *channels;
  	u32 phy_id;
  
-@@ -7322,6 +7322,7 @@ static int ath11k_mac_setup_channels_rat
+@@ -7332,6 +7332,7 @@ static int ath11k_mac_setup_channels_rat
  		     ATH11K_NUM_CHANS);
  
  	reg_cap = &ar->ab->hal_reg_cap[ar->pdev_idx];
@@ -47,7 +47,7 @@ Link: https://lore.kernel.org/r/20210804181217.88751-3-jouni@codeaurora.org
  
  	if (supported_bands & WMI_HOST_WLAN_2G_CAP) {
  		channels = kmemdup(ath11k_2ghz_channels,
-@@ -7340,11 +7341,11 @@ static int ath11k_mac_setup_channels_rat
+@@ -7350,11 +7351,11 @@ static int ath11k_mac_setup_channels_rat
  
  		if (ar->ab->hw_params.single_pdev_only) {
  			phy_id = ath11k_get_phy_id(ar, WMI_HOST_WLAN_2G_CAP);
@@ -62,7 +62,7 @@ Link: https://lore.kernel.org/r/20210804181217.88751-3-jouni@codeaurora.org
  	}
  
  	if (supported_bands & WMI_HOST_WLAN_5G_CAP) {
-@@ -7364,9 +7365,15 @@ static int ath11k_mac_setup_channels_rat
+@@ -7374,9 +7375,15 @@ static int ath11k_mac_setup_channels_rat
  			band->n_bitrates = ath11k_a_rates_size;
  			band->bitrates = ath11k_a_rates;
  			ar->hw->wiphy->bands[NL80211_BAND_6GHZ] = band;
@@ -80,7 +80,7 @@ Link: https://lore.kernel.org/r/20210804181217.88751-3-jouni@codeaurora.org
  		}
  
  		if (reg_cap->low_5ghz_chan < ATH11K_MIN_6G_FREQ) {
-@@ -7389,12 +7396,12 @@ static int ath11k_mac_setup_channels_rat
+@@ -7399,12 +7406,12 @@ static int ath11k_mac_setup_channels_rat
  
  			if (ar->ab->hw_params.single_pdev_only) {
  				phy_id = ath11k_get_phy_id(ar, WMI_HOST_WLAN_5G_CAP);

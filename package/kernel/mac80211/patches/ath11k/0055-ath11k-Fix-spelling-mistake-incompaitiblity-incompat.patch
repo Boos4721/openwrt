@@ -15,7 +15,7 @@ Link: https://lore.kernel.org/r/20211006083217.349596-1-colin.king@canonical.com
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7081,7 +7081,7 @@ ath11k_mac_op_set_bitrate_mask(struct ie
+@@ -7091,7 +7091,7 @@ ath11k_mac_op_set_bitrate_mask(struct ie
  
  		if (!ath11k_mac_validate_vht_he_fixed_rate_settings(ar, band, mask))
  			ath11k_warn(ar->ab,

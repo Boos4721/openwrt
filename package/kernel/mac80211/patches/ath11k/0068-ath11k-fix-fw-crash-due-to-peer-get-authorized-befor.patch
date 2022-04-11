@@ -28,7 +28,7 @@ Link: https://lore.kernel.org/r/1636554200-12345-1-git-send-email-quic_periyasa@
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -2474,6 +2474,8 @@ static void ath11k_bss_assoc(struct ieee
+@@ -2479,6 +2479,8 @@ static void ath11k_bss_assoc(struct ieee
  	struct ath11k_vif *arvif = (void *)vif->drv_priv;
  	struct peer_assoc_params peer_arg;
  	struct ieee80211_sta *ap_sta;
@@ -37,7 +37,7 @@ Link: https://lore.kernel.org/r/1636554200-12345-1-git-send-email-quic_periyasa@
  	int ret;
  
  	lockdep_assert_held(&ar->conf_mutex);
-@@ -2536,13 +2538,22 @@ static void ath11k_bss_assoc(struct ieee
+@@ -2541,13 +2543,22 @@ static void ath11k_bss_assoc(struct ieee
  		   "mac vdev %d up (associated) bssid %pM aid %d\n",
  		   arvif->vdev_id, bss_conf->bssid, bss_conf->aid);
  
@@ -67,7 +67,7 @@ Link: https://lore.kernel.org/r/1636554200-12345-1-git-send-email-quic_periyasa@
  
  	ret = ath11k_wmi_send_obss_spr_cmd(ar, arvif->vdev_id,
  					   &bss_conf->he_obss_pd);
-@@ -4221,6 +4232,34 @@ static int ath11k_mac_op_sta_state(struc
+@@ -4227,6 +4238,34 @@ static int ath11k_mac_op_sta_state(struc
  			ath11k_warn(ar->ab, "Failed to associate station: %pM\n",
  				    sta->addr);
  	} else if (old_state == IEEE80211_STA_ASSOC &&

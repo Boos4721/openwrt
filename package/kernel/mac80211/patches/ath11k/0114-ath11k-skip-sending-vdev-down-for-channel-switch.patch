@@ -27,7 +27,7 @@ Link: https://lore.kernel.org/r/20211118095901.8271-1-quic_wgong@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -6459,37 +6459,7 @@ ath11k_mac_update_vif_chan(struct ath11k
+@@ -6467,37 +6467,7 @@ ath11k_mac_update_vif_chan(struct ath11k
  
  	lockdep_assert_held(&ar->conf_mutex);
  

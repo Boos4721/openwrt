@@ -35,7 +35,7 @@ Link: https://lore.kernel.org/r/20211013073704.15888-1-wgong@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -4706,6 +4706,10 @@ ath11k_create_vht_cap(struct ath11k *ar,
+@@ -4712,6 +4712,10 @@ ath11k_create_vht_cap(struct ath11k *ar,
  	vht_cap.vht_supported = 1;
  	vht_cap.cap = ar->pdev->cap.vht_cap;
  

@@ -42,7 +42,7 @@ Link: https://lore.kernel.org/r/20210721204217.120572-1-jouni@codeaurora.org
 
 --- a/drivers/net/wireless/ath/ath11k/core.h
 +++ b/drivers/net/wireless/ath/ath11k/core.h
-@@ -93,6 +93,8 @@ struct ath11k_skb_rxcb {
+@@ -98,6 +98,8 @@ struct ath11k_skb_rxcb {
  	bool is_first_msdu;
  	bool is_last_msdu;
  	bool is_continuation;
@@ -51,7 +51,7 @@ Link: https://lore.kernel.org/r/20210721204217.120572-1-jouni@codeaurora.org
  	struct hal_rx_desc *rx_desc;
  	u8 err_rel_src;
  	u8 err_code;
-@@ -100,6 +102,8 @@ struct ath11k_skb_rxcb {
+@@ -105,6 +107,8 @@ struct ath11k_skb_rxcb {
  	u8 unmapped;
  	u8 is_frag;
  	u8 tid;
@@ -548,7 +548,7 @@ Link: https://lore.kernel.org/r/20210721204217.120572-1-jouni@codeaurora.org
  extern const struct ath11k_hw_ops ipq8074_ops;
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5370,7 +5370,8 @@ static void ath11k_mac_op_update_vif_off
+@@ -5380,7 +5380,8 @@ static void ath11k_mac_op_update_vif_off
  	if (ath11k_frame_mode != ATH11K_HW_TXRX_ETHERNET ||
  	    (vif->type != NL80211_IFTYPE_STATION &&
  	     vif->type != NL80211_IFTYPE_AP))
@@ -558,7 +558,7 @@ Link: https://lore.kernel.org/r/20210721204217.120572-1-jouni@codeaurora.org
  
  	if (vif->offload_flags & IEEE80211_OFFLOAD_ENCAP_ENABLED)
  		param_value = ATH11K_HW_TXRX_ETHERNET;
-@@ -5386,6 +5387,22 @@ static void ath11k_mac_op_update_vif_off
+@@ -5396,6 +5397,22 @@ static void ath11k_mac_op_update_vif_off
  			    arvif->vdev_id, ret);
  		vif->offload_flags &= ~IEEE80211_OFFLOAD_ENCAP_ENABLED;
  	}
@@ -581,7 +581,7 @@ Link: https://lore.kernel.org/r/20210721204217.120572-1-jouni@codeaurora.org
  }
  
  static int ath11k_mac_op_add_interface(struct ieee80211_hw *hw,
-@@ -7550,7 +7567,11 @@ static int __ath11k_mac_register(struct
+@@ -7560,7 +7577,11 @@ static int __ath11k_mac_register(struct
  	ieee80211_hw_set(ar->hw, QUEUE_CONTROL);
  	ieee80211_hw_set(ar->hw, SUPPORTS_TX_FRAG);
  	ieee80211_hw_set(ar->hw, REPORTS_LOW_ACK);

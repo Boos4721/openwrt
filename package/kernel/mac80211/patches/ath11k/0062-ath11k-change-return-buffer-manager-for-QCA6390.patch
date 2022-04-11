@@ -246,7 +246,7 @@ Link: https://lore.kernel.org/r/20210914163726.38604-2-jouni@codeaurora.org
  
  /* Map from pdev index to hw mac index */
  static u8 ath11k_hw_ipq8074_mac_from_pdev_id(int pdev_idx)
-@@ -2124,3 +2125,11 @@ const struct ath11k_hw_regs wcn6855_regs
+@@ -2122,3 +2123,11 @@ const struct ath11k_hw_regs wcn6855_regs
  	.pcie_qserdes_sysclk_en_sel = 0x01e0c0ac,
  	.pcie_pcs_osc_dtct_config_base = 0x01e0c628,
  };

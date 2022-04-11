@@ -667,7 +667,7 @@ Link: https://lore.kernel.org/r/20210913223148.208026-5-jouni@codeaurora.org
  	u32 base_addr_lsb; /* DWORD aligned base memory address of the ring */
 --- a/drivers/net/wireless/ath/ath11k/dp.h
 +++ b/drivers/net/wireless/ath/ath11k/dp.h
-@@ -1593,6 +1593,13 @@ struct ath11k_htt_extd_stats_msg {
+@@ -1594,6 +1594,13 @@ struct ath11k_htt_extd_stats_msg {
  	u8 data[0];
  } __packed;
  

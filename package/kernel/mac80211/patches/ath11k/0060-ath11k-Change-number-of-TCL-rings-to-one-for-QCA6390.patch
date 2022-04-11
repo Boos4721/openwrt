@@ -230,7 +230,7 @@ Link: https://lore.kernel.org/r/20210914163726.38604-1-jouni@codeaurora.org
  struct ath11k_hw_ops {
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5797,7 +5797,7 @@ err_vdev_del:
+@@ -5807,7 +5807,7 @@ err_vdev_del:
  	idr_for_each(&ar->txmgmt_idr,
  		     ath11k_mac_vif_txmgmt_idr_remove, vif);
  

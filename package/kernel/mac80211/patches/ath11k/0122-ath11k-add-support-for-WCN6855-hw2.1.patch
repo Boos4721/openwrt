@@ -127,7 +127,7 @@ Link: https://lore.kernel.org/r/20211129025613.21594-1-quic_bqiang@quicinc.com
  #define TCSR_SOC_HW_VERSION_MINOR_MASK	GENMASK(7, 0)
  
  /* BAR0 + 4k is always accessible, and no
-@@ -1409,9 +1409,21 @@ static int ath11k_pci_probe(struct pci_d
+@@ -1415,9 +1415,21 @@ static int ath11k_pci_probe(struct pci_d
  					   &soc_hw_version_minor);
  		switch (soc_hw_version_major) {
  		case 2:

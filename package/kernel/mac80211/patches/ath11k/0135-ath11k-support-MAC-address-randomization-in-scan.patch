@@ -21,7 +21,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -3543,6 +3543,12 @@ static int ath11k_mac_op_hw_scan(struct
+@@ -3546,6 +3546,12 @@ static int ath11k_mac_op_hw_scan(struct
  			arg.chan_list[i] = req->channels[i]->center_freq;
  	}
  
@@ -34,7 +34,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
  	ret = ath11k_start_scan(ar, &arg);
  	if (ret) {
  		ath11k_warn(ar->ab, "failed to start hw scan: %d\n", ret);
-@@ -5587,6 +5593,14 @@ static int ath11k_mac_op_start(struct ie
+@@ -5590,6 +5596,14 @@ static int ath11k_mac_op_start(struct ie
  		goto err;
  	}
  
@@ -49,7 +49,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
  	ret = ath11k_wmi_pdev_set_param(ar, WMI_PDEV_PARAM_ARP_AC_OVERRIDE,
  					0, pdev->pdev_id);
  	if (ret) {
-@@ -8183,6 +8197,11 @@ static int __ath11k_mac_register(struct
+@@ -8186,6 +8200,11 @@ static int __ath11k_mac_register(struct
  
  	ar->hw->wiphy->max_ap_assoc_sta = ar->max_num_stations;
  

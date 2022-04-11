@@ -25,7 +25,7 @@ Link: https://lore.kernel.org/r/1636558557-2874-1-git-send-email-quic_periyasa@q
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5613,7 +5613,7 @@ static int ath11k_mac_op_add_interface(s
+@@ -5623,7 +5623,7 @@ static int ath11k_mac_op_add_interface(s
  	u32 param_id, param_value;
  	u16 nss;
  	int i;
@@ -34,7 +34,7 @@ Link: https://lore.kernel.org/r/1636558557-2874-1-git-send-email-quic_periyasa@q
  	int bit;
  
  	vif->driver_flags |= IEEE80211_VIF_SUPPORTS_UAPSD;
-@@ -5816,17 +5816,17 @@ err_peer_del:
+@@ -5826,17 +5826,17 @@ err_peer_del:
  	if (arvif->vdev_type == WMI_VDEV_TYPE_AP) {
  		reinit_completion(&ar->peer_delete_done);
  
