@@ -3,7 +3,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=qca-ssdk-shell
 PKG_RELEASE:=$(AUTORELEASE)
 
-PKG_SOURCE_URL:=https://source.codeaurora.org/quic/cc-qrdk/oss/ssdk-shell
+PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/ssdk-shell.git
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2021-01-27
 PKG_SOURCE_VERSION:=5661366d471a78314bc7010f985ad8cc15be832a

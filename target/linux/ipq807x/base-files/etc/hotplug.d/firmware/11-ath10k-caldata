@@ -9,16 +9,8 @@ board=$(board_name)
 case "$FIRMWARE" in
 "ath10k/cal-pci-0000:01:00.0.bin")
 	case "$board" in
-	xiaomi,ax3600-1G|\
 	xiaomi,ax3600)
 		caldata_extract "0:art" 0x33000 0x844
-		;;
-	esac
-	;;
-"ath10k/cal-pci-0001:01:00.0.bin")
-	case "$board" in
-	xiaomi,ax9000)
-		caldata_extract "0:art" 0x4d000 0x844
 		;;
 	esac
 	;;

@@ -16,13 +16,13 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 @@ -238,6 +238,7 @@ static int qca808x_config_intr(struct ph
  	return err;
  }
-
+ 
 +#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 11, 0))
  static int qca808x_ack_interrupt(struct phy_device *phydev)
  {
  	int err;
 @@ -257,6 +258,47 @@ static int qca808x_ack_interrupt(struct
-
+ 
  	return (err < 0) ? err : 0;
  }
 +#endif
@@ -66,7 +66,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 +	return IRQ_HANDLED;
 +}
 +#endif
-
+ 
  /* switch linux negtiation capability to fal avariable */
  #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 0, 0))
 @@ -559,7 +601,11 @@ struct phy_driver qca808x_phy_driver = {
@@ -81,4 +81,3 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	.read_status	= qca808x_read_status,
  	.suspend	= qca808x_suspend,
  	.resume		= qca808x_resume,
-

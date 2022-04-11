@@ -1,7 +1,7 @@
-From 08eb2411d7516886cdefd26303c564d9dbaad58f Mon Sep 17 00:00:00 2001
+From 80393ab565e26d572de56b7502b069b0a944bd40 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Tue, 8 Jun 2021 22:14:34 +0200
-Subject: [PATCH 2/2] nss-crypto: replace ioremap_nocache() with ioremap
+Subject: [PATCH 2/3] nss-crypto: replace ioremap_nocache() with ioremap
 
 ioremap_nocache() was dropped in kernel 5.5 as regular
 ioremap() was exactly the same.
@@ -16,9 +16,11 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  v2.0/src/hal/ipq807x/nss_crypto_eip197.c | 2 +-
  3 files changed, 4 insertions(+), 4 deletions(-)
 
+diff --git a/v2.0/src/hal/ipq50xx/nss_crypto_ce5.c b/v2.0/src/hal/ipq50xx/nss_crypto_ce5.c
+index c89cd38..a7a46e0 100644
 --- a/v2.0/src/hal/ipq50xx/nss_crypto_ce5.c
 +++ b/v2.0/src/hal/ipq50xx/nss_crypto_ce5.c
-@@ -288,7 +288,7 @@ int nss_crypto_ce5_engine_init(struct pl
+@@ -288,7 +288,7 @@ int nss_crypto_ce5_engine_init(struct platform_device *pdev, struct resource *cr
  	 * remap the I/O addresses for crypto
  	 */
  	eng->crypto_paddr = crypto_res->start;
@@ -27,7 +29,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	if (!eng->crypto_vaddr) {
  		nss_crypto_warn("%px: unable to remap crypto_addr(0x%px)\n", node, (void *)eng->crypto_paddr);
  		nss_crypto_engine_free(eng);
-@@ -299,7 +299,7 @@ int nss_crypto_ce5_engine_init(struct pl
+@@ -299,7 +299,7 @@ int nss_crypto_ce5_engine_init(struct platform_device *pdev, struct resource *cr
  	 * remap the I/O addresses for bam
  	 */
  	eng->dma_paddr = bam_res->start;
@@ -36,9 +38,11 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	if (!eng->dma_vaddr) {
  		iounmap(eng->crypto_vaddr);
  		nss_crypto_warn("%px: unable to remap dma_addr(0x%px)\n", node, (void *)eng->dma_paddr);
+diff --git a/v2.0/src/hal/ipq60xx/nss_crypto_eip197.c b/v2.0/src/hal/ipq60xx/nss_crypto_eip197.c
+index 8dfc35d..79649f9 100644
 --- a/v2.0/src/hal/ipq60xx/nss_crypto_eip197.c
 +++ b/v2.0/src/hal/ipq60xx/nss_crypto_eip197.c
-@@ -490,7 +490,7 @@ int nss_crypto_eip197_engine_init(struct
+@@ -490,7 +490,7 @@ int nss_crypto_eip197_engine_init(struct platform_device *pdev, struct device_no
  	 * remap the I/O addresses
  	 */
  	paddr = res->start + offset;
@@ -47,9 +51,11 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	if (!vaddr) {
  		nss_crypto_warn("%px: unable to remap crypto_addr(0x%px)\n", node, (void *)paddr);
  		return -EIO;
+diff --git a/v2.0/src/hal/ipq807x/nss_crypto_eip197.c b/v2.0/src/hal/ipq807x/nss_crypto_eip197.c
+index 632adca..5e2c146 100644
 --- a/v2.0/src/hal/ipq807x/nss_crypto_eip197.c
 +++ b/v2.0/src/hal/ipq807x/nss_crypto_eip197.c
-@@ -490,7 +490,7 @@ int nss_crypto_eip197_engine_init(struct
+@@ -490,7 +490,7 @@ int nss_crypto_eip197_engine_init(struct platform_device *pdev, struct device_no
  	 * remap the I/O addresses
  	 */
  	paddr = res->start + offset;
@@ -58,3 +64,6 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	if (!vaddr) {
  		nss_crypto_warn("%px: unable to remap crypto_addr(0x%px)\n", node, (void *)paddr);
  		return -EIO;
+-- 
+2.35.1
+

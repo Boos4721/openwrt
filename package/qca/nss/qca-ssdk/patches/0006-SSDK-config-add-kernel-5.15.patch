@@ -17,7 +17,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 @@ -26,6 +26,10 @@ ifeq ($(KVER),$(filter 5.10%,$(KVER)))
  OS_VER=5_10
  endif
-
+ 
 +ifeq ($(KVER),$(filter 5.15%,$(KVER)))
 +OS_VER=5_15
 +endif
@@ -27,7 +27,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  endif
 @@ -127,7 +131,7 @@ endif
  endif
-
+ 
  ifeq ($(ARCH), arm64)
 -ifeq ($(KVER),$(filter 4.1% 4.4% 4.9% 5.4% 5.10%,$(KVER)))
 +ifeq ($(KVER),$(filter 4.1% 4.4% 4.9% 5.4% 5.10% 5.15%,$(KVER)))
@@ -39,16 +39,16 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 @@ -388,7 +388,7 @@ ifeq (KSLIB, $(MODULE_TYPE))
        KASAN_SHADOW_SCALE_SHIFT := 3
    endif
-
+ 
 -  ifeq ($(OS_VER),$(filter 5_4 5_10, $(OS_VER)))
 +  ifeq ($(OS_VER),$(filter 5_4 5_10 5_15, $(OS_VER)))
        ifeq ($(ARCH), arm64)
            KASAN_OPTION += -DKASAN_SHADOW_SCALE_SHIFT=$(KASAN_SHADOW_SCALE_SHIFT)
         endif
 @@ -419,7 +419,7 @@ ifeq (KSLIB, $(MODULE_TYPE))
-
+ 
    endif
-
+ 
 -  ifeq ($(OS_VER),$(filter 4_4 5_4 5_10, $(OS_VER)))
 +  ifeq ($(OS_VER),$(filter 4_4 5_4 5_10 5_15, $(OS_VER)))
                  MODULE_CFLAG += -DKVER34

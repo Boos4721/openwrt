@@ -110,8 +110,10 @@ start() {
 	[ -d /sys/kernel/debug/ecm/ecm_nss_ipv4 ] && sysctl -w dev.nss.general.redirect=1
 
 	support_bridge && {
-		echo 'net.bridge.bridge-nf-call-ip6tables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
-		echo 'net.bridge.bridge-nf-call-iptables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
+		if ([ -z "$(grep "net.bridge.bridge-nf-call-ip6tables=1" /etc/sysctl.d/qca-nss-ecm.conf)" ] && [ -z "$(grep "net.bridge.bridge-nf-call-iptables=1" /etc/sysctl.d/qca-nss-ecm.conf)" ]); then
+			echo 'net.bridge.bridge-nf-call-ip6tables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
+			echo 'net.bridge.bridge-nf-call-iptables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
+		fi
 	}
 
 	if [ -d /sys/module/qca_ovsmgr ]; then

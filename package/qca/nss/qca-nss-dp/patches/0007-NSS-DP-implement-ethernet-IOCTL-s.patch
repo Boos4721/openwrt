@@ -13,11 +13,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  nss_dp_main.c | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/nss_dp_main.c b/nss_dp_main.c
-index 28df280..72f0c59 100644
 --- a/nss_dp_main.c
 +++ b/nss_dp_main.c
-@@ -413,7 +413,11 @@ static const struct net_device_ops nss_dp_netdev_ops = {
+@@ -413,7 +413,11 @@ static const struct net_device_ops nss_d
  	.ndo_set_mac_address = nss_dp_set_mac_address,
  	.ndo_validate_addr = eth_validate_addr,
  	.ndo_change_mtu = nss_dp_change_mtu,
@@ -29,6 +27,3 @@ index 28df280..72f0c59 100644
  
  #if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 5, 0))
  	.ndo_bridge_setlink = switchdev_port_bridge_setlink,
--- 
-2.35.1
-

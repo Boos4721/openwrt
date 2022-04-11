@@ -3,11 +3,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=qca-nss-ecm
 PKG_RELEASE:=$(AUTORELEASE)
 
-PKG_SOURCE_URL:=https://source.codeaurora.org/quic/cc-qrdk/oss/lklm/qca-nss-ecm
+PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/qca-nss-ecm.git
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_DATE:=2021-06-17
+PKG_SOURCE_DATE:=2021-06-15
 PKG_SOURCE_VERSION:=34267065855d32f33264dc3054efb0e8103d627b
-PKG_MIRROR_HASH:=cbcc7cab7a862529e28b8f635079977f566e5908660bf5ea37451e72f0a1de20
+PKG_MIRROR_HASH:=0917659d69c5f3e6067d6671b9393b4b2d6b6cd5a7bacf5e7d6cf842dc906eca
 
 PKG_BUILD_PARALLEL:=1
 
@@ -18,7 +18,7 @@ define KernelPackage/qca-nss-ecm
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@(TARGET_ipq807x||TARGET_ipq60xx) \
+  DEPENDS:=@LINUX_5_10 @(TARGET_ipq807x||TARGET_ipq60xx) \
   	+kmod-qca-nss-drv \
 	+iptables-mod-extra \
 	+kmod-ipt-conntrack \

@@ -3,11 +3,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=qca-nss-drv
 PKG_RELEASE:=$(AUTORELEASE)
 
-PKG_SOURCE_URL:=https://source.codeaurora.org/quic/qsdk/oss/lklm/nss-drv
+PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-drv.git
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_DATE:=2021-07-13
+PKG_SOURCE_DATE:=2021-06-09
 PKG_SOURCE_VERSION:=22b485ac89a3a1b60f3a6d5b2fe3236d170934b9
-PKG_MIRROR_HASH:=d3129748ddc303f3c211c4bf61d8ddbc9096c1a3a411dff3cc2be884a2e829b8
+PKG_MIRROR_HASH:=ef94ba959cde4bd56d1bc4ffbbc5d91fb9a7766cd7096dc1538127e73bbae89a
 
 PKG_BUILD_PARALLEL:=1
 
@@ -50,7 +50,10 @@ define Build/InstallDev
 	$(CP) $(PKG_BUILD_DIR)/exports/* $(1)/usr/include/qca-nss-drv/
 endef
 
-EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-gmac -I$(STAGING_DIR)/usr/include/qca-nss-dp -I$(STAGING_DIR)/usr/include/qca-ssdk
+EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-gmac \
+			   -I$(STAGING_DIR)/usr/include/qca-nss-dp \
+			   -I$(STAGING_DIR)/usr/include/qca-ssdk \
+			   -Wno-unused-variable
 
 ifneq (, $(findstring $(CONFIG_TARGET_BOARD), "ipq807x" "ipq60xx"))
 EXTRA_CFLAGS+= -DNSS_MEM_PROFILE_MEDIUM
@@ -66,7 +69,7 @@ ifeq ($(LOW_MEM_PROFILE_MAKE_OPTS),y)
 DRV_MAKE_OPTS+=NSS_DRV_C2C_ENABLE=n \
 	NSS_DRV_CAPWAP_ENABLE=n \
 	NSS_DRV_CLMAP_ENABLE=n \
-	NSS_DRV_CRYPTO_ENABLE=n \
+	NSS_DRV_CRYPTO_ENABLE=y \
 	NSS_DRV_DTLS_ENABLE=n \
 	NSS_DRV_GRE_ENABLE=n \
 	NSS_DRV_GRE_REDIR_ENABLE=n \

@@ -10,12 +10,31 @@ platform_check_image() {
 
 platform_do_upgrade() {
 	case "$(board_name)" in
+	edgecore,eap102)
+		active="$(fw_printenv -n active)"
+		if [ "$active" -eq "1" ]; then
+			CI_UBIPART="rootfs2"
+		else
+			CI_UBIPART="rootfs1"
+		fi
+		# force altbootcmd which handles partition change in u-boot
+		fw_setenv bootcount 3
+		fw_setenv upgrade_available 1
+		nand_do_upgrade "$1"
+		;;
+	edimax,cax1800)
+		nand_do_upgrade "$1"
+		;;
+	qnap,301w)
+		kernelname="0:HLOS"
+		rootfsname="rootfs"
+		mmc_do_upgrade "$1"
+		;;
 	redmi,ax6|\
 	xiaomi,ax3600|\
-	xiaomi,ax3600-1G|\
 	xiaomi,ax9000)
 		part_num="$(fw_printenv -n flag_boot_rootfs)"
-		if [ "$part_num" -eq "1" ]; then
+		if [ "$part_num" -eq "0" ]; then
 			CI_UBIPART="rootfs_1"
 			target_num=1
 			# Reset fail flag for the current partition
@@ -36,7 +55,6 @@ platform_do_upgrade() {
 
 		# Reset success flag
 		fw_setenv flag_boot_success 0
-
 		nand_do_upgrade "$1"
 		;;
 	zte,mf269)

@@ -3,19 +3,18 @@ include $(TOPDIR)/rules.mk
 ARCH:=aarch64
 BOARD:=ipq807x
 BOARDNAME:=Qualcomm Atheros IPQ807x
-FEATURES:=squashfs ramdisk fpu nand source-only
+FEATURES:=squashfs ramdisk fpu nand emmc
 KERNELNAME:=Image dtbs
 CPU_TYPE:=cortex-a53
 SUBTARGETS:=generic
 
-KERNEL_PATCHVER:=5.10
-KERNEL_TESTING_PATCHVER:=5.15
+KERNEL_PATCHVER:=5.15
 
 include $(INCLUDE_DIR)/target.mk
 DEFAULT_PACKAGES += \
+	kmod-usb3 kmod-usb-dwc3 kmod-usb-dwc3-qcom \
 	kmod-leds-gpio kmod-gpio-button-hotplug \
-	ath11k-firmware-ipq8074 kmod-ath11k-ahb ath11k-board-ipq8074 \
-	wpad-openssl kmod-qca-nss-dp kmod-qca-nss-drv kmod-qca-nss-drv-pppoe kmod-qca-nss-ecm  kmod-qca-nss-drv-bridge-mgr qca-nss-gmac nss-firmware-ipq8074 \
-	zram-swap autocore-arm htop luci-app-cpufreq luci-app-eqos uboot-envtools \
+	ath11k-firmware-ipq8074 kmod-ath11k-ahb ath11k-board-ipq8074  kmod-qca-nss-dp kmod-qca-nss-drv-pppoe kmod-qca-nss-ecm  kmod-qca-nss-drv-bridge-mgr qca-nss-gmac nss-firmware-ipq8074 \
+	wpad-basic-wolfssl uboot-envtools zram-swap autocore-arm \
 
 $(eval $(call BuildTarget))
