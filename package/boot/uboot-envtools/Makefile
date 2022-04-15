@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uboot-envtools
 PKG_DISTNAME:=u-boot
-PKG_VERSION:=2022.01
+PKG_VERSION:=2022.04
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=$(PKG_DISTNAME)-$(PKG_VERSION).tar.bz2
@@ -17,7 +17,7 @@ PKG_SOURCE_URL:= \
     https://ftp.denx.de/pub/u-boot \
     https://mirror.cyberbits.eu/u-boot \
     ftp://ftp.denx.de/pub/u-boot
-PKG_HASH:=81b4543227db228c03f8a1bf5ddbc813b0bb8f6555ce46064ef721a6fc680413
+PKG_HASH:=68e065413926778e276ec3abd28bb32fa82abaa4a6898d570c1f48fbdb08bcd0
 PKG_SOURCE_SUBDIR:=$(PKG_DISTNAME)-$(PKG_VERSION)
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_DISTNAME)-$(PKG_VERSION)
 
