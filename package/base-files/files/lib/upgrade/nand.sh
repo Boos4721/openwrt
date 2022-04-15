@@ -158,13 +158,11 @@ nand_upgrade_prepare_ubi() {
 	local ubidev="$( nand_find_ubi "$CI_UBIPART" )"
 	if [ ! "$ubidev" ]; then
 		ubiattach -m "$mtdnum"
-		sync
 		ubidev="$( nand_find_ubi "$CI_UBIPART" )"
 
 		if [ ! "$ubidev" ]; then
 			ubiformat /dev/mtd$mtdnum -y
 			ubiattach -m "$mtdnum"
-			sync
 			ubidev="$( nand_find_ubi "$CI_UBIPART" )"
 
 			if [ ! "$ubidev" ]; then
@@ -232,7 +230,7 @@ nand_upgrade_prepare_ubi() {
 			return 1
 		fi
 	fi
-	sync
+
 	return 0
 }
 
@@ -258,7 +256,6 @@ nand_upgrade_ubinized() {
 
 	local mtddev="/dev/mtd${mtdnum}"
 	ubidetach -p "${mtddev}" || :
-	sync
 	ubiformat "${mtddev}" -y -f "${ubi_file}"
 	ubiattach -p "${mtddev}"
 
