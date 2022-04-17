@@ -31,8 +31,7 @@ define KernelPackage/drm-rockchip
 	$(LINUX_DIR)/drivers/gpu/drm/bridge/synopsys/dw-hdmi.ko \
 	$(LINUX_DIR)/drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.ko \
 	$(LINUX_DIR)/drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.ko \
-	$(LINUX_DIR)/drivers/media/cec/cec.ko@lt5.10 \
-	$(LINUX_DIR)/drivers/media/cec/core/cec.ko@ge5.10 \
+	$(LINUX_DIR)/drivers/media/cec/core/cec.ko \
 	$(LINUX_DIR)/drivers/phy/rockchip/phy-rockchip-inno-hdmi.ko \
 	$(LINUX_DIR)/drivers/gpu/drm/panel/panel-simple.ko \
 	$(LINUX_DIR)/drivers/gpu/drm/rockchip/rockchipdrm.ko
@@ -45,23 +44,20 @@ endef
 
 $(eval $(call KernelPackage,drm-rockchip))
 
-define KernelPackage/gpu-lima
-  SUBMENU:=$(VIDEO_MENU)
-  TITLE:=Mali-4xx GPU support
-  DEPENDS:=@TARGET_rockchip +kmod-drm
+define KernelPackage/saradc-rockchip
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=Rockchip SARADC support
+  DEPENDS:=@TARGET_rockchip +kmod-industrialio-triggered-buffer
   KCONFIG:= \
-	CONFIG_DRM_VGEM \
-	CONFIG_DRM_GEM_CMA_HELPER=y \
-	CONFIG_DRM_LIMA
+	CONFIG_RESET_CONTROLLER=y \
+	CONFIG_ROCKCHIP_SARADC
   FILES:= \
-	$(LINUX_DIR)/drivers/gpu/drm/vgem/vgem.ko \
-	$(LINUX_DIR)/drivers/gpu/drm/scheduler/gpu-sched.ko \
-	$(LINUX_DIR)/drivers/gpu/drm/lima/lima.ko
-  AUTOLOAD:=$(call AutoProbe,lima vgem)
+	$(LINUX_DIR)/drivers/iio/adc/rockchip_saradc.ko
+  AUTOLOAD:=$(call AutoProbe,rockchip_saradc)
 endef
 
-define KernelPackage/gpu-lima/description
-  Open-source reverse-engineered driver for Mali-4xx GPUs
+define KernelPackage/saradc-rockchip/description
+  Support for the SARADC found in SoCs from Rockchip
 endef
 
-$(eval $(call KernelPackage,gpu-lima))
+$(eval $(call KernelPackage,saradc-rockchip))
