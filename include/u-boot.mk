@@ -45,6 +45,11 @@ UBOOT_MAKE_FLAGS = \
 	HOSTCC="$(HOSTCC)" \
 	HOSTCFLAGS="$(HOST_CFLAGS) $(HOST_CPPFLAGS) -std=gnu11" \
 	HOSTLDFLAGS="$(HOST_LDFLAGS)" \
+	LOCALVERSION="-OpenWrt-$(REVISION)" \
+	STAGING_PREFIX="$(STAGING_DIR_HOST)" \
+	PKG_CONFIG_PATH="$(STAGING_DIR_HOST)/lib/pkgconfig" \
+	PKG_CONFIG_LIBDIR="$(STAGING_DIR_HOST)/lib/pkgconfig" \
+	PKG_CONFIG_EXTRAARGS="--static" \
 	$(if $(findstring c,$(OPENWRT_VERBOSE)),V=1,V='')
 
 define Build/U-Boot/Target
@@ -80,12 +85,9 @@ define Build/Configure/U-Boot
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) $(UBOOT_CONFIGURE_VARS) $(UBOOT_CONFIG)_config
 endef
 
-DTC=$(wildcard $(LINUX_DIR)/scripts/dtc/dtc)
-
 define Build/Compile/U-Boot
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
 		CROSS_COMPILE=$(TARGET_CROSS) \
-		$(if $(DTC),DTC="$(DTC)") \
 		$(UBOOT_MAKE_FLAGS)
 endef
 

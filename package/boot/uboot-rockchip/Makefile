@@ -5,10 +5,10 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
-PKG_VERSION:=2021.07
+PKG_VERSION:=2022.04
 PKG_RELEASE:=$(AUTORELEASE)
 
-PKG_HASH:=312b7eeae44581d1362c3a3f02c28d806647756c82ba8c72241c7cdbe68ba77e
+PKG_HASH:=68e065413926778e276ec3abd28bb32fa82abaa4a6898d570c1f48fbdb08bcd0
 
 PKG_MAINTAINER:=Tobias Maedel <openwrt@tbspace.de>
 
@@ -40,8 +40,7 @@ define U-Boot/nanopi-r2s-rk3328
   BUILD_SUBTARGET:=armv8
   NAME:=NanoPi R2S
   BUILD_DEVICES:= \
-    friendlyarm_nanopi-r2s \
-    friendlyarm_nanopi-neo3
+    friendlyarm_nanopi-r2s
   DEPENDS:=+PACKAGE_u-boot-nanopi-r2s-rk3328:arm-trusted-firmware-rk3328
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk322xh_bl31_v1.46.elf
@@ -73,6 +72,7 @@ define U-Boot/orangepi-r1-plus-lts-rk3328
   USE_RKBIN:=1
 endef
 
+
 # RK3399 boards
 
 define U-Boot/nanopi-r4s-rk3399
@@ -90,7 +90,7 @@ define U-Boot/rock-pi-4-rk3399
   BUILD_SUBTARGET:=armv8
   NAME:=Rock Pi 4
   BUILD_DEVICES:= \
-    radxa_rock-pi-4
+    radxa_rock-pi-4a
   DEPENDS:=+PACKAGE_u-boot-rock-pi-4-rk3399:arm-trusted-firmware-rockchip
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
   ATF:=rk3399_bl31.elf
