@@ -22,8 +22,6 @@ Signed-off-by: Mark Brown <broonie@kernel.org>
  sound/soc/rockchip/rockchip_pdm.h |  3 +++
  2 files changed, 37 insertions(+)
 
-diff --git a/sound/soc/rockchip/rockchip_pdm.c b/sound/soc/rockchip/rockchip_pdm.c
-index f2bf02305de6..64d9891b6434 100644
 --- a/sound/soc/rockchip/rockchip_pdm.c
 +++ b/sound/soc/rockchip/rockchip_pdm.c
 @@ -20,6 +20,7 @@
@@ -34,7 +32,7 @@ index f2bf02305de6..64d9891b6434 100644
  
  enum rk_pdm_version {
  	RK_PDM_RK3229,
-@@ -539,8 +540,36 @@ static const struct of_device_id rockchip_pdm_match[] __maybe_unused = {
+@@ -539,8 +540,36 @@ static const struct of_device_id rockchi
  };
  MODULE_DEVICE_TABLE(of, rockchip_pdm_match);
  
@@ -71,7 +69,7 @@ index f2bf02305de6..64d9891b6434 100644
  	const struct of_device_id *match;
  	struct rk_pdm_dev *pdm;
  	struct resource *res;
-@@ -606,6 +635,11 @@ static int rockchip_pdm_probe(struct platform_device *pdev)
+@@ -606,6 +635,11 @@ static int rockchip_pdm_probe(struct pla
  	}
  
  	rockchip_pdm_rxctrl(pdm, 0);
@@ -83,8 +81,6 @@ index f2bf02305de6..64d9891b6434 100644
  	ret = devm_snd_dmaengine_pcm_register(&pdev->dev, NULL, 0);
  	if (ret) {
  		dev_err(&pdev->dev, "could not register pcm: %d\n", ret);
-diff --git a/sound/soc/rockchip/rockchip_pdm.h b/sound/soc/rockchip/rockchip_pdm.h
-index 13bfbc286276..cab977272ee6 100644
 --- a/sound/soc/rockchip/rockchip_pdm.h
 +++ b/sound/soc/rockchip/rockchip_pdm.h
 @@ -53,6 +53,9 @@
@@ -97,6 +93,3 @@ index 13bfbc286276..cab977272ee6 100644
  #define PDM_CLK_FD_RATIO_MSK	BIT(6)
  #define PDM_CLK_FD_RATIO_40	(0X0 << 6)
  #define PDM_CLK_FD_RATIO_35	BIT(6)
--- 
-2.20.1
-

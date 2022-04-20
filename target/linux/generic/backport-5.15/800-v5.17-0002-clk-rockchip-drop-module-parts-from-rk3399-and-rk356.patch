@@ -20,8 +20,6 @@ Signed-off-by: Stephen Boyd <sboyd@kernel.org>
  drivers/clk/rockchip/clk-rk3568.c | 4 ----
  3 files changed, 2 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/clk/rockchip/Kconfig b/drivers/clk/rockchip/Kconfig
-index 2dfd6a383393..3067bdb6e119 100644
 --- a/drivers/clk/rockchip/Kconfig
 +++ b/drivers/clk/rockchip/Kconfig
 @@ -80,14 +80,14 @@ config CLK_RK3368
@@ -41,11 +39,9 @@ index 2dfd6a383393..3067bdb6e119 100644
  	depends on ARM64 || COMPILE_TEST
  	default y
  	help
-diff --git a/drivers/clk/rockchip/clk-rk3399.c b/drivers/clk/rockchip/clk-rk3399.c
-index 53ed5cca335b..306910a3a0d3 100644
 --- a/drivers/clk/rockchip/clk-rk3399.c
 +++ b/drivers/clk/rockchip/clk-rk3399.c
-@@ -1630,7 +1630,6 @@ static const struct of_device_id clk_rk3399_match_table[] = {
+@@ -1627,7 +1627,6 @@ static const struct of_device_id clk_rk3
  	},
  	{ }
  };
@@ -53,18 +49,16 @@ index 53ed5cca335b..306910a3a0d3 100644
  
  static int __init clk_rk3399_probe(struct platform_device *pdev)
  {
-@@ -1657,6 +1656,3 @@ static struct platform_driver clk_rk3399_driver = {
+@@ -1654,6 +1653,3 @@ static struct platform_driver clk_rk3399
  	},
  };
  builtin_platform_driver_probe(clk_rk3399_driver, clk_rk3399_probe);
 -
 -MODULE_DESCRIPTION("Rockchip RK3399 Clock Driver");
 -MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/rockchip/clk-rk3568.c b/drivers/clk/rockchip/clk-rk3568.c
-index 75ca855e720d..69a9e8069a48 100644
 --- a/drivers/clk/rockchip/clk-rk3568.c
 +++ b/drivers/clk/rockchip/clk-rk3568.c
-@@ -1693,7 +1693,6 @@ static const struct of_device_id clk_rk3568_match_table[] = {
+@@ -1693,7 +1693,6 @@ static const struct of_device_id clk_rk3
  	},
  	{ }
  };
@@ -72,13 +66,10 @@ index 75ca855e720d..69a9e8069a48 100644
  
  static int __init clk_rk3568_probe(struct platform_device *pdev)
  {
-@@ -1720,6 +1719,3 @@ static struct platform_driver clk_rk3568_driver = {
+@@ -1720,6 +1719,3 @@ static struct platform_driver clk_rk3568
  	},
  };
  builtin_platform_driver_probe(clk_rk3568_driver, clk_rk3568_probe);
 -
 -MODULE_DESCRIPTION("Rockchip RK3568 Clock Driver");
 -MODULE_LICENSE("GPL");
--- 
-2.20.1
-

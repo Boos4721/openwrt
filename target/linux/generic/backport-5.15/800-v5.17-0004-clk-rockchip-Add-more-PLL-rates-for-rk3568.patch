@@ -22,11 +22,9 @@ Signed-off-by: Heiko Stuebner <heiko@sntech.de>
  drivers/clk/rockchip/clk-rk3568.c | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/drivers/clk/rockchip/clk-rk3568.c b/drivers/clk/rockchip/clk-rk3568.c
-index 69a9e8069a48..9d889fc46811 100644
 --- a/drivers/clk/rockchip/clk-rk3568.c
 +++ b/drivers/clk/rockchip/clk-rk3568.c
-@@ -71,11 +71,17 @@ static struct rockchip_pll_rate_table rk3568_pll_rates[] = {
+@@ -71,11 +71,17 @@ static struct rockchip_pll_rate_table rk
  	RK3036_PLL_RATE(500000000, 1, 125, 6, 1, 1, 0),
  	RK3036_PLL_RATE(408000000, 1, 68, 2, 2, 1, 0),
  	RK3036_PLL_RATE(312000000, 1, 78, 6, 1, 1, 0),
@@ -44,6 +42,3 @@ index 69a9e8069a48..9d889fc46811 100644
  	RK3036_PLL_RATE(74250000, 2, 99, 4, 4, 1, 0),
  	{ /* sentinel */ },
  };
--- 
-2.20.1
-

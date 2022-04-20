@@ -15,11 +15,9 @@ Signed-off-by: Vinod Koul <vkoul@kernel.org>
  drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 17 ++++++++++++-----
  1 file changed, 12 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-index fac390e1f8de..1cdd9ae0a230 100644
 --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
 +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -1073,12 +1073,19 @@ static int rockchip_usb2phy_probe(struct platform_device *pdev)
+@@ -1081,12 +1081,19 @@ static int rockchip_usb2phy_probe(struct
  		return -EINVAL;
  	}
  
@@ -44,6 +42,3 @@ index fac390e1f8de..1cdd9ae0a230 100644
  
  	if (of_device_is_compatible(np, "rockchip,rv1108-usb2phy")) {
  		rphy->usbgrf =
--- 
-2.20.1
-

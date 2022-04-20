@@ -13,11 +13,9 @@ Signed-off-by: Mark Brown <broonie@kernel.org>
  sound/soc/rockchip/rockchip_pdm.c | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/sound/soc/rockchip/rockchip_pdm.c b/sound/soc/rockchip/rockchip_pdm.c
-index 67634d147377..f2bf02305de6 100644
 --- a/sound/soc/rockchip/rockchip_pdm.c
 +++ b/sound/soc/rockchip/rockchip_pdm.c
-@@ -531,6 +531,8 @@ static const struct of_device_id rockchip_pdm_match[] __maybe_unused = {
+@@ -531,6 +531,8 @@ static const struct of_device_id rockchi
  	  .data = (void *)RK_PDM_RK3308 },
  	{ .compatible = "rockchip,rk3308-pdm",
  	  .data = (void *)RK_PDM_RK3308 },
@@ -26,6 +24,3 @@ index 67634d147377..f2bf02305de6 100644
  	{ .compatible = "rockchip,rv1126-pdm",
  	  .data = (void *)RK_PDM_RV1126 },
  	{},
--- 
-2.20.1
-
