@@ -2699,7 +2699,7 @@ config BUSYBOX_DEFAULT_FEATURE_UDHCPC6_RFC5970
 	default n
 config BUSYBOX_DEFAULT_UDHCPC_DEFAULT_INTERFACE
 	string
-	default "n"
+	default ""
 config BUSYBOX_DEFAULT_FEATURE_UDHCP_PORT
 	bool
 	default n
