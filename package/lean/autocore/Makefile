@@ -1,61 +1,64 @@
+# SPDX-License-Identifier: GPL-3.0-only
 #
-# Copyright (C) 2010-2011 OpenWrt.org
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-#
+# Copyright (C) 2020 Lean <coolsnowwolf@gmail.com>
+# Copyright (C) 2021 ImmortalWrt.org
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=autocore
-PKG_VERSION:=1
-PKG_RELEASE:=41
+PKG_FLAGS:=nonshared
+PKG_RELEASE:=$(COMMITCOUNT)
+
+PKG_CONFIG_DEPENDS:= \
+	CONFIG_TARGET_bcm27xx \
+	CONFIG_TARGET_bcm53xx
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/autocore-arm
-  TITLE:=Arm auto core loadbalance script.
+  TITLE:=Arm auto core loadbalance script
   MAINTAINER:=CN_SZTL
-  DEPENDS:=@(TARGET_bcm27xx||TARGET_bcm53xx||TARGET_ipq40xx||TARGET_ipq806x||TARGET_ipq807x||TARGET_mvebu||TARGET_rockchip) \
-    +TARGET_bcm27xx:bcm27xx-userland +TARGET_bcm53xx:nvram +ethtool
+  DEPENDS:=@(arm||aarch64) \
+    +TARGET_bcm27xx:bcm27xx-userland \
+    +TARGET_bcm53xx:nvram
   VARIANT:=arm
 endef
 
 define Package/autocore-x86
-  TITLE:=x86/x64 auto core loadbalance script.
+  TITLE:=x86/x64 auto core loadbalance script
   MAINTAINER:=Lean
-  DEPENDS:=@TARGET_x86 +bc +lm-sensors +ethtool
+  DEPENDS:=@TARGET_x86 +lm-sensors +ethtool
   VARIANT:=x86
-endef
-
-define Package/autocore-arm/description
-  A luci autoconfig hotplug script.
-endef
-
-define Package/autocore-x86/description
-  A usb autoconfig hotplug script.
 endef
 
 define Build/Compile
 endef
 
-define Package/autocore-arm/install
+define Package/autocore/install/Default
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) ./files/arm/index.htm $(1)/etc/index.htm
+	$(CP) ./files/generic/index.htm $(1)/etc/
+
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	$(INSTALL_BIN) ./files/arm/090-cover-index_htm $(1)/etc/uci-defaults/090-cover-index_htm
+	$(INSTALL_BIN) ./files/generic/090-cover-index_htm $(1)/etc/uci-defaults/
+
 	$(INSTALL_DIR) $(1)/sbin
-	$(INSTALL_BIN) ./files/arm/sbin/cpuinfo $(1)/sbin/cpuinfo
-	$(INSTALL_BIN) ./files/arm/sbin/ethinfo $(1)/sbin/ethinfo
+	$(INSTALL_BIN) ./files/generic/cpuinfo $(1)/sbin/
+	$(INSTALL_BIN) ./files/generic/ethinfo $(1)/sbin/
+endef
+
+define Package/autocore-arm/install
+	$(call Package/autocore/install/Default,$(1))
+
+ifneq (, $(findstring $(BOARD), ipq40xx ipq806x))
+	$(INSTALL_BIN) ./files/arm/tempinfo $(1)/sbin/
+endif
 endef
 
 define Package/autocore-x86/install
+	$(call Package/autocore/install/Default,$(1))
+
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/x86/autocore $(1)/etc/init.d/autocore
-	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) ./files/x86/index.htm $(1)/etc/index.htm
-	$(INSTALL_DIR) $(1)/sbin
-	$(CP) ./files/x86/sbin/* $(1)/sbin
+	$(INSTALL_BIN) ./files/x86/autocore $(1)/etc/init.d/
 endef
 
 $(eval $(call BuildPackage,autocore-arm))
