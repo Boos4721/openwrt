@@ -1,0 +1,97 @@
+From 5ff77eea54812b8feadeaf8825bde8edaffd9e29 Mon Sep 17 00:00:00 2001
+From: bitthief <bitthief@protonmail.ch>
+Date: Wed, 9 Mar 2022 05:17:05 +0200
+Subject: [PATCH] qca-nss-ecm: skip acceleration for dying conntrack entries
+
+Backport fix from QSDK 12.1r2.
+
+---
+ ecm_conntrack_notifier.c     | 8 ++++++++
+ frontends/nss/ecm_nss_ipv4.c | 7 +++++++
+ frontends/nss/ecm_nss_ipv6.c | 7 +++++++
+ frontends/sfe/ecm_sfe_ipv4.c | 7 +++++++
+ frontends/sfe/ecm_sfe_ipv6.c | 8 ++++++++
+ 5 files changed, 37 insertions(+)
+
+--- a/ecm_conntrack_notifier.c
++++ b/ecm_conntrack_notifier.c
+@@ -356,6 +356,14 @@ static int ecm_conntrack_event(unsigned
+ 	}
+ 
+ 	/*
++	 * Do not process the packet, if the conntrack is in dying state.
++	 */
++	if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++		DEBUG_TRACE("Connection is in dying state - ignoring\n");
++		return NOTIFY_DONE;
++	}
++
++	/*
+ 	 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 	 * and onwards.
+ 	 */
+--- a/frontends/nss/ecm_nss_ipv4.c
++++ b/frontends/nss/ecm_nss_ipv4.c
+@@ -1134,6 +1134,13 @@ static unsigned int ecm_nss_ipv4_ip_proc
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
+ 		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
++		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+ 		 * So, for the newer kernels, instead of comparing the ct with the percpu
+--- a/frontends/nss/ecm_nss_ipv6.c
++++ b/frontends/nss/ecm_nss_ipv6.c
+@@ -1149,6 +1149,13 @@ static unsigned int ecm_nss_ipv6_ip_proc
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
+ 		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
++		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+ 		 * So, for the newer kernels, instead of comparing the ct with the percpu
+--- a/frontends/sfe/ecm_sfe_ipv4.c
++++ b/frontends/sfe/ecm_sfe_ipv4.c
+@@ -765,6 +765,13 @@ static unsigned int ecm_sfe_ipv4_ip_proc
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
+ 		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
++		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+ 		 * So, for the newer kernels, instead of comparing the ct with the percpu
+--- a/frontends/sfe/ecm_sfe_ipv6.c
++++ b/frontends/sfe/ecm_sfe_ipv6.c
+@@ -733,6 +733,14 @@ static unsigned int ecm_sfe_ipv6_ip_proc
+ 		sender = ECM_TRACKER_SENDER_TYPE_SRC;
+ 	} else {
+ 		/*
++		 * Do not process the packet, if the conntrack is in dying state.
++		 */
++		if (unlikely(test_bit(IPS_DYING_BIT, &ct->status))) {
++			DEBUG_WARN("%px: ct: %px is in dying state\n", skb, ct);
++			return NF_ACCEPT;
++		}
++
++		/*
+ 		 * Fake untracked conntrack objects were removed on 4.12 kernel version
+ 		 * and onwards.
+ 		 * So, for the newer kernels, instead of comparing the ct with the percpu

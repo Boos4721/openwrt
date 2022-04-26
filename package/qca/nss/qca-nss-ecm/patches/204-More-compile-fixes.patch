@@ -1,4 +1,4 @@
-From e6d701c0d454d841366c556b2ef07a5203ffb35d Mon Sep 17 00:00:00 2001
+From 829ed917a4561af6da17b73292290abd7fbe8e0e Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Fri, 21 May 2021 21:41:31 +0200
 Subject: [PATCH] More compile fixes
@@ -7,9 +7,11 @@ More runtime compile fixes.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 ---
- frontends/nss/ecm_nss_ported_ipv4.c | 12 +++---------
- frontends/nss/ecm_nss_ported_ipv6.c | 12 +++---------
- 2 files changed, 6 insertions(+), 18 deletions(-)
+ frontends/nss/ecm_nss_ported_ipv4.c | 10 ++--------
+ frontends/nss/ecm_nss_ported_ipv6.c |  8 +-------
+ frontends/sfe/ecm_sfe_ported_ipv4.c | 10 ++--------
+ frontends/sfe/ecm_sfe_ported_ipv6.c |  8 +-------
+ 4 files changed, 6 insertions(+), 30 deletions(-)
 
 --- a/frontends/nss/ecm_nss_ported_ipv4.c
 +++ b/frontends/nss/ecm_nss_ported_ipv4.c
@@ -20,12 +22,13 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 -	struct dentry *udp_dentry;
 -
 -	udp_dentry = debugfs_create_u32("udp_accelerated_count", S_IRUGO, dentry,
-+	debugfs_create_u32("udp_accelerated_count", S_IRUGO, dentry,
- 						&ecm_nss_ported_ipv4_accelerated_count[ECM_NSS_PORTED_IPV4_PROTO_UDP]);
+-						&ecm_nss_ported_ipv4_accelerated_count[ECM_NSS_PORTED_IPV4_PROTO_UDP]);
 -	if (!udp_dentry) {
 -		DEBUG_ERROR("Failed to create ecm nss ipv4 udp_accelerated_count file in debugfs\n");
 -		return false;
 -	}
++	debugfs_create_u32("udp_accelerated_count", S_IRUGO, dentry,
++ 					&ecm_nss_ported_ipv4_accelerated_count[ECM_NSS_PORTED_IPV4_PROTO_UDP]);
  
  	debugfs_create_u32("tcp_accelerated_count", S_IRUGO, dentry,
  					&ecm_nss_ported_ipv4_accelerated_count[ECM_NSS_PORTED_IPV4_PROTO_TCP]);
@@ -47,3 +50,41 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  
  	debugfs_create_u32("tcp_accelerated_count", S_IRUGO, dentry,
  					&ecm_nss_ported_ipv6_accelerated_count[ECM_NSS_PORTED_IPV6_PROTO_TCP]);
+--- a/frontends/sfe/ecm_sfe_ported_ipv4.c
++++ b/frontends/sfe/ecm_sfe_ported_ipv4.c
+@@ -2519,14 +2519,8 @@ done:
+  */
+ bool ecm_sfe_ported_ipv4_debugfs_init(struct dentry *dentry)
+ {
+-	struct dentry *udp_dentry;
+-
+-	udp_dentry = debugfs_create_u32("udp_accelerated_count", S_IRUGO, dentry,
+-						&ecm_sfe_ported_ipv4_accelerated_count[ECM_SFE_PORTED_IPV4_PROTO_UDP]);
+-	if (!udp_dentry) {
+-		DEBUG_ERROR("Failed to create ecm sfe ipv4 udp_accelerated_count file in debugfs\n");
+-		return false;
+-	}
++	debugfs_create_u32("udp_accelerated_count", S_IRUGO, dentry,
++					&ecm_sfe_ported_ipv4_accelerated_count[ECM_SFE_PORTED_IPV4_PROTO_UDP]);
+ 
+ 	debugfs_create_u32("tcp_accelerated_count", S_IRUGO, dentry,
+ 					&ecm_sfe_ported_ipv4_accelerated_count[ECM_SFE_PORTED_IPV4_PROTO_TCP]);
+--- a/frontends/sfe/ecm_sfe_ported_ipv6.c
++++ b/frontends/sfe/ecm_sfe_ported_ipv6.c
+@@ -2365,14 +2365,8 @@ done:
+  */
+ bool ecm_sfe_ported_ipv6_debugfs_init(struct dentry *dentry)
+ {
+-	struct dentry *udp_dentry;
+-
+-	udp_dentry = debugfs_create_u32("udp_accelerated_count", S_IRUGO, dentry,
+-						&ecm_sfe_ported_ipv6_accelerated_count[ECM_SFE_PORTED_IPV6_PROTO_UDP]);
+-	if (!udp_dentry) {
+-		DEBUG_ERROR("Failed to create ecm sfe ipv6 udp_accelerated_count file in debugfs\n");
+-		return false;
+-	}
++	debugfs_create_u32("udp_accelerated_count", S_IRUGO, dentry,
++					&ecm_sfe_ported_ipv6_accelerated_count[ECM_SFE_PORTED_IPV6_PROTO_UDP]);
+ 
+ 	debugfs_create_u32("tcp_accelerated_count", S_IRUGO, dentry,
+ 					&ecm_sfe_ported_ipv6_accelerated_count[ECM_SFE_PORTED_IPV6_PROTO_TCP]);
