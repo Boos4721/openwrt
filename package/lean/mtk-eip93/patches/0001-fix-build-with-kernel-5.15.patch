@@ -1,0 +1,34 @@
+--- a/src/eip93-cipher.c
++++ b/src/eip93-cipher.c
+@@ -16,7 +16,14 @@
+ #include <crypto/md5.h>
+ #include <crypto/null.h>
+ #include <crypto/scatterwalk.h>
++
++#include <linux/version.h>
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0) 
++#include <crypto/sha1.h>
++#include <crypto/sha2.h>
++#else
+ #include <crypto/sha.h>
++#endif
+
+ #include <linux/dma-mapping.h>
+ #include <linux/dmapool.h>
+diff --git a/src/eip93-core.h b/src/eip93-core.h
+index c391565..bfa1879 100644
+--- a/src/eip93-core.h
++++ b/src/eip93-core.h
+@@ -14,7 +14,8 @@
+ #include <crypto/internal/hash.h>
+ #include <crypto/internal/rng.h>
+ #include <crypto/internal/skcipher.h>
+-
++#include <linux/of.h>
++#include <linux/interrupt.h>
+ /**
+  * struct mtk_device - crypto engine device structure
+  */
+-- 
+2.17.1
+

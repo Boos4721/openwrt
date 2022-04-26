@@ -49,7 +49,7 @@ endef
 define Package/autocore-arm/install
 	$(call Package/autocore/install/Default,$(1))
 
-ifneq (, $(findstring $(BOARD), ipq40xx ipq806x))
+ifneq (, $(findstring $(BOARD), ipq40xx ipq806x ipq807x))
 	$(INSTALL_BIN) ./files/arm/tempinfo $(1)/sbin/
 endif
 endef
