@@ -262,7 +262,7 @@ Link: https://lore.kernel.org/r/20210929034253.24570-5-shawn.guo@linaro.org
  				      <0 0x088eb800 0 0x800>;
 --- a/arch/arm64/boot/dts/qcom/sm8350.dtsi
 +++ b/arch/arm64/boot/dts/qcom/sm8350.dtsi
-@@ -1120,7 +1120,7 @@
+@@ -1122,7 +1122,7 @@
  			reset-names = "ufsphy";
  			status = "disabled";
  

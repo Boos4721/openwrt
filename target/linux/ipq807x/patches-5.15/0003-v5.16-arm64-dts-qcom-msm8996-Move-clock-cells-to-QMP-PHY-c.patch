@@ -108,7 +108,7 @@ Link: https://lore.kernel.org/r/20210929034253.24570-4-shawn.guo@linaro.org
  				clock-output-names = "usb3_phy_pipe_clk_src";
 --- a/arch/arm64/boot/dts/qcom/sm8350.dtsi
 +++ b/arch/arm64/boot/dts/qcom/sm8350.dtsi
-@@ -1110,7 +1110,6 @@
+@@ -1112,7 +1112,6 @@
  			reg = <0 0x01d87000 0 0xe10>;
  			#address-cells = <2>;
  			#size-cells = <2>;
@@ -116,7 +116,7 @@ Link: https://lore.kernel.org/r/20210929034253.24570-4-shawn.guo@linaro.org
  			ranges;
  			clock-names = "ref",
  				      "ref_aux";
-@@ -1245,7 +1244,6 @@
+@@ -1247,7 +1246,6 @@
  			      <0 0x088e8000 0 0x20>;
  			reg-names = "reg-base", "dp_com";
  			status = "disabled";
@@ -124,7 +124,7 @@ Link: https://lore.kernel.org/r/20210929034253.24570-4-shawn.guo@linaro.org
  			#address-cells = <2>;
  			#size-cells = <2>;
  			ranges;
-@@ -1278,7 +1276,6 @@
+@@ -1280,7 +1278,6 @@
  			compatible = "qcom,sm8350-qmp-usb3-uni-phy";
  			reg = <0 0x088eb000 0 0x200>;
  			status = "disabled";
