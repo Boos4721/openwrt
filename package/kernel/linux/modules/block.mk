@@ -513,7 +513,7 @@ define KernelPackage/scsi-core
   TITLE:=SCSI device support
   KCONFIG:= \
 	CONFIG_SCSI \
-  CONFIG_SCSI_COMMON@ge5.15 \
+	CONFIG_SCSI_COMMON@ge5.15 \
 	CONFIG_BLK_DEV_SD
   FILES:= \
 	$(LINUX_DIR)/drivers/scsi/scsi_mod.ko \

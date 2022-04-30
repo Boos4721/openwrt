@@ -99,12 +99,12 @@ define KernelPackage/fs-cifs
   $(call AddDepends/nls)
   DEPENDS+= \
     +(LINUX_5_4||LINUX_5_10):kmod-crypto-md4\
-    +(LINUX_5_4||LINUX_5_10):kmod-crypto-arc4 \
     +kmod-crypto-md5 \
     +kmod-crypto-sha256 \
     +kmod-crypto-sha512 \
     +kmod-crypto-cmac \
     +kmod-crypto-hmac \
+    +(LINUX_5_4||LINUX_5_10):kmod-crypto-arc4 \
     +kmod-crypto-aead \
     +kmod-crypto-ccm \
     +kmod-crypto-ecb \
@@ -395,17 +395,6 @@ endef
 $(eval $(call KernelPackage,fs-nfs))
 
 
-define KernelPackage/fs-nfs-ssc
-  SUBMENU:=$(FS_MENU)
-  TITLE:=Common NFS filesystem SSC Helper module
-  KCONFIG:= CONFIG_NFS_V4_2@ge5.10
-  FILES:= $(LINUX_DIR)/fs/nfs_common/nfs_ssc.ko@ge5.10
-  AUTOLOAD:=$(call AutoLoad,30,nfs_ssc)
-endef
-
-$(eval $(call KernelPackage,fs-nfs-ssc))
-
-
 define KernelPackage/fs-nfs-common
   SUBMENU:=$(FS_MENU)
   TITLE:=Common NFS filesystem modules
@@ -413,11 +402,18 @@ define KernelPackage/fs-nfs-common
   KCONFIG:= \
 	CONFIG_LOCKD \
 	CONFIG_SUNRPC \
-	CONFIG_GRACE_PERIOD
+	CONFIG_GRACE_PERIOD \
+	CONFIG_NFS_V4=y \
+	CONFIG_NFS_V4_1=y \
+	CONFIG_NFS_V4_1_IMPLEMENTATION_ID_DOMAIN="kernel.org" \
+	CONFIG_NFS_V4_1_MIGRATION=n \
+	CONFIG_NFS_V4_2=y \
+	CONFIG_NFS_V4_2_READ_PLUS=n
   FILES:= \
 	$(LINUX_DIR)/fs/lockd/lockd.ko \
 	$(LINUX_DIR)/net/sunrpc/sunrpc.ko \
-	$(LINUX_DIR)/fs/nfs_common/grace.ko
+	$(LINUX_DIR)/fs/nfs_common/grace.ko \
+	$(LINUX_DIR)/fs/nfs_common/nfs_ssc.ko@ge5.10
   AUTOLOAD:=$(call AutoLoad,30,grace sunrpc lockd)
 endef
 
@@ -436,8 +432,7 @@ define KernelPackage/fs-nfs-common-rpcsec
 	+kmod-crypto-sha1 \
 	+kmod-crypto-hmac \
 	+kmod-crypto-ecb \
-	+kmod-crypto-arc4 \
-	+kmod-oid-registry
+	+kmod-crypto-arc4
   KCONFIG:= \
 	CONFIG_SUNRPC_GSS \
 	CONFIG_RPCSEC_GSS_KRB5
@@ -473,7 +468,7 @@ $(eval $(call KernelPackage,fs-nfs-v3))
 define KernelPackage/fs-nfs-v4
   SUBMENU:=$(FS_MENU)
   TITLE:=NFS4 filesystem client support
-  DEPENDS:=+kmod-fs-nfs +!LINUX_5_4:kmod-fs-nfs-ssc
+  DEPENDS:=+kmod-fs-nfs
   KCONFIG:= \
 	CONFIG_NFS_V4=y
   FILES:= \
@@ -499,7 +494,8 @@ define KernelPackage/fs-nfsd
 	CONFIG_NFSD_BLOCKLAYOUT=n \
 	CONFIG_NFSD_SCSILAYOUT=n \
 	CONFIG_NFSD_FLEXFILELAYOUT=n \
-	CONFIG_NFSD_FAULT_INJECTION=n
+	CONFIG_NFSD_FAULT_INJECTION=n \
+	CONFIG_NFSD_V4_2_INTER_SSC=n
   FILES:=$(LINUX_DIR)/fs/nfsd/nfsd.ko
   AUTOLOAD:=$(call AutoLoad,40,nfsd)
 endef
@@ -527,24 +523,25 @@ endef
 $(eval $(call KernelPackage,fs-ntfs))
 
 
-define KernelPackage/fs-ntfs3
+define KernelPackage/pstore
   SUBMENU:=$(FS_MENU)
-  TITLE:=NTFS3 Read-Write file system support
-  DEPENDS:=@LINUX_5_15 +kmod-nls-base
+  TITLE:=Pstore file system
+  DEFAULT:=m if ALL_KMODS
   KCONFIG:= \
-	CONFIG_NTFS3_FS \
-	CONFIG_NTFS3_64BIT_CLUSTER=y \
-	CONFIG_NTFS3_LZX_XPRESS=y \
-	CONFIG_NTFS3_FS_POSIX_ACL=y
-  FILES:=$(LINUX_DIR)/fs/ntfs3/ntfs3.ko
-  AUTOLOAD:=$(call AutoLoad,30,ntfs3)
+	CONFIG_PSTORE \
+	CONFIG_PSTORE_COMPRESS=y \
+	CONFIG_PSTORE_COMPRESS_DEFAULT="deflate" \
+	CONFIG_PSTORE_DEFLATE_COMPRESS=y \
+	CONFIG_PSTORE_DEFLATE_COMPRESS_DEFAULT=y
+  FILES:= $(LINUX_DIR)/fs/pstore/pstore.ko
+  AUTOLOAD:=$(call AutoLoad,30,pstore,1)
 endef
 
-define KernelPackage/fs-ntfs3/description
- Kernel module for NTFS3 filesystem support
+define KernelPackage/pstore/description
+ Kernel module for pstore filesystem support
 endef
 
-$(eval $(call KernelPackage,fs-ntfs3))
+$(eval $(call KernelPackage,pstore))
 
 
 define KernelPackage/fs-reiserfs
@@ -615,22 +612,6 @@ endef
 $(eval $(call KernelPackage,fs-vfat))
 
 
-define KernelPackage/fs-virtiofs
-  SUBMENU:=$(FS_MENU)
-  TITLE:=Virtiofs filesystem support
-  DEPENDS:=+kmod-fuse
-  KCONFIG:=CONFIG_VIRTIO_FS
-  FILES:=$(LINUX_DIR)/fs/fuse/virtiofs.ko
-  AUTOLOAD:=$(call AutoLoad,30,virtiofs)
-endef
-
-define KernelPackage/fs-virtiofs/description
-  Kernel module for Virtiofs filesystem support
-endef
-
-$(eval $(call KernelPackage,fs-virtiofs))
-
-
 define KernelPackage/fs-xfs
   SUBMENU:=$(FS_MENU)
   TITLE:=XFS filesystem support
@@ -660,3 +641,19 @@ define KernelPackage/fuse/description
 endef
 
 $(eval $(call KernelPackage,fuse))
+
+
+define KernelPackage/fs-ntfs3
+  SUBMENU:=$(FS_MENU)
+  TITLE:=Ntfs3 support
+  KCONFIG:= CONFIG_NTFS3_FS CONFIG_NTFS3_FS_POSIX_ACL=y
+  FILES:=$(LINUX_DIR)/fs/ntfs3/ntfs3.ko
+  $(call AddDepends/nls)
+  AUTOLOAD:=$(call AutoLoad,80,ntfs3)
+endef
+
+define KernelPackage/fuse/description
+ Kernel module for new NTFS3 filesystem support
+endef
+
+$(eval $(call KernelPackage,fs-ntfs3))

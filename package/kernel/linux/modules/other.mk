@@ -180,6 +180,32 @@ endef
 $(eval $(call KernelPackage,eeprom-at25))
 
 
+define KernelPackage/google-firmware
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=Google firmware drivers (Coreboot, VPD, Memconsole)
+  KCONFIG:= \
+	CONFIG_GOOGLE_FIRMWARE=y \
+	CONFIG_GOOGLE_COREBOOT_TABLE \
+	CONFIG_GOOGLE_MEMCONSOLE \
+	CONFIG_GOOGLE_MEMCONSOLE_COREBOOT \
+	CONFIG_GOOGLE_VPD
+  FILES:= \
+	  $(LINUX_DIR)/drivers/firmware/google/coreboot_table.ko \
+	  $(LINUX_DIR)/drivers/firmware/google/memconsole.ko \
+	  $(LINUX_DIR)/drivers/firmware/google/memconsole-coreboot.ko \
+	  $(LINUX_DIR)/drivers/firmware/google/vpd-sysfs.ko
+  AUTOLOAD:=$(call AutoProbe,coreboot_table memconsole-coreboot vpd-sysfs)
+endef
+
+define KernelPackage/google-firmware/description
+  Kernel modules for Google firmware drivers. Useful for examining firmware and
+  boot details on devices using a Google bootloader based on Coreboot. Provides
+  files like /sys/firmware/log and /sys/firmware/vpd.
+endef
+
+$(eval $(call KernelPackage,google-firmware))
+
+
 define KernelPackage/gpio-f7188x
   SUBMENU:=$(OTHER_MENU)
   TITLE:=Fintek F718xx/F818xx GPIO Support
@@ -768,6 +794,41 @@ endef
 $(eval $(call KernelPackage,mtdram))
 
 
+define KernelPackage/ramoops
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=Ramoops (pstore-ram)
+  DEFAULT:=m if ALL_KMODS
+  KCONFIG:=CONFIG_PSTORE_RAM
+  DEPENDS:=+kmod-pstore +kmod-reed-solomon
+  FILES:= $(LINUX_DIR)/fs/pstore/ramoops.ko
+  AUTOLOAD:=$(call AutoLoad,30,ramoops,1)
+endef
+
+define KernelPackage/ramoops/description
+ Kernel module for pstore-ram (ramoops) crash log storage
+endef
+
+$(eval $(call KernelPackage,ramoops))
+
+
+define KernelPackage/reed-solomon
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=Reed-Solomon error correction
+  DEFAULT:=m if ALL_KMODS
+  KCONFIG:=CONFIG_REED_SOLOMON \
+	CONFIG_REED_SOLOMON_DEC8=y \
+	CONFIG_REED_SOLOMON_ENC8=y
+  FILES:= $(LINUX_DIR)/lib/reed_solomon/reed_solomon.ko
+  AUTOLOAD:=$(call AutoLoad,30,reed_solomon,1)
+endef
+
+define KernelPackage/reed-solomon/description
+ Kernel module for Reed-Solomon error correction
+endef
+
+$(eval $(call KernelPackage,reed-solomon))
+
+
 define KernelPackage/serial-8250
   SUBMENU:=$(OTHER_MENU)
   TITLE:=8250 UARTs
@@ -1278,6 +1339,36 @@ endef
 
 $(eval $(call KernelPackage,f71808e-wdt))
 
+define KernelPackage/mhi-bus
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=MHI bus
+  DEPENDS:=@LINUX_5_15
+  KCONFIG:=CONFIG_MHI_BUS \
+           CONFIG_MHI_BUS_DEBUG=y
+  FILES:=$(LINUX_DIR)/drivers/bus/mhi/core/mhi.ko
+  AUTOLOAD:=$(call AutoProbe,mhi)
+endef
+
+define KernelPackage/mhi-bus/description
+  Kernel module for the Qualcomm MHI bus.
+endef
+
+$(eval $(call KernelPackage,mhi-bus))
+
+define KernelPackage/mhi-pci-generic
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=MHI PCI controller driver
+  DEPENDS:=@LINUX_5_15 +kmod-mhi-bus
+  KCONFIG:=CONFIG_MHI_BUS_PCI_GENERIC
+  FILES:=$(LINUX_DIR)/drivers/bus/mhi/mhi_pci_generic.ko
+  AUTOLOAD:=$(call AutoProbe,mhi_pci_generic)
+endef
+
+define KernelPackage/mhi-pci-generic/description
+  Kernel module for the MHI PCI controller driver.
+endef
+
+$(eval $(call KernelPackage,mhi-pci-generic))
 
 define KernelPackage/qcom-qmi-helpers
   SUBMENU:=$(OTHER_MENU)
@@ -1292,21 +1383,3 @@ define KernelPackage/qcom-qmi-helpers/description
 endef
 
 $(eval $(call KernelPackage,qcom-qmi-helpers))
-
-define KernelPackage/mhi
-  SUBMENU:=$(OTHER_MENU)
-  TITLE:=Modem Host Interface (MHI) bus
-  DEPENDS:=@LINUX_5_15
-  KCONFIG:=CONFIG_MHI_BUS \
-           CONFIG_MHI_BUS_DEBUG=y \
-           CONFIG_MHI_BUS_PCI_GENERIC=n \
-           CONFIG_MHI_NET=n
-  FILES:=$(LINUX_DIR)/drivers/bus/mhi/core/mhi.ko
-  AUTOLOAD:=$(call AutoProbe,mhi)
-endef
-
-define KernelPackage/mhi/description
-  Bus driver for MHI protocol.
-endef
-
-$(eval $(call KernelPackage,mhi))

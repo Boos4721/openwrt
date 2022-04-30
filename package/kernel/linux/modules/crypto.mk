@@ -446,13 +446,12 @@ endef
 
 $(eval $(call KernelPackage,crypto-kpp))
 
+
 define KernelPackage/crypto-lib-blake2s
   TITLE:=BLAKE2s hash function library
   KCONFIG:=CONFIG_CRYPTO_LIB_BLAKE2S
   HIDDEN:=1
-  FILES:= \
-	$(LINUX_DIR)/lib/crypto/libblake2s.ko \
-	$(LINUX_DIR)/lib/crypto/libblake2s-generic.ko
+  FILES:=$(LINUX_DIR)/lib/crypto/libblake2s.ko
   $(call AddDepends/crypto,+PACKAGE_kmod-crypto-hash:kmod-crypto-hash)
 endef
 
@@ -462,13 +461,29 @@ endef
 
 define KernelPackage/crypto-lib-blake2s/x86/64
   KCONFIG+=CONFIG_CRYPTO_BLAKE2S_X86
-  FILES+=$(LINUX_DIR)/arch/x86/crypto/blake2s-x86_64.ko
+  FILES+=\
+	  $(LINUX_DIR)/lib/crypto/libblake2s-generic.ko \
+	  $(LINUX_DIR)/arch/x86/crypto/blake2s-x86_64.ko
 endef
 
 define KernelPackage/crypto-lib-blake2s/arm
   KCONFIG+=CONFIG_CRYPTO_BLAKE2S_ARM
-  FILES+=$(LINUX_DIR)/arch/arm/crypto/blake2s-arm.ko
+  FILES+=\
+	  $(LINUX_DIR)/lib/crypto/libblake2s-generic.ko@lt5.12 \
+	  $(LINUX_DIR)/arch/arm/crypto/blake2s-arm.ko@ge5.12
 endef
+
+ifndef KernelPackage/crypto-lib-blake2s/$(CRYPTO_TARGET)
+  define KernelPackage/crypto-lib-blake2s/$(CRYPTO_TARGET)
+    KCONFIG+=CONFIG_CRYPTO_LIB_BLAKE2S_GENERIC
+    FILES+=$(LINUX_DIR)/lib/crypto/libblake2s-generic.ko
+  endef
+endif
+
+ifdef KernelPackage/crypto-lib-blake2s/$(ARCH)
+  KernelPackage/crypto-lib-blake2s/$(CRYPTO_TARGET)=\
+	  $(KernelPackage/crypto-lib-blake2s/$(ARCH))
+endif
 
 $(eval $(call KernelPackage,crypto-lib-blake2s))
 

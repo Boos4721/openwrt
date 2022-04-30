@@ -111,7 +111,6 @@ $(eval $(call KernelPackage,libphy))
 define KernelPackage/phylink
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Model for MAC to optional PHY connection
-  DEPENDS:=+kmod-libphy
   KCONFIG:=CONFIG_PHYLINK
   FILES:=$(LINUX_DIR)/drivers/net/phy/phylink.ko
   AUTOLOAD:=$(call AutoLoad,15,phylink,1)
@@ -196,6 +195,21 @@ define KernelPackage/et131x/description
 endef
 
 $(eval $(call KernelPackage,et131x))
+
+define KernelPackage/phy-microchip
+   SUBMENU:=$(NETWORK_DEVICES_MENU)
+   TITLE:=Microchip Ethernet PHY driver
+   KCONFIG:=CONFIG_MICROCHIP_PHY
+   DEPENDS:=+kmod-libphy
+   FILES:=$(LINUX_DIR)/drivers/net/phy/microchip.ko
+   AUTOLOAD:=$(call AutoLoad,18,microchip,1)
+endef
+
+define KernelPackage/phy-microchip/description
+   Supports the LAN88XX PHYs.
+endef
+
+$(eval $(call KernelPackage,phy-microchip))
 
 
 define KernelPackage/phylib-broadcom
@@ -1020,13 +1034,28 @@ endef
 
 $(eval $(call KernelPackage,forcedeth))
 
+define KernelPackage/fixed-phy
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=MDIO Bus/PHY emulation with fixed speed/link PHYs
+  DEPENDS:=+kmod-libphy
+  KCONFIG:=CONFIG_FIXED_PHY
+  FILES:=$(LINUX_DIR)/drivers/net/phy/fixed_phy.ko
+  AUTOLOAD:=$(call AutoProbe,fixed_phy)
+endef
+
+define KernelPackage/fixed-phy/description
+ Kernel driver for "fixed" MDIO Bus to cover the boards
+ and devices that use PHYs that are not connected to the real MDIO bus.
+endef
+
+$(eval $(call KernelPackage,fixed-phy))
+
 define KernelPackage/of-mdio
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=OpenFirmware MDIO support
-  DEPENDS:=+kmod-libphy @!TARGET_x86
+  DEPENDS:=+kmod-libphy +kmod-fixed-phy @!TARGET_x86
   KCONFIG:=CONFIG_OF_MDIO
   FILES:= \
-	$(LINUX_DIR)/drivers/net/phy/fixed_phy.ko \
 	$(LINUX_DIR)/drivers/of/of_mdio.ko@lt5.10 \
 	$(LINUX_DIR)/drivers/net/mdio/of_mdio.ko@ge5.10 \
 	$(LINUX_DIR)/drivers/net/mdio/fwnode_mdio.ko@ge5.15
@@ -1122,26 +1151,6 @@ endef
 
 $(eval $(call KernelPackage,bnx2x))
 
-define KernelPackage/bnxt-en
-  SUBMENU:=$(NETWORK_DEVICES_MENU)
-  TITLE:=BCM 574xx/575xx 10/25/50-Gigabit ethernet adapter driver
-  DEPENDS:=@PCI_SUPPORT  +kmod-lib-crc32c +kmod-mdio +kmod-ptp +kmod-lib-zlib-inflate +kmod-hwmon-core
-  FILES:=$(LINUX_DIR)/drivers/net/ethernet/broadcom/bnxt/bnxt_en.ko
-  KCONFIG:= \
-	CONFIG_BNXT \
-	CONFIG_BNXT_SRIOV=y \
-  	CONFIG_BNXT_FLOWER_OFFLOAD=y \
-  	CONFIG_BNXT_DCB=n \
-  	CONFIG_BNXT_HWMON=y
-  AUTOLOAD:=$(call AutoProbe,bnxt_en)
-endef
-
-define KernelPackage/bnxt-en/description
-  Broadcom 573xx/574xx/575xx 10/25/40/50-Gigabit ethernet adapter Driver
-endef
-
-$(eval $(call KernelPackage,bnxt-en))
-
 define KernelPackage/be2net
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Broadcom Emulex OneConnect 10Gbps NIC
@@ -1162,6 +1171,28 @@ define KernelPackage/be2net/description
 endef
 
 $(eval $(call KernelPackage,be2net))
+
+define KernelPackage/sfc
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Solarflare SFC9000/SFC9100-family 10Gbps NIC support
+  DEPENDS:=@PCI_SUPPORT +kmod-mdio +kmod-i2c-core +kmod-i2c-algo-bit +kmod-hwmon-core +kmod-ptp +kmod-lib-crc32c
+# add PCI_IOV
+  KCONFIG:= \
+    CONFIG_NET_VENDOR_SOLARFLARE=y \
+    CONFIG_SFC=y \
+    CONFIG_MTD=y \
+    CONFIG_MCDI_MON=y \
+    CONFIG_SRIOV=n \
+    CONFIG_MCDI_LOGGING=n \
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/sfc/sfc.ko
+  AUTOLOAD:=$(call AutoProbe, sfc)
+endef
+
+define KernelPackage/sfc/description
+  Solarflare SFC9000/SFC9100-family 10Gbps NIC support
+endef
+
+$(eval $(call KernelPackage,sfc))
 
 define KernelPackage/mlx4-core
   SUBMENU:=$(NETWORK_DEVICES_MENU)
@@ -1250,26 +1281,6 @@ endef
 
 $(eval $(call KernelPackage,qlcnic))
 
-define KernelPackage/qede
-  SUBMENU:=$(NETWORK_DEVICES_MENU)
-  DEPENDS:=@PCI_SUPPORT +kmod-ptp
-  TITLE:=QLogic FastLinQ 10/25/40/100Gb Ethernet NIC device support
-  KCONFIG:= \
-	CONFIG_NET_VENDOR_QLOGIC \
-	CONFIG_QED=y \
-	CONFIG_QED_SRIOV=y \
-	CONFIG_QEDE=y
-  FILES:=$(LINUX_DIR)/drivers/net/ethernet/qlogic/qede/qede.ko
-  AUTOLOAD:=$(call AutoProbe,qede)
-endef
-
-define KernelPackage/qede/description
-  This driver supports QLogic FastLinQ 25/40/100Gb Ethernet NIC
-  devices.
-endef
-
-$(eval $(call KernelPackage,qede))
-
 
 define KernelPackage/sfp
   SUBMENU:=$(NETWORK_DEVICES_MENU)
@@ -1343,3 +1354,50 @@ define KernelPackage/sfc-falcon/description
 endef
 
 $(eval $(call KernelPackage,sfc-falcon))
+
+define KernelPackage/mhi-net
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=MHI Network Device
+  DEPENDS:=@LINUX_5_15 @PCI_SUPPORT +kmod-mhi-bus
+  KCONFIG:=CONFIG_MHI_NET
+  FILES:=$(LINUX_DIR)/drivers/net/mhi_net.ko
+  AUTOLOAD:=$(call AutoProbe,mhi_net)
+endef
+
+define KernelPackage/mhi-net/description
+ Driver for MHI network interface
+endef
+
+$(eval $(call KernelPackage,mhi-net))
+
+define KernelPackage/mhi-wwan-ctrl
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=MHI WWAN Control
+  DEPENDS:=@LINUX_5_15 @PCI_SUPPORT +kmod-mhi-bus
+  KCONFIG:=CONFIG_MHI_WWAN_CTRL
+  FILES:=$(LINUX_DIR)/drivers/net/mhi_wwan_ctrl.ko
+  AUTOLOAD:=$(call AutoProbe,mhi_wwan_ctrl)
+endef
+
+define KernelPackage/mhi-wwan-ctrl/description
+ Driver for MHI WWAN Control
+ This exposes all modem control ports like AT, MBIM, QMI, DIAG, ..
+endef
+
+$(eval $(call KernelPackage,mhi-wwan-ctrl))
+
+define KernelPackage/mhi-wwan-mbim
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=MHI MBIM
+  DEPENDS:=@LINUX_5_15 @PCI_SUPPORT +kmod-mhi-bus
+  KCONFIG:=CONFIG_MHI_WWAN_MBIM
+  FILES:=$(LINUX_DIR)/drivers/net/mhi_wwan_mbim.ko
+  AUTOLOAD:=$(call AutoProbe,mhi_wwan_mbim)
+endef
+
+define KernelPackage/mhi-wwan-mbim/description
+ Driver for MHI MBIM
+ This implements MBIM over MHI
+endef
+
+$(eval $(call KernelPackage,mhi-wwan-mbim))
