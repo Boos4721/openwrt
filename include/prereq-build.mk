@@ -176,10 +176,6 @@ $(eval $(call TestHostCommand,python3-distutils, \
 	Please install the Python3 distutils module, \
 	$(STAGING_DIR_HOST)/bin/python3 -c 'import distutils'))
 
-$(eval $(call TestHostCommand,python3-distutils, \
-	Please install the Python3 distutils module, \
-	$(STAGING_DIR_HOST)/bin/python3 -c 'import distutils'))
-
 $(eval $(call SetupHostCommand,git,Please install Git (git-core) >= 1.7.12.2, \
 	git --exec-path | xargs -I % -- grep -q -- --recursive %/git-submodule))
 
@@ -202,5 +198,4 @@ prereq: $(STAGING_DIR_HOST)/bin/mkhash
 
 # Install ldconfig stub
 $(eval $(call TestHostCommand,ldconfig-stub,Failed to install stub, \
-	$(LN) $(if $(findstring Darwin,$(HOST_OS)),/usr/bin/true,/bin/true) $(STAGING_DIR_HOST)/bin/ldconfig))
-	
+	$(LN) /bin/true $(STAGING_DIR_HOST)/bin/ldconfig))
