@@ -4,8 +4,8 @@ config GCC_VERSION_11
 
 config GCC_VERSION
 	string
-	default "11.2.0"	if GCC_VERSION_11
-	default "11.2.0"
+	default "11.3.0"	if GCC_VERSION_11
+	default "11.3.0"
 
 config GCC_USE_IREMAP
 	bool
