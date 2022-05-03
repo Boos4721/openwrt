@@ -4,11 +4,6 @@ START=99
 
 boot() {
 	case $(board_name) in
-	edgecore,eap102)
-		fw_setenv upgrade_available 0
-		# Unset changed flag after sysupgrade complete
-		fw_setenv changed
-	;;
 	redmi,ax6|\
 	xiaomi,ax3600|\
 	xiaomi,ax9000)
@@ -24,4 +19,10 @@ boot() {
 		wifi
 		;;	
 	esac
+	qnap,301w)
+		ssdk_sh debug phy set 0 0x4004c441 0x8 1> /dev/kmsg 2>&1
+		ssdk_sh debug phy set 0 0x40070000 0x3200 1> /dev/kmsg 2>&1
+		ssdk_sh debug phy set 8 0x4004c441 0x8 1> /dev/kmsg 2>&1
+		ssdk_sh debug phy set 8 0x40070000 0x3200 1> /dev/kmsg 2>&1
+		;;
 }

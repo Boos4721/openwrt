@@ -11,12 +11,6 @@ ipq807x_setup_interfaces()
 	local board="$1"
 
 	case "$board" in
-	edgecore,eap102)
-		ucidef_set_interfaces_lan_wan "eth1" "eth0"
-		;;
-	edimax,cax1800)
-		ucidef_set_interfaces_lan_wan "eth0"
-		;;
 	qnap,301w)
 		ucidef_set_interfaces_lan_wan "eth0 eth1 eth2 eth3 eth4" "eth5"
 		;;
