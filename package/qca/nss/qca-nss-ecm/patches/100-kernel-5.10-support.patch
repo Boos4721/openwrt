@@ -1,4 +1,4 @@
-From 6b3a1a91778d8281abc5767612f2525744378fd0 Mon Sep 17 00:00:00 2001
+From e8b642c23af9146c973e828a7f4e0fb56cfc8d0b Mon Sep 17 00:00:00 2001
 From: Ansuel Smith <ansuelsmth@gmail.com>
 Date: Sat, 15 May 2021 03:51:14 +0200
 Subject: [PATCH] add support for kernel 5.10

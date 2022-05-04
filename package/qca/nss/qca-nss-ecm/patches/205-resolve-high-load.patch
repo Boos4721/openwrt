@@ -1,4 +1,4 @@
-From c7f166ffea669a365e54299db0ad677a6d0656de Mon Sep 17 00:00:00 2001
+From 6924b71ed809b37fffd74d6428a8ca83e5919746 Mon Sep 17 00:00:00 2001
 From: Dirk Buchwalder <buchwalder@posteo.de>
 Date: Sun, 27 Jun 2021 16:52:39 +0200
 Subject: [PATCH] qca-nss-ecm: resolve the cpu high load regarding ecm
