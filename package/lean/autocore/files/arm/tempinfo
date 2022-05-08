@@ -8,7 +8,7 @@ wifi_temp2="$(awk '{printf("%.1f°C ", $0 / 1000)}' "$IEEE_PATH"/phy*/device/hwm
 
 if grep -q "ipq40xx" "/etc/openwrt_release"; then
         if [ -e "$IEEE_PATH/phy0/hwmon0/temp1_input" ]; then
-        mt76_temp=" $(awk -F ': ' '{print $2}' "$IEEE_PATH/phy0/hwmon0/temp1_input")..C"
+        mt76_temp=" $(awk -F ': ' '{print $2}' "$IEEE_PATH/phy0/hwmon0/temp1_input")°C"
 fi
         echo -n "WiFi:${mt76_temp} ${wifi_temp}"
 else
