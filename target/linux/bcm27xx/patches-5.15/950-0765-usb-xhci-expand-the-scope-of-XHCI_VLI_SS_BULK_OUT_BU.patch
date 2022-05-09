@@ -22,7 +22,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/usb/host/xhci.c
 +++ b/drivers/usb/host/xhci.c
-@@ -1393,9 +1393,12 @@ static void xhci_unmap_temp_buf(struct u
+@@ -1404,9 +1404,12 @@ static void xhci_unmap_temp_buf(struct u
  static int xhci_map_urb_for_dma(struct usb_hcd *hcd, struct urb *urb,
  				gfp_t mem_flags)
  {
@@ -35,7 +35,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  	if (xhci_urb_suitable_for_idt(urb))
  		return 0;
-@@ -1404,6 +1407,16 @@ static int xhci_map_urb_for_dma(struct u
+@@ -1415,6 +1418,16 @@ static int xhci_map_urb_for_dma(struct u
  		if (xhci_urb_temp_buffer_required(hcd, urb))
  			return xhci_map_temp_buffer(hcd, urb);
  	}
@@ -52,7 +52,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	return usb_hcd_map_urb_for_dma(hcd, urb, mem_flags);
  }
  
-@@ -1417,7 +1430,8 @@ static void xhci_unmap_urb_for_dma(struc
+@@ -1428,7 +1441,8 @@ static void xhci_unmap_urb_for_dma(struc
  	if (urb->num_sgs && (urb->transfer_flags & URB_DMA_MAP_SINGLE))
  		unmap_temp_buf = true;
  
