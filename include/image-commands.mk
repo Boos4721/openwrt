@@ -27,6 +27,15 @@ define Build/append-kernel
 	dd if=$(IMAGE_KERNEL) >> $@
 endef
 
+define Build/package-kernel-ubifs
+	mkdir $@.kernelubifs
+	cp $@ $@.kernelubifs/kernel
+	$(STAGING_DIR_HOST)/bin/mkfs.ubifs \
+		$(KERNEL_UBIFS_OPTS) \
+		-r $@.kernelubifs $@
+	rm -r $@.kernelubifs
+endef
+
 define Build/append-image
 	cp "$(BIN_DIR)/$(DEVICE_IMG_PREFIX)-$(1)" "$@.stripmeta"
 	fwtool -s /dev/null -t "$@.stripmeta" || :
@@ -112,13 +121,25 @@ define Build/append-ubi
 		$(if $(UBOOTENV_IN_UBI),--uboot-env) \
 		$(if $(KERNEL_IN_UBI),--kernel $(IMAGE_KERNEL)) \
 		$(foreach part,$(UBINIZE_PARTS),--part $(part)) \
-		$(IMAGE_ROOTFS) \
+		--rootfs $(IMAGE_ROOTFS) \
 		$@.tmp \
 		-p $(BLOCKSIZE:%k=%KiB) -m $(PAGESIZE) \
 		$(if $(SUBPAGESIZE),-s $(SUBPAGESIZE)) \
 		$(if $(VID_HDR_OFFSET),-O $(VID_HDR_OFFSET)) \
 		$(UBINIZE_OPTS)
 	cat $@.tmp >> $@
+	rm $@.tmp
+endef
+
+define Build/ubinize-kernel
+	cp $@ $@.tmp
+	sh $(TOPDIR)/scripts/ubinize-image.sh \
+		--kernel $@.tmp \
+		$@ \
+		-p $(BLOCKSIZE:%k=%KiB) -m $(PAGESIZE) \
+		$(if $(SUBPAGESIZE),-s $(SUBPAGESIZE)) \
+		$(if $(VID_HDR_OFFSET),-O $(VID_HDR_OFFSET)) \
+		$(UBINIZE_OPTS)
 	rm $@.tmp
 endef
 
@@ -179,9 +200,13 @@ define Build/check-size
 	@imagesize="$$(stat -c%s $@)"; \
 	limitsize="$$(($(subst k,* 1024,$(subst m, * 1024k,$(if $(1),$(1),$(IMAGE_SIZE))))))"; \
 	[ $$limitsize -ge $$imagesize ] || { \
-		echo "WARNING: Image file $@ is too big: $$imagesize > $$limitsize" >&2; \
+		$(call ERROR_MESSAGE,    WARNING: Image file $@ is too big: $$imagesize > $$limitsize); \
 		rm -f $@; \
 	}
+endef
+
+define Build/copy-file
+	cat "$(1)" > "$@"
 endef
 
 define Build/elecom-product-header
@@ -194,6 +219,19 @@ define Build/elecom-product-header
 		dd if=$(fw); \
 	) > $(fw).new
 	mv $(fw).new $(fw)
+endef
+
+define Build/elecom-wrc-gs-factory
+	$(eval product=$(word 1,$(1)))
+	$(eval version=$(word 2,$(1)))
+	$(eval hash_opt=$(word 3,$(1)))
+	$(MKHASH) md5 $(hash_opt) $@ >> $@
+	( \
+		echo -n "ELECOM $(product) v$(version)" | \
+			dd bs=32 count=1 conv=sync; \
+		dd if=$@; \
+	) > $@.new
+	mv $@.new $@
 endef
 
 define Build/elx-header
@@ -241,6 +279,7 @@ define Build/fit
 				-i $(KERNEL_BUILD_DIR)/initrd.cpio$(strip $(call Build/initrd_compression)))) \
 		-a $(KERNEL_LOADADDR) -e $(if $(KERNEL_ENTRY),$(KERNEL_ENTRY),$(KERNEL_LOADADDR)) \
 		$(if $(DEVICE_FDT_NUM),-n $(DEVICE_FDT_NUM)) \
+		$(if $(DEVICE_DTS_DELIMITER),-l $(DEVICE_DTS_DELIMITER)) \
 		$(if $(DEVICE_DTS_OVERLAY),$(foreach dtso,$(DEVICE_DTS_OVERLAY), -O $(dtso):$(KERNEL_BUILD_DIR)/image-$(dtso).dtb)) \
 		-c $(if $(DEVICE_DTS_CONFIG),$(DEVICE_DTS_CONFIG),"config-1") \
 		-A $(LINUX_KARCH) -v $(LINUX_VERSION)
@@ -263,6 +302,16 @@ define Build/install-dtb
 		), \
 		install-dtb-$(IMG_PREFIX) \
 	)
+endef
+
+define Build/iptime-crc32
+	$(STAGING_DIR_HOST)/bin/iptime-crc32 $(1) $@ $@.new
+	mv $@.new $@
+endef
+
+define Build/iptime-naspkg
+	$(STAGING_DIR_HOST)/bin/iptime-naspkg $(1) $@ $@.new
+	mv $@.new $@
 endef
 
 define Build/jffs2
@@ -377,13 +426,6 @@ define Build/qemu-image
 	else \
 		echo "WARNING: Install qemu-img to create VDI/VMDK images" >&2; exit 1; \
 	fi
-endef
-
-define Build/qsdk-ipq-factory-mmc
-	$(TOPDIR)/scripts/mkits-qsdk-ipq-image.sh \
-		$@.its kernel $(IMAGE_KERNEL) rootfs $(IMAGE_ROOTFS)
-	PATH=$(LINUX_DIR)/scripts/dtc:$(PATH) mkimage -f $@.its $@.new
-	@mv $@.new $@
 endef
 
 define Build/qsdk-ipq-factory-nand
@@ -505,6 +547,7 @@ define Build/xor-image
 endef
 
 define Build/zip
+	rm -rf $@.tmp
 	mkdir $@.tmp
 	mv $@ $@.tmp/$(word 1,$(1))
 	TZ=UTC $(STAGING_DIR_HOST)/bin/zip -j -X \

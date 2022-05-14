@@ -137,14 +137,6 @@ define Image/BuildKernel/MkuImage
 		-n '$(call toupper,$(ARCH)) $(VERSION_DIST) Linux-$(LINUX_VERSION)' -d $(4) $(5)
 endef
 
-define Image/BuildKernel/MkFIT
-	$(TOPDIR)/scripts/mkits.sh \
-		-D $(1) -o $(KDIR)/fit-$(1).its -k $(2) $(if $(3),-d $(3)) -C $(4) -a $(5) -e $(6) \
-		-c $(if $(DEVICE_DTS_CONFIG),$(DEVICE_DTS_CONFIG),"config-1") \
-		-A $(LINUX_KARCH) -v $(LINUX_VERSION)
-	PATH=$(LINUX_DIR)/scripts/dtc:$(PATH) mkimage -f $(KDIR)/fit-$(1).its $(KDIR)/fit-$(1)$(7).itb
-endef
-
 ifdef CONFIG_TARGET_IMAGES_GZIP
   define Image/Gzip
 	rm -f $(1).gz
@@ -184,6 +176,7 @@ endef
 # $(4) extra DTC flags
 define Image/BuildDTB
 	$(TARGET_CROSS)cpp -nostdinc -x assembler-with-cpp \
+		$(DTS_CPPFLAGS) \
 		-I$(DTS_DIR) \
 		-I$(DTS_DIR)/include \
 		-I$(LINUX_DIR)/include/ \
@@ -229,8 +222,7 @@ $(eval $(foreach S,$(NAND_BLOCKSIZE),$(call Image/mkfs/jffs2-nand/template,$(S))
 define Image/mkfs/squashfs-common
 	$(STAGING_DIR_HOST)/bin/mksquashfs4 $(call mkfs_target_dir,$(1)) $@ \
 		-nopad -noappend -root-owned \
-		-comp $(SQUASHFSCOMP) $(SQUASHFSOPT) \
-		-processors $(shell nproc)
+		-comp $(SQUASHFSCOMP) $(SQUASHFSOPT)
 endef
 
 ifeq ($(CONFIG_TARGET_ROOTFS_SECURITY_LABELS),y)
@@ -394,6 +386,7 @@ define Device/Init
 
   DEVICE_DTS :=
   DEVICE_DTS_CONFIG :=
+  DEVICE_DTS_DELIMITER :=
   DEVICE_DTS_DIR :=
   DEVICE_DTS_OVERLAY :=
   DEVICE_FDT_NUM :=
@@ -419,8 +412,8 @@ DEFAULT_DEVICE_VARS := \
   DEVICE_NAME KERNEL KERNEL_INITRAMFS KERNEL_INITRAMFS_IMAGE KERNEL_SIZE \
   CMDLINE UBOOTENV_IN_UBI KERNEL_IN_UBI BLOCKSIZE PAGESIZE SUBPAGESIZE \
   VID_HDR_OFFSET UBINIZE_OPTS UBINIZE_PARTS MKUBIFS_OPTS DEVICE_DTS \
-  DEVICE_DTS_CONFIG DEVICE_DTS_DIR DEVICE_DTS_OVERLAY DEVICE_FDT_NUM \
-  DEVICE_IMG_PREFIX SOC BOARD_NAME UIMAGE_MAGIC UIMAGE_NAME \
+  DEVICE_DTS_CONFIG DEVICE_DTS_DELIMITER DEVICE_DTS_DIR DEVICE_DTS_OVERLAY \
+  DEVICE_FDT_NUM DEVICE_IMG_PREFIX SOC BOARD_NAME UIMAGE_MAGIC UIMAGE_NAME \
   SUPPORTED_DEVICES IMAGE_METADATA KERNEL_ENTRY KERNEL_LOADADDR \
   UBOOT_PATH IMAGE_SIZE \
   DEVICE_PACKAGES DEVICE_COMPAT_VERSION DEVICE_COMPAT_MESSAGE \
@@ -629,7 +622,9 @@ define Device/Build/image
 endef
 
 define Device/Build/artifact
-  $$(_TARGET): $(BIN_DIR)/$(DEVICE_IMG_PREFIX)-$(1)
+  $$(_TARGET): $(if $(CONFIG_JSON_OVERVIEW_IMAGE_INFO), \
+	  $(BUILD_DIR)/json_info_files/$(DEVICE_IMG_PREFIX)-$(1).json, \
+	  $(BIN_DIR)/$(DEVICE_IMG_PREFIX)-$(1))
   $(eval $(call Device/Export,$(KDIR)/tmp/$(DEVICE_IMG_PREFIX)-$(1)))
   $(KDIR)/tmp/$(DEVICE_IMG_PREFIX)-$(1): $$(KDIR_KERNEL_IMAGE) $(2)-images
 	@rm -f $$@
