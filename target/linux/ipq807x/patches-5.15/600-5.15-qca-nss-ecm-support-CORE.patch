@@ -1,26 +1,3 @@
-From 435d2f9d180918f4c32c7e55b0a528e38f2766ca Mon Sep 17 00:00:00 2001
-From: Simon Casey <simon501098c@gmail.com>
-Date: Wed, 2 Feb 2022 19:29:20 +0100
-Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
-
----
- include/linux/if_bridge.h |  40 +++++++++++++++
- include/linux/if_vlan.h   |  21 ++++++++
- include/linux/netdevice.h |   4 ++
- include/net/addrconf.h    |   5 ++
- include/net/ip6_route.h   |   5 ++
- include/net/neighbour.h   |  11 ++++
- include/net/route.h       |   5 ++
- net/8021q/vlan_core.c     |  48 +++++++++++++++++
- net/bridge/br_fdb.c       | 105 +++++++++++++++++++++++++++++++++++++-
- net/bridge/br_private.h   |   5 ++
- net/core/neighbour.c      |  27 +++++++++-
- net/ipv4/fib_trie.c       |  23 +++++++++
- net/ipv6/addrconf.c       |  32 ++++++++++++
- net/ipv6/ndisc.c          |   1 +
- net/ipv6/route.c          |  24 +++++++++
- 16 files changed, 457 insertions(+), 2 deletions(-)
-
 --- a/include/linux/if_bridge.h
 +++ b/include/linux/if_bridge.h
 @@ -69,6 +69,9 @@ void brioctl_set(int (*hook)(struct net
@@ -33,7 +10,7 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
  
  extern void br_dev_update_stats(struct net_device *dev,
  				struct rtnl_link_stats64 *nlstats);
-@@ -195,4 +198,41 @@ static inline clock_t br_get_ageing_time
+@@ -195,4 +198,42 @@ static inline clock_t br_get_ageing_time
  }
  #endif
  
@@ -43,6 +20,7 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
 +					  struct sk_buff *skb,
 +					  unsigned int cookie);
 +extern void br_refresh_fdb_entry(struct net_device *dev, const char *addr);
++extern void br_fdb_entry_refresh(struct net_device *dev, const char *addr, __u16 vid);
 +extern struct net_bridge_fdb_entry *br_fdb_has_entry(struct net_device *dev,
 +						     const char *addr,
 +						     __u16 vid);
@@ -119,18 +97,6 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
  };
  const char *netdev_cmd_to_name(enum netdev_cmd cmd);
  
---- a/include/net/addrconf.h
-+++ b/include/net/addrconf.h
-@@ -501,4 +501,9 @@ int if6_proc_init(void);
- void if6_proc_exit(void);
- #endif
- 
-+/* QCA NSS ECM support - Start */
-+struct net_device *ipv6_dev_find_and_hold(struct net *net, struct in6_addr *addr,
-+				 int strict);
-+/* QCA NSS ECM support - End */
-+
- #endif
 --- a/include/net/ip6_route.h
 +++ b/include/net/ip6_route.h
 @@ -211,6 +211,11 @@ void rt6_multipath_rebalance(struct fib6
@@ -177,61 +143,6 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
  struct in_ifaddr;
  void fib_add_ifaddr(struct in_ifaddr *);
  void fib_del_ifaddr(struct in_ifaddr *, struct in_ifaddr *);
---- a/net/8021q/vlan_core.c
-+++ b/net/8021q/vlan_core.c
-@@ -556,4 +556,52 @@ static int __init vlan_offload_init(void
- 	return 0;
- }
- 
-+/* QCA NSS ECM support - Start */
-+/* Update the VLAN device with statistics from network offload engines */
-+void __vlan_dev_update_accel_stats(struct net_device *dev,
-+				   struct rtnl_link_stats64 *nlstats)
-+{
-+	struct vlan_pcpu_stats *stats;
-+
-+	if (!is_vlan_dev(dev))
-+		return;
-+
-+	stats = per_cpu_ptr(vlan_dev_priv(dev)->vlan_pcpu_stats, 0);
-+
-+	u64_stats_update_begin(&stats->syncp);
-+	stats->rx_packets += nlstats->rx_packets;
-+	stats->rx_bytes += nlstats->rx_bytes;
-+	stats->tx_packets += nlstats->tx_packets;
-+	stats->tx_bytes += nlstats->tx_bytes;
-+	u64_stats_update_end(&stats->syncp);
-+}
-+EXPORT_SYMBOL(__vlan_dev_update_accel_stats);
-+
-+/* Lookup the 802.1p egress_map table and return the 802.1p value */
-+u16 vlan_dev_get_egress_prio(struct net_device *dev, u32 skb_prio)
-+{
-+	struct vlan_priority_tci_mapping *mp;
-+
-+	mp = vlan_dev_priv(dev)->egress_priority_map[(skb_prio & 0xf)];
-+	while (mp) {
-+		if (mp->priority == skb_prio) {
-+			/* This should already be shifted
-+			 * to mask correctly with the
-+			 * VLAN's TCI
-+			 */
-+			return mp->vlan_qos;
-+		}
-+		mp = mp->next;
-+	}
-+	return 0;
-+}
-+EXPORT_SYMBOL(vlan_dev_get_egress_prio);
-+
-+struct net_device *vlan_dev_next_dev(const struct net_device *dev)
-+{
-+	return vlan_dev_priv(dev)->real_dev;
-+}
-+EXPORT_SYMBOL(vlan_dev_next_dev);
-+/* QCA NSS ECM support - End */
-+
- fs_initcall(vlan_offload_init);
 --- a/net/bridge/br_fdb.c
 +++ b/net/bridge/br_fdb.c
 @@ -38,6 +38,35 @@ static int fdb_insert(struct net_bridge
@@ -334,7 +245,7 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
  	if (swdev_notify)
  		br_switchdev_fdb_notify(br, fdb, type);
  
-@@ -1382,3 +1444,44 @@ void br_fdb_clear_offload(const struct n
+@@ -1382,3 +1444,62 @@ void br_fdb_clear_offload(const struct n
  	spin_unlock_bh(&p->br->hash_lock);
  }
  EXPORT_SYMBOL_GPL(br_fdb_clear_offload);
@@ -360,6 +271,24 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
 +}
 +EXPORT_SYMBOL_GPL(br_refresh_fdb_entry);
 +
++/* Update timestamp of FDB entries for bridge packets being forwarded by offload engines */
++void br_fdb_entry_refresh(struct net_device *dev, const char *addr, __u16 vid)
++{
++	struct net_bridge_fdb_entry *fdb;
++	struct net_bridge_port *p = br_port_get_rcu(dev);
++
++	if (!p || p->state == BR_STATE_DISABLED)
++		return;
++
++	rcu_read_lock();
++	fdb = fdb_find_rcu(&p->br->fdb_hash_tbl, addr, vid);
++	if (likely(fdb)) {
++		fdb->updated = jiffies;
++	}
++	rcu_read_unlock();
++}
++EXPORT_SYMBOL_GPL(br_fdb_entry_refresh);
++
 +/* Look up the MAC address in the device's bridge fdb table */
 +struct net_bridge_fdb_entry *br_fdb_has_entry(struct net_device *dev,
 +					      const char *addr, __u16 vid)
@@ -379,6 +308,114 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
 +EXPORT_SYMBOL_GPL(br_fdb_has_entry);
 +/* QCA NSS ECM support - End */
 +
+--- a/net/bridge/br_if.c
++++ b/net/bridge/br_if.c
+@@ -27,6 +27,12 @@
+ #include "br_private.h"
+ #include "br_private_offload.h"
+ 
++/* QCA NSS ECM support - Start */
++/* Hook for external forwarding logic */
++br_port_dev_get_hook_t __rcu *br_port_dev_get_hook __read_mostly;
++EXPORT_SYMBOL_GPL(br_port_dev_get_hook);
++/* QCA NSS ECM support - End */
++
+ /*
+  * Determine initial path cost based on speed.
+  * using recommendations from 802.1d standard
+@@ -707,6 +713,8 @@ int br_add_if(struct net_bridge *br, str
+ 
+ 	kobject_uevent(&p->kobj, KOBJ_ADD);
+ 
++	call_netdevice_notifiers(NETDEV_BR_JOIN, dev); /* QCA NSS ECM support */
++
+ 	return 0;
+ 
+ err6:
+@@ -742,6 +750,8 @@ int br_del_if(struct net_bridge *br, str
+ 	if (!p || p->br != br)
+ 		return -EINVAL;
+ 
++	call_netdevice_notifiers(NETDEV_BR_LEAVE, dev); /* QCA NSS ECM support */
++
+ 	/* Since more than one interface can be attached to a bridge,
+ 	 * there still maybe an alternate path for netconsole to use;
+ 	 * therefore there is no reason for a NETDEV_RELEASE event.
+@@ -810,3 +820,74 @@ bool br_port_flag_is_set(const struct ne
+ 	return p->flags & flag;
+ }
+ EXPORT_SYMBOL_GPL(br_port_flag_is_set);
++
++/* API to know if hairpin feature is enabled/disabled on this bridge port */
++bool br_is_hairpin_enabled(struct net_device *dev)
++{
++	struct net_bridge_port *port = br_port_get_check_rcu(dev);
++
++	if (likely(port))
++		return port->flags & BR_HAIRPIN_MODE;
++	return false;
++}
++EXPORT_SYMBOL_GPL(br_is_hairpin_enabled);
++
++/* br_port_dev_get()
++ *      If a skb is provided, and the br_port_dev_get_hook_t hook exists,
++ *      use that to try and determine the egress port for that skb.
++ *      If not, or no egress port could be determined, use the given addr
++ *      to identify the port to which it is reachable,
++ *	returing a reference to the net device associated with that port.
++ *
++ * NOTE: Return NULL if given dev is not a bridge or the mac has no
++ * associated port.
++ */
++struct net_device *br_port_dev_get(struct net_device *dev, unsigned char *addr,
++				   struct sk_buff *skb,
++				   unsigned int cookie)
++{
++	struct net_bridge_fdb_entry *fdbe;
++	struct net_bridge *br;
++	struct net_device *netdev = NULL;
++
++	/* Is this a bridge? */
++	if (!(dev->priv_flags & IFF_EBRIDGE))
++		return NULL;
++
++	rcu_read_lock();
++
++	/* If the hook exists and the skb isn't NULL, try and get the port */
++	if (skb) {
++		br_port_dev_get_hook_t *port_dev_get_hook;
++
++		port_dev_get_hook = rcu_dereference(br_port_dev_get_hook);
++		if (port_dev_get_hook) {
++			struct net_bridge_port *pdst =
++				__br_get(port_dev_get_hook, NULL, dev, skb,
++					 addr, cookie);
++			if (pdst) {
++				dev_hold(pdst->dev);
++				netdev = pdst->dev;
++				goto out;
++			}
++		}
++	}
++
++	/* Either there is no hook, or can't
++	 * determine the port to use - fall back to using FDB
++	 */
++
++	br = netdev_priv(dev);
++
++	/* Lookup the fdb entry and get reference to the port dev */
++	fdbe = br_fdb_find_rcu(br, addr, 0);
++	if (fdbe && fdbe->dst) {
++		netdev = fdbe->dst->dev; /* port device */
++		dev_hold(netdev);
++	}
++out:
++	rcu_read_unlock();
++	return netdev;
++}
++EXPORT_SYMBOL_GPL(br_port_dev_get);
++/* QCA NSS ECM support - End */
 --- a/net/bridge/br_private.h
 +++ b/net/bridge/br_private.h
 @@ -2122,4 +2122,9 @@ void br_do_proxy_suppress_arp(struct sk_
@@ -510,54 +547,18 @@ Subject: [PATCH] Update 600-qca-nss-ecm-support-CORE.patch for kernel 5.15
  struct fib_table *fib_trie_table(u32 id, struct fib_table *alias)
  {
  	struct fib_table *tb;
---- a/net/ipv6/addrconf.c
-+++ b/net/ipv6/addrconf.c
-@@ -7341,3 +7341,35 @@ void addrconf_cleanup(void)
+--- a/include/net/addrconf.h
++++ b/include/net/addrconf.h
+@@ -501,4 +501,9 @@ int if6_proc_init(void);
+ void if6_proc_exit(void);
+ #endif
  
- 	destroy_workqueue(addrconf_wq);
- }
-+
 +/* QCA NSS ECM support - Start */
-+/* ipv6_dev_find_and_hold()
-+ *	Find (and hold) net device that has the given address.
-+ *	Or NULL on failure.
-+ */
 +struct net_device *ipv6_dev_find_and_hold(struct net *net, struct in6_addr *addr,
-+				 int strict)
-+{
-+	struct inet6_ifaddr *ifp;
-+	struct net_device *dev;
-+
-+	ifp = ipv6_get_ifaddr(net, addr, NULL, strict);
-+	if (!ifp)
-+		return NULL;
-+
-+	if (!ifp->idev) {
-+		in6_ifa_put(ifp);
-+		return NULL;
-+	}
-+
-+	dev = ifp->idev->dev;
-+	if (dev)
-+		dev_hold(dev);
-+
-+	in6_ifa_put(ifp);
-+
-+	return dev;
-+}
-+EXPORT_SYMBOL(ipv6_dev_find_and_hold);
++				 int strict);
 +/* QCA NSS ECM support - End */
 +
---- a/net/ipv6/ndisc.c
-+++ b/net/ipv6/ndisc.c
-@@ -649,6 +649,7 @@ void ndisc_send_ns(struct net_device *de
- 
- 	ndisc_send_skb(skb, daddr, saddr);
- }
-+EXPORT_SYMBOL(ndisc_send_ns);
- 
- void ndisc_send_rs(struct net_device *dev, const struct in6_addr *saddr,
- 		   const struct in6_addr *daddr)
+ #endif
 --- a/net/ipv6/route.c
 +++ b/net/ipv6/route.c
 @@ -3878,6 +3878,9 @@ out_free:
