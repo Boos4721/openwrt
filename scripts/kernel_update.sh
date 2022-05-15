@@ -155,7 +155,15 @@ if [ "$UPDATE" -eq 1 ]; then
 		CHECKSUM=$(./staging_dir/host/bin/mkhash sha256 dl/linux-$PATCHVER.tar.xz)
 	fi
 
-	$CMD ./staging_dir/host/bin/sed -i include/kernel-${KERNEL}.mk \
+	if [ -f include/kernel-${KERNEL} ]; then
+		# split version files
+		KERNEL_VERSION_FILE=include/kernel-${KERNEL}.mk
+	else
+		# unified version file
+		KERNEL_VERSION_FILE=include/kernel-version.mk
+	fi
+
+	$CMD ./staging_dir/host/bin/sed -i ${KERNEL_VERSION_FILE} \
 		-e "s|LINUX_VERSION-${KERNEL} =.*|LINUX_VERSION-${KERNEL} = ${NEWVER}|" \
 		-e "s|LINUX_KERNEL_HASH-${KERNEL}.*|LINUX_KERNEL_HASH-${PATCHVER} = ${CHECKSUM}|"
 fi
