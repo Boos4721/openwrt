@@ -25,7 +25,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -6633,12 +6633,13 @@ static void ath11k_mac_op_remove_chanctx
+@@ -6630,12 +6630,13 @@ static void ath11k_mac_op_remove_chanctx
  
  static int
  ath11k_mac_vdev_start_restart(struct ath11k_vif *arvif,
@@ -40,7 +40,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
  	int he_support = arvif->vif->bss_conf.he_support;
  	int ret = 0;
  
-@@ -6673,8 +6674,7 @@ ath11k_mac_vdev_start_restart(struct ath
+@@ -6670,8 +6671,7 @@ ath11k_mac_vdev_start_restart(struct ath
  		arg.channel.chan_radar =
  			!!(chandef->chan->flags & IEEE80211_CHAN_RADAR);
  
@@ -50,7 +50,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
  
  		arg.channel.passive = arg.channel.chan_radar;
  
-@@ -6784,15 +6784,15 @@ err:
+@@ -6781,15 +6781,15 @@ err:
  }
  
  static int ath11k_mac_vdev_start(struct ath11k_vif *arvif,
@@ -70,7 +70,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
  }
  
  struct ath11k_mac_change_chanctx_arg {
-@@ -6867,7 +6867,7 @@ ath11k_mac_update_vif_chan(struct ath11k
+@@ -6864,7 +6864,7 @@ ath11k_mac_update_vif_chan(struct ath11k
  		 * If vdev is down then it expect vdev_stop->vdev_start.
  		 */
  		if (arvif->is_up) {
@@ -79,7 +79,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
  			if (ret) {
  				ath11k_warn(ab, "failed to restart vdev %d: %d\n",
  					    arvif->vdev_id, ret);
-@@ -6881,7 +6881,7 @@ ath11k_mac_update_vif_chan(struct ath11k
+@@ -6878,7 +6878,7 @@ ath11k_mac_update_vif_chan(struct ath11k
  				continue;
  			}
  
@@ -88,7 +88,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
  			if (ret)
  				ath11k_warn(ab, "failed to start vdev %d: %d\n",
  					    arvif->vdev_id, ret);
-@@ -6970,7 +6970,8 @@ static void ath11k_mac_op_change_chanctx
+@@ -6967,7 +6967,8 @@ static void ath11k_mac_op_change_chanctx
  	if (WARN_ON(changed & IEEE80211_CHANCTX_CHANGE_CHANNEL))
  		goto unlock;
  
@@ -98,7 +98,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
  		ath11k_mac_update_active_vif_chan(ar, ctx);
  
  	/* TODO: Recalc radar detection */
-@@ -6990,7 +6991,7 @@ static int ath11k_start_vdev_delay(struc
+@@ -6987,7 +6988,7 @@ static int ath11k_start_vdev_delay(struc
  	if (WARN_ON(arvif->is_started))
  		return -EBUSY;
  
@@ -107,7 +107,7 @@ Link: https://lore.kernel.org/r/1644416019-820-2-git-send-email-quic_vnaralas@qu
  	if (ret) {
  		ath11k_warn(ab, "failed to start vdev %i addr %pM on freq %d: %d\n",
  			    arvif->vdev_id, vif->addr,
-@@ -7084,7 +7085,7 @@ ath11k_mac_op_assign_vif_chanctx(struct
+@@ -7081,7 +7082,7 @@ ath11k_mac_op_assign_vif_chanctx(struct
  		goto out;
  	}
  

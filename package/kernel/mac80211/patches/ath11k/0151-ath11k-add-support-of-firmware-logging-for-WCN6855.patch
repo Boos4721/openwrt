@@ -269,7 +269,7 @@ Link: https://lore.kernel.org/r/20211220121053.357087-1-quic_chengwan@quicinc.co
  /* we don't want to use include/trace/events */
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -7527,6 +7527,13 @@ static void ath11k_wmi_event_wow_wakeup_
+@@ -7525,6 +7525,13 @@ static void ath11k_wmi_event_wow_wakeup_
  	complete(&ab->wow.wakeup_completed);
  }
  
@@ -283,7 +283,7 @@ Link: https://lore.kernel.org/r/20211220121053.357087-1-quic_chengwan@quicinc.co
  static void ath11k_wmi_tlv_op_rx(struct ath11k_base *ab, struct sk_buff *skb)
  {
  	struct wmi_cmd_hdr *cmd_hdr;
-@@ -7649,6 +7656,9 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7647,6 +7654,9 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_RFKILL_STATE_CHANGE_EVENTID:
  		ath11k_rfkill_state_change_event(ab, skb);
  		break;

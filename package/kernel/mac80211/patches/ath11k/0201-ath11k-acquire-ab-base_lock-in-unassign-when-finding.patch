@@ -27,7 +27,7 @@ Link: https://lore.kernel.org/r/20220314215253.92658-1-dossche.niels@gmail.com
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7136,6 +7136,7 @@ ath11k_mac_op_unassign_vif_chanctx(struc
+@@ -7133,6 +7133,7 @@ ath11k_mac_op_unassign_vif_chanctx(struc
  	struct ath11k *ar = hw->priv;
  	struct ath11k_base *ab = ar->ab;
  	struct ath11k_vif *arvif = (void *)vif->drv_priv;
@@ -35,7 +35,7 @@ Link: https://lore.kernel.org/r/20220314215253.92658-1-dossche.niels@gmail.com
  	int ret;
  
  	mutex_lock(&ar->conf_mutex);
-@@ -7147,9 +7148,13 @@ ath11k_mac_op_unassign_vif_chanctx(struc
+@@ -7144,9 +7145,13 @@ ath11k_mac_op_unassign_vif_chanctx(struc
  	WARN_ON(!arvif->is_started);
  
  	if (ab->hw_params.vdev_start_delay &&

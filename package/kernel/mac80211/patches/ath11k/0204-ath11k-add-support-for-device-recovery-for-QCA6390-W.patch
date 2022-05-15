@@ -195,7 +195,7 @@ Link: https://lore.kernel.org/r/20220228064606.8981-2-quic_wgong@quicinc.com
  		u32 fw_crash_counter;
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7918,6 +7918,8 @@ ath11k_mac_op_reconfig_complete(struct i
+@@ -7915,6 +7915,8 @@ ath11k_mac_op_reconfig_complete(struct i
  				enum ieee80211_reconfig_type reconfig_type)
  {
  	struct ath11k *ar = hw->priv;
@@ -204,7 +204,7 @@ Link: https://lore.kernel.org/r/20220228064606.8981-2-quic_wgong@quicinc.com
  
  	if (reconfig_type != IEEE80211_RECONFIG_TYPE_RESTART)
  		return;
-@@ -7929,6 +7931,22 @@ ath11k_mac_op_reconfig_complete(struct i
+@@ -7926,6 +7928,22 @@ ath11k_mac_op_reconfig_complete(struct i
  			    ar->pdev->pdev_id);
  		ar->state = ATH11K_STATE_ON;
  		ieee80211_wake_queues(ar->hw);

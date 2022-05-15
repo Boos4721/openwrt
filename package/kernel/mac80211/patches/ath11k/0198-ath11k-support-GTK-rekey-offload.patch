@@ -62,7 +62,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-7-git-send-email-quic_cjhuang@q
  	cancel_delayed_work_sync(&arvif->connection_loss_work);
  }
  
-@@ -8203,6 +8206,39 @@ generate:
+@@ -8200,6 +8203,39 @@ generate:
  	ath11k_generate_ns_mc_addr(ar, offload);
  }
  
@@ -102,7 +102,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-7-git-send-email-quic_cjhuang@q
  static const struct ieee80211_ops ath11k_ops = {
  	.tx				= ath11k_mac_op_tx,
  	.start                          = ath11k_mac_op_start,
-@@ -8217,6 +8253,7 @@ static const struct ieee80211_ops ath11k
+@@ -8214,6 +8250,7 @@ static const struct ieee80211_ops ath11k
  	.hw_scan                        = ath11k_mac_op_hw_scan,
  	.cancel_hw_scan                 = ath11k_mac_op_cancel_hw_scan,
  	.set_key                        = ath11k_mac_op_set_key,
@@ -112,7 +112,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-7-git-send-email-quic_cjhuang@q
  	.sta_set_txpwr			= ath11k_mac_op_sta_set_txpwr,
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -7767,6 +7767,56 @@ exit:
+@@ -7765,6 +7765,56 @@ exit:
  	kfree(tb);
  }
  
@@ -169,7 +169,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-7-git-send-email-quic_cjhuang@q
  static void ath11k_wmi_tlv_op_rx(struct ath11k_base *ab, struct sk_buff *skb)
  {
  	struct wmi_cmd_hdr *cmd_hdr;
-@@ -7898,6 +7948,9 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7896,6 +7946,9 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_DIAG_EVENTID:
  		ath11k_wmi_diag_event(ab, skb);
  		break;
@@ -179,7 +179,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-7-git-send-email-quic_cjhuang@q
  	/* TODO: Add remaining events */
  	default:
  		ath11k_dbg(ab, ATH11K_DBG_WMI, "Unknown eventid: 0x%x\n", id);
-@@ -8737,3 +8790,69 @@ int ath11k_wmi_arp_ns_offload(struct ath
+@@ -8735,3 +8788,69 @@ int ath11k_wmi_arp_ns_offload(struct ath
  
  	return ath11k_wmi_cmd_send(ar->wmi, skb, WMI_SET_ARP_NS_OFFLOAD_CMDID);
  }

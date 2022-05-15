@@ -144,7 +144,7 @@ Link: https://lore.kernel.org/r/20220228064606.8981-3-quic_wgong@quicinc.com
  	unsigned long reset_fail_timeout;
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5752,6 +5752,27 @@ static int ath11k_mac_config_mon_status_
+@@ -5749,6 +5749,27 @@ static int ath11k_mac_config_mon_status_
  	return ret;
  }
  
@@ -172,7 +172,7 @@ Link: https://lore.kernel.org/r/20220228064606.8981-3-quic_wgong@quicinc.com
  static int ath11k_mac_op_start(struct ieee80211_hw *hw)
  {
  	struct ath11k *ar = hw->priv;
-@@ -5768,6 +5789,7 @@ static int ath11k_mac_op_start(struct ie
+@@ -5765,6 +5786,7 @@ static int ath11k_mac_op_start(struct ie
  		break;
  	case ATH11K_STATE_RESTARTING:
  		ar->state = ATH11K_STATE_RESTARTED;

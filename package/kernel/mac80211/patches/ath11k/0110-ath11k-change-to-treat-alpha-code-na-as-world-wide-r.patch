@@ -18,7 +18,7 @@ Link: https://lore.kernel.org/r/20211118094848.7776-1-quic_wgong@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -5929,7 +5929,13 @@ static void ath11k_wmi_htc_tx_complete(s
+@@ -5927,7 +5927,13 @@ static void ath11k_wmi_htc_tx_complete(s
  
  static bool ath11k_reg_is_world_alpha(char *alpha)
  {

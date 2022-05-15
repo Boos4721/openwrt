@@ -21,7 +21,7 @@ Link: https://lore.kernel.org/r/1644416019-820-1-git-send-email-quic_vnaralas@qu
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -6859,13 +6859,33 @@ ath11k_mac_update_vif_chan(struct ath11k
+@@ -6856,13 +6856,33 @@ ath11k_mac_update_vif_chan(struct ath11k
  		if (WARN_ON(!arvif->is_started))
  			continue;
  

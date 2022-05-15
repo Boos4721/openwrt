@@ -46,7 +46,7 @@ Link: https://lore.kernel.org/r/20220112025400.2222-1-quic_bqiang@quicinc.com
  	vdev_param = WMI_VDEV_PARAM_BEACON_RATE;
  	ret = ath11k_wmi_vdev_set_param_cmd(ar, arvif->vdev_id, vdev_param,
  					    hw_rate_code);
-@@ -6963,6 +6968,19 @@ static int ath11k_start_vdev_delay(struc
+@@ -6960,6 +6965,19 @@ static int ath11k_start_vdev_delay(struc
  		return ret;
  	}
  

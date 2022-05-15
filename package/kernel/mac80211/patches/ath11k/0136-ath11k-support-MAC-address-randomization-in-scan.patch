@@ -34,7 +34,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
  	ret = ath11k_start_scan(ar, &arg);
  	if (ret) {
  		ath11k_warn(ar->ab, "failed to start hw scan: %d\n", ret);
-@@ -5593,6 +5599,14 @@ static int ath11k_mac_op_start(struct ie
+@@ -5590,6 +5596,14 @@ static int ath11k_mac_op_start(struct ie
  		goto err;
  	}
  
@@ -49,7 +49,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
  	ret = ath11k_wmi_pdev_set_param(ar, WMI_PDEV_PARAM_ARP_AC_OVERRIDE,
  					0, pdev->pdev_id);
  	if (ret) {
-@@ -8189,6 +8203,11 @@ static int __ath11k_mac_register(struct
+@@ -8186,6 +8200,11 @@ static int __ath11k_mac_register(struct
  
  	ar->hw->wiphy->max_ap_assoc_sta = ar->max_num_stations;
  
@@ -63,7 +63,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
  	ar->hw->offchannel_tx_hw_queue = ATH11K_HW_MAX_QUEUES - 1;
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -2183,6 +2183,8 @@ int ath11k_wmi_send_scan_start_cmd(struc
+@@ -2181,6 +2181,8 @@ int ath11k_wmi_send_scan_start_cmd(struc
  	cmd->num_ssids = params->num_ssids;
  	cmd->ie_len = params->extraie.len;
  	cmd->n_probes = params->n_probes;
@@ -72,7 +72,7 @@ Link: https://lore.kernel.org/r/1638948007-9609-1-git-send-email-quic_cjhuang@qu
  
  	ptr += sizeof(*cmd);
  
-@@ -7712,3 +7714,31 @@ int ath11k_wmi_wow_enable(struct ath11k
+@@ -7710,3 +7712,31 @@ int ath11k_wmi_wow_enable(struct ath11k
  
  	return ath11k_wmi_cmd_send(ar->wmi, skb, WMI_WOW_ENABLE_CMDID);
  }

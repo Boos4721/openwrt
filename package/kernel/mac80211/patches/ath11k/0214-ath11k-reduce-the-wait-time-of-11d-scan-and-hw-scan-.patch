@@ -140,7 +140,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  	return ret;
  }
  
-@@ -5862,7 +5846,7 @@ static int ath11k_mac_op_start(struct ie
+@@ -5859,7 +5843,7 @@ static int ath11k_mac_op_start(struct ie
  
  	/* TODO: Do we need to enable ANI? */
  
@@ -149,7 +149,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  
  	ar->num_started_vdevs = 0;
  	ar->num_created_vdevs = 0;
-@@ -5929,6 +5913,11 @@ static void ath11k_mac_op_stop(struct ie
+@@ -5926,6 +5910,11 @@ static void ath11k_mac_op_stop(struct ie
  	cancel_work_sync(&ar->ab->update_11d_work);
  	cancel_work_sync(&ar->ab->rfkill_work);
  
@@ -161,7 +161,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  	spin_lock_bh(&ar->data_lock);
  	list_for_each_entry_safe(ppdu_stats, tmp, &ar->ppdu_stats_info, list) {
  		list_del(&ppdu_stats->list);
-@@ -6099,7 +6088,7 @@ static bool ath11k_mac_vif_ap_active_any
+@@ -6096,7 +6085,7 @@ static bool ath11k_mac_vif_ap_active_any
  	return false;
  }
  
@@ -170,7 +170,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  {
  	struct wmi_11d_scan_start_params param;
  	int ret;
-@@ -6127,28 +6116,22 @@ void ath11k_mac_11d_scan_start(struct at
+@@ -6124,28 +6113,22 @@ void ath11k_mac_11d_scan_start(struct at
  
  	ath11k_dbg(ar->ab, ATH11K_DBG_MAC, "mac start 11d scan\n");
  
@@ -206,7 +206,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  	mutex_unlock(&ar->ab->vdev_id_11d_lock);
  }
  
-@@ -6171,12 +6154,15 @@ void ath11k_mac_11d_scan_stop(struct ath
+@@ -6168,12 +6151,15 @@ void ath11k_mac_11d_scan_stop(struct ath
  		vdev_id = ar->vdev_id_11d_scan;
  
  		ret = ath11k_wmi_send_11d_scan_stop_cmd(ar, vdev_id);
@@ -224,7 +224,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  	}
  	mutex_unlock(&ar->ab->vdev_id_11d_lock);
  }
-@@ -6372,8 +6358,10 @@ static int ath11k_mac_op_add_interface(s
+@@ -6369,8 +6355,10 @@ static int ath11k_mac_op_add_interface(s
  			goto err_peer_del;
  		}
  
@@ -237,7 +237,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  		break;
  	case WMI_VDEV_TYPE_MONITOR:
  		set_bit(ATH11K_FLAG_MONITOR_VDEV_CREATED, &ar->monitor_flags);
-@@ -7233,7 +7221,7 @@ ath11k_mac_op_unassign_vif_chanctx(struc
+@@ -7230,7 +7218,7 @@ ath11k_mac_op_unassign_vif_chanctx(struc
  	}
  
  	if (arvif->vdev_type == WMI_VDEV_TYPE_STA)
@@ -246,7 +246,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  
  	mutex_unlock(&ar->conf_mutex);
  }
-@@ -8923,8 +8911,7 @@ int ath11k_mac_allocate(struct ath11k_ba
+@@ -8920,8 +8908,7 @@ int ath11k_mac_allocate(struct ath11k_ba
  		ar->monitor_vdev_id = -1;
  		clear_bit(ATH11K_FLAG_MONITOR_VDEV_CREATED, &ar->monitor_flags);
  		ar->vdev_id_11d_scan = ATH11K_11D_INVALID_VDEV_ID;
@@ -360,7 +360,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  #endif
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -2017,7 +2017,10 @@ void ath11k_wmi_start_scan_init(struct a
+@@ -2015,7 +2015,10 @@ void ath11k_wmi_start_scan_init(struct a
  {
  	/* setup commonly used values */
  	arg->scan_req_id = 1;
@@ -372,7 +372,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  	arg->dwell_time_active = 50;
  	arg->dwell_time_active_2g = 0;
  	arg->dwell_time_passive = 150;
-@@ -6352,8 +6355,10 @@ static void ath11k_wmi_op_ep_tx_credits(
+@@ -6350,8 +6353,10 @@ static void ath11k_wmi_op_ep_tx_credits(
  static int ath11k_reg_11d_new_cc_event(struct ath11k_base *ab, struct sk_buff *skb)
  {
  	const struct wmi_11d_new_cc_ev *ev;
@@ -384,7 +384,7 @@ Link: https://lore.kernel.org/r/20220328035832.14122-1-quic_wgong@quicinc.com
  
  	tb = ath11k_wmi_tlv_parse_alloc(ab, skb->data, skb->len, GFP_ATOMIC);
  	if (IS_ERR(tb)) {
-@@ -6379,6 +6384,13 @@ static int ath11k_reg_11d_new_cc_event(s
+@@ -6377,6 +6382,13 @@ static int ath11k_reg_11d_new_cc_event(s
  
  	kfree(tb);
  

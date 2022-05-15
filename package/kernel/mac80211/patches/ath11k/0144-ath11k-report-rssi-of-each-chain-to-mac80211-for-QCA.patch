@@ -327,7 +327,7 @@ Link: https://lore.kernel.org/r/20211215090944.19729-1-quic_wgong@quicinc.com
  struct ath11k_hw_ops {
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7778,12 +7778,42 @@ exit:
+@@ -7775,12 +7775,42 @@ exit:
  	return ret;
  }
  
@@ -370,7 +370,7 @@ Link: https://lore.kernel.org/r/20211215090944.19729-1-quic_wgong@quicinc.com
  
  	sinfo->rx_duration = arsta->rx_duration;
  	sinfo->filled |= BIT_ULL(NL80211_STA_INFO_RX_DURATION);
-@@ -7806,6 +7836,16 @@ static void ath11k_mac_op_sta_statistics
+@@ -7803,6 +7833,16 @@ static void ath11k_mac_op_sta_statistics
  		sinfo->filled |= BIT_ULL(NL80211_STA_INFO_TX_BITRATE);
  	}
  
@@ -413,7 +413,7 @@ Link: https://lore.kernel.org/r/20211215090944.19729-1-quic_wgong@quicinc.com
  };
  
  #define PRIMAP(_hw_mode_) \
-@@ -5556,37 +5566,89 @@ ath11k_wmi_pull_bcn_stats(const struct w
+@@ -5554,37 +5564,89 @@ ath11k_wmi_pull_bcn_stats(const struct w
  	dst->tx_bcn_outage_cnt = src->tx_bcn_outage_cnt;
  }
  
@@ -527,7 +527,7 @@ Link: https://lore.kernel.org/r/20211215090944.19729-1-quic_wgong@quicinc.com
  	stats->stats_id = 0;
  
  	for (i = 0; i < ev->num_pdev_stats; i++) {
-@@ -5594,10 +5656,8 @@ int ath11k_wmi_pull_fw_stats(struct ath1
+@@ -5592,10 +5654,8 @@ int ath11k_wmi_pull_fw_stats(struct ath1
  		struct ath11k_fw_stats_pdev *dst;
  
  		src = data;
@@ -539,7 +539,7 @@ Link: https://lore.kernel.org/r/20211215090944.19729-1-quic_wgong@quicinc.com
  
  		stats->stats_id = WMI_REQUEST_PDEV_STAT;
  
-@@ -5619,10 +5679,8 @@ int ath11k_wmi_pull_fw_stats(struct ath1
+@@ -5617,10 +5677,8 @@ int ath11k_wmi_pull_fw_stats(struct ath1
  		struct ath11k_fw_stats_vdev *dst;
  
  		src = data;
@@ -551,7 +551,7 @@ Link: https://lore.kernel.org/r/20211215090944.19729-1-quic_wgong@quicinc.com
  
  		stats->stats_id = WMI_REQUEST_VDEV_STAT;
  
-@@ -5642,10 +5700,8 @@ int ath11k_wmi_pull_fw_stats(struct ath1
+@@ -5640,10 +5698,8 @@ int ath11k_wmi_pull_fw_stats(struct ath1
  		struct ath11k_fw_stats_bcn *dst;
  
  		src = data;
@@ -563,7 +563,7 @@ Link: https://lore.kernel.org/r/20211215090944.19729-1-quic_wgong@quicinc.com
  
  		stats->stats_id = WMI_REQUEST_BCN_STAT;
  
-@@ -5660,10 +5716,67 @@ int ath11k_wmi_pull_fw_stats(struct ath1
+@@ -5658,10 +5714,67 @@ int ath11k_wmi_pull_fw_stats(struct ath1
  		list_add_tail(&dst->list, &stats->bcn);
  	}
  

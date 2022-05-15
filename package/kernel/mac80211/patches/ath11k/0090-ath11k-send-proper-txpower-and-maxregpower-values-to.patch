@@ -38,7 +38,7 @@ Link: https://lore.kernel.org/r/1635164229-22880-1-git-send-email-quic_ppranees@
  
  	arg.pref_tx_streams = ar->num_tx_chains;
  	arg.pref_rx_streams = ar->num_rx_chains;
-@@ -6136,9 +6136,9 @@ ath11k_mac_vdev_start_restart(struct ath
+@@ -6133,9 +6133,9 @@ ath11k_mac_vdev_start_restart(struct ath
  		ath11k_phymodes[chandef->chan->band][chandef->width];
  
  	arg.channel.min_power = 0;
@@ -53,7 +53,7 @@ Link: https://lore.kernel.org/r/1635164229-22880-1-git-send-email-quic_ppranees@
  	arg.pref_rx_streams = ar->num_rx_chains;
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -2390,6 +2390,8 @@ int ath11k_wmi_send_scan_chan_list_cmd(s
+@@ -2388,6 +2388,8 @@ int ath11k_wmi_send_scan_chan_list_cmd(s
  					    tchan_info->reg_class_id);
  			*reg2 |= FIELD_PREP(WMI_CHAN_REG_INFO2_ANT_MAX,
  					    tchan_info->antennamax);

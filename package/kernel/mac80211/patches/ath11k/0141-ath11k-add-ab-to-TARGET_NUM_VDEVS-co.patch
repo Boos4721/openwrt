@@ -96,7 +96,7 @@ Link: https://lore.kernel.org/r/20211209104351.9811-2-kvalo@kernel.org
  #define TARGET_NUM_OFFLD_PEERS	4
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -6007,9 +6007,9 @@ static int ath11k_mac_op_add_interface(s
+@@ -6004,9 +6004,9 @@ static int ath11k_mac_op_add_interface(s
  		goto err;
  	}
  
@@ -108,7 +108,7 @@ Link: https://lore.kernel.org/r/20211209104351.9811-2-kvalo@kernel.org
  		ret = -EBUSY;
  		goto err;
  	}
-@@ -8205,8 +8205,8 @@ static int __ath11k_mac_register(struct
+@@ -8202,8 +8202,8 @@ static int __ath11k_mac_register(struct
  	ar->hw->wiphy->features |= NL80211_FEATURE_AP_MODE_CHAN_WIDTH_CHANGE |
  				   NL80211_FEATURE_AP_SCAN;
  
@@ -119,7 +119,7 @@ Link: https://lore.kernel.org/r/20211209104351.9811-2-kvalo@kernel.org
  
  	ar->hw->wiphy->max_ap_assoc_sta = ar->max_num_stations;
  
-@@ -8309,7 +8309,7 @@ int ath11k_mac_register(struct ath11k_ba
+@@ -8306,7 +8306,7 @@ int ath11k_mac_register(struct ath11k_ba
  
  	/* Initialize channel counters frequency value in hertz */
  	ab->cc_freq_hz = IPQ8074_CC_FREQ_HERTZ;

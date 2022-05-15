@@ -19,7 +19,7 @@ Link: https://lore.kernel.org/r/1646024079-26391-1-git-send-email-quic_periyasa@
 
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -6390,22 +6390,12 @@ static int ath11k_mac_op_add_interface(s
+@@ -6387,22 +6387,12 @@ static int ath11k_mac_op_add_interface(s
  
  err_peer_del:
  	if (arvif->vdev_type == WMI_VDEV_TYPE_AP) {

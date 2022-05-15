@@ -205,7 +205,7 @@ Link: https://lore.kernel.org/r/20211217102334.14907-1-quic_wgong@quicinc.com
  	int num_rxmda_per_pdev;
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -5574,6 +5574,63 @@ static int ath11k_mac_mgmt_tx(struct ath
+@@ -5571,6 +5571,63 @@ static int ath11k_mac_mgmt_tx(struct ath
  	return 0;
  }
  
@@ -269,7 +269,7 @@ Link: https://lore.kernel.org/r/20211217102334.14907-1-quic_wgong@quicinc.com
  static void ath11k_mac_op_tx(struct ieee80211_hw *hw,
  			     struct ieee80211_tx_control *control,
  			     struct sk_buff *skb)
-@@ -5806,6 +5863,7 @@ static void ath11k_mac_op_stop(struct ie
+@@ -5803,6 +5860,7 @@ static void ath11k_mac_op_stop(struct ie
  	cancel_delayed_work_sync(&ar->scan.timeout);
  	cancel_work_sync(&ar->regd_update_work);
  	cancel_work_sync(&ar->ab->update_11d_work);
@@ -299,7 +299,7 @@ Link: https://lore.kernel.org/r/20211217102334.14907-1-quic_wgong@quicinc.com
  	[WMI_TAG_PDEV_CTL_FAILSAFE_CHECK_EVENT]
  		= { .min_len = sizeof(struct wmi_pdev_ctl_failsafe_chk_event) },
  	[WMI_TAG_HOST_SWFDA_EVENT] = {
-@@ -526,6 +528,8 @@ static int ath11k_pull_service_ready_tlv
+@@ -524,6 +526,8 @@ static int ath11k_pull_service_ready_tlv
  	cap->default_dbs_hw_mode_index = ev->default_dbs_hw_mode_index;
  	cap->num_msdu_desc = ev->num_msdu_desc;
  
@@ -308,7 +308,7 @@ Link: https://lore.kernel.org/r/20211217102334.14907-1-quic_wgong@quicinc.com
  	return 0;
  }
  
-@@ -7336,6 +7340,40 @@ exit:
+@@ -7334,6 +7338,40 @@ exit:
  	kfree(tb);
  }
  
@@ -349,7 +349,7 @@ Link: https://lore.kernel.org/r/20211217102334.14907-1-quic_wgong@quicinc.com
  static void
  ath11k_wmi_pdev_temperature_event(struct ath11k_base *ab,
  				  struct sk_buff *skb)
-@@ -7608,6 +7646,9 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7606,6 +7644,9 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_11D_NEW_COUNTRY_EVENTID:
  		ath11k_reg_11d_new_cc_event(ab, skb);
  		break;

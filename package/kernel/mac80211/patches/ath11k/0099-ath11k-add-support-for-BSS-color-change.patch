@@ -121,7 +121,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  		} else if (vif->type == NL80211_IFTYPE_STATION) {
  			ret = ath11k_wmi_send_bss_color_change_enable_cmd(ar,
  									  arvif->vdev_id,
-@@ -7885,6 +7931,9 @@ static int __ath11k_mac_register(struct
+@@ -7882,6 +7928,9 @@ static int __ath11k_mac_register(struct
  
  	wiphy_ext_feature_set(ar->hw->wiphy, NL80211_EXT_FEATURE_CQM_RSSI_LIST);
  	wiphy_ext_feature_set(ar->hw->wiphy, NL80211_EXT_FEATURE_STA_TX_PWR);
@@ -150,7 +150,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  };
  
  #define PRIMAP(_hw_mode_) \
-@@ -1635,6 +1637,15 @@ int ath11k_wmi_bcn_tmpl(struct ath11k *a
+@@ -1633,6 +1635,15 @@ int ath11k_wmi_bcn_tmpl(struct ath11k *a
  	void *ptr;
  	int ret, len;
  	size_t aligned_len = roundup(bcn->len, 4);
@@ -166,7 +166,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  
  	len = sizeof(*cmd) + sizeof(*bcn_prb_info) + TLV_HDR_SIZE + aligned_len;
  
-@@ -1647,8 +1658,12 @@ int ath11k_wmi_bcn_tmpl(struct ath11k *a
+@@ -1645,8 +1656,12 @@ int ath11k_wmi_bcn_tmpl(struct ath11k *a
  			  FIELD_PREP(WMI_TLV_LEN, sizeof(*cmd) - TLV_HDR_SIZE);
  	cmd->vdev_id = vdev_id;
  	cmd->tim_ie_offset = offs->tim_offset;
@@ -181,7 +181,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  	cmd->buf_len = bcn->len;
  
  	ptr = skb->data + sizeof(*cmd);
-@@ -3454,6 +3469,53 @@ int ath11k_wmi_fils_discovery(struct ath
+@@ -3452,6 +3467,53 @@ int ath11k_wmi_fils_discovery(struct ath
  }
  
  static void
@@ -235,7 +235,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  ath11k_fill_band_to_mac_param(struct ath11k_base  *soc,
  			      struct wmi_host_pdev_band_to_mac *band_to_mac)
  {
-@@ -6160,6 +6222,7 @@ static void ath11k_vdev_start_resp_event
+@@ -6158,6 +6220,7 @@ static void ath11k_vdev_start_resp_event
  
  static void ath11k_bcn_tx_status_event(struct ath11k_base *ab, struct sk_buff *skb)
  {
@@ -243,7 +243,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  	u32 vdev_id, tx_status;
  
  	if (ath11k_pull_bcn_tx_status_ev(ab, skb->data, skb->len,
-@@ -6167,6 +6230,14 @@ static void ath11k_bcn_tx_status_event(s
+@@ -6165,6 +6228,14 @@ static void ath11k_bcn_tx_status_event(s
  		ath11k_warn(ab, "failed to extract bcn tx status");
  		return;
  	}
@@ -258,7 +258,7 @@ Link: https://lore.kernel.org/r/1635178254-17732-1-git-send-email-quic_ramess@qu
  }
  
  static void ath11k_vdev_stopped_event(struct ath11k_base *ab, struct sk_buff *skb)
-@@ -7194,6 +7265,9 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7192,6 +7263,9 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_OFFLOAD_PROB_RESP_TX_STATUS_EVENTID:
  		ath11k_probe_resp_tx_status_event(ab, skb);
  		break;

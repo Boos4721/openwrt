@@ -35,7 +35,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-3-git-send-email-quic_cjhuang@q
  struct ath11k_band_cap {
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -8501,6 +8501,18 @@ static int __ath11k_mac_register(struct
+@@ -8498,6 +8498,18 @@ static int __ath11k_mac_register(struct
  			NL80211_FEATURE_SCAN_RANDOM_MAC_ADDR;
  	}
  
@@ -56,7 +56,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-3-git-send-email-quic_cjhuang@q
  		ath11k_warn(ar->ab, "failed to init wow: %d\n", ret);
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -8395,3 +8395,157 @@ int ath11k_wmi_wow_del_pattern(struct at
+@@ -8393,3 +8393,157 @@ int ath11k_wmi_wow_del_pattern(struct at
  
  	return ath11k_wmi_cmd_send(ar->wmi, skb, WMI_WOW_DEL_WAKE_PATTERN_CMDID);
  }

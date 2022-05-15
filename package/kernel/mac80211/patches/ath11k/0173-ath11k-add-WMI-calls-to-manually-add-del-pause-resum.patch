@@ -39,7 +39,7 @@ Link: https://lore.kernel.org/r/20220131031043.1295-1-alokad@codeaurora.org
  };
  
  #define PRIMAP(_hw_mode_) \
-@@ -3087,11 +3089,12 @@ ath11k_wmi_send_twt_enable_cmd(struct at
+@@ -3085,11 +3087,12 @@ ath11k_wmi_send_twt_enable_cmd(struct at
  	/* TODO add MBSSID support */
  	cmd->mbss_support = 0;
  
@@ -54,7 +54,7 @@ Link: https://lore.kernel.org/r/20220131031043.1295-1-alokad@codeaurora.org
  	}
  	return ret;
  }
-@@ -3116,11 +3119,181 @@ ath11k_wmi_send_twt_disable_cmd(struct a
+@@ -3114,11 +3117,181 @@ ath11k_wmi_send_twt_disable_cmd(struct a
  			  FIELD_PREP(WMI_TLV_LEN, len - TLV_HDR_SIZE);
  	cmd->pdev_id = pdev_id;
  
@@ -238,7 +238,7 @@ Link: https://lore.kernel.org/r/20220131031043.1295-1-alokad@codeaurora.org
  	}
  	return ret;
  }
-@@ -7534,6 +7707,66 @@ ath11k_wmi_diag_event(struct ath11k_base
+@@ -7532,6 +7705,66 @@ ath11k_wmi_diag_event(struct ath11k_base
  	trace_ath11k_wmi_diag(ab, skb->data, skb->len);
  }
  
@@ -305,7 +305,7 @@ Link: https://lore.kernel.org/r/20220131031043.1295-1-alokad@codeaurora.org
  static void ath11k_wmi_tlv_op_rx(struct ath11k_base *ab, struct sk_buff *skb)
  {
  	struct wmi_cmd_hdr *cmd_hdr;
-@@ -7631,11 +7864,17 @@ static void ath11k_wmi_tlv_op_rx(struct
+@@ -7629,11 +7862,17 @@ static void ath11k_wmi_tlv_op_rx(struct
  	case WMI_OBSS_COLOR_COLLISION_DETECTION_EVENTID:
  		ath11k_wmi_obss_color_collision_event(ab, skb);
  		break;

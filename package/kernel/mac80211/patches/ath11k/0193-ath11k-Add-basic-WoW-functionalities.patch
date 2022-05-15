@@ -169,7 +169,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-2-git-send-email-quic_cjhuang@q
  
  #define CHAN2G(_channel, _freq, _flags) { \
  	.band                   = NL80211_BAND_2GHZ, \
-@@ -7261,31 +7263,47 @@ static int ath11k_mac_op_set_frag_thresh
+@@ -7258,31 +7260,47 @@ static int ath11k_mac_op_set_frag_thresh
  	return -EOPNOTSUPP;
  }
  
@@ -231,7 +231,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-2-git-send-email-quic_cjhuang@q
  }
  
  static int
-@@ -8107,6 +8125,13 @@ static const struct ieee80211_ops ath11k
+@@ -8104,6 +8122,13 @@ static const struct ieee80211_ops ath11k
  	.flush				= ath11k_mac_op_flush,
  	.sta_statistics			= ath11k_mac_op_sta_statistics,
  	CFG80211_TESTMODE_CMD(ath11k_tm_cmd)
@@ -245,7 +245,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-2-git-send-email-quic_cjhuang@q
  #ifdef CPTCFG_ATH11K_DEBUGFS
  	.sta_add_debugfs		= ath11k_debugfs_sta_op_add,
  #endif
-@@ -8476,6 +8501,12 @@ static int __ath11k_mac_register(struct
+@@ -8473,6 +8498,12 @@ static int __ath11k_mac_register(struct
  			NL80211_FEATURE_SCAN_RANDOM_MAC_ADDR;
  	}
  
@@ -268,7 +268,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-2-git-send-email-quic_cjhuang@q
  #endif
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -8237,3 +8237,161 @@ int ath11k_wmi_scan_prob_req_oui(struct
+@@ -8235,3 +8235,161 @@ int ath11k_wmi_scan_prob_req_oui(struct
  
  	return ath11k_wmi_cmd_send(ar->wmi, skb, WMI_SCAN_PROB_REQ_OUI_CMDID);
  }

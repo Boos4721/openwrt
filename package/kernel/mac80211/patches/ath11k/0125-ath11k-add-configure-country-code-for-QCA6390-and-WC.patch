@@ -19,7 +19,7 @@ Link: https://lore.kernel.org/r/20211201071745.17746-3-quic_wgong@quicinc.com
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -2800,6 +2800,42 @@ out:
+@@ -2798,6 +2798,42 @@ out:
  	return ret;
  }
  

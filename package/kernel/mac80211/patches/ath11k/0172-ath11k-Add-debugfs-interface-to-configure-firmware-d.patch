@@ -303,7 +303,7 @@ Link: https://lore.kernel.org/r/1642405103-32302-1-git-send-email-quic_seevalam@
  void ath11k_debugfs_soc_destroy(struct ath11k_base *ab);
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -7800,6 +7800,59 @@ int ath11k_wmi_simulate_radar(struct ath
+@@ -7798,6 +7798,59 @@ int ath11k_wmi_simulate_radar(struct ath
  	return ath11k_wmi_send_unit_test_cmd(ar, wmi_ut, dfs_args);
  }
  

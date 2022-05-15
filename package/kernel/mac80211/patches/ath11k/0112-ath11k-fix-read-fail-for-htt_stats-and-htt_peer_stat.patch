@@ -181,7 +181,7 @@ Link: https://lore.kernel.org/r/20211118095700.8149-1-quic_wgong@quicinc.com
  
  	/* Take non-zero tx/rx chainmask. If tx/rx chainmask differs from
  	 * band to band for a single radio, need to see how this should be
-@@ -4232,6 +4237,7 @@ static int ath11k_wmi_tlv_ext_soc_hal_re
+@@ -4230,6 +4235,7 @@ static int ath11k_wmi_tlv_ext_soc_hal_re
  	svc_rdy_ext->param.num_phy = svc_rdy_ext->soc_hal_reg_caps->num_phy;
  
  	soc->num_radios = 0;

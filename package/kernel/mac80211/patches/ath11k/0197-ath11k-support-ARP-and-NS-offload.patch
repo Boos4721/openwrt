@@ -99,7 +99,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-6-git-send-email-quic_cjhuang@q
  	mutex_unlock(&ar->conf_mutex);
  }
  
-@@ -8090,6 +8108,101 @@ static void ath11k_mac_op_sta_statistics
+@@ -8087,6 +8105,101 @@ static void ath11k_mac_op_sta_statistics
  	}
  }
  
@@ -201,7 +201,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-6-git-send-email-quic_cjhuang@q
  static const struct ieee80211_ops ath11k_ops = {
  	.tx				= ath11k_mac_op_tx,
  	.start                          = ath11k_mac_op_start,
-@@ -8135,6 +8248,11 @@ static const struct ieee80211_ops ath11k
+@@ -8132,6 +8245,11 @@ static const struct ieee80211_ops ath11k
  #ifdef CPTCFG_ATH11K_DEBUGFS
  	.sta_add_debugfs		= ath11k_debugfs_sta_op_add,
  #endif
@@ -215,7 +215,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-6-git-send-email-quic_cjhuang@q
  static void ath11k_mac_update_ch_list(struct ath11k *ar,
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -8582,3 +8582,158 @@ int ath11k_wmi_wow_config_pno(struct ath
+@@ -8580,3 +8580,158 @@ int ath11k_wmi_wow_config_pno(struct ath
  	return ath11k_wmi_cmd_send(ar->wmi, skb, WMI_NETWORK_LIST_OFFLOAD_CONFIG_CMDID);
  }
  

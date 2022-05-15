@@ -20,7 +20,7 @@ Link: https://lore.kernel.org/r/1644308006-22784-4-git-send-email-quic_cjhuang@q
 
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
-@@ -8167,6 +8167,39 @@ void ath11k_wmi_detach(struct ath11k_bas
+@@ -8165,6 +8165,39 @@ void ath11k_wmi_detach(struct ath11k_bas
  	ath11k_wmi_free_dbring_caps(ab);
  }
  

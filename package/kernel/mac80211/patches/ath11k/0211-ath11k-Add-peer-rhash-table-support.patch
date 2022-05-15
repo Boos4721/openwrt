@@ -136,7 +136,7 @@ Link: https://lore.kernel.org/r/1644036628-5334-1-git-send-email-quic_periyasa@q
  
  		kfree(arsta->tx_stats);
  		arsta->tx_stats = NULL;
-@@ -8577,6 +8583,8 @@ void ath11k_mac_unregister(struct ath11k
+@@ -8574,6 +8580,8 @@ void ath11k_mac_unregister(struct ath11k
  
  		__ath11k_mac_unregister(ar);
  	}
@@ -145,7 +145,7 @@ Link: https://lore.kernel.org/r/1644036628-5334-1-git-send-email-quic_periyasa@q
  }
  
  static int __ath11k_mac_register(struct ath11k *ar)
-@@ -8805,6 +8813,10 @@ int ath11k_mac_register(struct ath11k_ba
+@@ -8802,6 +8810,10 @@ int ath11k_mac_register(struct ath11k_ba
  	ab->cc_freq_hz = IPQ8074_CC_FREQ_HERTZ;
  	ab->free_vdev_map = (1LL << (ab->num_radios * TARGET_NUM_VDEVS(ab))) - 1;
  
@@ -156,7 +156,7 @@ Link: https://lore.kernel.org/r/1644036628-5334-1-git-send-email-quic_periyasa@q
  	for (i = 0; i < ab->num_radios; i++) {
  		pdev = &ab->pdevs[i];
  		ar = pdev->ar;
-@@ -8834,6 +8846,8 @@ err_cleanup:
+@@ -8831,6 +8843,8 @@ err_cleanup:
  		__ath11k_mac_unregister(ar);
  	}
  

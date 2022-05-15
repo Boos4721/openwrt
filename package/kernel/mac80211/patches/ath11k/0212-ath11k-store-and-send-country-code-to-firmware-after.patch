@@ -43,7 +43,7 @@ Link: https://lore.kernel.org/r/20220324011856.11014-1-quic_wgong@quicinc.com
  struct ath11k_band_cap {
 --- a/drivers/net/wireless/ath/ath11k/mac.c
 +++ b/drivers/net/wireless/ath/ath11k/mac.c
-@@ -7960,6 +7960,14 @@ ath11k_mac_op_reconfig_complete(struct i
+@@ -7957,6 +7957,14 @@ ath11k_mac_op_reconfig_complete(struct i
  		ar->state = ATH11K_STATE_ON;
  		ieee80211_wake_queues(ar->hw);
  
