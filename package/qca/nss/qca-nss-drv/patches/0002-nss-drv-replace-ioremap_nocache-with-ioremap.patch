@@ -1,7 +1,7 @@
-From b5e2a7167ca3df9fce34f0d7c05468d4f5597275 Mon Sep 17 00:00:00 2001
+From 0cffa7bb366a4e0ff5665d6fc2fa33c1437cb397 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Thu, 13 May 2021 23:33:18 +0200
-Subject: [PATCH] nss-drv: replace ioremap_nocache() with ioremap()
+Subject: [PATCH 2/8] nss-drv: replace ioremap_nocache() with ioremap()
 
 ioremap_nocache() does not exist anymore.
 
@@ -128,9 +128,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  		return -EFAULT;
 --- a/nss_hal/nss_hal.c
 +++ b/nss_hal/nss_hal.c
-@@ -78,9 +78,9 @@ int nss_hal_firmware_load(struct nss_ctx
- 		return rc;
+@@ -73,9 +73,9 @@ int nss_hal_firmware_load(struct nss_ctx
  	}
+ 
  
 -	load_mem = ioremap_nocache(npd->load_addr, nss_fw->size);
 +	load_mem = ioremap(npd->load_addr, nss_fw->size);
@@ -142,7 +142,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	}
 --- a/nss_meminfo.c
 +++ b/nss_meminfo.c
-@@ -728,7 +728,7 @@ bool nss_meminfo_init(struct nss_ctx_ins
+@@ -735,7 +735,7 @@ bool nss_meminfo_init(struct nss_ctx_ins
  	/*
  	 * meminfo_start is the label where the start address of meminfo map is stored.
  	 */

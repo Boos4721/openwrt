@@ -18,7 +18,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/nss_core.c
 +++ b/nss_core.c
-@@ -1617,7 +1617,7 @@ static int32_t nss_core_handle_cause_que
+@@ -1650,7 +1650,7 @@ static int32_t nss_core_handle_cause_que
  		 *
  		 */
  		if (unlikely((buffer_type == N2H_BUFFER_CRYPTO_RESP))) {
@@ -29,7 +29,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  
 --- a/nss_coredump.c
 +++ b/nss_coredump.c
-@@ -154,7 +154,7 @@ void nss_fw_coredump_notify(struct nss_c
+@@ -157,7 +157,7 @@ void nss_fw_coredump_notify(struct nss_c
  		dma_addr = nss_own->meminfo_ctx.logbuffer_dma;
  	}
  
@@ -38,7 +38,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  
  	/*
  	 * If the current entry is smaller than or equal to the number of NSS_LOG_COREDUMP_LINE_NUM,
-@@ -181,7 +181,7 @@ void nss_fw_coredump_notify(struct nss_c
+@@ -184,7 +184,7 @@ void nss_fw_coredump_notify(struct nss_c
  
  		offset = (index * sizeof(struct nss_log_entry))
  			+ offsetof(struct nss_log_descriptor, log_ring_buffer);

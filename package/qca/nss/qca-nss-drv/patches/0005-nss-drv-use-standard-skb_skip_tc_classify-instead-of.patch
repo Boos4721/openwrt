@@ -14,7 +14,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
 
 --- a/nss_core.c
 +++ b/nss_core.c
-@@ -1075,7 +1075,7 @@ static inline void nss_core_set_skb_clas
+@@ -1109,7 +1109,7 @@ static inline void nss_core_set_skb_clas
  #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0))
  		nbuf->tc_verd = SET_TC_NCLS_NSS(nbuf->tc_verd);
  #else

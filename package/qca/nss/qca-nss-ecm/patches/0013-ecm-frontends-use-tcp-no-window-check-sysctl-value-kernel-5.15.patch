@@ -1,0 +1,43 @@
+From be57a3e8e2bcff87c6411d1bfeef4292b6308c0b Mon Sep 17 00:00:00 2001
+From: boos4721 <3.1415926535boos@gmail.com>
+Date: Mon, 16 May 2022 03:53:31 +0800
+Subject: [PATCH] qca-nss-ecm: use net.ct.tcp_no_window_check sysctl
+
+Signed-off-by: boos4721 <3.1415926535boos@gmail.com>
+---
+ frontends/nss/ecm_nss_ported_ipv4.c | 7 ++++++-
+ frontends/nss/ecm_nss_ported_ipv6.c | 7 ++++++-
+ 2 files changed, 12 insertions(+), 2 deletions(-)
+
+--- a/frontends/nss/ecm_nss_ported_ipv4.c
++++ b/frontends/nss/ecm_nss_ported_ipv4.c
+@@ -1230,7 +1230,12 @@ static void ecm_nss_ported_ipv4_connecti
+ 			nircm->tcp_rule.return_end = ct->proto.tcp.seen[return_dir].td_end;
+ 			nircm->tcp_rule.return_max_end = ct->proto.tcp.seen[return_dir].td_maxend;
+ #ifdef ECM_OPENWRT_SUPPORT
+-			if (tn->tcp_be_liberal || tn->tcp_no_window_check
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
++			net = nf_ct_net(ct);
++           if (tn->tcp_be_liberal  || (net && net->ct.sysctl_no_window_check)
++#else
++        	if (tn->tcp_be_liberal || tn->tcp_no_window_check
++#endif
+ #else
+ 			if (tn->tcp_be_liberal
+ #endif
+--- a/frontends/nss/ecm_nss_ported_ipv6.c
++++ b/frontends/nss/ecm_nss_ported_ipv6.c
+@@ -1156,7 +1156,12 @@ static void ecm_nss_ported_ipv6_connecti
+ 			nircm->tcp_rule.return_end = ct->proto.tcp.seen[return_dir].td_end;
+ 			nircm->tcp_rule.return_max_end = ct->proto.tcp.seen[return_dir].td_maxend;
+ #ifdef ECM_OPENWRT_SUPPORT
+-			if (tn->tcp_be_liberal || tn->tcp_no_window_check
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
++			net = nf_ct_net(ct);
++           if (tn->tcp_be_liberal  || (net && net->ct.sysctl_no_window_check)
++#else
++        	if (tn->tcp_be_liberal || tn->tcp_no_window_check
++#endif
+ #else
+ 			if (tn->tcp_be_liberal
+ #endif

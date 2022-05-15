@@ -1,7 +1,7 @@
-From 6d5ebe99134f093af7f551b976e7727ad67d91a3 Mon Sep 17 00:00:00 2001
+From 6e65f6daecb09463688eaea0a234018a728196b8 Mon Sep 17 00:00:00 2001
 From: Ansuel Smith <ansuelsmth@gmail.com>
 Date: Tue, 5 Apr 2022 18:10:57 +0200
-Subject: [PATCH 6/7] nss-drv: add support for kernel 5.15
+Subject: [PATCH 5/8] nss-drv: add support for kernel 5.15
 
 - Fix coredump panic notifier include change.
 - Fix skb ZEROCOPY flag.
@@ -26,7 +26,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  #error "Check skb recycle code in this file to match Linux version"
  #endif
  
-@@ -2623,7 +2624,7 @@ static inline bool nss_core_skb_can_reus
+@@ -2678,7 +2679,7 @@ static inline bool nss_core_skb_can_reus
  	if (unlikely(irqs_disabled()))
  		return false;
  
@@ -37,7 +37,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	if (unlikely(skb_is_nonlinear(nbuf)))
 --- a/nss_coredump.c
 +++ b/nss_coredump.c
-@@ -23,7 +23,11 @@
+@@ -25,7 +25,11 @@
  #include "nss_hal.h"
  #include "nss_log.h"
  #include <linux/kernel.h>

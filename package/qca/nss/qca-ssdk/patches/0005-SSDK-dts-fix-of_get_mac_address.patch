@@ -15,7 +15,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/src/init/ssdk_dts.c
 +++ b/src/init/ssdk_dts.c
-@@ -779,8 +779,9 @@ static void ssdk_dt_parse_intf_mac(void)
+@@ -824,8 +824,9 @@ static void ssdk_dt_parse_intf_mac(void)
  {
  	struct device_node *dp_node = NULL;
  	a_uint32_t dp = 0;
@@ -26,7 +26,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  
  	for (dp = 1; dp <= SSDK_MAX_NR_ETH; dp++) {
  		snprintf(dp_name, sizeof(dp_name), "dp%d", dp);
-@@ -788,11 +789,11 @@ static void ssdk_dt_parse_intf_mac(void)
+@@ -833,11 +834,11 @@ static void ssdk_dt_parse_intf_mac(void)
  		if (!dp_node) {
  			continue;
  		}

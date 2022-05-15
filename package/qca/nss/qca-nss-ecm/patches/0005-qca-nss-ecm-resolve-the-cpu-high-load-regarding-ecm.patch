@@ -1,7 +1,7 @@
-From 6924b71ed809b37fffd74d6428a8ca83e5919746 Mon Sep 17 00:00:00 2001
+From 65aa71f33891bcf0b75995219e31abaf674c6199 Mon Sep 17 00:00:00 2001
 From: Dirk Buchwalder <buchwalder@posteo.de>
 Date: Sun, 27 Jun 2021 16:52:39 +0200
-Subject: [PATCH] qca-nss-ecm: resolve the cpu high load regarding ecm
+Subject: [PATCH 05/12] qca-nss-ecm: resolve the cpu high load regarding ecm
 
 If using ECM, cpu load goes up (around 1.0) and stucks there.
 This is due to using uninterruptible sleep function,
@@ -15,7 +15,7 @@ Signed-off-by: Dirk Buchwalder buchwalder@posteo.de
 
 --- a/frontends/nss/ecm_nss_ipv4.c
 +++ b/frontends/nss/ecm_nss_ipv4.c
-@@ -2471,7 +2471,7 @@ static void ecm_nss_ipv4_stats_sync_req_
+@@ -697,7 +697,7 @@ static void ecm_nss_ipv4_stats_sync_req_
  	}
  	spin_unlock_bh(&ecm_nss_ipv4_lock);
  
@@ -24,7 +24,7 @@ Signed-off-by: Dirk Buchwalder buchwalder@posteo.de
  
  	/*
  	 * If index is 0, we are starting a new round, but if we still have time remain
-@@ -2485,7 +2485,7 @@ static void ecm_nss_ipv4_stats_sync_req_
+@@ -711,7 +711,7 @@ static void ecm_nss_ipv4_stats_sync_req_
  		}
  
  		if (time_after(ecm_nss_ipv4_next_req_time, current_jiffies)) {
@@ -35,7 +35,7 @@ Signed-off-by: Dirk Buchwalder buchwalder@posteo.de
  		ecm_nss_ipv4_next_req_time = ecm_nss_ipv4_roll_check_jiffies + ECM_NSS_IPV4_STATS_SYNC_PERIOD;
 --- a/frontends/nss/ecm_nss_ipv6.c
 +++ b/frontends/nss/ecm_nss_ipv6.c
-@@ -2210,7 +2210,7 @@ static void ecm_nss_ipv6_stats_sync_req_
+@@ -675,7 +675,7 @@ static void ecm_nss_ipv6_stats_sync_req_
  	}
  	spin_unlock_bh(&ecm_nss_ipv6_lock);
  
@@ -44,7 +44,7 @@ Signed-off-by: Dirk Buchwalder buchwalder@posteo.de
  
  	/*
  	 * If index is 0, we are starting a new round, but if we still have time remain
-@@ -2224,7 +2224,7 @@ static void ecm_nss_ipv6_stats_sync_req_
+@@ -689,7 +689,7 @@ static void ecm_nss_ipv6_stats_sync_req_
  		}
  
  		if (time_after(ecm_nss_ipv6_next_req_time, current_jiffies)) {

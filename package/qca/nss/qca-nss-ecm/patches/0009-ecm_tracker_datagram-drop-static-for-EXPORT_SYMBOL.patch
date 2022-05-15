@@ -1,12 +1,14 @@
-From 5c3a3d208a91ba4dec563c9c19480915af821e15 Mon Sep 17 00:00:00 2001
-From: bitthief <bitthief@protonmail.ch>
-Date: Wed, 9 Mar 2022 04:46:12 +0200
-Subject: [PATCH] qca-nss-ecm: remove static for ecm_tracker_datagram exports
+From 9827d8597545ecfee17eba7b08d48dbcdf55c614 Mon Sep 17 00:00:00 2001
+From: Ansuel Smith <ansuelsmth@gmail.com>
+Date: Sun, 8 May 2022 18:39:39 +0200
+Subject: [PATCH 09/12] ecm_tracker_datagram: drop static for EXPORT_SYMBOL
 
+EXPORT_SYMBOL should NOT be static
+
+Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
 ---
  ecm_tracker_datagram.c | 8 ++++----
- ecm_tracker_datagram.h | 6 ++++++
- 2 files changed, 10 insertions(+), 4 deletions(-)
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 --- a/ecm_tracker_datagram.c
 +++ b/ecm_tracker_datagram.c

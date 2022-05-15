@@ -15,7 +15,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/nss_dp_main.c
 +++ b/nss_dp_main.c
-@@ -413,7 +413,11 @@ static const struct net_device_ops nss_d
+@@ -532,7 +532,11 @@ static const struct net_device_ops nss_d
  	.ndo_set_mac_address = nss_dp_set_mac_address,
  	.ndo_validate_addr = eth_validate_addr,
  	.ndo_change_mtu = nss_dp_change_mtu,
