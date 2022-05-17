@@ -1,0 +1,13 @@
+#!/bin/sh
+######################################################
+# Copyright (C) 2022 @Boos4721(Telegram and Github)  #
+#                                                    #
+# SPDX-License-Identifier: GPL-3.0-or-later          #
+#                                                    #
+######################################################
+
+DRV=/sys/kernel/debug/qca-nss-drv
+
+NSS_LOAD="$(awk '{print$1}' "$DRV"/stats/cpu_load_ubi | awk '$1=$1' | tail -n 1)"
+
+echo -n "$NSS_LOAD"
