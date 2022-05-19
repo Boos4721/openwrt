@@ -2,10 +2,10 @@
 
 IEEE_PATH="/sys/class/ieee80211"
 THERMAL_PATH="/sys/class/thermal"
-DRV_PATH="/sys/kernel/debug/qca-nss-drv"
 
 wifi_temp1="$(awk '{printf("%.1f°C ", $0 / 1000)}' "$IEEE_PATH"/phy*/hwmon*/temp1_input | awk '$1=$1')"
 wifi_temp2="$(awk '{printf("%.1f°C ", $0 / 1000)}' "$IEEE_PATH"/phy*/device/hwmon/hwmon*/temp1_input | awk '$1=$1')"
+NSS_LOAD="$(awk '{print$1}' "$DRV"/stats/cpu_load_ubi | awk '$1=$1' | tail -n 1)"
 
 if grep -q "ipq40xx" "/etc/openwrt_release"; then
         if [ -e "$IEEE_PATH/phy0/hwmon0/temp1_input" ]; then
@@ -13,11 +13,6 @@ if grep -q "ipq40xx" "/etc/openwrt_release"; then
 fi
         echo -n "WiFi:${mt76_temp} ${wifi_temp}"
 
-elif grep -q "ipq807x " "/etc/openwrt_release"; then
-        NSS_LOAD="$(awk '{print$1}' "$DRV_PATH"/stats/cpu_load_ubi | awk '$1=$1' | tail -n 1)"
-        echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp1} ${wifi_temp2}, NSS: ${NSS_LOAD}"
-    
-else
 	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' "$THERMAL_PATH/thermal_zone0/temp")"
 	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp1} ${wifi_temp2}"
 fi
