@@ -25,7 +25,7 @@ Signed-off-by: Marek Behún <kabel@kernel.org>
 
 --- a/drivers/pci/controller/pci-aardvark.c
 +++ b/drivers/pci/controller/pci-aardvark.c
-@@ -1542,6 +1542,18 @@ static void advk_pcie_handle_int(struct
+@@ -1541,6 +1541,18 @@ static void advk_pcie_handle_int(struct
  	if (isr0_status & PCIE_MSG_PM_PME_MASK)
  		advk_pcie_handle_pme(pcie);
  
