@@ -9,7 +9,7 @@ https://github.com/u-boot/u-boot/commit/3b142045e8a7f0ab17b6099e9226296af45967d0
  #if defined(__MACH__)
  #include <mach-o/getsect.h>
 +#include <mach-o/dyld.h>
-
+ 
  #define INIT_SECTION(name)  do {					\
  		unsigned long name ## _len;				\
  		char *__cat(pstart_, name) = getsectdata("__DATA",	\

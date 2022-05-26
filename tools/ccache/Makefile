@@ -14,8 +14,6 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/ccache/ccache/releases/download/v$(PKG_VERSION)
 PKG_HASH:=3d2bb860f4359169e640f60cf7cc11da5fab5fb9aed55230d78141e49c3945e9
 
-HOST_BUILD_PARALLEL:=1
-
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 

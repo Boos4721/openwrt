@@ -33,4 +33,3 @@ MESON_HOST_ARGS += \
 	-Dlz4=disabled
 
 $(eval $(call HostBuild))
-
