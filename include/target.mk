@@ -23,6 +23,8 @@ DEFAULT_PACKAGES:=\
 	opkg \
 	uci \
 	uclient-fetch \
+	zsh \
+	git \
 	urandom-seed
 
 ifneq ($(CONFIG_SELINUX),)
@@ -46,7 +48,6 @@ DEFAULT_PACKAGES.router:=\
 	iptables \
 	ppp \
 	ppp-mod-pppoe \
-	UA2F \
 	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw kmod-tun kmod-inet-diag iptables-mod-tproxy iptables-mod-extra \
 	default-settings luci luci-app-ddns luci-app-upnp luci-app-autoreboot \
 	luci-app-filetransfer luci-app-eqos luci-app-arpbind \
