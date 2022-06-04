@@ -1,7 +1,7 @@
-From d31a74ccec8679458908ed08573a8558e04c209f Mon Sep 17 00:00:00 2001
+From 28de437934da2fb9f04b0c4f5aa73553e63894e3 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 21 Jun 2021 16:13:02 +0200
-Subject: [PATCH 016/828] drm/vc4: crtc: Add some logging
+Subject: [PATCH] drm/vc4: crtc: Add some logging
 
 The encoder retrieval code has been a source of bugs and glitches in the
 past and the crtc <-> encoder association been wrong in a number of

@@ -1,7 +1,7 @@
-From bf681447fed1077d7caa01cd5a1303d764876371 Mon Sep 17 00:00:00 2001
+From 7b6b90b399056144655b7651e44c46466044709b Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.com>
 Date: Mon, 20 Apr 2020 13:41:10 +0100
-Subject: [PATCH 028/828] Revert "spi: spidev: Fix CS polarity if GPIO
+Subject: [PATCH] Revert "spi: spidev: Fix CS polarity if GPIO
  descriptors are used"
 
 This reverts commit 83b2a8fe43bda0c11981ad6afa5dd0104d78be28.

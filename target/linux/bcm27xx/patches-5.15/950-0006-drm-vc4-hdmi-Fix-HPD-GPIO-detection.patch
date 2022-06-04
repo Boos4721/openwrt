@@ -1,7 +1,7 @@
-From 67b3c9ae6cea0f3bba4447b1c0748eead5551b09 Mon Sep 17 00:00:00 2001
+From b460aee2dab3419842e24e7039a52d613b19a6e8 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 25 Oct 2021 17:28:55 +0200
-Subject: [PATCH 006/828] drm/vc4: hdmi: Fix HPD GPIO detection
+Subject: [PATCH] drm/vc4: hdmi: Fix HPD GPIO detection
 
 Prior to commit 6800234ceee0 ("drm/vc4: hdmi: Convert to gpiod"), in the
 detect hook, if we had an HPD GPIO we would only rely on it and return

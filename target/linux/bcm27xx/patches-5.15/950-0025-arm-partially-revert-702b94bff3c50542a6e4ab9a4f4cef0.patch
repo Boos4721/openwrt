@@ -1,7 +1,7 @@
-From 47090ca3e20595483f323615502d929aaa83799f Mon Sep 17 00:00:00 2001
+From 08a1fec2fe9884288efd30ca814ae51fe84f842b Mon Sep 17 00:00:00 2001
 From: Dan Pasanen <dan.pasanen@gmail.com>
 Date: Thu, 21 Sep 2017 09:55:42 -0500
-Subject: [PATCH 025/828] arm: partially revert
+Subject: [PATCH] arm: partially revert
  702b94bff3c50542a6e4ab9a4f4cef093262fe65
 
 * Re-expose some dmi APIs for use in VCSM

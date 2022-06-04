@@ -1,7 +1,7 @@
-From 206c0a8b1c1cbe40982d385fc4b9382fe80fc918 Mon Sep 17 00:00:00 2001
+From 35cc50251cbf17c5e855879bcf6d71995f0f271a Mon Sep 17 00:00:00 2001
 From: James Hughes <james.hughes@raspberrypi.org>
 Date: Thu, 14 Mar 2019 13:27:54 +0000
-Subject: [PATCH 066/828] Pulled in the multi frame buffer support from the Pi3
+Subject: [PATCH] Pulled in the multi frame buffer support from the Pi3
  repo
 
 ---

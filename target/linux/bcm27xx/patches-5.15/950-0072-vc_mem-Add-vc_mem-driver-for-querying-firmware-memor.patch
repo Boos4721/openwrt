@@ -1,7 +1,7 @@
-From e704db556dfdec5ad0df1903ff1b2e01667cdd76 Mon Sep 17 00:00:00 2001
+From 47c1d1988df17bf39bbf3a188d78792eaa693068 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Fri, 28 Oct 2016 15:36:43 +0100
-Subject: [PATCH 072/828] vc_mem: Add vc_mem driver for querying firmware
+Subject: [PATCH] vc_mem: Add vc_mem driver for querying firmware
  memory addresses
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

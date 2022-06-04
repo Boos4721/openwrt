@@ -1,7 +1,7 @@
-From a0073d49aea8a21658a00c24439ca95f42baf3ee Mon Sep 17 00:00:00 2001
+From 269985a75363eecabfc6e039c4731100c4d47b05 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Wed, 15 Dec 2021 10:51:14 +0100
-Subject: [PATCH 022/828] firmware: raspberrypi: Add
+Subject: [PATCH] firmware: raspberrypi: Add
  RPI_FIRMWARE_NOTIFY_DISPLAY_DONE
 
 The RPI_FIRMWARE_NOTIFY_DISPLAY_DONE firmware call allows to tell the

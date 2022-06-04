@@ -1,7 +1,7 @@
-From 8c4a8300ab9e004755f5708e1ca621f846a5b338 Mon Sep 17 00:00:00 2001
+From 85c2420c3b800f5ec030b28f19b2a77022173a9b Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Fri, 15 Mar 2019 21:11:10 +0000
-Subject: [PATCH 027/828] Revert "staging: bcm2835-audio: Drop DT dependency"
+Subject: [PATCH] Revert "staging: bcm2835-audio: Drop DT dependency"
 
 This reverts commit b7491a9fca2dc2535b9dc922550a37c5baae9d3d.
 ---

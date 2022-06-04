@@ -1,7 +1,7 @@
-From e03e29fe2bb7da723d52beedc56c9a6694ae5483 Mon Sep 17 00:00:00 2001
+From 1cc57695d3103fa93eda71bb6ba212c3e5806b4a Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 21 Jun 2021 17:19:22 +0200
-Subject: [PATCH 017/828] drm/vc4: Leverage the load tracker on the BCM2711
+Subject: [PATCH] drm/vc4: Leverage the load tracker on the BCM2711
 
 The load tracker was initially designed to report and warn about a load
 too high for the HVS. To do so, it computes for each plane the impact

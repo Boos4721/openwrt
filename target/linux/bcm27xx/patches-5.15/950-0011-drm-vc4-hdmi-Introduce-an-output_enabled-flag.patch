@@ -1,7 +1,7 @@
-From cbc84143c02c3a42609ba37283f0f1ea23643ecc Mon Sep 17 00:00:00 2001
+From 02631cb4e30d7bc46f2b30657a84ddeb65831798 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Tue, 19 Oct 2021 17:31:58 +0200
-Subject: [PATCH 011/828] drm/vc4: hdmi: Introduce an output_enabled flag
+Subject: [PATCH] drm/vc4: hdmi: Introduce an output_enabled flag
 
 We currently poke at encoder->crtc in the ALSA code path to determine
 whether the HDMI output is enabled or not, and thus whether we should

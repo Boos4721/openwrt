@@ -1,7 +1,7 @@
-From 77a18429c6eb06a7bacf858f77b2778dee318df9 Mon Sep 17 00:00:00 2001
+From d6ecbdcba5174488d403ccddc016721243eb1797 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Tue, 19 Oct 2021 14:19:29 +0200
-Subject: [PATCH 009/828] drm/vc4: hdmi: Prevent access to crtc->state outside
+Subject: [PATCH] drm/vc4: hdmi: Prevent access to crtc->state outside
  of KMS
 
 Accessing the crtc->state pointer from outside the modesetting context

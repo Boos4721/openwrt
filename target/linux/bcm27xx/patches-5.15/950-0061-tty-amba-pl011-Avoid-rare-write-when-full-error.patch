@@ -1,7 +1,7 @@
-From 27817f65220792b0f820e9da8bec49c75cc25ab3 Mon Sep 17 00:00:00 2001
+From db675d9894cea3a30ba50695a3e1ea9739782bd2 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 29 Jan 2020 09:35:19 +0000
-Subject: [PATCH 061/828] tty: amba-pl011: Avoid rare write-when-full error
+Subject: [PATCH] tty: amba-pl011: Avoid rare write-when-full error
 
 Under some circumstances on BCM283x processors data loss can be
 observed - a single byte missing from the TX output stream. These bytes

@@ -1,7 +1,7 @@
-From b7091bd20c8d42fe27ca48d649fadb6dfb07608b Mon Sep 17 00:00:00 2001
+From 77673025dd2dab30832e4264bf8de9474a9b9142 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 29 Sep 2017 10:32:19 +0100
-Subject: [PATCH 058/828] amba_pl011: Insert mb() for correct FIFO handling
+Subject: [PATCH] amba_pl011: Insert mb() for correct FIFO handling
 
 The pl011 register accessor functions use the _relaxed versions of the
 standard readl() and writel() functions, meaning that there are no

@@ -1,7 +1,7 @@
-From ef2d1d2b0aa268e543ae56aa7c2ba9e9d4f51135 Mon Sep 17 00:00:00 2001
+From 13d6f1d6ccff0a381bd1e8149b4964158627d5cc Mon Sep 17 00:00:00 2001
 From: Luke Wren <luke@raspberrypi.org>
 Date: Fri, 21 Aug 2015 23:14:48 +0100
-Subject: [PATCH 073/828] Add /dev/gpiomem device for rootless user GPIO access
+Subject: [PATCH] Add /dev/gpiomem device for rootless user GPIO access
 
 Signed-off-by: Luke Wren <luke@raspberrypi.org>
 

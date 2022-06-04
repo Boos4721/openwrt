@@ -1,7 +1,7 @@
-From 93e1f2ad3042e41c96031191f2bb6db2d0011e9c Mon Sep 17 00:00:00 2001
+From f818ed9b9033ef7fbe45a7f5e2fc8c0d0cfe8c1d Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 25 Oct 2021 17:29:01 +0200
-Subject: [PATCH 005/828] drm/vc4: hdmi: Raise the maximum clock rate
+Subject: [PATCH] drm/vc4: hdmi: Raise the maximum clock rate
 
 Now that we have the infrastructure in place, we can raise the maximum
 pixel rate we can reach for HDMI0 on the BCM2711.

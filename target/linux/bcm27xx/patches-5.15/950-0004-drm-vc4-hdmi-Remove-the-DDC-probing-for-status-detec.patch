@@ -1,7 +1,7 @@
-From c1f62cb809b2b5a34bc9cfbf86288f53845c3639 Mon Sep 17 00:00:00 2001
+From faa24f47c0066893e0b7772befe378bde4dc2ff9 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 25 Oct 2021 17:28:54 +0200
-Subject: [PATCH 004/828] drm/vc4: hdmi: Remove the DDC probing for status
+Subject: [PATCH] drm/vc4: hdmi: Remove the DDC probing for status
  detection
 
 Commit 9d44abbbb8d5 ("drm/vc4: Fall back to using an EDID probe in the

@@ -1,7 +1,7 @@
-From 0a307f1bd0ea3ee888d6fca239ae62a6fe2d39b2 Mon Sep 17 00:00:00 2001
+From 5976ef1d81c8d474eddb55103f29a686f84f22f1 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 25 Oct 2021 16:11:09 +0200
-Subject: [PATCH 008/828] drm/vc4: hdmi: Use a mutex to prevent concurrent
+Subject: [PATCH] drm/vc4: hdmi: Use a mutex to prevent concurrent
  framework access
 
 The vc4 HDMI controller registers into the KMS, CEC and ALSA

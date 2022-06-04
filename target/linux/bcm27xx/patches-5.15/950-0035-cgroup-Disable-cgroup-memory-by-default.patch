@@ -1,7 +1,7 @@
-From f61ab6249b4da040e2a1d1e621bfe6acb3b70782 Mon Sep 17 00:00:00 2001
+From e2494e8c48c510ccefc889393f5d776b5e3824ac Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 27 Nov 2017 17:14:54 +0000
-Subject: [PATCH 035/828] cgroup: Disable cgroup "memory" by default
+Subject: [PATCH] cgroup: Disable cgroup "memory" by default
 
 Some Raspberry Pis have limited RAM and most users won't use the
 cgroup memory support so it is disabled by default. Enable with:

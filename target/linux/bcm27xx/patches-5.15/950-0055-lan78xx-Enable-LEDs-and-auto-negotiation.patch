@@ -1,7 +1,7 @@
-From 191379e03871c844045018dff9913dcacb5561e1 Mon Sep 17 00:00:00 2001
+From ec6fe1f3510a68ea742758b1cd806a5a08fed7ae Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Tue, 17 Oct 2017 15:04:29 +0100
-Subject: [PATCH 055/828] lan78xx: Enable LEDs and auto-negotiation
+Subject: [PATCH] lan78xx: Enable LEDs and auto-negotiation
 
 For applications of the LAN78xx that don't have valid programmed
 EEPROMs or OTPs, enabling both LEDs and auto-negotiation by default

@@ -1,7 +1,7 @@
-From f29de39e03adc3797d48b526ce78b15acfd01112 Mon Sep 17 00:00:00 2001
+From 098cc3b9ed15b24089bae72c5de9d099910d10d4 Mon Sep 17 00:00:00 2001
 From: Martin Sperl <kernel@martin.sperl.org>
 Date: Fri, 2 Sep 2016 16:45:27 +0100
-Subject: [PATCH 046/828] Register the clocks early during the boot process, so
+Subject: [PATCH] Register the clocks early during the boot process, so
  that special/critical clocks can get enabled early on in the boot process
  avoiding the risk of disabling a clock, pll_divider or pll when a claiming
  driver fails to install propperly - maybe it needs to defer.

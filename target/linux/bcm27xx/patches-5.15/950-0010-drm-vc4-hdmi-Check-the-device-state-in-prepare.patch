@@ -1,7 +1,7 @@
-From 4c60b81986b4e1dc80faa718a60dd9849dd4f4f7 Mon Sep 17 00:00:00 2001
+From ba0375640d2d82158600a398181bb9f9c3835d0a Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Fri, 24 Sep 2021 14:27:38 +0200
-Subject: [PATCH 010/828] drm/vc4: hdmi: Check the device state in prepare()
+Subject: [PATCH] drm/vc4: hdmi: Check the device state in prepare()
 
 Even though we already check that the encoder->crtc pointer is there
 during in startup(), which is part of the open() path in ASoC, nothing

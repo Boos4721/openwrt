@@ -1,7 +1,7 @@
-From c8c89dff518af84e8850000441f6f2e0f40dfec6 Mon Sep 17 00:00:00 2001
+From b99d91f044ff9360ac03ce7d27eb6aead6cd2d42 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.com>
 Date: Mon, 1 Mar 2021 09:12:44 +0000
-Subject: [PATCH 030/828] Revert "Bluetooth: Always request for user
+Subject: [PATCH] Revert "Bluetooth: Always request for user
  confirmation for Just Works (LE SC)"
 
 This reverts commit ffee202a78c2980688bc5d2f7d56480e69a5e0c9.

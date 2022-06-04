@@ -1,7 +1,7 @@
-From 63d006c505f695b14d71324f6217b7031531b242 Mon Sep 17 00:00:00 2001
+From 28f071bd81de9d9026587c9fe7a6f9c3781a30cf Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 14 Jun 2021 15:27:24 +0200
-Subject: [PATCH 014/828] drm/vc4: crtc: Add encoder to vc4_crtc_config_pv
+Subject: [PATCH] drm/vc4: crtc: Add encoder to vc4_crtc_config_pv
  prototype
 
 vc4_crtc_config_pv() retrieves the encoder again, even though its only

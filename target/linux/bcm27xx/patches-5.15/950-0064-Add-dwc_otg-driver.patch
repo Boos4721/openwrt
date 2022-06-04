@@ -1,7 +1,7 @@
-From 1561c1c0488ca3d335b72a0b1f28f35f6cdf6664 Mon Sep 17 00:00:00 2001
+From 81cb0a202a30580ee9ebb79621d1d8c1c613c491 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 1 May 2013 19:46:17 +0100
-Subject: [PATCH 064/828] Add dwc_otg driver
+Subject: [PATCH] Add dwc_otg driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

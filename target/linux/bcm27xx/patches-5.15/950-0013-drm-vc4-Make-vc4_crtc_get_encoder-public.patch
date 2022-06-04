@@ -1,7 +1,7 @@
-From 7cfd43baeaf6f423ab7e4e291ae3b72f84f8fdbf Mon Sep 17 00:00:00 2001
+From e83ac8f131b0f691e2a35866fa67b484c7256a49 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Wed, 26 May 2021 16:07:01 +0200
-Subject: [PATCH 013/828] drm/vc4: Make vc4_crtc_get_encoder public
+Subject: [PATCH] drm/vc4: Make vc4_crtc_get_encoder public
 
 We'll need that function in vc4_kms to compute the core clock rate
 requirements.

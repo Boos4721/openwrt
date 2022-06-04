@@ -1,7 +1,7 @@
-From c1888f14e25039752859be495bce70265f60bca2 Mon Sep 17 00:00:00 2001
+From abea9147d22704cdfb68b7161a71dc9fb8fcb0b0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 26 Jun 2015 14:25:01 +0200
-Subject: [PATCH 077/828] firmware: bcm2835: Support ARCH_BCM270x
+Subject: [PATCH] firmware: bcm2835: Support ARCH_BCM270x
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

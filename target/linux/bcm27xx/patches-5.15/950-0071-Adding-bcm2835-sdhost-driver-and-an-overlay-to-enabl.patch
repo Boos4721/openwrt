@@ -1,7 +1,7 @@
-From 62a847d64494ded1556600cc1f7df63a00090e5c Mon Sep 17 00:00:00 2001
+From 1f9519b68dad61a179658fdaf3faf50a617a22f8 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 25 Mar 2015 17:49:47 +0000
-Subject: [PATCH 071/828] Adding bcm2835-sdhost driver, and an overlay to
+Subject: [PATCH] Adding bcm2835-sdhost driver, and an overlay to
  enable it
 
 BCM2835 has two SD card interfaces. This driver uses the other one.

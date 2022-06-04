@@ -1,7 +1,7 @@
-From 092de8a130a33a1bd181cf0d40b9137af4be9dcf Mon Sep 17 00:00:00 2001
+From 4b98173449085326199e97a10d06cee4cce021a1 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Tue, 19 Oct 2021 19:13:46 +0200
-Subject: [PATCH 012/828] drm/vc4: hdmi: Introduce a scdc_enabled flag
+Subject: [PATCH] drm/vc4: hdmi: Introduce a scdc_enabled flag
 
 We currently rely on two functions, vc4_hdmi_supports_scrambling() and
 vc4_hdmi_mode_needs_scrambling() to determine if we should enable and

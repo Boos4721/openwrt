@@ -1,7 +1,7 @@
-From a5e0873893ea7c3cefae8792572ea0fb9bf2e03e Mon Sep 17 00:00:00 2001
+From 8cf89fd573e0ddea9505be66bb2de845ddc22eff Mon Sep 17 00:00:00 2001
 From: gellert <gellert@raspberrypi.org>
 Date: Fri, 15 Aug 2014 16:35:06 +0100
-Subject: [PATCH 070/828] MMC: added alternative MMC driver
+Subject: [PATCH] MMC: added alternative MMC driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

@@ -1,7 +1,7 @@
-From d91e03b406108d5134bfd4e059327ce68b356fa0 Mon Sep 17 00:00:00 2001
+From 52c470c6deac07f7499c9d10570509b9cf2fc3af Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Thu, 9 Feb 2017 14:36:44 +0000
-Subject: [PATCH 051/828] sound: Demote deferral errors to INFO level
+Subject: [PATCH] sound: Demote deferral errors to INFO level
 
 At present there is no mechanism to specify driver load order,
 which can lead to deferrals and repeated retries until successful.

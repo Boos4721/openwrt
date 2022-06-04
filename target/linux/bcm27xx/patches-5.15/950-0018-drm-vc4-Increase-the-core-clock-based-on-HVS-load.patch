@@ -1,7 +1,7 @@
-From 7c9fbfef03953f5e079d1c02897aaf3c514f12ad Mon Sep 17 00:00:00 2001
+From 99c821dc4cd65ff067e2dfff4a47ceb5aa61ad0c Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Wed, 26 May 2021 16:13:02 +0200
-Subject: [PATCH 018/828] drm/vc4: Increase the core clock based on HVS load
+Subject: [PATCH] drm/vc4: Increase the core clock based on HVS load
 
 Depending on a given HVS output (HVS to PixelValves) and input (planes
 attached to a channel) load, the HVS needs for the core clock to be

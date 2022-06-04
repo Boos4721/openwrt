@@ -1,7 +1,7 @@
-From e2bda55c62d31d0a2de2aa8b8e286c1af2a67c55 Mon Sep 17 00:00:00 2001
+From 784d9bd9e4fecb27ceb3a0d0375dc13d1f35e44c Mon Sep 17 00:00:00 2001
 From: Harm Hanemaaijer <fgenfb@yahoo.com>
 Date: Thu, 20 Jun 2013 20:21:39 +0200
-Subject: [PATCH 068/828] Speed up console framebuffer imageblit function
+Subject: [PATCH] Speed up console framebuffer imageblit function
 
 Especially on platforms with a slower CPU but a relatively high
 framebuffer fill bandwidth, like current ARM devices, the existing

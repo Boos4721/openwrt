@@ -1,7 +1,7 @@
-From 38408d71937535a016902abdd26e84acb692d1d8 Mon Sep 17 00:00:00 2001
+From dacf9893c23c5563a757a49be907f07bc81bb456 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 28 Nov 2016 16:50:04 +0000
-Subject: [PATCH 081/828] Improve __copy_to_user and __copy_from_user
+Subject: [PATCH] Improve __copy_to_user and __copy_from_user
  performance
 
 Provide a __copy_from_user that uses memcpy. On BCM2708, use

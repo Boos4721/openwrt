@@ -1,7 +1,7 @@
-From 36f680f4c877dfefa5a4406f3e12c5c1aa9c23e1 Mon Sep 17 00:00:00 2001
+From decd99704aba1800c3e62a7ed1f5cbd9c5f6526a Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 29 Sep 2017 10:32:19 +0100
-Subject: [PATCH 059/828] amba_pl011: Add cts-event-workaround DT property
+Subject: [PATCH] amba_pl011: Add cts-event-workaround DT property
 
 The BCM2835 PL011 implementation seems to have a bug that can lead to a
 transmission lockup if CTS changes frequently. A workaround was added to

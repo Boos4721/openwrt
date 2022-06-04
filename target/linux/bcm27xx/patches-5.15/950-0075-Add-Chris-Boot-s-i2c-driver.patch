@@ -1,7 +1,7 @@
-From 6fbae01f3e6978d72c06c8a0e3910f6b5eb20432 Mon Sep 17 00:00:00 2001
+From 1ef16c46c87351e276f9c2b9bf04e1f6dcd015b7 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 17 Jun 2015 15:44:08 +0100
-Subject: [PATCH 075/828] Add Chris Boot's i2c driver
+Subject: [PATCH] Add Chris Boot's i2c driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

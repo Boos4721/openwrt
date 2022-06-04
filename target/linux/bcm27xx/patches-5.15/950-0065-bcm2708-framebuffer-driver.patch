@@ -1,7 +1,7 @@
-From 572e8ac98cf145a20bed39029726d3dcd1f1fa8e Mon Sep 17 00:00:00 2001
+From 2320a031fa693daf5d92dd96881edf37f5f37ef8 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 17 Jun 2015 17:06:34 +0100
-Subject: [PATCH 065/828] bcm2708 framebuffer driver
+Subject: [PATCH] bcm2708 framebuffer driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

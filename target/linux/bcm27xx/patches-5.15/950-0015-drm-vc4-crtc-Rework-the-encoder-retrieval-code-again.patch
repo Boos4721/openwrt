@@ -1,7 +1,7 @@
-From ef75a3ac2ee94f67f3d3d1d25f74200397b10d28 Mon Sep 17 00:00:00 2001
+From 0496e855a6e1acd60d4ae2e52ee906a4cffae014 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 21 Jun 2021 16:07:22 +0200
-Subject: [PATCH 015/828] drm/vc4: crtc: Rework the encoder retrieval code
+Subject: [PATCH] drm/vc4: crtc: Rework the encoder retrieval code
  (again)
 
 It turns out the encoder retrieval code, in addition to being

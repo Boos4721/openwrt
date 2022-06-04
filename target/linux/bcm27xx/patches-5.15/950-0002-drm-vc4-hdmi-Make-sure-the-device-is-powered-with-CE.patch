@@ -1,7 +1,7 @@
-From 055b225c463ec348ab2701047016cc5957693320 Mon Sep 17 00:00:00 2001
+From 0ba6ff7f5632f01143911e307be538ecc62e5094 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Thu, 19 Aug 2021 15:59:30 +0200
-Subject: [PATCH 002/828] drm/vc4: hdmi: Make sure the device is powered with
+Subject: [PATCH] drm/vc4: hdmi: Make sure the device is powered with
  CEC
 
 Similarly to what we encountered with the detect hook with DRM, nothing

@@ -1,7 +1,7 @@
-From b286ea771fae840609b0d5eeb25ef0a4518a2a4f Mon Sep 17 00:00:00 2001
+From b30b747d76946fb176bb4b044c830415d551b7bb Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Thu, 19 Aug 2021 13:50:12 +0200
-Subject: [PATCH 021/828] drm/vc4: hdmi: Actually check for the connector
+Subject: [PATCH] drm/vc4: hdmi: Actually check for the connector
  status in hotplug
 
 The drm_helper_hpd_irq_event() documentation states that this function

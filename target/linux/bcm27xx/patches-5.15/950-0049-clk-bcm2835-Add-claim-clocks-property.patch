@@ -1,7 +1,7 @@
-From 71691549878c2c1809b96c26bb8b2a87acd68969 Mon Sep 17 00:00:00 2001
+From 9e4d97d8b1643b0eccdcf793e898101b18a01801 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 13 Feb 2017 17:20:08 +0000
-Subject: [PATCH 049/828] clk-bcm2835: Add claim-clocks property
+Subject: [PATCH] clk-bcm2835: Add claim-clocks property
 
 The claim-clocks property can be used to prevent PLLs and dividers
 from being marked as critical. It contains a vector of clock IDs,

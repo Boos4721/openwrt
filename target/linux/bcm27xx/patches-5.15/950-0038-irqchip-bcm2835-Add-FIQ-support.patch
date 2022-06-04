@@ -1,7 +1,7 @@
-From 4625990bc4c0ae8ac4df8021dcd60cc33a640ef7 Mon Sep 17 00:00:00 2001
+From 247b39081d1219b7052962e6e835491f0c031f25 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 12 Jun 2015 19:01:05 +0200
-Subject: [PATCH 038/828] irqchip: bcm2835: Add FIQ support
+Subject: [PATCH] irqchip: bcm2835: Add FIQ support
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

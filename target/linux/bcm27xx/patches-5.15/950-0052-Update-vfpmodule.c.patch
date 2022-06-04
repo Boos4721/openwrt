@@ -1,7 +1,7 @@
-From faff7b1971f9c03fbadc26f11e0a78cdbeb89ea3 Mon Sep 17 00:00:00 2001
+From fabb6bb88caed1f6fb257cc0c711dba5c5830084 Mon Sep 17 00:00:00 2001
 From: Claggy3 <stephen.maclagan@hotmail.com>
 Date: Sat, 11 Feb 2017 14:00:30 +0000
-Subject: [PATCH 052/828] Update vfpmodule.c
+Subject: [PATCH] Update vfpmodule.c
 
 Christopher Alexander Tobias Schulze - May 2, 2015, 11:57 a.m.
 This patch fixes a problem with VFP state save and restore related

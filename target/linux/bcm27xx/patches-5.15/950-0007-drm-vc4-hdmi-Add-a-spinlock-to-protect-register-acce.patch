@@ -1,7 +1,7 @@
-From 2420cd113b423d855a00fd587599955970bb9993 Mon Sep 17 00:00:00 2001
+From d91a953904e1aeddf24a95af40fc1ae7ba2319fd Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Mon, 25 Oct 2021 16:11:08 +0200
-Subject: [PATCH 007/828] drm/vc4: hdmi: Add a spinlock to protect register
+Subject: [PATCH] drm/vc4: hdmi: Add a spinlock to protect register
  access
 
 The vc4 HDMI driver has multiple path shared between the CEC, ALSA and

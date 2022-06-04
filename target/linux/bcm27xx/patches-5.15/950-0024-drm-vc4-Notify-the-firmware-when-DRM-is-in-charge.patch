@@ -1,7 +1,7 @@
-From a52f674503e239ace32a2e831d42891682a86c89 Mon Sep 17 00:00:00 2001
+From 9e9177db83609c19bbe523cc4d20119cf09ea787 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Wed, 15 Dec 2021 10:51:17 +0100
-Subject: [PATCH 024/828] drm/vc4: Notify the firmware when DRM is in charge
+Subject: [PATCH] drm/vc4: Notify the firmware when DRM is in charge
 
 Once the call to drm_fb_helper_remove_conflicting_framebuffers() has
 been made, simplefb has been unregistered and the KMS driver is entirely

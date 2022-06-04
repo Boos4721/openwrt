@@ -1,7 +1,7 @@
-From 7a658f50ad6404eda6f8bd883485418fcbbac6cb Mon Sep 17 00:00:00 2001
+From 3da4c0aceaaf3fabfc1cd0ba8b8480dec0e27f7b Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 5 Apr 2016 19:40:12 +0100
-Subject: [PATCH 044/828] reboot: Use power off rather than busy spinning when
+Subject: [PATCH] reboot: Use power off rather than busy spinning when
  halt is requested
 
 ---

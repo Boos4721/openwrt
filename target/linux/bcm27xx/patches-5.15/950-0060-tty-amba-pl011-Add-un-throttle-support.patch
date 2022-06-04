@@ -1,7 +1,7 @@
-From f6185bce3d95e12cce0eb27c10ce6d7e308681d7 Mon Sep 17 00:00:00 2001
+From 48cb6ac7067b412c56a0a6aca43f5c964dfb7dec Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 24 Jan 2020 11:38:28 +0000
-Subject: [PATCH 060/828] tty: amba-pl011: Add un/throttle support
+Subject: [PATCH] tty: amba-pl011: Add un/throttle support
 
 The PL011 driver lacks throttle and unthrottle methods. As a result,
 sending more data to the Pi than it can immediately sink while CRTSCTS

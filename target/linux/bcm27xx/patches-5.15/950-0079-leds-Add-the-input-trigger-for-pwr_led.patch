@@ -1,7 +1,7 @@
-From 29cdb6ce49510953f22f4bcab8904ca64ea2b003 Mon Sep 17 00:00:00 2001
+From 8a9552813613d4f2d57e7ef97e4e43279603bf85 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 6 Feb 2015 13:50:57 +0000
-Subject: [PATCH 079/828] leds: Add the "input" trigger, for pwr_led
+Subject: [PATCH] leds: Add the "input" trigger, for pwr_led
 
 The "input" trigger makes the associated GPIO an input.  This is to support
 the Raspberry Pi PWR LED, which is driven by external hardware in normal use.

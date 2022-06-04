@@ -1,7 +1,7 @@
-From dcce186901246abd12cf6280a4846934aeb5c595 Mon Sep 17 00:00:00 2001
+From 3ac4dc10f82935d6cfc759bb34e9686b391f3371 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 13 Feb 2017 17:20:08 +0000
-Subject: [PATCH 048/828] clk-bcm2835: Mark used PLLs and dividers CRITICAL
+Subject: [PATCH] clk-bcm2835: Mark used PLLs and dividers CRITICAL
 
 The VPU configures and relies on several PLLs and dividers. Mark all
 enabled dividers and their PLLs as CRITICAL to prevent the kernel from

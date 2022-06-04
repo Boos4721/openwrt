@@ -1,7 +1,7 @@
-From 744faed58885b1cc5a6d17c4efbb6f934e0fa45a Mon Sep 17 00:00:00 2001
+From 0d425f483f0a6c22344341d693f1845f9c6b68b0 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Thu, 25 Jun 2015 12:16:11 +0100
-Subject: [PATCH 082/828] gpio-poweroff: Allow it to work on Raspberry Pi
+Subject: [PATCH] gpio-poweroff: Allow it to work on Raspberry Pi
 
 The Raspberry Pi firmware manages the power-down and reboot
 process. To do this it installs a pm_power_off handler, causing

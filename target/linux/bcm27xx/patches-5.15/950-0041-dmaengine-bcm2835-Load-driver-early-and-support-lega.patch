@@ -1,7 +1,7 @@
-From 576f90bdfda30cb1c00611c5e8d677a610e918b0 Mon Sep 17 00:00:00 2001
+From 6d73f2ff2b8fdd774be0430577aed7f08478d541 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Sat, 3 Oct 2015 22:22:55 +0200
-Subject: [PATCH 041/828] dmaengine: bcm2835: Load driver early and support
+Subject: [PATCH] dmaengine: bcm2835: Load driver early and support
  legacy API
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

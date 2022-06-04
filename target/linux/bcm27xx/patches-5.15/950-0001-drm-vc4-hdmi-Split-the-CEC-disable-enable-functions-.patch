@@ -1,7 +1,7 @@
-From f959ee9d0bfbcb747a74458e79157db37817d390 Mon Sep 17 00:00:00 2001
+From d145ff5ff4c35bf00a84c7f916165150d0a75e53 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Thu, 19 Aug 2021 15:59:29 +0200
-Subject: [PATCH 001/828] drm/vc4: hdmi: Split the CEC disable / enable
+Subject: [PATCH] drm/vc4: hdmi: Split the CEC disable / enable
  functions in two
 
 In order to ease further additions to the CEC enable and disable, let's

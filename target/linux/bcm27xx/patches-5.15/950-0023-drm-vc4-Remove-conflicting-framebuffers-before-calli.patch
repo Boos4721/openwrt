@@ -1,7 +1,7 @@
-From 5644237465a4d0bf53a37db34ebae894e9fc9aaf Mon Sep 17 00:00:00 2001
+From c8f54918eece907f904d160815603bfcee0cfa1e Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Wed, 15 Dec 2021 10:51:16 +0100
-Subject: [PATCH 023/828] drm/vc4: Remove conflicting framebuffers before
+Subject: [PATCH] drm/vc4: Remove conflicting framebuffers before
  callind bind_all
 
 The bind hooks will modify their controller registers, so simplefb is

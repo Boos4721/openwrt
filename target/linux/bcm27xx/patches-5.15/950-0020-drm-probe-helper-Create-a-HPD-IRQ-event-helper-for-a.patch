@@ -1,7 +1,7 @@
-From 435320b9d091bf1b42e65c2f36b16f9bebd0702d Mon Sep 17 00:00:00 2001
+From 22ce134cee72bd9ef4b02c8769f868309f2ab8fd Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Thu, 19 Aug 2021 14:37:04 +0200
-Subject: [PATCH 020/828] drm/probe-helper: Create a HPD IRQ event helper for a
+Subject: [PATCH] drm/probe-helper: Create a HPD IRQ event helper for a
  single connector
 
 The drm_helper_hpd_irq_event() function is iterating over all the
@@ -23,6 +23,15 @@ Since both are suboptimal, let's create a helper that will only perform
 the status detection on a single connector.
 
 Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+
+---
+
+Changes from v1:
+  - Rename the shared function
+  - Move the hotplug event notification out of the shared function
+  - Added missing locks
+  - Improve the documentation
+  - Switched to drm_dbg_kms
 ---
  drivers/gpu/drm/drm_probe_helper.c | 120 ++++++++++++++++++++---------
  include/drm/drm_probe_helper.h     |   1 +

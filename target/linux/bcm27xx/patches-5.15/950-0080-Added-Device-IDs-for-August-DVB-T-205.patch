@@ -1,7 +1,7 @@
-From 5569c5f9c6f7b1eed2f6ae78f7dca6fae744dbbd Mon Sep 17 00:00:00 2001
+From d3697c0d2d862e7e6c974b74eb84018387556233 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 3 Jul 2013 00:54:08 +0100
-Subject: [PATCH 080/828] Added Device IDs for August DVB-T 205
+Subject: [PATCH] Added Device IDs for August DVB-T 205
 
 ---
  drivers/media/usb/dvb-usb-v2/rtl28xxu.c | 4 ++++

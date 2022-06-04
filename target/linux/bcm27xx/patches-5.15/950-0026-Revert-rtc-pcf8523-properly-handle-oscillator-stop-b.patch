@@ -1,7 +1,7 @@
-From fac88fd5d60183089cfc11a875acbd47d0b00242 Mon Sep 17 00:00:00 2001
+From 39869587dac09c9e738960ccdf01e1dc62a906f7 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 29 Oct 2018 14:45:45 +0000
-Subject: [PATCH 026/828] Revert "rtc: pcf8523: properly handle oscillator stop
+Subject: [PATCH] Revert "rtc: pcf8523: properly handle oscillator stop
  bit"
 
 This reverts commit ede44c908d44b166a5b6bd7caacd105c2ff5a70f.

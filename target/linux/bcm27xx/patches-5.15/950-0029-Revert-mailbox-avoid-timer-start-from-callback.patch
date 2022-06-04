@@ -1,7 +1,7 @@
-From 67426427b88650b1e4ad874dc73b5332f92aebfd Mon Sep 17 00:00:00 2001
+From fe19823f6053fe91a671fdbf92ab93b517a25219 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.com>
 Date: Tue, 3 Nov 2020 11:49:53 +0000
-Subject: [PATCH 029/828] Revert "mailbox: avoid timer start from callback"
+Subject: [PATCH] Revert "mailbox: avoid timer start from callback"
 
 This reverts commit c7dacf5b0f32957b24ef29df1207dc2cd8307743.
 

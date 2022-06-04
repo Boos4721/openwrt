@@ -1,7 +1,7 @@
-From 2128e42c35dd4d42abf6343b356489182d836508 Mon Sep 17 00:00:00 2001
+From ee4cf9296b88a4c40b1b8a41a159a587585b2414 Mon Sep 17 00:00:00 2001
 From: Florian Meier <florian.meier@koalo.de>
 Date: Mon, 25 Jan 2016 15:48:59 +0000
-Subject: [PATCH 084/828] Add support for all the downstream rpi sound card
+Subject: [PATCH] Add support for all the downstream rpi sound card
  drivers
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

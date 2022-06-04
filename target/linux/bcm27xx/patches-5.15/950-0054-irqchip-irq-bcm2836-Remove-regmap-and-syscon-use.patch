@@ -1,7 +1,7 @@
-From 990b66cf837f2088744d63764983943e9df13e6a Mon Sep 17 00:00:00 2001
+From a27ad8b9cf6ad18b033fe9e34be3a1de3bea6c69 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Tue, 23 Jan 2018 16:52:45 +0000
-Subject: [PATCH 054/828] irqchip: irq-bcm2836: Remove regmap and syscon use
+Subject: [PATCH] irqchip: irq-bcm2836: Remove regmap and syscon use
 
 The syscon node defines a register range that duplicates that used by
 the local_intc node on bcm2836/7. Since irq-bcm2835 and irq-bcm2836 are

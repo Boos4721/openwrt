@@ -1,7 +1,7 @@
-From 4e3e5995804776cd5425928cd3bbbc74750643ed Mon Sep 17 00:00:00 2001
+From 6113493e995480949876c74ec24ecd202004c3ae Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 6 Mar 2017 09:06:18 +0000
-Subject: [PATCH 050/828] clk-bcm2835: Read max core clock from firmware
+Subject: [PATCH] clk-bcm2835: Read max core clock from firmware
 
 The VPU is responsible for managing the core clock, usually under
 direction from the bcm2835-cpufreq driver but not via the clk-bcm2835

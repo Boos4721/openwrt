@@ -1,7 +1,7 @@
-From e58cb5414ddc9f72731eecd2fbfdcb7423d5135e Mon Sep 17 00:00:00 2001
+From c7a3892d84af30b95f30d14a1140ddbcf738abf7 Mon Sep 17 00:00:00 2001
 From: Luke Wren <wren6991@gmail.com>
 Date: Sat, 5 Sep 2015 01:14:45 +0100
-Subject: [PATCH 074/828] Add SMI driver
+Subject: [PATCH] Add SMI driver
 
 Signed-off-by: Luke Wren <wren6991@gmail.com>
 
