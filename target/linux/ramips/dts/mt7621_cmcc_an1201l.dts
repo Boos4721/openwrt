@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+#include "mt7621_xiaomi_mi-router-ac2100.dts"
+
+/ {
+	compatible = "cmcc,an1201l", "mediatek,mt7621-soc";
+	model = "CMCC AN1201L";
+
+	};
+};

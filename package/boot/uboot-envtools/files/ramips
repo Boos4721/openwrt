@@ -58,7 +58,8 @@ xiaomi,mir3g|\
 xiaomi,mir4|\
 xiaomi,miwifi-r3|\
 xiaomi,mi-router-ac2100|\
-xiaomi,redmi-router-ac2100)
+xiaomi,redmi-router-ac2100|\
+cmcc,an1201l)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x20000"
 	;;
 xiaomi,mi-router-cr660x)

@@ -1879,3 +1879,12 @@ define Device/zyxel_wap6805
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += zyxel_wap6805
+
+define Device/cmcc_an1201l
+  $(Device/xiaomi_nand_separate)
+  DEVICE_VENDOR := CMCC
+  DEVICE_MODEL := AN1201L
+  IMAGE_SIZE := 120320k
+  DEVICE_PACKAGES += kmod-mt7603 kmod-mt7615e kmod-mt7615-firmware
+endef
+TARGET_DEVICES += cmcc_an1201l
