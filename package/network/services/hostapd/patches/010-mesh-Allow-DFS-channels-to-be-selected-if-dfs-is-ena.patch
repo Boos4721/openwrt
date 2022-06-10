@@ -1,6 +1,20 @@
+From 8de8cd8380af0c43d4fde67a668d79ef73b26b26 Mon Sep 17 00:00:00 2001
+From: Peter Oh <peter.oh@bowerswilkins.com>
+Date: Tue, 30 Jun 2020 14:18:58 +0200
+Subject: [PATCH 10/19] mesh: Allow DFS channels to be selected if dfs is
+ enabled
+
+Note: DFS is assumed to be usable if a country code has been set
+
+Signed-off-by: Benjamin Berg <benjamin@sipsolutions.net>
+Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
+---
+ wpa_supplicant/wpa_supplicant.c | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
+
 --- a/wpa_supplicant/wpa_supplicant.c
 +++ b/wpa_supplicant/wpa_supplicant.c
-@@ -2409,7 +2409,7 @@ static int drv_supports_vht(struct wpa_s
+@@ -2424,7 +2424,7 @@ static int drv_supports_vht(struct wpa_s
  }
  
  
@@ -9,7 +23,7 @@
  {
  	int i;
  
-@@ -2418,7 +2418,10 @@ static bool ibss_mesh_is_80mhz_avail(int
+@@ -2433,7 +2433,10 @@ static bool ibss_mesh_is_80mhz_avail(int
  
  		chan = hw_get_channel_chan(mode, i, NULL);
  		if (!chan ||
@@ -21,7 +35,7 @@
  			return false;
  	}
  
-@@ -2447,6 +2450,8 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2462,6 +2465,8 @@ void ibss_mesh_setup_freq(struct wpa_sup
  	int chwidth, seg0, seg1;
  	u32 vht_caps = 0;
  	bool is_24ghz, is_6ghz;
@@ -30,7 +44,7 @@
  
  	freq->freq = ssid->frequency;
  
-@@ -2543,8 +2548,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2558,8 +2563,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
  		return;
  
  	/* Check primary channel flags */
@@ -43,7 +57,7 @@
  
  	freq->channel = pri_chan->chan;
  
-@@ -2577,8 +2585,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
+@@ -2592,8 +2600,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
  		return;
  
  	/* Check secondary channel flags */
@@ -56,7 +70,7 @@
  
  	if (ht40 == -1) {
  		if (!(pri_chan->flag & HOSTAPD_CHAN_HT40MINUS))
-@@ -2667,7 +2678,7 @@ skip_to_6ghz:
+@@ -2682,7 +2693,7 @@ skip_to_6ghz:
  		return;
  
  	/* Back to HT configuration if channel not usable */
@@ -65,7 +79,7 @@
  		return;
  
  	chwidth = CHANWIDTH_80MHZ;
-@@ -2681,7 +2692,7 @@ skip_to_6ghz:
+@@ -2696,7 +2707,7 @@ skip_to_6ghz:
  		 * above; check the remaining four 20 MHz channels for the total
  		 * of 160 MHz bandwidth.
  		 */
@@ -74,7 +88,7 @@
  			return;
  
  		for (j = 0; j < ARRAY_SIZE(bw160); j++) {
-@@ -2711,10 +2722,12 @@ skip_to_6ghz:
+@@ -2726,10 +2737,12 @@ skip_to_6ghz:
  				if (!chan)
  					continue;
  
