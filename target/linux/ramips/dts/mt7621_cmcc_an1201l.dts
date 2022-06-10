@@ -5,6 +5,4 @@
 / {
 	compatible = "cmcc,an1201l", "mediatek,mt7621-soc";
 	model = "CMCC AN1201L";
-
-	};
 };
