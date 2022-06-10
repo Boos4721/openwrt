@@ -94,7 +94,7 @@ Cc: linux-tegra@vger.kernel.org
  	ret = dw_pcie_host_init(pp);
 --- a/drivers/pci/controller/dwc/pci-imx6.c
 +++ b/drivers/pci/controller/dwc/pci-imx6.c
-@@ -853,12 +853,6 @@ static int imx6_add_pcie_port(struct imx
+@@ -858,12 +858,6 @@ static int imx6_add_pcie_port(struct imx
  	struct device *dev = &pdev->dev;
  	int ret;
  
@@ -242,8 +242,8 @@ Cc: linux-tegra@vger.kernel.org
 -	}
 -
  	ret = phy_init(pcie->phy);
- 	if (ret) {
- 		pm_runtime_disable(&pdev->dev);
+ 	if (ret)
+ 		goto err_pm_runtime_put;
 --- a/drivers/pci/controller/dwc/pcie-spear13xx.c
 +++ b/drivers/pci/controller/dwc/pcie-spear13xx.c
 @@ -183,6 +183,7 @@ static int spear13xx_add_pcie_port(struc

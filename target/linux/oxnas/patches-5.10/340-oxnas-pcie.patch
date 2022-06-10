@@ -24,7 +24,7 @@
  obj-$(CONFIG_PCIE_BRCMSTB) += pcie-brcmstb.o
 --- a/arch/arm/boot/dts/ox820.dtsi
 +++ b/arch/arm/boot/dts/ox820.dtsi
-@@ -289,7 +289,7 @@
+@@ -282,7 +282,7 @@
  			#address-cells = <1>;
  			#size-cells = <1>;
  			compatible = "simple-bus";
@@ -33,7 +33,7 @@
  
  			scu: scu@0 {
  				compatible = "arm,arm11mp-scu";
-@@ -318,5 +318,86 @@
+@@ -304,5 +304,86 @@
  				      <0x100 0x500>;
  			};
  		};

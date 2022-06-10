@@ -1542,7 +1542,7 @@
  static const struct qmp_phy_cfg sdm845_qmp_pciephy_cfg = {
  	.type = PHY_TYPE_PCIE,
  	.nlanes = 1,
-@@ -4002,6 +4239,9 @@ int qcom_qmp_phy_create(struct device *d
+@@ -4011,6 +4248,9 @@ int qcom_qmp_phy_create(struct device *d
  
  static const struct of_device_id qcom_qmp_phy_of_match_table[] = {
  	{

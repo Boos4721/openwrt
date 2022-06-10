@@ -1,6 +1,6 @@
 --- a/arch/arm/boot/dts/ox820.dtsi
 +++ b/arch/arm/boot/dts/ox820.dtsi
-@@ -247,6 +247,15 @@
+@@ -253,6 +253,15 @@
  				};
  			};
  
