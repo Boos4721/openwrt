@@ -11,7 +11,7 @@ This reverts commit 5dbb9357519a9479eacdda130713bf0dc44e069c.
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -355,7 +355,6 @@ static void vc4_atomic_commit_tail(struc
+@@ -352,7 +352,6 @@ static void vc4_atomic_commit_tail(struc
  	struct drm_crtc *crtc;
  	struct vc4_hvs_state *old_hvs_state;
  	unsigned int channel;
@@ -19,7 +19,7 @@ This reverts commit 5dbb9357519a9479eacdda130713bf0dc44e069c.
  	int i;
  
  	old_hvs_state = vc4_hvs_get_old_global_state(state);
-@@ -401,7 +400,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -398,7 +397,7 @@ static void vc4_atomic_commit_tail(struc
  		unsigned long core_rate = max_t(unsigned long,
  						500000000, state_rate);
  
@@ -28,7 +28,7 @@ This reverts commit 5dbb9357519a9479eacdda130713bf0dc44e069c.
  	}
  
  	drm_atomic_helper_commit_modeset_disables(dev, state);
-@@ -433,8 +432,6 @@ static void vc4_atomic_commit_tail(struc
+@@ -430,8 +429,6 @@ static void vc4_atomic_commit_tail(struc
  
  		clk_set_min_rate(hvs->core_clk, new_hvs_state->core_clock_rate);
  

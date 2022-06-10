@@ -27,7 +27,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -939,7 +939,9 @@ vc4_core_clock_atomic_check(struct drm_a
+@@ -936,7 +936,9 @@ vc4_core_clock_atomic_check(struct drm_a
  			continue;
  
  		num_outputs++;

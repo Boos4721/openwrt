@@ -35,7 +35,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  
  	ret = devm_clk_bulk_get(dev, ARRAY_SIZE(res->clks), res->clks);
  	if (ret < 0)
-@@ -1701,6 +1703,7 @@ static const struct of_device_id qcom_pc
+@@ -1700,6 +1702,7 @@ static const struct of_device_id qcom_pc
  	{ .compatible = "qcom,pcie-sdm845", .data = &ops_2_7_0 },
  	{ .compatible = "qcom,pcie-sm8250", .data = &ops_1_9_0 },
  	{ .compatible = "qcom,pcie-ipq6018", .data = &ops_2_9_0 },

@@ -20,7 +20,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -992,6 +992,12 @@ static const struct drm_mode_config_func
+@@ -989,6 +989,12 @@ static const struct drm_mode_config_func
  	.fb_create = vc4_fb_create,
  };
  
@@ -33,7 +33,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  int vc4_kms_load(struct drm_device *dev)
  {
  	struct vc4_dev *vc4 = to_vc4_dev(dev);
-@@ -1026,7 +1032,7 @@ int vc4_kms_load(struct drm_device *dev)
+@@ -1025,7 +1031,7 @@ int vc4_kms_load(struct drm_device *dev)
  		dev->mode_config.max_height = 2048;
  	}
  

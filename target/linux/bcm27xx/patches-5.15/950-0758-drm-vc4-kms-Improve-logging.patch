@@ -14,7 +14,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -447,6 +447,9 @@ static void vc4_atomic_commit_tail(struc
+@@ -444,6 +444,9 @@ static void vc4_atomic_commit_tail(struc
  
  		/* And drop the temporary request */
  		clk_request_done(core_req);
@@ -24,7 +24,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  	}
  }
  
-@@ -827,9 +830,18 @@ static int vc4_pv_muxing_atomic_check(st
+@@ -824,9 +827,18 @@ static int vc4_pv_muxing_atomic_check(st
  		if (vc4->firmware_kms)
  			continue;
  
@@ -44,7 +44,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  
  		/* Muxing will need to be modified, mark it as such */
  		new_vc4_crtc_state->update_muxing = true;
-@@ -837,6 +849,10 @@ static int vc4_pv_muxing_atomic_check(st
+@@ -834,6 +846,10 @@ static int vc4_pv_muxing_atomic_check(st
  		/* If we're disabling our CRTC, we put back our channel */
  		if (!new_crtc_state->enable) {
  			channel = old_vc4_crtc_state->assigned_channel;
@@ -55,7 +55,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  			hvs_new_state->fifo_state[channel].in_use = false;
  			new_vc4_crtc_state->assigned_channel = VC4_HVS_CHANNEL_DISABLED;
  			continue;
-@@ -871,6 +887,8 @@ static int vc4_pv_muxing_atomic_check(st
+@@ -868,6 +884,8 @@ static int vc4_pv_muxing_atomic_check(st
  			return -EINVAL;
  
  		channel = ffs(matching_channels) - 1;

@@ -357,7 +357,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	fixed->hw.init = &init;
  
  	ret = devm_clk_hw_register(qmp->dev, &fixed->hw);
-@@ -5530,6 +5694,9 @@ static const struct of_device_id qcom_qm
+@@ -5539,6 +5703,9 @@ static const struct of_device_id qcom_qm
  		.compatible = "qcom,ipq6018-qmp-usb3-phy",
  		.data = &ipq8074_usb3phy_cfg,
  	}, {

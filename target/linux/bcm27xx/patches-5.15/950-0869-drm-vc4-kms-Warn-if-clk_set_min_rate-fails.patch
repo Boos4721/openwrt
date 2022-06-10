@@ -16,7 +16,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -400,7 +400,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -397,7 +397,7 @@ static void vc4_atomic_commit_tail(struc
  		unsigned long core_rate = max_t(unsigned long,
  						500000000, state_rate);
  
@@ -25,7 +25,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  	}
  
  	drm_atomic_helper_commit_modeset_disables(dev, state);
-@@ -430,7 +430,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -427,7 +427,7 @@ static void vc4_atomic_commit_tail(struc
  		drm_dbg(dev, "Running the core clock at %lu Hz\n",
  			new_hvs_state->core_clock_rate);
  

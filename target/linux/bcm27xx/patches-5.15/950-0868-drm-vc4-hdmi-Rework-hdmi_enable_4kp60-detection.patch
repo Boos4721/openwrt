@@ -113,7 +113,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  	bool cec_tx_ok;
 --- a/drivers/gpu/drm/vc4/vc4_hvs.c
 +++ b/drivers/gpu/drm/vc4/vc4_hvs.c
-@@ -897,12 +897,18 @@ static int vc4_hvs_bind(struct device *d
+@@ -883,12 +883,18 @@ static int vc4_hvs_bind(struct device *d
  	hvs->regset.nregs = ARRAY_SIZE(hvs_regs);
  
  	if (hvs->hvs5) {

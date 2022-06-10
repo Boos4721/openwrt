@@ -20,7 +20,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -354,6 +354,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -351,6 +351,7 @@ static void vc4_atomic_commit_tail(struc
  	struct vc4_hvs_state *new_hvs_state;
  	struct drm_crtc *crtc;
  	struct vc4_hvs_state *old_hvs_state;
@@ -28,7 +28,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  	unsigned int channel;
  	int i;
  
-@@ -397,8 +398,8 @@ static void vc4_atomic_commit_tail(struc
+@@ -394,8 +395,8 @@ static void vc4_atomic_commit_tail(struc
  	if (vc4->hvs && vc4->hvs->hvs5) {
  		unsigned long state_rate = max(old_hvs_state->core_clock_rate,
  					       new_hvs_state->core_clock_rate);
@@ -39,7 +39,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  
  		WARN_ON(clk_set_min_rate(hvs->core_clk, core_rate));
  	}
-@@ -427,10 +428,13 @@ static void vc4_atomic_commit_tail(struc
+@@ -424,10 +425,13 @@ static void vc4_atomic_commit_tail(struc
  	drm_atomic_helper_cleanup_planes(dev, state);
  
  	if (vc4->hvs && vc4->hvs->hvs5) {

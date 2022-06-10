@@ -13,7 +13,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -286,13 +286,14 @@ static void vc5_hvs_pv_muxing_commit(str
+@@ -283,13 +283,14 @@ static void vc5_hvs_pv_muxing_commit(str
  	for_each_new_crtc_in_state(state, crtc, crtc_state, i) {
  		struct vc4_crtc_state *vc4_state = to_vc4_crtc_state(crtc_state);
  		struct vc4_crtc *vc4_crtc = to_vc4_crtc(crtc);
@@ -29,7 +29,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  			reg = HVS_READ(SCALER_DISPECTRL);
  			HVS_WRITE(SCALER_DISPECTRL,
  				  (reg & ~SCALER_DISPECTRL_DSP2_MUX_MASK) |
-@@ -300,10 +301,10 @@ static void vc5_hvs_pv_muxing_commit(str
+@@ -297,10 +298,10 @@ static void vc5_hvs_pv_muxing_commit(str
  			break;
  
  		case 3:
@@ -42,7 +42,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  
  			reg = HVS_READ(SCALER_DISPCTRL);
  			HVS_WRITE(SCALER_DISPCTRL,
-@@ -312,10 +313,10 @@ static void vc5_hvs_pv_muxing_commit(str
+@@ -309,10 +310,10 @@ static void vc5_hvs_pv_muxing_commit(str
  			break;
  
  		case 4:
@@ -55,7 +55,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  
  			reg = HVS_READ(SCALER_DISPEOLN);
  			HVS_WRITE(SCALER_DISPEOLN,
-@@ -325,10 +326,10 @@ static void vc5_hvs_pv_muxing_commit(str
+@@ -322,10 +323,10 @@ static void vc5_hvs_pv_muxing_commit(str
  			break;
  
  		case 5:

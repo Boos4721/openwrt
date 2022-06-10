@@ -30,7 +30,7 @@ This reverts commit c65633a429b15f9d182a5bc7d6387fecbd5b7bb0.
  
  	struct {
  		unsigned in_use: 1;
-@@ -407,8 +406,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -404,8 +403,7 @@ static void vc4_atomic_commit_tail(struc
  		 * And remove the previous one based on the HVS
  		 * requirements if any.
  		 */
@@ -40,7 +40,7 @@ This reverts commit c65633a429b15f9d182a5bc7d6387fecbd5b7bb0.
  	}
  
  	drm_atomic_helper_commit_modeset_disables(dev, state);
-@@ -442,8 +440,8 @@ static void vc4_atomic_commit_tail(struc
+@@ -439,8 +437,8 @@ static void vc4_atomic_commit_tail(struc
  		 * Request a clock rate based on the current HVS
  		 * requirements.
  		 */

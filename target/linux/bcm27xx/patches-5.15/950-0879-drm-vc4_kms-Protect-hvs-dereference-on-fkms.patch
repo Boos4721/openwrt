@@ -12,7 +12,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -354,7 +354,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -351,7 +351,7 @@ static void vc4_atomic_commit_tail(struc
  	struct vc4_hvs_state *new_hvs_state;
  	struct drm_crtc *crtc;
  	struct vc4_hvs_state *old_hvs_state;

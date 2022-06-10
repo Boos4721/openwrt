@@ -19,7 +19,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_crtc.c
 +++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -728,10 +728,16 @@ static int vc4_crtc_atomic_check(struct
+@@ -723,10 +723,16 @@ static int vc4_crtc_atomic_check(struct
  		if (conn_state->crtc != crtc)
  			continue;
  
@@ -42,7 +42,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -589,12 +589,7 @@ struct vc4_crtc_state {
+@@ -580,12 +580,7 @@ struct vc4_crtc_state {
  	bool txp_armed;
  	unsigned int assigned_channel;
  
