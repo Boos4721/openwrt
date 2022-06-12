@@ -303,7 +303,7 @@ menu "Target Images"
 
 	config TARGET_ROOTFS_PARTSIZE
 		int "Root filesystem partition size (in MB)"
-		depends on USES_ROOTFS_PART || TARGET_ROOTFS_EXT4FS || TARGET_omap || TARGET_sunxi || TARGET_uml
+		depends on USES_ROOTFS_PART || TARGET_ROOTFS_EXT4FS
 		default 160
 		default 1130 if TARGET_rockchip
 		default 1130 if TARGET_bcm27xx
