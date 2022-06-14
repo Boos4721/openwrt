@@ -42,7 +42,6 @@ define Package/quickassist-c3xxx
 	+libopenssl \
 	+libstdcpp \
 	+eudev \
-	+kmod-itco-wdt \
 	+kmod-crypto-manager \
 	+kmod-crypto-sha1 \
 	+kmod-crypto-sha256 \

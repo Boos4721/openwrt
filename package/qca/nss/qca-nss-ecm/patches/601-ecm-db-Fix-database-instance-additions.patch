@@ -1,0 +1,93 @@
+From eca08ae5195e04789ef06f09e44920a91b1e5863 Mon Sep 17 00:00:00 2001
+From: bitthief <bitthief@protonmail.ch>
+Date: Wed, 9 Mar 2022 05:57:52 +0200
+Subject: [PATCH] qca-nss-ecm: fix database instance additions
+
+Backport fix from QSDK 12.1r2.
+
+---
+ ecm_db/ecm_db_connection.c | 2 ++
+ ecm_db/ecm_db_host.c       | 1 +
+ ecm_db/ecm_db_iface.c      | 2 ++
+ ecm_db/ecm_db_mapping.c    | 1 +
+ ecm_db/ecm_db_node.c       | 1 +
+ 5 files changed, 7 insertions(+)
+
+diff --git a/ecm_db/ecm_db_connection.c b/ecm_db/ecm_db_connection.c
+index 490a3f6..57b80ba 100644
+--- a/ecm_db/ecm_db_connection.c
++++ b/ecm_db/ecm_db_connection.c
+@@ -2733,6 +2733,7 @@ void ecm_db_connection_add(struct ecm_db_connection_instance *ci,
+ 	/*
+ 	 * Insert connection into the connections hash table
+ 	 */
++	ci->hash_prev = NULL;
+ 	ci->hash_next = ecm_db_connection_table[hash_index];
+ 	if (ecm_db_connection_table[hash_index]) {
+ 		ecm_db_connection_table[hash_index]->hash_prev = ci;
+@@ -2744,6 +2745,7 @@ void ecm_db_connection_add(struct ecm_db_connection_instance *ci,
+ 	/*
+ 	 * Insert connection into the connections serial hash table
+ 	 */
++	ci->serial_hash_prev = NULL;
+ 	ci->serial_hash_next = ecm_db_connection_serial_table[serial_hash_index];
+ 	if (ecm_db_connection_serial_table[serial_hash_index]) {
+ 		ecm_db_connection_serial_table[serial_hash_index]->serial_hash_prev = ci;
+diff --git a/ecm_db/ecm_db_host.c b/ecm_db/ecm_db_host.c
+index e28ae6a..050ad2d 100644
+--- a/ecm_db/ecm_db_host.c
++++ b/ecm_db/ecm_db_host.c
+@@ -573,6 +573,7 @@ void ecm_db_host_add(struct ecm_db_host_instance *hi, ip_addr_t address, bool on
+ 	/*
+ 	 * Add host into the hash table
+ 	 */
++	hi->hash_prev = NULL;
+ 	hi->hash_next = ecm_db_host_table[hash_index];
+ 	if (ecm_db_host_table[hash_index]) {
+ 		ecm_db_host_table[hash_index]->hash_prev = hi;
+diff --git a/ecm_db/ecm_db_iface.c b/ecm_db/ecm_db_iface.c
+index d4f33ba..cd07666 100644
+--- a/ecm_db/ecm_db_iface.c
++++ b/ecm_db/ecm_db_iface.c
+@@ -1473,6 +1473,7 @@ static void _ecm_db_iface_identifier_hash_table_insert_entry(struct ecm_db_iface
+ 	/*
+ 	 * Insert into interface identifier chain
+ 	 */
++	ii->iface_id_hash_prev = NULL;
+ 	ii->iface_id_hash_next = ecm_db_iface_id_table[iface_id_hash_index];
+ 	if (ecm_db_iface_id_table[iface_id_hash_index]) {
+ 		ecm_db_iface_id_table[iface_id_hash_index]->iface_id_hash_prev = ii;
+@@ -2592,6 +2593,7 @@ static inline void ecm_db_iface_add_to_db(struct ecm_db_iface_instance *ii,  ecm
+ 	/*
+ 	 * Insert into chain
+ 	 */
++	ii->hash_prev = NULL;
+ 	ii->hash_next = ecm_db_iface_table[hash_index];
+ 	if (ecm_db_iface_table[hash_index]) {
+ 		ecm_db_iface_table[hash_index]->hash_prev = ii;
+diff --git a/ecm_db/ecm_db_mapping.c b/ecm_db/ecm_db_mapping.c
+index 07cbfbd..f9ebd16 100644
+--- a/ecm_db/ecm_db_mapping.c
++++ b/ecm_db/ecm_db_mapping.c
+@@ -678,6 +678,7 @@ void ecm_db_mapping_add(struct ecm_db_mapping_instance *mi, struct ecm_db_host_i
+ 	/*
+ 	 * Insert mapping into the mappings hash table
+ 	 */
++	mi->hash_prev = NULL;
+ 	mi->hash_next = ecm_db_mapping_table[hash_index];
+ 	if (ecm_db_mapping_table[hash_index]) {
+ 		ecm_db_mapping_table[hash_index]->hash_prev = mi;
+diff --git a/ecm_db/ecm_db_node.c b/ecm_db/ecm_db_node.c
+index 3350902..599fb1f 100644
+--- a/ecm_db/ecm_db_node.c
++++ b/ecm_db/ecm_db_node.c
+@@ -542,6 +542,7 @@ void ecm_db_node_add(struct ecm_db_node_instance *ni, struct ecm_db_iface_instan
+ 	/*
+ 	 * Insert into the hash chain
+ 	 */
++	ni->hash_prev = NULL;
+ 	ni->hash_next = ecm_db_node_table[hash_index];
+ 	if (ecm_db_node_table[hash_index]) {
+ 		ecm_db_node_table[hash_index]->hash_prev = ni;
+--
+2.35.1

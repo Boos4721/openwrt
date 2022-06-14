@@ -1,0 +1,148 @@
+From 095fe36aca675384be34f0a47839ee4191dac1e7 Mon Sep 17 00:00:00 2001
+From: bitthief <bitthief@protonmail.ch>
+Date: Wed, 9 Mar 2022 04:10:57 +0200
+Subject: [PATCH] qca-nss-ecm: nf_conntrack notifier support (kernel 5.15)
+
+These patches introduce support for the kernel 5.15 native netfilter
+conntrack chain notifiers registration.
+Additionally, a mutex has been introduced for the notifier
+registration and unregistration calls.
+
+---
+ ecm_conntrack_notifier.c | 49 +++++++++++++++++++++++++++++++++-------
+ 1 file changed, 41 insertions(+), 8 deletions(-)
+
+diff --git a/ecm_conntrack_notifier.c b/ecm_conntrack_notifier.c
+index 83669e5..8e44a1a 100644
+--- a/ecm_conntrack_notifier.c
++++ b/ecm_conntrack_notifier.c
+@@ -53,6 +53,9 @@
+ #include <net/netfilter/nf_conntrack_l4proto.h>
+ #include <net/netfilter/nf_conntrack_zones.h>
+ #include <net/netfilter/nf_conntrack_core.h>
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
++#include <net/netfilter/nf_conntrack_ecache.h>
++#endif
+ #include <net/netfilter/ipv4/nf_conntrack_ipv4.h>
+ #include <net/netfilter/ipv4/nf_defrag_ipv4.h>
+
+@@ -86,6 +89,7 @@
+  * Locking of the classifier - concurrency control
+  */
+ static DEFINE_SPINLOCK(ecm_conntrack_notifier_lock __attribute__((unused)));	/* Protect against SMP access between netfilter, events and private threaded function. */
++static DEFINE_MUTEX(nf_ct_net_event_lock);  /* Netfilter conntrack notifier registration lock */
+
+ /*
+  * Debugfs dentry object.
+@@ -314,17 +318,24 @@ EXPORT_SYMBOL(ecm_conntrack_ipv4_event);
+
+ #ifdef CONFIG_NF_CONNTRACK_EVENTS
+ /*
++ * Conntrack notifier expect event callback (since kernel 5.15).
++*/
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0) && !defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
++static int ecm_expect_event(unsigned int events, const struct nf_exp_event *item) {
++    return 0;
++}
++#endif
++/*
+  * ecm_conntrack_event()
+  *	Callback event invoked when conntrack connection state changes, currently we handle destroy events to quickly release state
+  */
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
+-static int ecm_conntrack_event(struct notifier_block *this, unsigned long events, void *ptr)
+-#else
+-static int ecm_conntrack_event(unsigned int events, struct nf_ct_event *item)
+-#endif
+-{
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0) && !defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
++static int ecm_conntrack_event(unsigned int events, const struct nf_ct_event *item) {
++#elif defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
++static int ecm_conntrack_event(struct notifier_block *this, unsigned long events, void *ptr) {
+ 	struct nf_ct_event *item = (struct nf_ct_event *)ptr;
++#else
++static int ecm_conntrack_event(unsigned int events, struct nf_ct_event *item) {
+ #endif
+ 	struct nf_conn *ct = item->ct;
+
+@@ -372,7 +391,16 @@ static int ecm_conntrack_event(unsigned
+ 	return NOTIFY_DONE;
+ }
+
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0) && !defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
++/*
++ * struct nf_ct_event_notifier ecm_conntrack_notifier
++ *	Netfilter conntrack event system to monitor connection tracking changes
++ */
++static struct nf_ct_event_notifier ecm_conntrack_notifier = {
++	.ct_event  = ecm_conntrack_event,
++	.exp_event = ecm_expect_event,
++};
++#elif defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
+ /*
+  * struct notifier_block ecm_conntrack_notifier
+  *	Netfilter conntrack event system to monitor connection tracking changes
+@@ -438,15 +438,29 @@ int ecm_conntrack_notifier_init(struct d
+ 					(u32 *)&ecm_conntrack_notifier_stopped);
+
+ #ifdef CONFIG_NF_CONNTRACK_EVENTS
+-	/*
++    /*
++     * Lock the conntrack notifier registration mutex
++     */
++    mutex_lock(&nf_ct_net_event_lock);
++
++    /*
+ 	 * Eventing subsystem is available so we register a notifier hook to get fast notifications of expired connections
+ 	 */
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0) && !defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
++    if (!READ_ONCE(init_net.ct.nf_conntrack_event_cb))
++        nf_conntrack_register_notifier(&init_net, &ecm_conntrack_notifier);
++    result = 0;
++#elif defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
+ 	result = nf_conntrack_register_chain_notifier(&init_net, &ecm_conntrack_notifier);
+ #else
+ 	result = nf_conntrack_register_notifier(&init_net, &ecm_conntrack_notifier);
+ #endif
+-	if (result < 0) {
++	/*
++    * Unlock the conntrack notifier registration mutex
++    */
++    mutex_unlock(&nf_ct_net_event_lock);
++
++    if (result < 0) {
+ 		DEBUG_ERROR("Can't register nf notifier hook.\n");
+ 		debugfs_remove_recursive(ecm_conntrack_notifier_dentry);
+ 		return result;
+@@ -463,11 +477,25 @@ EXPORT_SYMBOL(ecm_conntrack_notifier_ini
+ void ecm_conntrack_notifier_exit(void)
+ {
+ 	DEBUG_INFO("ECM Conntrack Notifier exit\n");
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++
++    /*
++     * Lock the conntrack notifier registration mutex
++     */
++    mutex_lock(&nf_ct_net_event_lock);
++
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0) && !defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
++    nf_conntrack_unregister_notifier(&init_net);
++#elif defined(CONFIG_NF_CONNTRACK_CHAIN_EVENTS)
+ 	nf_conntrack_unregister_chain_notifier(&init_net, &ecm_conntrack_notifier);
+ #else
+ 	nf_conntrack_unregister_notifier(&init_net, &ecm_conntrack_notifier);
+ #endif
++
++    /*
++     * Unlock the conntrack notifier registration mutex
++     */
++    mutex_unlock(&nf_ct_net_event_lock);
++
+ 	/*
+ 	 * Remove the debugfs files recursively.
+ 	 */
+--
+2.35.1

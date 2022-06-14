@@ -1,0 +1,54 @@
+From 098a645bd1ffaadb1320d800458f092a075ff270 Mon Sep 17 00:00:00 2001
+From: bitthief <bitthief@protonmail.ch>
+Date: Wed, 9 Mar 2022 04:36:11 +0200
+Subject: [PATCH] qca-nss-ecm: prevent set_fs() calls in kernel 5.15
+
+The deprecated set_fs() defines are no longer enabled (and necessary)
+by default in kernel 5.15 for arm64 (and most architectures).
+Guard them with #ifdef's on 5.15 and newer kernel versions.
+
+---
+ ecm_interface.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/ecm_interface.c b/ecm_interface.c
+index c5101b7..a57f483 100644
+--- a/ecm_interface.c
++++ b/ecm_interface.c
+@@ -7494,7 +7494,11 @@ static int ecm_interface_wifi_event_rx(struct socket *sock, struct sockaddr_nl *
+ {
+ 	struct msghdr msg;
+ 	struct iovec  iov;
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0)
++#ifdef set_fs
+ 	mm_segment_t oldfs;
++#endif
++#endif
+ 	int size;
+
+ 	iov.iov_base = buf;
+@@ -7506,14 +7510,22 @@ static int ecm_interface_wifi_event_rx(struct socket *sock, struct sockaddr_nl *
+ 	msg.msg_control = NULL;
+ 	msg.msg_controllen = 0;
+ 	iov_iter_init(&msg.msg_iter, READ, &iov, 1, 1);
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0)
++#ifdef set_fs
+ 	oldfs = get_fs();
+ 	set_fs(KERNEL_DS);
++#endif
++#endif
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 7, 0))
+ 	size = sock_recvmsg(sock, &msg, len, msg.msg_flags);
+ #else
+ 	size = sock_recvmsg(sock, &msg, msg.msg_flags);
+ #endif
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0)
++#ifdef set_fs
+ 	set_fs(oldfs);
++#endif
++#endif
+
+ 	return size;
+ }
+--
+2.35.1

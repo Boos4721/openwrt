@@ -14,9 +14,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  nss_dp_main.c                                | 3 +++
  2 files changed, 5 insertions(+), 2 deletions(-)
 
+diff --git a/hal/dp_ops/edma_dp/edma_v1/edma_data_plane.c b/hal/dp_ops/edma_dp/edma_v1/edma_data_plane.c
+index 0af39c2..1d748db 100644
 --- a/hal/dp_ops/edma_dp/edma_v1/edma_data_plane.c
 +++ b/hal/dp_ops/edma_dp/edma_v1/edma_data_plane.c
-@@ -822,8 +822,8 @@ static int edma_register_netdevice(struc
+@@ -822,8 +822,8 @@ static int edma_register_netdevice(struct net_device *netdev, uint32_t macid)
  		return -EINVAL;
  	}
  
@@ -27,9 +29,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	/*
  	 * We expect 'macid' to correspond to ports numbers on
+diff --git a/nss_dp_main.c b/nss_dp_main.c
+index c0ae9d6..441c300 100644
 --- a/nss_dp_main.c
 +++ b/nss_dp_main.c
-@@ -875,6 +875,9 @@ static int32_t nss_dp_probe(struct platf
+@@ -875,6 +875,9 @@ static int32_t nss_dp_probe(struct platform_device *pdev)
  		goto phy_setup_fail;
  	}
  
@@ -39,3 +43,5 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	dp_global_ctx.nss_dp[dp_priv->macid - 1] = dp_priv;
  	dp_global_ctx.slowproto_acl_bm = 0;
  
+-- 
+2.34.1

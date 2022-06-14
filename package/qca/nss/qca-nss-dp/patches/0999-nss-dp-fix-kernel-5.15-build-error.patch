@@ -1,0 +1,14 @@
+--- a/nss_dp_switchdev.c
++++ b/nss_dp_switchdev.c
+@@ -298,7 +301,11 @@ static int nss_dp_port_attr_set(struct n
+ 	switch (attr->id) {
+ 	case SWITCHDEV_ATTR_ID_PORT_BRIDGE_FLAGS:
+ 		dp_priv->brport_flags = attr->u.brport_flags;
++		#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 12, 0))
++		netdev_dbg(dev, "set brport_flags %lu\n", attr->u.brport_flags);
++		#else
+		netdev_dbg(dev, "set brport_flags %lu\n", attr->u.brport_flags.val);
++		#endif
+ 		return 0;
+ 	case SWITCHDEV_ATTR_ID_PORT_STP_STATE:
+ 		return nss_dp_stp_state_set(dp_priv, attr->u.stp_state);

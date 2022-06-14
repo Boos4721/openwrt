@@ -1,0 +1,28 @@
+From 63f36edcbb49ec127bc77abd6dbfea9661460aa0 Mon Sep 17 00:00:00 2001
+From: boos4721 <3.1415926535boos@gmail.com>
+Date: Thu, 5 May 2022 14:00:46 +0800
+Subject: [PATCH] fix IEEE 802.11: deauthenticated due to local deauth request
+ warnning
+
+Signed-off-by: boos4721 <3.1415926535boos@gmail.com>
+---
+ src/ap/ieee802_11.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/ap/ieee802_11.c b/src/ap/ieee802_11.c
+index 83d80c1..838a901 100644
+--- a/src/ap/ieee802_11.c
++++ b/src/ap/ieee802_11.c
+@@ -6474,7 +6474,7 @@ static void handle_assoc_cb(struct hostapd_data *hapd,
+ 		if (status == WLAN_STATUS_SUCCESS)
+ 			hostapd_drv_sta_remove(hapd, sta->addr);
+
+-		return;
++	//	return;
+ 	}
+
+ 	if (status != WLAN_STATUS_SUCCESS)
+-- 
+2.32.0 (Apple Git-132)
+
+
