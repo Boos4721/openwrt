@@ -85,7 +85,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  }
  
  static int qcom_pcie_get_resources_2_7_0(struct qcom_pcie *pcie)
-@@ -1569,6 +1576,7 @@ static const struct qcom_pcie_ops ops_2_
+@@ -1563,6 +1570,7 @@ static const struct qcom_pcie_ops ops_2_
  static const struct qcom_pcie_ops ops_2_3_3 = {
  	.get_resources = qcom_pcie_get_resources_2_3_3,
  	.init = qcom_pcie_init_2_3_3,

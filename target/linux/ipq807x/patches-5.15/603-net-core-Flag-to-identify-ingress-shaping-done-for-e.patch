@@ -32,7 +32,7 @@ variable names created with 603.
  #ifdef CONFIG_NET_REDIRECT
 --- a/include/net/sch_generic.h
 +++ b/include/net/sch_generic.h
-@@ -753,6 +753,40 @@ static inline bool skb_skip_tc_classify(
+@@ -739,6 +739,40 @@ static inline bool skb_skip_tc_classify(
  	return false;
  }
  
