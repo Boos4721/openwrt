@@ -525,7 +525,7 @@ Cc: linux-tegra@vger.kernel.org
  }
  
  static void qcom_pcie_2_1_0_ltssm_enable(struct qcom_pcie *pcie)
-@@ -1290,15 +1287,8 @@ static int qcom_pcie_host_init(struct pc
+@@ -1284,15 +1281,8 @@ static int qcom_pcie_host_init(struct pc
  
  	qcom_ep_reset_deassert(pcie);
  
@@ -542,7 +542,7 @@ Cc: linux-tegra@vger.kernel.org
  err_disable_phy:
  	phy_power_off(pcie->phy);
  err_deinit:
-@@ -1365,6 +1355,7 @@ static const struct qcom_pcie_ops ops_2_
+@@ -1359,6 +1349,7 @@ static const struct qcom_pcie_ops ops_2_
  
  static const struct dw_pcie_ops dw_pcie_ops = {
  	.link_up = qcom_pcie_link_up,

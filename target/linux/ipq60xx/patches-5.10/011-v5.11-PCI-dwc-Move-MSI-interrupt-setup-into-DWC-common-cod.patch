@@ -229,7 +229,7 @@ Cc: linux-tegra@vger.kernel.org
  	return dw_pcie_host_init(&pci->pp);
 --- a/drivers/pci/controller/dwc/pcie-qcom.c
 +++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -1434,14 +1434,6 @@ static int qcom_pcie_probe(struct platfo
+@@ -1428,14 +1428,6 @@ static int qcom_pcie_probe(struct platfo
  
  	pp->ops = &qcom_pcie_dw_ops;
  

@@ -22,7 +22,7 @@ Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
 
 --- a/drivers/pci/controller/dwc/pcie-qcom.c
 +++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -1411,18 +1411,18 @@ static int qcom_pcie_host_init(struct pc
+@@ -1405,18 +1405,18 @@ static int qcom_pcie_host_init(struct pc
  
  	qcom_ep_reset_assert(pcie);
  
@@ -45,7 +45,7 @@ Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
  	}
  
  	dw_pcie_setup_rc(pp);
-@@ -1430,10 +1430,10 @@ static int qcom_pcie_host_init(struct pc
+@@ -1424,10 +1424,10 @@ static int qcom_pcie_host_init(struct pc
  
  	return 0;
  

@@ -220,7 +220,7 @@ Cc: linux-tegra@vger.kernel.org
  }
 --- a/drivers/pci/controller/dwc/pcie-qcom.c
 +++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -1283,8 +1283,6 @@ static int qcom_pcie_host_init(struct pc
+@@ -1277,8 +1277,6 @@ static int qcom_pcie_host_init(struct pc
  	}
  
  	dw_pcie_setup_rc(pp);
