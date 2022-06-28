@@ -22,6 +22,15 @@ define Device/friendlyarm_nanopi-r2s
 endef
 TARGET_DEVICES += friendlyarm_nanopi-r2s
 
+define Device/friendlyarm_nanopi-r5s
+  DEVICE_VENDOR := FriendlyARM
+  DEVICE_MODEL := NanoPi R5S
+  SOC := rk3328
+  DEVICE_PACKAGES := kmod-r8125 luci-app-emmc-tools
+  DEVICE_DTS = rockchip/rk3328-nanopi-r2s
+endef
+TARGET_DEVICES += friendlyarm_nanopi-r5s
+
 define Device/friendlyarm_nanopi-r4s
   DEVICE_VENDOR := FriendlyARM
   DEVICE_MODEL := NanoPi R4S

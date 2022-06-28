@@ -108,29 +108,8 @@ define Package/ath10k-board-qca99x0/install
 	$(INSTALL_DATA) \
 		$(PKG_BUILD_DIR)/ath10k/QCA99X0/hw2.0/board-2.bin \
 		$(1)/lib/firmware/ath10k/QCA99X0/hw2.0/board-2.bin
-	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/ath10k/QCA99X0/hw2.0/board.bin \
-		$(1)/lib/firmware/ath10k/QCA99X0/hw2.0/board.bin
 endef
 $(eval $(call BuildPackage,ath10k-board-qca99x0))
-
-Package/ath10k-board-qca99x0-2g = $(call Package/firmware-default,ath10k qca99x0 board 2g precal firmware)
-define Package/ath10k-board-qca99x0-2g/install
-	$(INSTALL_DIR) $(1)/lib/firmware/ath10k/QCA99X0/hw2.0
-	$(INSTALL_DATA) \
-		$(DL_DIR)/boardData_AR900B_CUS260_2G_v2_002.bin \
-		$(1)/lib/firmware/ath10k/QCA99X0/hw2.0/board-2g-precal.bin
-endef
-$(eval $(call BuildPackage,ath10k-board-qca99x0-2g))
-
-Package/ath10k-board-qca99x0-5g = $(call Package/firmware-default,ath10k qca99x0 board 5g precal firmware)
-define Package/ath10k-board-qca99x0-5g/install
-	$(INSTALL_DIR) $(1)/lib/firmware/ath10k/QCA99X0/hw2.0
-	$(INSTALL_DATA) \
-		$(DL_DIR)/boardData_AR900B_CUS239_5G_v2_001.bin \
-		$(1)/lib/firmware/ath10k/QCA99X0/hw2.0/board-5g-precal.bin
-endef
-$(eval $(call BuildPackage,ath10k-board-qca99x0-5g))
 
 Package/ath10k-firmware-qca99x0 = $(call Package/firmware-default,ath10k qca99x0 firmware,+ath10k-board-qca99x0)
 define Package/ath10k-firmware-qca99x0/install
