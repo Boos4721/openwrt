@@ -1,0 +1,9 @@
+[submodule "package/v2ray-core"]
+	path = package/v2ray-core
+	url = https://github.com/kuoruan/openwrt-v2ray.git
+[submodule "package/v2raya"]
+	path = package/v2raya
+	url = https://github.com/v2rayA/v2raya-openwrt.git
+[submodule "package/openwrt-upx"]
+	path = package/openwrt-upx
+	url = https://github.com/kuoruan/openwrt-upx.git
