@@ -65,100 +65,66 @@ jobs:
 
       - name: Generate configuration file
         run: |
-          rm -f ./.config*
-          touch ./.config
+          mv config.ax3600 .config
 
-          #
-          # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
-          # 例如:
-
-          cat >> .config <<EOF
-          CONFIG_MODULES=y
-          CONFIG_HAVE_DOT_CONFIG=y
-          CONFIG_HOST_OS_LINUX=y
-          CONFIG_TARGET_ipq807x=y
-          CONFIG_TARGET_ipq807x_generic=y
-          CONFIG_TARGET_ipq807x_generic_DEVICE_xiaomi_ax3600=y
-          CONFIG_HAS_SUBTARGETS=y
-          CONFIG_HAS_DEVICES=y
-          CONFIG_TARGET_BOARD="ipq807x"
-          CONFIG_TARGET_SUBTARGET="generic"
-          CONFIG_TARGET_PROFILE="DEVICE_xiaomi_ax3600"
-          CONFIG_TARGET_ARCH_PACKAGES="aarch64_cortex-a53"
-          CONFIG_DEFAULT_TARGET_OPTIMIZATION="-Os -pipe -mcpu=cortex-a53"
-          CONFIG_CPU_TYPE="cortex-a53"
-          CONFIG_LINUX_5_15=y
-          CONFIG_DEFAULT_ath10k-firmware-qca9887-ct=y
-          CONFIG_DEFAULT_ath11k-firmware-ipq8074=y
-          CONFIG_DEFAULT_autocore-arm=y
-          CONFIG_DEFAULT_base-files=y
-          CONFIG_DEFAULT_bind-dig=y
-          CONFIG_DEFAULT_block-mount=y
-          CONFIG_DEFAULT_busybox=y
-          CONFIG_DEFAULT_coremark=y
-          CONFIG_DEFAULT_ddns-scripts_aliyun=y
-          CONFIG_DEFAULT_ddns-scripts_cloudflare.com-v4=y
-          CONFIG_DEFAULT_ddns-scripts_dnspod=y
-          CONFIG_DEFAULT_default-settings=y
-          CONFIG_DEFAULT_dnsmasq-full=y
-          CONFIG_DEFAULT_dropbear=y
-          CONFIG_DEFAULT_firewall=y
-          CONFIG_DEFAULT_fstools=y
-          CONFIG_DEFAULT_git=y
-          CONFIG_DEFAULT_htop=y
-          CONFIG_DEFAULT_ipq-wifi-xiaomi_ax3600=y
-          CONFIG_DEFAULT_iptables=y
-          CONFIG_DEFAULT_iptables-mod-extra=y
-          CONFIG_DEFAULT_iptables-mod-tproxy=y
-          CONFIG_DEFAULT_iwinfo=y
-          CONFIG_DEFAULT_kmod-ath10k-ct-smallbuffers=y
-          CONFIG_DEFAULT_kmod-ath11k-ahb=y
-          CONFIG_DEFAULT_kmod-gpio-button-hotplug=y
-          CONFIG_DEFAULT_kmod-inet-diag=y
-          CONFIG_DEFAULT_kmod-ipt-raw=y
-          CONFIG_DEFAULT_kmod-leds-gpio=y
-          CONFIG_DEFAULT_kmod-nf-nathelper=y
-          CONFIG_DEFAULT_kmod-nf-nathelper-extra=y
-          CONFIG_DEFAULT_kmod-qca-nss-dp=y
-          CONFIG_DEFAULT_kmod-qca-nss-drv=y
-          CONFIG_DEFAULT_kmod-qca-nss-drv-bridge-mgr=y
-          CONFIG_DEFAULT_kmod-qca-nss-drv-pppoe=y
-          CONFIG_DEFAULT_kmod-tun=y
-          CONFIG_DEFAULT_libc=y
-          CONFIG_DEFAULT_libgcc=y
-          CONFIG_DEFAULT_libustream-openssl=y
-          CONFIG_DEFAULT_libwolfssl-benchmark=y
-          CONFIG_DEFAULT_logd=y
-          CONFIG_DEFAULT_luci=y
-          CONFIG_DEFAULT_luci-app-advanced=y
-          CONFIG_DEFAULT_luci-app-argon-config=y
-          CONFIG_DEFAULT_luci-app-arpbind=y
-          CONFIG_DEFAULT_luci-app-autoreboot=y
-          CONFIG_DEFAULT_luci-app-cpufreq=y
-          CONFIG_DEFAULT_luci-app-ddns=y
-          CONFIG_DEFAULT_luci-app-eqos=y
-          CONFIG_DEFAULT_luci-app-filetransfer=y
-          CONFIG_DEFAULT_luci-app-ramfree=y
-          CONFIG_DEFAULT_luci-app-ttyd=y
-          CONFIG_DEFAULT_luci-app-turboacc=y
-          CONFIG_DEFAULT_luci-app-unblockneteasemusic=y
-          CONFIG_DEFAULT_luci-app-upnp=y
-          CONFIG_DEFAULT_luci-newapi=y
-          CONFIG_DEFAULT_luci-theme-argon=y
-          CONFIG_DEFAULT_mtd=y
-          CONFIG_DEFAULT_netifd=y
-          CONFIG_DEFAULT_nss-firmware-ipq8074=y
-          CONFIG_DEFAULT_opkg=y
-          CONFIG_DEFAULT_ppp=y
-          CONFIG_DEFAULT_ppp-mod-pppoe=y
-          CONFIG_DEFAULT_procd=y
-          CONFIG_DEFAULT_uboot-envtools=y
-          CONFIG_DEFAULT_uci=y
-          CONFIG_DEFAULT_uclient-fetch=y
-          CONFIG_DEFAULT_urandom-seed=y
-          CONFIG_DEFAULT_wpad-wolfssl=y
-          CONFIG_DEFAULT_zram-swap=y
-          CONFIG_DEFAULT_zsh=y
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
           CONFIG_HAS_FPU=y
           CONFIG_AUDIO_SUPPORT=y
           CONFIG_GPIO_SUPPORT=y
