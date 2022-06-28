@@ -1,0 +1,32 @@
+From f9834dbdd322f144f7b51f2fe8017fc6b870b3ec Mon Sep 17 00:00:00 2001
+From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Date: Sat, 5 Mar 2022 23:12:52 +0100
+Subject: [PATCH] wireless: Use netif_rx().
+
+Since commit
+   baebdf48c3600 ("net: dev: Makes sure netif_rx() can be invoked in any context.")
+
+the function netif_rx() can be used in preemptible/thread context as
+well as in interrupt context.
+
+Use netif_rx().
+
+Cc: Johannes Berg <johannes@sipsolutions.net>
+Cc: linux-wireless@vger.kernel.org
+Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+---
+ net/wireless/util.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/net/wireless/util.c
++++ b/net/wireless/util.c
+@@ -2149,7 +2149,7 @@ void cfg80211_send_layer2_update(struct
+ 	skb->dev = dev;
+ 	skb->protocol = eth_type_trans(skb, dev);
+ 	memset(skb->cb, 0, sizeof(skb->cb));
+-	netif_rx_ni(skb);
++	netif_rx(skb);
+ }
+ EXPORT_SYMBOL(cfg80211_send_layer2_update);
+

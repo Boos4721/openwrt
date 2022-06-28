@@ -1,0 +1,67 @@
+From b71597edfaade119157ded98991bac7160be80c2 Mon Sep 17 00:00:00 2001
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+Date: Fri, 8 Apr 2022 10:00:42 +0200
+Subject: [PATCH] mmc: core: improve API to make clear mmc_hw_reset is for
+ cards
+
+To make it unambiguous that mmc_hw_reset() is for cards and not for
+controllers, we make the function argument mmc_card instead of mmc_host.
+Also, all users are converted.
+
+Suggested-by: Ulf Hansson <ulf.hansson@linaro.org>
+Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
+Acked-by: Kalle Valo <kvalo@kernel.org>
+Link: https://lore.kernel.org/r/20220408080045.6497-2-wsa+renesas@sang-engineering.com
+Signed-off-by: Ulf Hansson <ulf.hansson@linaro.org>
+---
+ drivers/net/wireless/ath/ath10k/sdio.c                  | 2 +-
+ drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c | 2 +-
+ drivers/net/wireless/marvell/mwifiex/sdio.c             | 2 +-
+ drivers/net/wireless/ti/wlcore/sdio.c                   | 2 +--
+ 8 files changed, 10 insertions(+), 10 deletions(-)
+
+
+--- a/drivers/net/wireless/ath/ath10k/sdio.c
++++ b/drivers/net/wireless/ath/ath10k/sdio.c
+@@ -1633,7 +1633,7 @@ static void ath10k_sdio_hif_power_down(s
+ 		return;
+ 	}
+
+-	ret = mmc_hw_reset(ar_sdio->func->card->host);
++	ret = mmc_hw_reset(ar_sdio->func->card);
+ 	if (ret)
+ 		ath10k_warn(ar, "unable to reset sdio: %d\n", ret);
+
+--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
++++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
+@@ -4164,7 +4164,7 @@ static int brcmf_sdio_bus_reset(struct d
+
+ 	/* reset the adapter */
+ 	sdio_claim_host(sdiodev->func1);
+-	mmc_hw_reset(sdiodev->func1->card->host);
++	mmc_hw_reset(sdiodev->func1->card);
+ 	sdio_release_host(sdiodev->func1);
+
+ 	brcmf_bus_change_state(sdiodev->bus_if, BRCMF_BUS_DOWN);
+--- a/drivers/net/wireless/marvell/mwifiex/sdio.c
++++ b/drivers/net/wireless/marvell/mwifiex/sdio.c
+@@ -2643,7 +2643,7 @@ static void mwifiex_sdio_card_reset_work
+
+ 	/* Run a HW reset of the SDIO interface. */
+ 	sdio_claim_host(func);
+-	ret = mmc_hw_reset(func->card->host);
++	ret = mmc_hw_reset(func->card);
+ 	sdio_release_host(func);
+
+ 	switch (ret) {
+--- a/drivers/net/wireless/ti/wlcore/sdio.c
++++ b/drivers/net/wireless/ti/wlcore/sdio.c
+@@ -146,7 +146,7 @@ static int wl12xx_sdio_power_on(struct w
+ 	 * To guarantee that the SDIO card is power cycled, as required to make
+ 	 * the FW programming to succeed, let's do a brute force HW reset.
+ 	 */
+-	mmc_hw_reset(card->host);
++	mmc_hw_reset(card);
+
+ 	sdio_enable_func(func);
+ 	sdio_release_host(func);
