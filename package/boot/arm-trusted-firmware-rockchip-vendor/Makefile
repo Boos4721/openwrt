@@ -69,9 +69,6 @@ endef
 define Package/arm-trusted-firmware-rk3399/install
 endef
 
-define Package/arm-trusted-firmware-rk3566/install
-endef
-
 define Package/arm-trusted-firmware-rk3568/install
 endef
 
