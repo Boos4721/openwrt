@@ -525,8 +525,8 @@ $(eval $(call KernelPackage,fs-ntfs))
 
 define KernelPackage/pstore
   SUBMENU:=$(FS_MENU)
-  TITLE:=Pstore file system
-  DEFAULT:=m if ALL_KMODS
+  TITLE:=NTFS3 Read-Write file system support
+  DEPENDS:=@(LINUX_5_15||LINUX_5_18) +kmod-nls-base
   KCONFIG:= \
 	CONFIG_PSTORE \
 	CONFIG_PSTORE_COMPRESS=y \
