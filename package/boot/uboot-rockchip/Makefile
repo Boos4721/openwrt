@@ -1,14 +1,14 @@
 #
 # This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
+# See /LICENSE for more information. 
 #
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
-PKG_VERSION:=2022.07-rc3
+PKG_VERSION:=2022.07-rc2
 PKG_RELEASE:=$(AUTORELEASE)
 
-PKG_HASH:=f17f3a051b6a9b4e2a5c15f938d19bfe90bf5e92ffc66d12abf6b4e590d998cf
+PKG_HASH:=de4819a6d83c557efe3cf65ad17ec111008baa400ea2a8d13e04ddd43eca3a81
 
 PKG_MAINTAINER:=Tobias Maedel <openwrt@tbspace.de>
 
