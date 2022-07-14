@@ -6,12 +6,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=autocore
-PKG_FLAGS:=nonshared
-PKG_RELEASE:=$(COMMITCOUNT)
-
-PKG_CONFIG_DEPENDS:= \
-	CONFIG_TARGET_bcm27xx \
-	CONFIG_TARGET_bcm53xx
+PKG_VERSION:=1
+PKG_RELEASE:=43
 
 include $(INCLUDE_DIR)/package.mk
 
