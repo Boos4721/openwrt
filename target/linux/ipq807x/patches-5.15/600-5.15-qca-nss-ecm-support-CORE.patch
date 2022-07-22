@@ -592,7 +592,7 @@
  out:
  	fib6_info_release(rt);
  	return err;
-@@ -6345,6 +6355,20 @@ static int ip6_route_dev_notify(struct n
+@@ -6352,6 +6362,20 @@ static int ip6_route_dev_notify(struct n
  	return NOTIFY_OK;
  }
  
