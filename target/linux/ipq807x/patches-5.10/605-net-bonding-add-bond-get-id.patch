@@ -29,7 +29,7 @@
  /*---------------------------------- VLAN -----------------------------------*/
  
  /* In the following 2 functions, bond_vlan_rx_add_vid and bond_vlan_rx_kill_vid,
-@@ -4835,6 +4850,9 @@ static void bond_destructor(struct net_d
+@@ -4837,6 +4852,9 @@ static void bond_destructor(struct net_d
  	struct bonding *bond = netdev_priv(bond_dev);
  	if (bond->wq)
  		destroy_workqueue(bond->wq);
@@ -39,7 +39,7 @@
  }
  
  void bond_setup(struct net_device *bond_dev)
-@@ -5403,6 +5421,14 @@ int bond_create(struct net *net, const c
+@@ -5405,6 +5423,14 @@ int bond_create(struct net *net, const c
  	bond_work_init_all(bond);
  
  	rtnl_unlock();
