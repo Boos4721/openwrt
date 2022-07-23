@@ -25,9 +25,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  nss_profiler.c                |   3 +-
  6 files changed, 127 insertions(+), 68 deletions(-)
 
+diff --git a/nss_core.c b/nss_core.c
+index 23dc155..f9e6014 100644
 --- a/nss_core.c
 +++ b/nss_core.c
-@@ -1462,6 +1462,8 @@ static inline void nss_core_handle_empty
+@@ -1429,6 +1429,8 @@ static inline void nss_core_handle_empty_buffers(struct nss_ctx_instance *nss_ct
  						 uint32_t count, uint32_t hlos_index,
  						 uint16_t mask)
  {
@@ -36,7 +38,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	while (count) {
  		/*
  		 * Since we only return the primary skb, we have no way to unmap
-@@ -1515,7 +1517,9 @@ next:
+@@ -1482,7 +1484,9 @@ next:
  	n2h_desc_ring->hlos_index = hlos_index;
  	if_map->n2h_hlos_index[NSS_IF_N2H_EMPTY_BUFFER_RETURN_QUEUE] = hlos_index;
  
@@ -47,7 +49,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  }
  
-@@ -1537,6 +1541,7 @@ static int32_t nss_core_handle_cause_que
+@@ -1504,6 +1508,7 @@ static int32_t nss_core_handle_cause_queue(struct int_ctx_instance *int_ctx, uin
  	struct nss_ctx_instance *nss_ctx = int_ctx->nss_ctx;
  	struct nss_meminfo_ctx *mem_ctx = &nss_ctx->meminfo_ctx;
  	struct nss_if_mem_map *if_map = mem_ctx->if_map;
@@ -55,7 +57,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	qid = nss_core_cause_to_queue(cause);
  
-@@ -1548,7 +1553,8 @@ static int32_t nss_core_handle_cause_que
+@@ -1515,7 +1520,8 @@ static int32_t nss_core_handle_cause_queue(struct int_ctx_instance *int_ctx, uin
  	n2h_desc_ring = &nss_ctx->n2h_desc_ring[qid];
  	desc_if = &n2h_desc_ring->desc_ring;
  	desc_ring = desc_if->desc;
@@ -65,7 +67,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  	nss_index = if_map->n2h_nss_index[qid];
  
-@@ -1577,13 +1583,23 @@ static int32_t nss_core_handle_cause_que
+@@ -1544,13 +1550,23 @@ static int32_t nss_core_handle_cause_queue(struct int_ctx_instance *int_ctx, uin
  	start = hlos_index;
  	end = (hlos_index + count) & mask;
  	if (end > start) {
@@ -92,7 +94,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	}
  
  	/*
-@@ -1712,7 +1728,8 @@ next:
+@@ -1679,7 +1695,8 @@ next:
  	n2h_desc_ring->hlos_index = hlos_index;
  	if_map->n2h_hlos_index[qid] = hlos_index;
  
@@ -102,21 +104,21 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	return count;
-@@ -1724,11 +1741,12 @@ next:
+@@ -1691,11 +1708,12 @@ next:
   */
  static void nss_core_init_nss(struct nss_ctx_instance *nss_ctx, struct nss_if_mem_map *if_map)
  {
 +	struct nss_meminfo_ctx *mem_ctx = &nss_ctx->meminfo_ctx;
  	struct nss_top_instance *nss_top;
  	int ret;
- 	int i;
+	int i;
  
 -	NSS_CORE_DMA_CACHE_MAINT((void *)if_map, sizeof(*if_map), DMA_FROM_DEVICE);
 +	dma_sync_single_for_device(nss_ctx->dev, mem_ctx->if_map_dma, sizeof(*if_map), DMA_FROM_DEVICE);
  	NSS_CORE_DSB();
  
  	/*
-@@ -1817,6 +1835,7 @@ static void nss_core_alloc_paged_buffers
+@@ -1762,6 +1780,7 @@ static void nss_core_alloc_paged_buffers(struct nss_ctx_instance *nss_ctx, struc
  				uint16_t count, int16_t mask, int32_t hlos_index, uint32_t alloc_fail_count,
  				uint32_t buffer_type, uint32_t buffer_queue, uint32_t stats_index)
  {
@@ -124,7 +126,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct sk_buff *nbuf;
  	struct page *npage;
  	struct hlos_h2n_desc_rings *h2n_desc_ring = &nss_ctx->h2n_desc_rings[buffer_queue];
-@@ -1886,7 +1905,9 @@ static void nss_core_alloc_paged_buffers
+@@ -1831,7 +1850,9 @@ static void nss_core_alloc_paged_buffers(struct nss_ctx_instance *nss_ctx, struc
  		/*
  		 * Flush the descriptor
  		 */
@@ -135,7 +137,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  		hlos_index = (hlos_index + 1) & (mask);
  		count--;
-@@ -1900,7 +1921,8 @@ static void nss_core_alloc_paged_buffers
+@@ -1845,7 +1866,8 @@ static void nss_core_alloc_paged_buffers(struct nss_ctx_instance *nss_ctx, struc
  	h2n_desc_ring->hlos_index = hlos_index;
  	if_map->h2n_hlos_index[buffer_queue] = hlos_index;
  
@@ -145,7 +147,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	NSS_PKT_STATS_INC(&nss_top->stats_drv[stats_index]);
-@@ -1913,7 +1935,7 @@ static void nss_core_alloc_paged_buffers
+@@ -1858,7 +1880,7 @@ static void nss_core_alloc_paged_buffers(struct nss_ctx_instance *nss_ctx, struc
  static void nss_core_alloc_jumbo_mru_buffers(struct nss_ctx_instance *nss_ctx, struct nss_if_mem_map *if_map,
  				int jumbo_mru, uint16_t count, int16_t mask, int32_t hlos_index)
  {
@@ -154,7 +156,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct sk_buff *nbuf;
  	struct hlos_h2n_desc_rings *h2n_desc_ring = &nss_ctx->h2n_desc_rings[NSS_IF_H2N_EMPTY_BUFFER_QUEUE];
  	struct h2n_desc_if_instance *desc_if = &h2n_desc_ring->desc_ring;
-@@ -1960,7 +1982,9 @@ static void nss_core_alloc_jumbo_mru_buf
+@@ -1905,7 +1927,9 @@ static void nss_core_alloc_jumbo_mru_buffers(struct nss_ctx_instance *nss_ctx, s
  		/*
  		 * Flush the descriptor
  		 */
@@ -165,7 +167,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  		hlos_index = (hlos_index + 1) & (mask);
  		count--;
-@@ -1974,7 +1998,8 @@ static void nss_core_alloc_jumbo_mru_buf
+@@ -1919,7 +1943,8 @@ static void nss_core_alloc_jumbo_mru_buffers(struct nss_ctx_instance *nss_ctx, s
  	h2n_desc_ring->hlos_index = hlos_index;
  	if_map->h2n_hlos_index[NSS_IF_H2N_EMPTY_BUFFER_QUEUE] = hlos_index;
  
@@ -175,7 +177,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	NSS_PKT_STATS_INC(&nss_top->stats_drv[NSS_DRV_STATS_TX_EMPTY]);
-@@ -1987,6 +2012,7 @@ static void nss_core_alloc_jumbo_mru_buf
+@@ -1932,6 +1957,7 @@ static void nss_core_alloc_jumbo_mru_buffers(struct nss_ctx_instance *nss_ctx, s
  static void nss_core_alloc_max_avail_size_buffers(struct nss_ctx_instance *nss_ctx, struct nss_if_mem_map *if_map,
  				uint16_t max_buf_size, uint16_t count, int16_t mask, int32_t hlos_index)
  {
@@ -183,7 +185,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct hlos_h2n_desc_rings *h2n_desc_ring = &nss_ctx->h2n_desc_rings[NSS_IF_H2N_EMPTY_BUFFER_QUEUE];
  	struct h2n_desc_if_instance *desc_if = &h2n_desc_ring->desc_ring;
  	struct h2n_descriptor *desc_ring = desc_if->desc;
-@@ -1994,6 +2020,7 @@ static void nss_core_alloc_max_avail_siz
+@@ -1939,6 +1965,7 @@ static void nss_core_alloc_max_avail_size_buffers(struct nss_ctx_instance *nss_c
  	uint16_t payload_len = max_buf_size + NET_SKB_PAD;
  	uint16_t start = hlos_index;
  	uint16_t prev_hlos_index;
@@ -191,7 +193,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	while (count) {
  		dma_addr_t buffer;
-@@ -2046,13 +2073,26 @@ static void nss_core_alloc_max_avail_siz
+@@ -1991,13 +2018,26 @@ static void nss_core_alloc_max_avail_size_buffers(struct nss_ctx_instance *nss_c
  	 * Flush the descriptors, including the descriptor at prev_hlos_index.
  	 */
  	if (prev_hlos_index > start) {
@@ -221,7 +223,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	}
  
  	/*
-@@ -2063,7 +2103,8 @@ static void nss_core_alloc_max_avail_siz
+@@ -2008,7 +2048,8 @@ static void nss_core_alloc_max_avail_size_buffers(struct nss_ctx_instance *nss_c
  	h2n_desc_ring->hlos_index = hlos_index;
  	if_map->h2n_hlos_index[NSS_IF_H2N_EMPTY_BUFFER_QUEUE] = hlos_index;
  
@@ -231,7 +233,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	NSS_PKT_STATS_INC(&nss_top->stats_drv[NSS_DRV_STATS_TX_EMPTY]);
-@@ -2076,6 +2117,7 @@ static void nss_core_alloc_max_avail_siz
+@@ -2021,6 +2062,7 @@ static void nss_core_alloc_max_avail_size_buffers(struct nss_ctx_instance *nss_c
  static inline void nss_core_handle_empty_buffer_sos(struct nss_ctx_instance *nss_ctx,
  				struct nss_if_mem_map *if_map, uint16_t max_buf_size)
  {
@@ -239,7 +241,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	uint16_t count, size, mask;
  	int32_t nss_index, hlos_index;
  	struct hlos_h2n_desc_rings *h2n_desc_ring = &nss_ctx->h2n_desc_rings[NSS_IF_H2N_EMPTY_BUFFER_QUEUE];
-@@ -2086,7 +2128,8 @@ static inline void nss_core_handle_empty
+@@ -2031,7 +2073,8 @@ static inline void nss_core_handle_empty_buffer_sos(struct nss_ctx_instance *nss
  	/*
  	 * Check how many empty buffers could be filled in queue
  	 */
@@ -249,7 +251,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  	nss_index = if_map->h2n_nss_index[NSS_IF_H2N_EMPTY_BUFFER_QUEUE];
  
-@@ -2131,6 +2174,7 @@ static inline void nss_core_handle_empty
+@@ -2076,6 +2119,7 @@ static inline void nss_core_handle_empty_buffer_sos(struct nss_ctx_instance *nss
  static inline void nss_core_handle_paged_empty_buffer_sos(struct nss_ctx_instance *nss_ctx,
  				struct nss_if_mem_map *if_map, uint16_t max_buf_size)
  {
@@ -257,7 +259,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	uint16_t count, size, mask;
  	int32_t nss_index, hlos_index;
  	struct hlos_h2n_desc_rings *h2n_desc_ring = &nss_ctx->h2n_desc_rings[NSS_IF_H2N_EMPTY_PAGED_BUFFER_QUEUE];
-@@ -2138,7 +2182,8 @@ static inline void nss_core_handle_paged
+@@ -2083,7 +2127,8 @@ static inline void nss_core_handle_paged_empty_buffer_sos(struct nss_ctx_instanc
  	/*
  	 * Check how many empty buffers could be filled in queue
  	 */
@@ -267,7 +269,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  	nss_index = if_map->h2n_nss_index[NSS_IF_H2N_EMPTY_PAGED_BUFFER_QUEUE];
  
-@@ -2706,9 +2751,11 @@ void nss_skb_reuse(struct sk_buff *nbuf)
+@@ -2651,9 +2696,11 @@ void nss_skb_reuse(struct sk_buff *nbuf)
   *	Sends one skb to NSS FW
   */
  static inline int32_t nss_core_send_buffer_simple_skb(struct nss_ctx_instance *nss_ctx,
@@ -281,7 +283,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct h2n_descriptor *desc_ring = desc_if->desc;
  	struct h2n_descriptor *desc;
  	uint16_t bit_flags;
-@@ -2762,7 +2809,8 @@ static inline int32_t nss_core_send_buff
+@@ -2707,7 +2754,8 @@ static inline int32_t nss_core_send_buffer_simple_skb(struct nss_ctx_instance *n
  		(nss_ptr_t)nbuf, (uint16_t)(nbuf->data - nbuf->head), nbuf->len,
  		sz, (uint32_t)nbuf->priority, mss, bit_flags);
  
@@ -291,7 +293,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	/*
  	 * We are done using the skb fields and can reuse it now
-@@ -2786,7 +2834,8 @@ no_reuse:
+@@ -2731,7 +2779,8 @@ no_reuse:
  		(nss_ptr_t)nbuf, (uint16_t)(nbuf->data - nbuf->head), nbuf->len,
  		(uint16_t)skb_end_offset(nbuf), (uint32_t)nbuf->priority, mss, bit_flags);
  
@@ -301,7 +303,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	NSS_PKT_STATS_INC(&nss_ctx->nss_top->stats_drv[NSS_DRV_STATS_TX_SIMPLE]);
  	return 1;
-@@ -2800,9 +2849,11 @@ no_reuse:
+@@ -2745,9 +2794,11 @@ no_reuse:
   * Used to differentiate from FRAGLIST
   */
  static inline int32_t nss_core_send_buffer_nr_frags(struct nss_ctx_instance *nss_ctx,
@@ -315,7 +317,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct h2n_descriptor *desc_ring = desc_if->desc;
  	struct h2n_descriptor *desc;
  	const skb_frag_t *frag;
-@@ -2842,7 +2893,8 @@ static inline int32_t nss_core_send_buff
+@@ -2787,7 +2838,8 @@ static inline int32_t nss_core_send_buffer_nr_frags(struct nss_ctx_instance *nss
  		(nss_ptr_t)NULL, nbuf->data - nbuf->head, nbuf->len - nbuf->data_len,
  		skb_end_offset(nbuf), (uint32_t)nbuf->priority, mss, bit_flags | H2N_BIT_FLAG_FIRST_SEGMENT);
  
@@ -325,7 +327,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	/*
  	 * Now handle rest of the fragments.
-@@ -2866,7 +2918,8 @@ static inline int32_t nss_core_send_buff
+@@ -2811,7 +2863,8 @@ static inline int32_t nss_core_send_buffer_nr_frags(struct nss_ctx_instance *nss
  			(nss_ptr_t)NULL, 0, skb_frag_size(frag), skb_frag_size(frag),
  			nbuf->priority, mss, bit_flags);
  
@@ -335,7 +337,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	}
  
  	/*
-@@ -2882,7 +2935,8 @@ static inline int32_t nss_core_send_buff
+@@ -2827,7 +2880,8 @@ static inline int32_t nss_core_send_buffer_nr_frags(struct nss_ctx_instance *nss
  	desc->bit_flags &= ~(H2N_BIT_FLAG_DISCARD);
  	desc->opaque = (nss_ptr_t)nbuf;
  
@@ -345,7 +347,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	NSS_PKT_STATS_INC(&nss_ctx->nss_top->stats_drv[NSS_DRV_STATS_TX_NR_FRAGS]);
  	return i+1;
-@@ -2896,9 +2950,11 @@ static inline int32_t nss_core_send_buff
+@@ -2841,9 +2895,11 @@ static inline int32_t nss_core_send_buffer_nr_frags(struct nss_ctx_instance *nss
   * Used to differentiate from FRAGS
   */
  static inline int32_t nss_core_send_buffer_fraglist(struct nss_ctx_instance *nss_ctx,
@@ -359,7 +361,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct h2n_descriptor *desc_ring = desc_if->desc;
  	struct h2n_descriptor *desc;
  	dma_addr_t buffer;
-@@ -2937,7 +2993,8 @@ static inline int32_t nss_core_send_buff
+@@ -2882,7 +2938,8 @@ static inline int32_t nss_core_send_buffer_fraglist(struct nss_ctx_instance *nss
  		(nss_ptr_t)nbuf, nbuf->data - nbuf->head, nbuf->len - nbuf->data_len,
  		skb_end_offset(nbuf), (uint32_t)nbuf->priority, mss, bit_flags | H2N_BIT_FLAG_FIRST_SEGMENT);
  
@@ -369,7 +371,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	/*
  	 * Walk the frag_list in nbuf
-@@ -2990,7 +3047,8 @@ static inline int32_t nss_core_send_buff
+@@ -2935,7 +2992,8 @@ static inline int32_t nss_core_send_buffer_fraglist(struct nss_ctx_instance *nss
  			(nss_ptr_t)iter, iter->data - iter->head, iter->len - iter->data_len,
  			skb_end_offset(iter), iter->priority, mss, bit_flags);
  
@@ -379,7 +381,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  		i++;
  	}
-@@ -3009,7 +3067,8 @@ static inline int32_t nss_core_send_buff
+@@ -2954,7 +3012,8 @@ static inline int32_t nss_core_send_buffer_fraglist(struct nss_ctx_instance *nss
  	 * Update bit flag for last descriptor.
  	 */
  	desc->bit_flags |= H2N_BIT_FLAG_LAST_SEGMENT;
@@ -389,7 +391,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	NSS_PKT_STATS_INC(&nss_ctx->nss_top->stats_drv[NSS_DRV_STATS_TX_FRAGLIST]);
  	return i+1;
-@@ -3088,8 +3147,10 @@ int32_t nss_core_send_buffer(struct nss_
+@@ -3025,8 +3084,10 @@ int32_t nss_core_send_buffer(struct nss_ctx_instance *nss_ctx, uint32_t if_num,
  		 * We need to work out if there's sufficent space in our transmit descriptor
  		 * ring to place all the segments of a nbuf.
  		 */
@@ -401,7 +403,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  		nss_index = if_map->h2n_nss_index[qid];
  		h2n_desc_ring->nss_index_local = nss_index;
  		count = ((nss_index - hlos_index - 1) + size) & (mask);
-@@ -3154,13 +3215,13 @@ int32_t nss_core_send_buffer(struct nss_
+@@ -3095,13 +3156,13 @@ int32_t nss_core_send_buffer(struct nss_ctx_instance *nss_ctx, uint32_t if_num,
  	count = 0;
  	if (likely((segments == 0) || is_bounce)) {
  		count = nss_core_send_buffer_simple_skb(nss_ctx, desc_if, if_num,
@@ -418,7 +420,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	}
  
  	if (unlikely(count <= 0)) {
-@@ -3184,7 +3245,8 @@ int32_t nss_core_send_buffer(struct nss_
+@@ -3125,7 +3186,8 @@ int32_t nss_core_send_buffer(struct nss_ctx_instance *nss_ctx, uint32_t if_num,
  	h2n_desc_ring->hlos_index = hlos_index;
  	if_map->h2n_hlos_index[qid] = hlos_index;
  
@@ -428,6 +430,8 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  #ifdef CONFIG_DEBUG_KMEMLEAK
+diff --git a/nss_core.h b/nss_core.h
+index d7f62fe..7ddf6ce 100644
 --- a/nss_core.h
 +++ b/nss_core.h
 @@ -100,31 +100,30 @@
@@ -482,9 +486,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  #define NSS_DEVICE_IF_START NSS_PHYSICAL_IF_START
  
+diff --git a/nss_hal/ipq806x/nss_hal_pvt.c b/nss_hal/ipq806x/nss_hal_pvt.c
+index 52d63b0..5375087 100644
 --- a/nss_hal/ipq806x/nss_hal_pvt.c
 +++ b/nss_hal/ipq806x/nss_hal_pvt.c
-@@ -474,10 +474,9 @@ static struct nss_platform_data *__nss_h
+@@ -474,10 +474,9 @@ static struct nss_platform_data *__nss_hal_of_get_pdata(struct platform_device *
  	/*
  	 * Clear TCM memory used by this core
  	 */
@@ -497,9 +503,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	/*
+diff --git a/nss_hal/ipq807x/nss_hal_pvt.c b/nss_hal/ipq807x/nss_hal_pvt.c
+index bb8f42f..733d7f1 100644
 --- a/nss_hal/ipq807x/nss_hal_pvt.c
 +++ b/nss_hal/ipq807x/nss_hal_pvt.c
-@@ -256,10 +256,9 @@ static struct nss_platform_data *__nss_h
+@@ -256,10 +256,9 @@ static struct nss_platform_data *__nss_hal_of_get_pdata(struct platform_device *
  	/*
  	 * Clear TCM memory used by this core
  	 */
@@ -512,9 +520,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	/*
+diff --git a/nss_meminfo.c b/nss_meminfo.c
+index 2255eae..d804524 100644
 --- a/nss_meminfo.c
 +++ b/nss_meminfo.c
-@@ -414,7 +414,6 @@ static bool nss_meminfo_init_block_lists
+@@ -414,7 +414,6 @@ static bool nss_meminfo_init_block_lists(struct nss_ctx_instance *nss_ctx)
  		/*
  		 * Flush the updated meminfo request.
  		 */
@@ -522,7 +532,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  		NSS_CORE_DSB();
  
  		/*
-@@ -545,7 +544,7 @@ static bool nss_meminfo_configure_n2h_h2
+@@ -538,7 +537,7 @@ static bool nss_meminfo_configure_n2h_h2n_rings(struct nss_ctx_instance *nss_ctx
  	 * Bring a fresh copy of if_map from memory in order to read it correctly.
  	 */
  	if_map = mem_ctx->if_map;
@@ -531,7 +541,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	if_map->n2h_rings = NSS_N2H_RING_COUNT;
-@@ -583,7 +582,7 @@ static bool nss_meminfo_configure_n2h_h2
+@@ -576,7 +575,7 @@ static bool nss_meminfo_configure_n2h_h2n_rings(struct nss_ctx_instance *nss_ctx
  	/*
  	 * Flush the updated nss_if_mem_map.
  	 */
@@ -540,9 +550,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	NSS_CORE_DSB();
  
  	return true;
+diff --git a/nss_profiler.c b/nss_profiler.c
+index 5717ac3..aadc7c9 100755
 --- a/nss_profiler.c
 +++ b/nss_profiler.c
-@@ -199,11 +199,12 @@ EXPORT_SYMBOL(nss_profile_dma_deregister
+@@ -199,11 +199,12 @@ EXPORT_SYMBOL(nss_profile_dma_deregister_cb);
  struct nss_profile_sdma_ctrl *nss_profile_dma_get_ctrl(struct nss_ctx_instance *nss_ctx)
  {
  	struct nss_profile_sdma_ctrl *ctrl = nss_ctx->meminfo_ctx.sdma_ctrl;
@@ -556,3 +568,6 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	dsb(sy);
  	return ctrl;
  }
+-- 
+2.34.1
+

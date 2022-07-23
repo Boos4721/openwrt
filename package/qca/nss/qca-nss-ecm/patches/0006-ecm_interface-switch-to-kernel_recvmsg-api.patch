@@ -11,38 +11,44 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ecm_interface.c | 9 +++++++++
  1 file changed, 9 insertions(+)
 
+diff --git a/ecm_interface.c b/ecm_interface.c
+index b461456..6be872a 100644
 --- a/ecm_interface.c
 +++ b/ecm_interface.c
-@@ -7653,9 +7653,13 @@ static int ecm_interface_wifi_event_hand
+@@ -7617,9 +7617,13 @@ static int ecm_interface_wifi_event_hand
  static int ecm_interface_wifi_event_rx(struct socket *sock, struct sockaddr_nl *addr, unsigned char *buf, int len)
  {
  	struct msghdr msg;
+-	struct iovec  iov;
 +#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0))
- 	struct iovec  iov;
++   struct iovec  iov;
  	mm_segment_t oldfs;
  	int size;
 +#else
-+	struct kvec iov;
++    struct kvec iov;
 +#endif
- 
+
  	iov.iov_base = buf;
  	iov.iov_len  = len;
-@@ -7665,6 +7669,8 @@ static int ecm_interface_wifi_event_rx(s
+@@ -7629,7 +7633,8 @@ static int ecm_interface_wifi_event_rx(s
  	msg.msg_namelen = sizeof(struct sockaddr_nl);
  	msg.msg_control = NULL;
  	msg.msg_controllen = 0;
-+
+-	oldfs = get_fs();
 +#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0))
- 	iov_iter_init(&msg.msg_iter, READ, &iov, 1, 1);
- 	oldfs = get_fs();
++   oldfs = get_fs();
  	set_fs(KERNEL_DS);
-@@ -7676,6 +7682,9 @@ static int ecm_interface_wifi_event_rx(s
+ 	iov_iter_init(&msg.msg_iter, READ, &iov, 1, len);
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 7, 0))
+@@ -7640,6 +7645,9 @@ static int ecm_interface_wifi_event_rx(s
  	set_fs(oldfs);
- 
+
  	return size;
 +#else
-+	return kernel_recvmsg(sock, &msg, &iov, 1, iov.iov_len, 0);
++   return kernel_recvmsg(sock, &msg, &iov, 1, iov.iov_len, 0);
 +#endif
  }
- 
+
  /*
+--
+2.34.1

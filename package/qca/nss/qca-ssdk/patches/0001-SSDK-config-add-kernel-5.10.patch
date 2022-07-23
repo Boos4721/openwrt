@@ -14,8 +14,8 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/config
 +++ b/config
-@@ -24,6 +24,10 @@ ifeq ($(KVER),$(filter 5.4%,$(KVER)))
- 	OS_VER=5_4
+@@ -22,6 +22,10 @@ ifeq ($(KVER),$(filter 5.4%,$(KVER)))
+ OS_VER=5_4
  endif
  
 +ifeq ($(KVER),$(filter 5.10%,$(KVER)))
@@ -23,9 +23,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 +endif
 +
  ifeq ($(KVER), 3.4.0)
- 	OS_VER=3_4
+ OS_VER=3_4
  endif
-@@ -132,7 +136,7 @@ ifeq ($(ARCH), arm)
+@@ -123,7 +127,7 @@ endif
  endif
  
  ifeq ($(ARCH), arm64)
@@ -36,7 +36,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  endif
 --- a/make/linux_opt.mk
 +++ b/make/linux_opt.mk
-@@ -422,7 +422,7 @@ ifeq (KSLIB, $(MODULE_TYPE))
+@@ -388,7 +388,7 @@ ifeq (KSLIB, $(MODULE_TYPE))
        KASAN_SHADOW_SCALE_SHIFT := 3
    endif
  
@@ -45,7 +45,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
        ifeq ($(ARCH), arm64)
            KASAN_OPTION += -DKASAN_SHADOW_SCALE_SHIFT=$(KASAN_SHADOW_SCALE_SHIFT)
         endif
-@@ -453,7 +453,7 @@ ifeq (KSLIB, $(MODULE_TYPE))
+@@ -419,7 +419,7 @@ ifeq (KSLIB, $(MODULE_TYPE))
  
    endif
  

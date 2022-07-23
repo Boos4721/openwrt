@@ -12,9 +12,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ecm_interface.c | 21 ++++++++++++++++++++-
  1 file changed, 20 insertions(+), 1 deletion(-)
 
+diff --git a/ecm_interface.c b/ecm_interface.c
+index 9a17cc7..5111d17 100644
 --- a/ecm_interface.c
 +++ b/ecm_interface.c
-@@ -740,6 +740,25 @@ bool ecm_interface_mac_addr_get(ip_addr_
+@@ -740,6 +740,25 @@ bool ecm_interface_mac_addr_get(ip_addr_t addr, uint8_t *mac_addr, bool *on_link
  }
  EXPORT_SYMBOL(ecm_interface_mac_addr_get);
  
@@ -49,3 +51,6 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  			dev_put(dev);
  			continue;
  
+-- 
+2.34.1
+

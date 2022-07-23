@@ -10,9 +10,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ecm_tracker_datagram.c | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
+diff --git a/ecm_tracker_datagram.c b/ecm_tracker_datagram.c
+index 9c04d73..ae14146 100644
 --- a/ecm_tracker_datagram.c
 +++ b/ecm_tracker_datagram.c
-@@ -203,7 +203,7 @@ static void ecm_tracker_datagram_datagra
+@@ -203,7 +203,7 @@ static void ecm_tracker_datagram_datagram_discard(struct ecm_tracker_datagram_in
   * ecm_tracker_datagram_discard_all()
   *	Discard all tracked data
   */
@@ -21,7 +23,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  {
  	int32_t src_count;
  	int32_t dest_count;
-@@ -364,7 +364,7 @@ static void ecm_tracker_datagram_datagra
+@@ -364,7 +364,7 @@ static void ecm_tracker_datagram_datagram_discard_callback(struct ecm_tracker_in
   * ecm_tracker_datagram_datagram_size_get()
   *	Return size in bytes of datagram at index i that was sent to the target
   */
@@ -30,7 +32,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  {
  	struct ecm_tracker_datagram_internal_instance *dtii = (struct ecm_tracker_datagram_internal_instance *)uti;
  
-@@ -412,7 +412,7 @@ static int32_t ecm_tracker_datagram_data
+@@ -412,7 +412,7 @@ static int32_t ecm_tracker_datagram_datagram_size_get_callback(struct ecm_tracke
   * ecm_tracker_datagram_datagram_read()
   *	Read size bytes from datagram at index i into the buffer
   */
@@ -39,7 +41,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  {
  	struct ecm_tracker_datagram_internal_instance *dtii = (struct ecm_tracker_datagram_internal_instance *)uti;
  	int res;
-@@ -466,7 +466,7 @@ static int ecm_tracker_datagram_datagram
+@@ -466,7 +466,7 @@ static int ecm_tracker_datagram_datagram_read_callback(struct ecm_tracker_instan
   * ecm_tracker_datagram_datagram_add()
   *	Append the datagram onto the tracker queue for the given target
   */
@@ -48,3 +50,6 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  {
  	struct ecm_tracker_datagram_internal_instance *dtii = (struct ecm_tracker_datagram_internal_instance *)uti;
  	struct sk_buff *skbc;
+-- 
+2.34.1
+

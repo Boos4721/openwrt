@@ -14,9 +14,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  frontends/ecm_front_end_common.c |  7 +++++--
  3 files changed, 36 insertions(+), 4 deletions(-)
 
+diff --git a/ecm_interface.c b/ecm_interface.c
+index 2ca02bc..b461456 100644
 --- a/ecm_interface.c
 +++ b/ecm_interface.c
-@@ -334,7 +334,7 @@ static struct net_device *ecm_interface_
+@@ -334,7 +334,7 @@ static struct net_device *ecm_interface_dev_find_by_local_addr_ipv6(ip_addr_t ad
  	struct net_device *dev;
  
  	ECM_IP_ADDR_TO_NIN6_ADDR(addr6, addr);
@@ -25,7 +27,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	return dev;
  }
  #endif
-@@ -718,6 +718,34 @@ bool ecm_interface_mac_addr_get(ip_addr_
+@@ -718,6 +718,34 @@ bool ecm_interface_mac_addr_get(ip_addr_t addr, uint8_t *mac_addr, bool *on_link
  EXPORT_SYMBOL(ecm_interface_mac_addr_get);
  
  #ifdef ECM_IPV6_ENABLE
@@ -60,7 +62,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  /*
   * ecm_interface_mac_addr_get_ipv6_no_route()
   *	Finds the mac address of a node from its ip address reachable via
-@@ -736,7 +764,7 @@ static bool ecm_interface_mac_addr_get_i
+@@ -736,7 +764,7 @@ static bool ecm_interface_mac_addr_get_ipv6_no_route(struct net_device *dev, ip_
  	 * Get the MAC address that corresponds to IP address given.
  	 */
  	ECM_IP_ADDR_TO_NIN6_ADDR(daddr, addr);
@@ -69,9 +71,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	if (local_dev) {
  		DEBUG_TRACE("%pi6 is a local address\n", &daddr);
  		memcpy(mac_addr, dev->dev_addr, ETH_ALEN);
+diff --git a/ecm_interface.h b/ecm_interface.h
+index 0172e8d..4c17fee 100644
 --- a/ecm_interface.h
 +++ b/ecm_interface.h
-@@ -58,6 +58,7 @@ bool ecm_interface_mac_addr_get(ip_addr_
+@@ -58,6 +58,7 @@ bool ecm_interface_mac_addr_get(ip_addr_t addr, uint8_t *mac_addr, bool *on_link
  bool ecm_interface_find_route_by_addr(ip_addr_t addr, struct ecm_interface_route *ecm_rt);
  void ecm_interface_route_release(struct ecm_interface_route *rt);
  #ifdef ECM_IPV6_ENABLE
@@ -79,6 +83,8 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  struct neighbour *ecm_interface_ipv6_neigh_get(struct ecm_front_end_connection_instance *feci, ecm_db_obj_dir_t dir, ip_addr_t addr);
  void ecm_interface_send_neighbour_solicitation(struct net_device *dev, ip_addr_t addr);
  #endif
+diff --git a/frontends/ecm_front_end_common.c b/frontends/ecm_front_end_common.c
+index e21ca24..6054685 100644
 --- a/frontends/ecm_front_end_common.c
 +++ b/frontends/ecm_front_end_common.c
 @@ -56,6 +56,9 @@
@@ -91,7 +97,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  /*
   * Sysctl table header
-@@ -315,7 +318,7 @@ bool ecm_front_end_gre_proto_is_accel_al
+@@ -315,7 +318,7 @@ bool ecm_front_end_gre_proto_is_accel_allowed(struct net_device *indev,
  		}
  	} else {
  #ifdef ECM_IPV6_ENABLE
@@ -100,7 +106,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  		if (dev) {
  			/*
  			 * Source IP address is local
-@@ -325,7 +328,7 @@ bool ecm_front_end_gre_proto_is_accel_al
+@@ -325,7 +328,7 @@ bool ecm_front_end_gre_proto_is_accel_allowed(struct net_device *indev,
  			return false;
  		}
  
@@ -109,3 +115,6 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  		if (dev) {
  			/*
  			 * Destination IP address is local
+-- 
+2.34.1
+

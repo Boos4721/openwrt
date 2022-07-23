@@ -12,9 +12,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  frontends/ecm_front_end_common.c |  7 ++++
  5 files changed, 72 insertions(+), 11 deletions(-)
 
+diff --git a/Makefile b/Makefile
+index a59cbce..f7e40f8 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -113,10 +113,18 @@ ccflags-$(ECM_INTERFACE_BOND_ENABLE) +=
+@@ -113,9 +113,17 @@ ccflags-$(ECM_INTERFACE_BOND_ENABLE) += -DECM_INTERFACE_BOND_ENABLE
  # Define ECM_INTERFACE_PPPOE_ENABLE=y in order
  # to enable support for PPPoE acceleration.
  # #############################################################################
@@ -24,30 +26,29 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
 +endif
  ccflags-$(ECM_INTERFACE_PPPOE_ENABLE) += -DECM_INTERFACE_PPPOE_ENABLE
  
- # #############################################################################
++# #############################################################################
 +# Define ECM_INTERFACE_L2TPV2_PPTP_ENABLE=y in order
 +# to enable support for l2tpv2 or PPTP detection.
 +# #############################################################################
 +ccflags-$(ECM_INTERFACE_L2TPV2_PPTP_ENABLE) += -DECM_INTERFACE_L2TPV2_PPTP_ENABLE
 +
-+# #############################################################################
+ # #############################################################################
  # Define ECM_INTERFACE_L2TPV2_ENABLE=y in order
  # to enable support for l2tpv2 acceleration.
- # #############################################################################
-@@ -143,6 +151,12 @@ endif
+@@ -142,6 +150,12 @@ endif
+ endif
  ccflags-$(ECM_INTERFACE_PPP_ENABLE) += -DECM_INTERFACE_PPP_ENABLE
  
- # #############################################################################
++# #############################################################################
 +# Define ECM_INTERFACE_GRE_ENABLE=y in order
 +# to enable support for GRE detection.
 +# #############################################################################
 +ccflags-$(ECM_INTERFACE_GRE_ENABLE) += -DECM_INTERFACE_GRE_ENABLE
 +
-+# #############################################################################
+ # #############################################################################
  # Define ECM_INTERFACE_GRE_TAP_ENABLE=y in order
  # to enable support for GRE TAP interface.
- # #############################################################################
-@@ -218,7 +232,9 @@ ccflags-$(ECM_INTERFACE_OVS_BRIDGE_ENABL
+@@ -218,7 +232,9 @@ ccflags-$(ECM_INTERFACE_OVS_BRIDGE_ENABLE) += -DECM_INTERFACE_OVS_BRIDGE_ENABLE
  # #############################################################################
  # Define ECM_INTERFACE_VLAN_ENABLE=y in order to enable support for VLAN
  # #############################################################################
@@ -58,7 +59,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ccflags-$(ECM_INTERFACE_VLAN_ENABLE) += -DECM_INTERFACE_VLAN_ENABLE
  
  # #############################################################################
-@@ -255,7 +271,9 @@ ccflags-$(ECM_CLASSIFIER_OVS_ENABLE) +=
+@@ -255,7 +271,9 @@ ccflags-$(ECM_CLASSIFIER_OVS_ENABLE) += -DECM_CLASSIFIER_OVS_ENABLE
  # #############################################################################
  # Define ECM_CLASSIFIER_MARK_ENABLE=y in order to enable mark classifier.
  # #############################################################################
@@ -69,7 +70,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ecm-$(ECM_CLASSIFIER_MARK_ENABLE) += ecm_classifier_mark.o
  ccflags-$(ECM_CLASSIFIER_MARK_ENABLE) += -DECM_CLASSIFIER_MARK_ENABLE
  
-@@ -274,7 +292,9 @@ ccflags-$(ECM_CLASSIFIER_NL_ENABLE) += -
+@@ -274,7 +292,9 @@ ccflags-$(ECM_CLASSIFIER_NL_ENABLE) += -DECM_CLASSIFIER_NL_ENABLE
  # #############################################################################
  # Define ECM_CLASSIFIER_DSCP_ENABLE=y in order to enable DSCP classifier.
  # #############################################################################
@@ -80,7 +81,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ecm-$(ECM_CLASSIFIER_DSCP_ENABLE) += ecm_classifier_dscp.o
  ccflags-$(ECM_CLASSIFIER_DSCP_ENABLE) += -DECM_CLASSIFIER_DSCP_ENABLE
  ccflags-$(ECM_CLASSIFIER_DSCP_IGS) += -DECM_CLASSIFIER_DSCP_IGS
-@@ -293,7 +313,9 @@ ccflags-$(ECM_CLASSIFIER_HYFI_ENABLE) +=
+@@ -293,7 +313,9 @@ ccflags-$(ECM_CLASSIFIER_HYFI_ENABLE) += -DECM_CLASSIFIER_HYFI_ENABLE
  # the Parental Controls subsystem classifier in ECM. Currently disabled until
  # customers require it / if they need to integrate their Parental Controls with it.
  # #############################################################################
@@ -91,7 +92,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ecm-$(ECM_CLASSIFIER_PCC_ENABLE) += ecm_classifier_pcc.o
  ccflags-$(ECM_CLASSIFIER_PCC_ENABLE) += -DECM_CLASSIFIER_PCC_ENABLE
  
-@@ -327,28 +349,36 @@ ccflags-$(ECM_NON_PORTED_SUPPORT_ENABLE)
+@@ -327,28 +349,36 @@ ccflags-$(ECM_NON_PORTED_SUPPORT_ENABLE) += -DECM_NON_PORTED_SUPPORT_ENABLE
  # #############################################################################
  # Define ECM_STATE_OUTPUT_ENABLE=y to support XML state output
  # #############################################################################
@@ -132,7 +133,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ccflags-$(ECM_TRACKER_DPI_SUPPORT_ENABLE) += -DECM_TRACKER_DPI_SUPPORT_ENABLE
  
  # #############################################################################
-@@ -356,14 +386,18 @@ ccflags-$(ECM_TRACKER_DPI_SUPPORT_ENABLE
+@@ -356,14 +386,18 @@ ccflags-$(ECM_TRACKER_DPI_SUPPORT_ENABLE) += -DECM_TRACKER_DPI_SUPPORT_ENABLE
  # support for the database keeping lists of connections that are assigned
  # on a per TYPE of classifier basis.
  # #############################################################################
@@ -153,9 +154,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ccflags-$(ECM_BAND_STEERING_ENABLE) += -DECM_BAND_STEERING_ENABLE
  
  # #############################################################################
+diff --git a/ecm_db/ecm_db_connection.c b/ecm_db/ecm_db_connection.c
+index 6d0bff4..77e5f3f 100644
 --- a/ecm_db/ecm_db_connection.c
 +++ b/ecm_db/ecm_db_connection.c
-@@ -454,7 +454,9 @@ EXPORT_SYMBOL(ecm_db_connection_make_def
+@@ -454,7 +454,9 @@ EXPORT_SYMBOL(ecm_db_connection_make_defunct);
   */
  void ecm_db_connection_data_totals_update(struct ecm_db_connection_instance *ci, bool is_from, uint64_t size, uint64_t packets)
  {
@@ -165,7 +168,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  	DEBUG_CHECK_MAGIC(ci, ECM_DB_CONNECTION_INSTANCE_MAGIC, "%px: magic failed\n", ci);
  
-@@ -553,7 +555,9 @@ EXPORT_SYMBOL(ecm_db_connection_data_tot
+@@ -553,7 +555,9 @@ EXPORT_SYMBOL(ecm_db_connection_data_totals_update);
   */
  void ecm_db_connection_data_totals_update_dropped(struct ecm_db_connection_instance *ci, bool is_from, uint64_t size, uint64_t packets)
  {
@@ -191,7 +194,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  /*
   * ecm_db_connection_defunct_by_port()
-@@ -1987,6 +1993,7 @@ struct ecm_db_node_instance *ecm_db_conn
+@@ -1987,6 +1993,7 @@ struct ecm_db_node_instance *ecm_db_connection_node_get_and_ref(struct ecm_db_co
  }
  EXPORT_SYMBOL(ecm_db_connection_node_get_and_ref);
  
@@ -199,7 +202,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  /*
   * ecm_db_connection_mapping_get_and_ref_next()
   *	Return reference to next connection in the mapping chain in the specified direction.
-@@ -2028,6 +2035,7 @@ struct ecm_db_connection_instance *ecm_d
+@@ -2028,6 +2035,7 @@ struct ecm_db_connection_instance *ecm_db_connection_iface_get_and_ref_next(stru
  	return nci;
  }
  EXPORT_SYMBOL(ecm_db_connection_iface_get_and_ref_next);
@@ -207,35 +210,37 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  /*
   * ecm_db_connection_mapping_get_and_ref()
+diff --git a/ecm_db/ecm_db_node.c b/ecm_db/ecm_db_node.c
+index c3d70be..89b386f 100644
 --- a/ecm_db/ecm_db_node.c
 +++ b/ecm_db/ecm_db_node.c
-@@ -224,9 +224,11 @@ EXPORT_SYMBOL(ecm_db_node_get_and_ref_ne
+@@ -224,8 +224,10 @@ EXPORT_SYMBOL(ecm_db_node_get_and_ref_next);
   */
  int ecm_db_node_deref(struct ecm_db_node_instance *ni)
  {
 +#ifdef ECM_DB_XREF_ENABLE
  #if (DEBUG_LEVEL >= 1)
  	int dir;
- #endif
 +#endif
+ #endif
  	DEBUG_CHECK_MAGIC(ni, ECM_DB_NODE_INSTANCE_MAGIC, "%px: magic failed\n", ni);
  
- 	spin_lock_bh(&ecm_db_lock);
-@@ -486,9 +488,11 @@ EXPORT_SYMBOL(ecm_db_node_iface_get_and_
+@@ -486,8 +488,10 @@ EXPORT_SYMBOL(ecm_db_node_iface_get_and_ref);
  void ecm_db_node_add(struct ecm_db_node_instance *ni, struct ecm_db_iface_instance *ii, uint8_t *address,
  					ecm_db_node_final_callback_t final, void *arg)
  {
 +#ifdef ECM_DB_XREF_ENABLE
  #if (DEBUG_LEVEL >= 1)
  	int dir;
- #endif
 +#endif
+ #endif
  	ecm_db_node_hash_t hash_index;
  	struct ecm_db_listener_instance *li;
- 
+diff --git a/ecm_interface.c b/ecm_interface.c
+index d7ca169..2ca02bc 100644
 --- a/ecm_interface.c
 +++ b/ecm_interface.c
-@@ -1355,6 +1355,7 @@ struct neighbour *ecm_interface_ipv6_nei
+@@ -1355,6 +1355,7 @@ struct neighbour *ecm_interface_ipv6_neigh_get(struct ecm_front_end_connection_i
   */
  bool ecm_interface_is_pptp(struct sk_buff *skb, const struct net_device *out)
  {
@@ -243,7 +248,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct net_device *in;
  
  	/*
-@@ -1379,6 +1380,7 @@ bool ecm_interface_is_pptp(struct sk_buf
+@@ -1379,6 +1380,7 @@ bool ecm_interface_is_pptp(struct sk_buff *skb, const struct net_device *out)
  	}
  
  	dev_put(in);
@@ -251,7 +256,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	return false;
  }
  
-@@ -1391,6 +1393,7 @@ bool ecm_interface_is_pptp(struct sk_buf
+@@ -1391,6 +1393,7 @@ bool ecm_interface_is_pptp(struct sk_buff *skb, const struct net_device *out)
   */
  bool ecm_interface_is_l2tp_packet_by_version(struct sk_buff *skb, const struct net_device *out, int ver)
  {
@@ -259,7 +264,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	uint32_t flag = 0;
  	struct net_device *in;
  
-@@ -1423,6 +1426,7 @@ bool ecm_interface_is_l2tp_packet_by_ver
+@@ -1423,6 +1426,7 @@ bool ecm_interface_is_l2tp_packet_by_version(struct sk_buff *skb, const struct n
  	}
  
  	dev_put(in);
@@ -267,7 +272,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	return false;
  }
  
-@@ -1435,6 +1439,7 @@ bool ecm_interface_is_l2tp_packet_by_ver
+@@ -1435,6 +1439,7 @@ bool ecm_interface_is_l2tp_packet_by_version(struct sk_buff *skb, const struct n
   */
  bool ecm_interface_is_l2tp_pptp(struct sk_buff *skb, const struct net_device *out)
  {
@@ -275,7 +280,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct net_device *in;
  
  	/*
-@@ -1457,6 +1462,7 @@ bool ecm_interface_is_l2tp_pptp(struct s
+@@ -1457,6 +1462,7 @@ bool ecm_interface_is_l2tp_pptp(struct sk_buff *skb, const struct net_device *ou
  	}
  
  	dev_put(in);
@@ -283,7 +288,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	return false;
  }
  
-@@ -6770,6 +6776,7 @@ static void ecm_interface_regenerate_con
+@@ -6770,6 +6776,7 @@ static void ecm_interface_regenerate_connections(struct ecm_db_iface_instance *i
  		return;
  	}
  
@@ -291,7 +296,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	for (dir = 0; dir < ECM_DB_OBJ_DIR_MAX; dir++) {
  		/*
  		 * Re-generate all connections associated with this interface
-@@ -6785,6 +6792,7 @@ static void ecm_interface_regenerate_con
+@@ -6785,6 +6792,7 @@ static void ecm_interface_regenerate_connections(struct ecm_db_iface_instance *i
  			ci[dir] = cin;
  		}
  	}
@@ -299,9 +304,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  #ifdef ECM_MULTICAST_ENABLE
  	/*
+diff --git a/frontends/ecm_front_end_common.c b/frontends/ecm_front_end_common.c
+index 3b33c41..e21ca24 100644
 --- a/frontends/ecm_front_end_common.c
 +++ b/frontends/ecm_front_end_common.c
-@@ -228,6 +228,7 @@ bool ecm_front_end_gre_proto_is_accel_al
+@@ -228,6 +228,7 @@ bool ecm_front_end_gre_proto_is_accel_allowed(struct net_device *indev,
  							     struct nf_conntrack_tuple *tuple,
  							     int ip_version)
  {
@@ -309,7 +316,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  	struct net_device *dev;
  	struct gre_base_hdr *greh;
  
-@@ -239,10 +240,12 @@ bool ecm_front_end_gre_proto_is_accel_al
+@@ -239,10 +240,12 @@ bool ecm_front_end_gre_proto_is_accel_allowed(struct net_device *indev,
  		/*
  		 * Case 1: PPTP locally terminated
  		 */
@@ -322,7 +329,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  		/*
  		 * Case 2: PPTP pass through
-@@ -350,6 +353,10 @@ bool ecm_front_end_gre_proto_is_accel_al
+@@ -350,6 +353,10 @@ bool ecm_front_end_gre_proto_is_accel_allowed(struct net_device *indev,
  	 */
  	DEBUG_TRACE("%px: GRE IPv%d pass through - allow acceleration\n", skb, ip_version);
  	return true;
@@ -333,3 +340,6 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  }
  
  #ifdef ECM_CLASSIFIER_DSCP_ENABLE
+-- 
+2.34.1
+

@@ -20,6 +20,8 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  src/hsl/phy/malibu_phy.c     | 11 +++++++++++
  2 files changed, 13 insertions(+)
 
+diff --git a/include/hsl/phy/malibu_phy.h b/include/hsl/phy/malibu_phy.h
+index b7354041..ec7a0621 100755
 --- a/include/hsl/phy/malibu_phy.h
 +++ b/include/hsl/phy/malibu_phy.h
 @@ -94,6 +94,7 @@ extern "C"
@@ -38,10 +40,12 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  #define MALIBU_PHY_MMD7_LED_1000_CTRL1       0x8076
  
  
+diff --git a/src/hsl/phy/malibu_phy.c b/src/hsl/phy/malibu_phy.c
+index 1f4dba15..2bef9fa3 100644
 --- a/src/hsl/phy/malibu_phy.c
 +++ b/src/hsl/phy/malibu_phy.c
-@@ -15,6 +15,8 @@
-  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+@@ -12,6 +12,8 @@
+  * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   */
  
 +#include <linux/of.h>
@@ -49,7 +53,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  #include "sw.h"
  #include "fal_port_ctrl.h"
  #include "hsl_api.h"
-@@ -2708,6 +2710,15 @@ malibu_phy_hw_init(a_uint32_t dev_id, a_
+@@ -2726,6 +2728,15 @@ malibu_phy_hw_init(a_uint32_t dev_id, a_uint32_t port_bmp)
  			led_status |= MALIBU_LED_1000_CTRL1_100_10_MASK;
  			malibu_phy_mmd_write(dev_id, phy_addr, MALIBU_PHY_MMD7_NUM,
  				MALIBU_PHY_MMD7_LED_1000_CTRL1, led_status);
@@ -65,3 +69,6 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  			/*disable Extended next page*/
  			phy_data = malibu_phy_reg_read(dev_id, phy_addr, MALIBU_AUTONEG_ADVERT);
  			phy_data &= ~MALIBU_EXTENDED_NEXT_PAGE_EN;
+-- 
+2.34.1
+

@@ -12,9 +12,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  ecm_interface.c | 27 +++++++++++++++++++++++++--
  1 file changed, 25 insertions(+), 2 deletions(-)
 
+diff --git a/ecm_interface.c b/ecm_interface.c
+index 6be872a..9a17cc7 100644
 --- a/ecm_interface.c
 +++ b/ecm_interface.c
-@@ -306,8 +306,31 @@ EXPORT_SYMBOL(ecm_interface_get_and_hold
+@@ -306,8 +306,31 @@ EXPORT_SYMBOL(ecm_interface_get_and_hold_dev_master);
   */
  static inline struct net_device *ecm_interface_vlan_real_dev(struct net_device *vlan_dev)
  {
@@ -56,3 +58,6 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  			dev_put(dev);
  			continue;
  #endif
+-- 
+2.34.1
+

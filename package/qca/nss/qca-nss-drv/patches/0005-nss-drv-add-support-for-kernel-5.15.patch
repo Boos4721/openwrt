@@ -14,6 +14,8 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  nss_hal/nss_hal.c | 1 +
  3 files changed, 8 insertions(+), 2 deletions(-)
 
+diff --git a/nss_core.c b/nss_core.c
+index f9e6014..8cd1d4b 100644
 --- a/nss_core.c
 +++ b/nss_core.c
 @@ -53,7 +53,8 @@
@@ -26,7 +28,7 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  #error "Check skb recycle code in this file to match Linux version"
  #endif
  
-@@ -2678,7 +2679,7 @@ static inline bool nss_core_skb_can_reus
+@@ -2623,7 +2624,7 @@ static inline bool nss_core_skb_can_reuse(struct nss_ctx_instance *nss_ctx,
  	if (unlikely(irqs_disabled()))
  		return false;
  
@@ -35,9 +37,11 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  		return false;
  
  	if (unlikely(skb_is_nonlinear(nbuf)))
+diff --git a/nss_coredump.c b/nss_coredump.c
+index ecad659..3ecef7e 100644
 --- a/nss_coredump.c
 +++ b/nss_coredump.c
-@@ -25,7 +25,11 @@
+@@ -23,7 +23,11 @@
  #include "nss_hal.h"
  #include "nss_log.h"
  #include <linux/kernel.h>
@@ -49,6 +53,8 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  #include <linux/jiffies.h>	/* for time */
  #include "nss_tx_rx_common.h"
  
+diff --git a/nss_hal/nss_hal.c b/nss_hal/nss_hal.c
+index 57974c1..d8c703b 100644
 --- a/nss_hal/nss_hal.c
 +++ b/nss_hal/nss_hal.c
 @@ -24,6 +24,7 @@
@@ -59,3 +65,6 @@ Signed-off-by: Ansuel Smith <ansuelsmth@gmail.com>
  
  #include "nss_hal.h"
  #include "nss_arch.h"
+-- 
+2.34.1
+

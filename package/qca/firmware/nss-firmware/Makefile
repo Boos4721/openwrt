@@ -8,9 +8,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nss-firmware
-PKG_SOURCE_DATE:=2022-05-06
-PKG_SOURCE_VERSION:=20c9a9b7e0ea2935b0a54f112104e433009312ca
-PKG_MIRROR_HASH:=196ee50c4f7f4c1cc5645ce22d4aca720ffd6652d99663c3686ace9ffbc259e8
+PKG_SOURCE_DATE:=2022-07-13
+PKG_SOURCE_VERSION:=ade6bff594377c9d9c79b45e39bf104303d919bc
+PKG_MIRROR_HASH:=fa3868853a9a3c1b6c6999fd5f8672ad5f0588cb7bff98cd9d44ce670a5666db
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
@@ -22,7 +22,7 @@ PKG_MAINTAINER:=Robert Marko <robimarko@gmail.com>
 
 include $(INCLUDE_DIR)/package.mk
 
-VERSION_PATH=$(PKG_BUILD_DIR)/QCA_Networking.SPF_11.5.0/CS
+VERSION_PATH=$(PKG_BUILD_DIR)/QCA_Networking_2022.SPF_12.0.0/ED1
 
 define Package/nss-firmware-default
   SECTION:=firmware
@@ -34,13 +34,13 @@ endef
 define Package/nss-firmware-ipq6018
 $(Package/nss-firmware-default)
   TITLE:=NSS firmware for IPQ6018 devices
-NSS_ARCHIVE:=$(VERSION_PATH)/IPQ6018.ATH.11.5.0/BIN-NSS.FW.12.0.r1-002-CP.R.tar.bz2
+  NSS_ARCHIVE:=$(VERSION_PATH)/IPQ6018.ATH.12.0/BIN-NSS.FW.12.1-022-CP.R.tar.bz2
 endef
 
 define Package/nss-firmware-ipq8074
 $(Package/nss-firmware-default)
   TITLE:=NSS firmware for IPQ8074 devices
-  NSS_ARCHIVE:=$(VERSION_PATH)/IPQ8074.ATH.11.5.0/BIN-NSS.FW.12.0.r1-002-HK.R.tar.bz2
+  NSS_ARCHIVE:=$(VERSION_PATH)/IPQ8074.ATH.12.0.0/BIN-NSS.FW.12.1-022-HK.R.tar.bz2
 endef
 
 define Build/Compile
