@@ -18,7 +18,7 @@ include $(INCLUDE_DIR)/kernel.mk
 PKG_NAME:=shortcut-fe-simulated-driver
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://source.codeaurora.org/quic/qsdk/oss/lklm/shortcut-fe
+PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/shortcut-fe.git
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2021-03-30
 PKG_SOURCE_VERSION:=fa0e9abb8d6203f47b65d3dc6d53ad2a58ea0fee
